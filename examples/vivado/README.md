@@ -12,6 +12,8 @@ python -B examples/vivado/scripts/rebuild.py
 python -B examples/vivado/scripts/rebuild.py --vivado "<Vivado安装目录>/bin/vivado.bat" --build-root "<空的ASCII构建目录>"
 ```
 
+若下载的是独立 Vivado ZIP，解压后先进入 `vivado` 目录，使用 `python -B scripts/rebuild.py`；需要时同样追加 `--vivado` 和 `--build-root` 参数。
+
 不指定构建目录时使用 `tempfile` 新建目录。工具需要 ASCII 构建路径；如果系统临时目录包含中文，请通过 `--build-root` 指定新的 ASCII 目录。入口拒绝非空目录，将源码复制到构建目录后执行；不会删除旧构建、连接硬件或使用既有工程。安装路径通过参数或 PATH 查找，不内置机器路径。
 
 ## 实际执行的五个阶段
