@@ -25,16 +25,18 @@ python -B scripts/release.py verify-packages
 
 `pack` 先完整校验，再写入 `dist/`：
 
-- `embedded-project-workflow-v0.1.0-beta.1.zip`：Skill 目录中的文件，加上归档根内的 MIT LICENSE。
-- `vivado-examples-v0.1.0-beta.1.zip`：Vivado 原创示例源码，加上 MIT LICENSE。
+- `embedded-project-workflow-v0.2.0-beta.1.zip`：Skill 目录中的文件，加上归档根内的 MIT LICENSE。
+- `vivado-examples-v0.2.0-beta.1.zip`：Vivado 原创示例源码，加上 MIT LICENSE。
 - `SHA256SUMS.txt`：两个 ZIP 的 SHA-256。
 
 归档使用固定元数据和排序；相同来源应生成相同字节。`verify-packages` 独立核对归档条目、CRC、每项内容与来源以及附件校验值，拒绝多余条目和被替换的数据。
 
-CI 执行 validate、self-test、pack、verify-packages，并上传构建附件。它不自动创建 Release，不运行 Vivado，不安装 Skill，不操作硬件。
+CubeMX/FreeRTOS、TouchGFX 原创示例及10例合成评估材料在仓库中交付，不另打入 Skill ZIP。Vivado ZIP 包含原始两个示例及受控配置与续接示例。厂商依赖始终由本机已有安装提供。
+
+CI 执行 validate、self-test、合成案例准备、pack、verify-packages，并上传构建附件。案例准备只复制原创输入与 Skill，不能代替模型执行和行为评分。CI 不自动创建 Release，不运行厂商工具，不安装 Skill，不操作硬件。
 
 ## GitHub 预发布
 
-发布者在本轮真实试用报告完成、仓库校验及相关工具复验通过后，创建 `v0.1.0-beta.1` 标签和 GitHub prerelease。先从远端全新克隆验证清单及包，再上传 `dist/` 中两个 ZIP 和校验文件。
+发布者在本轮真实试用报告完成、仓库校验及相关工具复验通过后，创建 `v0.2.0-beta.1` 标签和 GitHub prerelease。先从远端全新克隆验证清单及包，再上传 `dist/` 中两个 ZIP 和校验文件。
 
-发布说明分别列出历史行为、真实 Vivado、本轮 CubeMX 与结构检查证据。若某项未覆盖，应直接标明，不能以缓存日志或模拟输出代替。原始私有材料保持本地，不随 Git 历史或附件发布。
+发布说明分别列出历史行为、v0.2 行为复验、三类真实工具及结构检查证据。版本完整执行后若还有小范围修订，保留两个源码身份，说明定向复验和未重复的流程。若某项未覆盖，应直接标明，不能以缓存日志或模拟输出代替。原始私有材料保持本地，不随 Git 历史或附件发布。

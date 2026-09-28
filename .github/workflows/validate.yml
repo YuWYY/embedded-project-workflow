@@ -20,6 +20,8 @@ jobs:
         run: python -B scripts/release.py validate
       - name: Check controlled failures
         run: python -B scripts/release.py self-test
+      - name: Prepare public synthetic evaluation inputs
+        run: python -B evaluations/v02/prepare.py --output "${{ runner.temp }}/embedded-workflow-cases"
       - name: Build release archives
         run: python -B scripts/release.py pack
       - name: Verify archive contents

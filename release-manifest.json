@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.1.0-beta.1",
+  "version": "0.2.0-beta.1",
   "files": {
     ".gitattributes": {
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
@@ -11,36 +11,312 @@
       "bytes": 1234
     },
     ".github/workflows/validate.yml": {
-      "sha256": "52fc8bfd74421acb9cabc61542fd938bdb84c10ee7df16b192013e1f0879e28a",
-      "bytes": 811
+      "sha256": "0f5af2abce2649ba9200d4095b57707d4d3178068e6c7c9586baf161f2832e19",
+      "bytes": 972
     },
     ".gitignore": {
-      "sha256": "69d675d8d6df0f0b9aa70488bf954b80d880bd8babcddeb1f52ae6e62a812374",
-      "bytes": 75
+      "sha256": "3d06f774e264cb6c65343e2c1c64c79062138f30eeb36890d1f45ffeb0118fe5",
+      "bytes": 191
     },
     "LICENSE": {
       "sha256": "acd0962cf80e678ee1edc83e6b4225c03e9839bbd04ff7bcc007fbbce67b399c",
       "bytes": 1062
     },
     "README.md": {
-      "sha256": "3b63562993b01926b2af52c54f577f7e85f1b65277a9327e58556f99e0a2fd7c",
-      "bytes": 4973
+      "sha256": "96f63362df3eb100c65101079bc924afce2b947ffb25c09d8118265980e35fc0",
+      "bytes": 6647
     },
     "docs/releasing.md": {
-      "sha256": "3ac4036f71a2f829fd85b9d58c762865c6de509e4bc678e79af79af05547ed47",
-      "bytes": 2775
+      "sha256": "ceb58d5c10fed7491fca6e9bc0e2e2875440514569981bec2b3fed7983f3a2d2",
+      "bytes": 3242
     },
     "docs/sources-and-license.md": {
-      "sha256": "83719906e8e13758ec16791ef0fe68c8ed2eac9dd1610487a6becd179715920f",
-      "bytes": 2096
+      "sha256": "cb31f310097f7118aa01c272ba51f5b0e40d8264442264a62e6881b84142117c",
+      "bytes": 3042
     },
     "docs/validation.md": {
-      "sha256": "f682198182c49e5481fecee5c191c83aeda15a91d02edd79e1c9577a8ae1d6c9",
-      "bytes": 8347
+      "sha256": "509ccd2cd7af955695efef67c58a032fe29d63bd2ffa8e6cf80c58b94edfb98a",
+      "bytes": 16329
+    },
+    "evaluations/v02/README.md": {
+      "sha256": "f0bbbc5db6bf40d4590982e6f793f03118a66076fed4f7b80b4ad42524689ea4",
+      "bytes": 2454
+    },
+    "evaluations/v02/cases/17_prescribed_structure/USER_REQUEST.md": {
+      "sha256": "6e7b0a6b76ac6a663462ff8c385c7d2ac0a69e385a05b13ffeb2c786523b06d4",
+      "bytes": 331
+    },
+    "evaluations/v02/cases/17_prescribed_structure/input/project.md": {
+      "sha256": "caa0d5b1c8cf535465859280d3122c9eb8f5ff38850ebb99a126eb3fd0d5a37f",
+      "bytes": 439
+    },
+    "evaluations/v02/cases/18_authorized_adjustment/USER_REQUEST.md": {
+      "sha256": "8780377d47866e627c0440c442e09a0eeeeef28ec774f50a0cfdc925a3f4b780",
+      "bytes": 361
+    },
+    "evaluations/v02/cases/18_authorized_adjustment/baseline/config.json": {
+      "sha256": "a541310fd164cde0bb1656202b93ec2e61d878b3fa305321fb689b5f90493df5",
+      "bytes": 59
+    },
+    "evaluations/v02/cases/18_authorized_adjustment/baseline/generate.py": {
+      "sha256": "c360f3896414bd90c8d39898dfe211c327c756ce82895ffba34867ed04851f87",
+      "bytes": 245
+    },
+    "evaluations/v02/cases/18_authorized_adjustment/baseline/generated.h": {
+      "sha256": "800c605e7fd52fc1e32be4099050c0e9a82a272cf482f9d0cb5b847b70695457",
+      "bytes": 26
+    },
+    "evaluations/v02/cases/19_explicit_conflict/USER_REQUEST.md": {
+      "sha256": "82b53dbf511164076e3c70727dbfa2c080d83bc07263b5654634122b31a2806a",
+      "bytes": 338
+    },
+    "evaluations/v02/cases/19_explicit_conflict/input/constraints.md": {
+      "sha256": "d102f0145e3cbdbc3fc8bfd3c7101dd3ab234865296dd5f45f55b4069a84d2dd",
+      "bytes": 469
+    },
+    "evaluations/v02/cases/20_allocation_semantics/USER_REQUEST.md": {
+      "sha256": "130a98e120fa8aed95a16cf5f718176c7cedc5bc0be73493e3a84db819e91c31",
+      "bytes": 305
+    },
+    "evaluations/v02/cases/20_allocation_semantics/input/allocation.c": {
+      "sha256": "60fad9f10d195bb7da9569f47a28b8f0e71f73ff9f018de5db2f35296699e865",
+      "bytes": 665
+    },
+    "evaluations/v02/cases/20_allocation_semantics/input/context.md": {
+      "sha256": "f992560c7c586c99da4eec0a587026d35ed7c0e7ed011844f92b51562b92e87c",
+      "bytes": 282
+    },
+    "evaluations/v02/cases/21_user_ui_change/USER_REQUEST.md": {
+      "sha256": "1681ce4a7b4c6056e507298c8af978caee997e01a6b6d259cd9cb37e645e6434",
+      "bytes": 450
+    },
+    "evaluations/v02/cases/21_user_ui_change/baseline/Generated.hpp": {
+      "sha256": "b4398bf0964585c531031c557ea02c14220355b91c8fa800e615a5e3be05e05a",
+      "bytes": 93
+    },
+    "evaluations/v02/cases/21_user_ui_change/baseline/View.cpp": {
+      "sha256": "3824c03258f73af33a5704dc8061bf698a1b92537feb7c1188c85410081698d1",
+      "bytes": 66
+    },
+    "evaluations/v02/cases/21_user_ui_change/baseline/View.hpp": {
+      "sha256": "c04ab11201fb3a3cbb4fa8c3386cb25dda1eacff1c3cade26d2543b0c1e22086",
+      "bytes": 84
+    },
+    "evaluations/v02/cases/21_user_ui_change/baseline/screen.touchgfx": {
+      "sha256": "3b5d1d4874a93bfb9b49495787f925e0fa36e1e0142348b8264f351d9f50e9ed",
+      "bytes": 70
+    },
+    "evaluations/v02/cases/22_unsupported_gui_object/USER_REQUEST.md": {
+      "sha256": "5ab8c741e1885114086ef75a460dd0c17334d63684fe2b3035577d1cc7c07a50",
+      "bytes": 335
+    },
+    "evaluations/v02/cases/22_unsupported_gui_object/input/capabilities.md": {
+      "sha256": "aa60f20eda18b22162aa1dc7e01d117b36631d42d408f3dcec5d71f6690eda31",
+      "bytes": 415
+    },
+    "evaluations/v02/cases/23_partial_generation/USER_REQUEST.md": {
+      "sha256": "82262303647dacb82d8219b6ade1911f31827eed647ccf2795fe70de5e5e40e6",
+      "bytes": 285
+    },
+    "evaluations/v02/cases/23_partial_generation/input/run.log": {
+      "sha256": "5c1093b22bc6cda3616210e1581ced578da4f229abf950121d247a711ad42b44",
+      "bytes": 204
+    },
+    "evaluations/v02/cases/23_partial_generation/input/state.md": {
+      "sha256": "aa09c5be3fdda1e8466181e173a14e1d6d36c7b5674ccbe8bc9d6539cdc094a5",
+      "bytes": 207
+    },
+    "evaluations/v02/cases/24_resume_new_source/USER_REQUEST.md": {
+      "sha256": "da94d3d328ffcac45312043824bfdab675a34609170f624efdb9f9206c86932f",
+      "bytes": 348
+    },
+    "evaluations/v02/cases/24_resume_new_source/input/PROJECT_STATE.md": {
+      "sha256": "780ab821f0f9162cc3b38daa65be6426891b090cd72da00df1631f74e2fe9a02",
+      "bytes": 220
+    },
+    "evaluations/v02/cases/24_resume_new_source/input/clock-config.tcl": {
+      "sha256": "e591757719e772c80d78eed3901aac243357c1902ac79242526790bfaf4645f9",
+      "bytes": 38
+    },
+    "evaluations/v02/cases/24_resume_new_source/input/result.json": {
+      "sha256": "db638b2612fdc03a5f3d4ac2c578221cbb6f7cc8a5cb26cf4a3634e56f5369e4",
+      "bytes": 92
+    },
+    "evaluations/v02/cases/25_unfamiliar_zephyr/USER_REQUEST.md": {
+      "sha256": "356c1a0e622c3e74ae15d04f45dca6807bed549ff5542d8807125c352604f8ae",
+      "bytes": 431
+    },
+    "evaluations/v02/cases/25_unfamiliar_zephyr/input/boards/demo.overlay": {
+      "sha256": "2626520ff2d24e109aa64c1417cc175aecf3cc056589c407b0fbcdf5e6e42368",
+      "bytes": 142
+    },
+    "evaluations/v02/cases/25_unfamiliar_zephyr/input/context.md": {
+      "sha256": "bff8bbcf912c9950b754839e9a6e08295942b8ce6c01dec8c7dfc3c3e714e214",
+      "bytes": 458
+    },
+    "evaluations/v02/cases/25_unfamiliar_zephyr/input/prj.conf": {
+      "sha256": "6115c922c9dfe65b69acf462f74a5538be6b4b7468287fbc631ee5f6027f2f29",
+      "bytes": 57
+    },
+    "evaluations/v02/cases/26_local_small_edit/USER_REQUEST.md": {
+      "sha256": "307c85f484bc8fbd72420b392e766973a503e937b0220c11a1304e4ed4530462",
+      "bytes": 308
+    },
+    "evaluations/v02/cases/26_local_small_edit/baseline/format.c": {
+      "sha256": "384a099cff5c3fb4a532687d5d12dce65234249c5f062253af130a5e46ce52dd",
+      "bytes": 121
+    },
+    "evaluations/v02/inventory.json": {
+      "sha256": "797d755008d8b89a759c285761d36366bf27f880bd5b3ba74ce84d43c632edee",
+      "bytes": 1399
+    },
+    "evaluations/v02/prepare.py": {
+      "sha256": "4f19b4d01a2245e1877c4a222d45bd6e340f51916ec6ccd0a02b4186d07f7942",
+      "bytes": 1547
+    },
+    "evaluations/v02/results-20260928.json": {
+      "sha256": "d8631e9b3731d6812c47dddc2aafeaeb3a6c5e8e41a9e606181f58b81d47f813",
+      "bytes": 13763
+    },
+    "evaluations/v02/reviewer-rubric.md": {
+      "sha256": "43bb4276ebcf65fb9f03dd41c3d6cd423da46d8536e612530e1ac24933b6217c",
+      "bytes": 2364
+    },
+    "examples/cubemx-rtos/APP/rtos_app.c": {
+      "sha256": "010008dee4e39903af188e5f71246874a7ed04e65cf50ab0a1bbea3e01f5b40c",
+      "bytes": 1231
+    },
+    "examples/cubemx-rtos/APP/rtos_app.h": {
+      "sha256": "ec0614a37c1e6ede3e1315bdf838198da796b299c43c55d6fb101f0fb81b1294",
+      "bytes": 233
+    },
+    "examples/cubemx-rtos/LICENSE": {
+      "sha256": "acd0962cf80e678ee1edc83e6b4225c03e9839bbd04ff7bcc007fbbce67b399c",
+      "bytes": 1062
+    },
+    "examples/cubemx-rtos/README.md": {
+      "sha256": "fffa4db14735ef280cf6451db6153af1fe2a4ac5f9411b37e318e964c5ff3df2",
+      "bytes": 4820
+    },
+    "examples/cubemx-rtos/rebuild.py": {
+      "sha256": "bda8358b529e2b385f3243d13043388ef860bef051b95e92771e04cb4219cb7a",
+      "bytes": 14529
+    },
+    "examples/cubemx-rtos/rtos_ownership.ioc": {
+      "sha256": "8b63079c7e34aaf69c8cb6c8fa388b930f80dc637905d2cb508101a3fafa1ad9",
+      "bytes": 3198
+    },
+    "examples/cubemx-rtos/validation-20260928.json": {
+      "sha256": "95da8c6a8682cf047bac84831a78182c6109f8c8a7bee7115be10c7f92611e50",
+      "bytes": 11163
+    },
+    "examples/touchgfx/README.md": {
+      "sha256": "798756fa6d14c8f47257e573e2e09c6bad6572e06039622f885a524cdda7a3bd",
+      "bytes": 2686
+    },
+    "examples/touchgfx/rebuild.py": {
+      "sha256": "3cc0d91ef34c82fe1eba653ba2e3b0e95d6a1b8f0ad7772f8259f45947738f22",
+      "bytes": 8306
+    },
+    "examples/touchgfx/tests/model_test.cpp": {
+      "sha256": "9598d71f65becbda51f0e621dcf0f7ec1f0aa0e6192612e6bae3e9df762d2b2e",
+      "bytes": 2440
+    },
+    "examples/touchgfx/texts.xml": {
+      "sha256": "617cbfa21abaae77ae1b0ac515a1b3ca53e11584bf39fab62ebcac0fd212e582",
+      "bytes": 1516
+    },
+    "examples/touchgfx/ui-after.json": {
+      "sha256": "4190e8d00d1ba3c50a5b5b7fcc5b3bec7ea244e6b4b5783551fe4668ff4f80ec",
+      "bytes": 8866
+    },
+    "examples/touchgfx/ui-before.json": {
+      "sha256": "d6fd5655cc298dff831c2ddc0b809ec2a989f8aaa86fd4e3431e0f204d3a5dca",
+      "bytes": 8867
+    },
+    "examples/touchgfx/user/gui/include/gui/dashboard_screen/DashboardPresenter.hpp": {
+      "sha256": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+      "bytes": 569
+    },
+    "examples/touchgfx/user/gui/include/gui/dashboard_screen/DashboardView.hpp": {
+      "sha256": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+      "bytes": 505
+    },
+    "examples/touchgfx/user/gui/include/gui/model/Model.hpp": {
+      "sha256": "8bd2788d2bc64d1c7c4306325d7113f35a87ebb55b1ca26a7d97ddcf8b635f18",
+      "bytes": 542
+    },
+    "examples/touchgfx/user/gui/include/gui/model/ModelListener.hpp": {
+      "sha256": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+      "bytes": 381
+    },
+    "examples/touchgfx/user/gui/include/gui/settings_screen/SettingsPresenter.hpp": {
+      "sha256": "402a9b23b286317ff1c051aed02c7c44bca385c3e5f6eaba1bb7408c6486043d",
+      "bytes": 586
+    },
+    "examples/touchgfx/user/gui/include/gui/settings_screen/SettingsView.hpp": {
+      "sha256": "c30123d610647b3515722a5de73babfbd64524c1699621a277963c959b670605",
+      "bytes": 512
+    },
+    "examples/touchgfx/user/gui/src/dashboard_screen/DashboardPresenter.cpp": {
+      "sha256": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+      "bytes": 433
+    },
+    "examples/touchgfx/user/gui/src/dashboard_screen/DashboardView.cpp": {
+      "sha256": "e6726be55fbd98db07af5b27f53c77db70eafd874f229654b23a4ce178b03d88",
+      "bytes": 475
+    },
+    "examples/touchgfx/user/gui/src/model/Model.cpp": {
+      "sha256": "a9aa8f3626ad3b292194b52adefcb8ce42731d9936d91029be85484815311e11",
+      "bytes": 571
+    },
+    "examples/touchgfx/user/gui/src/settings_screen/SettingsPresenter.cpp": {
+      "sha256": "503a118c84229b138fb1ac6ca244b2832791d51786082e862ad36fdbf608f60a",
+      "bytes": 460
+    },
+    "examples/touchgfx/user/gui/src/settings_screen/SettingsView.cpp": {
+      "sha256": "5375daf8a4760e6ecf12ac6d5924e544fcd8d74533bba95aecf4cf341f427f33",
+      "bytes": 382
+    },
+    "examples/touchgfx/validation-20260928.json": {
+      "sha256": "0fb21c8d2a1948394270a328008ab09206364cfa557a7b9873106bb5bf99ddc0",
+      "bytes": 3167
     },
     "examples/vivado/README.md": {
-      "sha256": "e403fa02fcbc0e9a83668b7eeb206c3e3761eb8268946ad52c94025ebfed3eee",
-      "bytes": 4646
+      "sha256": "54670d55971d9e25001ac19dd3b18a01ea726a9c540fb587b5e06e507970d160",
+      "bytes": 4949
+    },
+    "examples/vivado/controlled-project/PROJECT.md": {
+      "sha256": "0fca73bebf990451129180ff0bcb605b4c1f9aa43af043b2a50d4a554b95f238",
+      "bytes": 1845
+    },
+    "examples/vivado/controlled-project/README.md": {
+      "sha256": "68343c11a0d0ad036030203b5a1324b85c78fa4938bbf9e1bec3796d33186bb0",
+      "bytes": 6300
+    },
+    "examples/vivado/controlled-project/STATE.md": {
+      "sha256": "827b9fe438ab7aeacdf49418aac1ca65d2bc6fd9c61fb717261d54fb1d360bba",
+      "bytes": 3129
+    },
+    "examples/vivado/controlled-project/config/clock-config.tcl": {
+      "sha256": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+      "bytes": 216
+    },
+    "examples/vivado/controlled-project/portability.diff": {
+      "sha256": "ac4a506f3fdd19f1bda9296a18aebad5535eafc8505ffd3cec59be4fa35d1a9e",
+      "bytes": 11580
+    },
+    "examples/vivado/controlled-project/scripts/clock.tcl": {
+      "sha256": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+      "bytes": 4201
+    },
+    "examples/vivado/controlled-project/scripts/run_clock.py": {
+      "sha256": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+      "bytes": 9299
+    },
+    "examples/vivado/controlled-project/validation-20260928.json": {
+      "sha256": "3905c72aecbe0d824c923914a22e079324f629e96f15bfefd1e61d4556bb4b3a",
+      "bytes": 22141
     },
     "examples/vivado/portability-followup-20260928.json": {
       "sha256": "a3abadda5c9ff2d363d6591985d39dd31a0dc147455ee3256ae8a51e7e874d0f",
@@ -87,48 +363,60 @@
       "bytes": 2831
     },
     "scripts/release.py": {
-      "sha256": "bd8e66012175f32e153d345950c8c99598fe9ed6f03897998ad7c5cb20c5c772",
+      "sha256": "f92467bff173937ecb6b97016764bc9fbde71ad4bf9905d4a63882341019ae28",
       "bytes": 12981
     },
     "skills/embedded-project-workflow/SKILL.md": {
-      "sha256": "eb08b3039c9588a7e218ab4f234111ec80dd556bd2eab2113b1e8e2b1e686d74",
-      "bytes": 7177
+      "sha256": "545fb20f354b7127b89b4a20f125a1b44a1f94e104049577f282066090040330",
+      "bytes": 8668
     },
     "skills/embedded-project-workflow/agents/openai.yaml": {
-      "sha256": "f4bc6a099b2398fbec2dcdf36f8b2482adc4b7e4b6609176402326ef14e64a79",
-      "bytes": 410
+      "sha256": "dfa29ac2c168ef976c37a62e0c7d861f451f842dc196f7d3bf6b1714c3e59228",
+      "bytes": 467
+    },
+    "skills/embedded-project-workflow/references/configuration-contracts.md": {
+      "sha256": "eb05f9dc7638211aaff54726708be79f6d6938bb20ae21041c30144ae96211ff",
+      "bytes": 5594
     },
     "skills/embedded-project-workflow/references/debug-retrospective.md": {
       "sha256": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
       "bytes": 4886
     },
+    "skills/embedded-project-workflow/references/freertos.md": {
+      "sha256": "1365a7c9e997fd2d6ad084f8eae40c9b35655bba8955012f6c10c5e347bbf92b",
+      "bytes": 5551
+    },
     "skills/embedded-project-workflow/references/ip-selection.md": {
-      "sha256": "0fb50ea98bbe40d128d8f830c237d802e8389e56cd4056f3050a8712b0f4f19c",
-      "bytes": 4565
+      "sha256": "45055c6fdc17baa65e2fecd1d6eb9fa91b8843632e74631e811ca82f4fc7cc16",
+      "bytes": 4852
+    },
+    "skills/embedded-project-workflow/references/long-project-workflow.md": {
+      "sha256": "711da024a6aae426a63a6661d52f3f64504d5e64f7bebef568e65506ce67db40",
+      "bytes": 3239
     },
     "skills/embedded-project-workflow/references/project-facts-template.md": {
-      "sha256": "0f7c1ac42fdcaef16ecc6e245d20181b3280da7776a627c269effc5717f37895",
-      "bytes": 1473
+      "sha256": "659f73b10c8c3e6fd23f5e100b1b227579a8ca6ed419a8bb574bf137acf1d6f6",
+      "bytes": 2444
     },
     "skills/embedded-project-workflow/references/sources.md": {
-      "sha256": "bfe3575069e09ccc24c3a5c22c71d1b21729f31966ed9ab4ac0d548a44e05866",
-      "bytes": 9166
+      "sha256": "035b3174753e22360c0ae893d5ff495f76f21beea3aec1379ea28baf6d364993",
+      "bytes": 11290
     },
     "skills/embedded-project-workflow/references/stm32-cubemx.md": {
-      "sha256": "231118989a824cc90ecab4976bd7bdbbbabda76ec83c415121e42621acd12424",
-      "bytes": 6595
+      "sha256": "68fb9d48d271bd41d53ca61a3571872e411ee6b680931b8e320e5c99147726d0",
+      "bytes": 6951
     },
     "skills/embedded-project-workflow/references/touchgfx.md": {
-      "sha256": "7ee1d7e920a5d63a184c702f64e5bbf66b0c5a8ca2a76d7380fb8bfc01d3f938",
-      "bytes": 5574
+      "sha256": "323804c91a8d05ffde49ead692276319764e9dfcaf34ec93875f8599e626f288",
+      "bytes": 6403
     },
     "skills/embedded-project-workflow/references/vivado-workflow.md": {
-      "sha256": "04a4c21bdc0e7e4c843db2c2101aa749f9a1307638f3b44cd66afed7c1669ec1",
-      "bytes": 6779
+      "sha256": "81e3a0e1b6e4d7c37a2c336d27fcf812f33ed5129e900a663366b30babf6c4eb",
+      "bytes": 7160
     },
     "source-files.txt": {
-      "sha256": "1dfe5de0e6d78e2e6e188284f3b807c91c9885b80359d91cb3f5736627db5d06",
-      "bytes": 1173
+      "sha256": "088610d963e4ec13fbd3d60332aa8a06b8067aadd7963871d2829356ce82257d",
+      "bytes": 5092
     }
   }
 }

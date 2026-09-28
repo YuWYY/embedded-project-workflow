@@ -1,65 +1,81 @@
 # 嵌入式与 FPGA 工程协作
 
-`embedded-project-workflow` 是面向 STM32CubeMX、TouchGFX、Vivado 工程的 Codex Skill，帮助 AI 根据用途选择配置、工具生成、用户代码以及 IP 复用或自研的分工。
+`embedded-project-workflow` 帮助 AI 根据用户目标，发现原生配置与组件能力，划分工具生成和用户代码，在用户约定内完成实现、验证及多阶段续接。用户可先配置工程，也可授权 AI 代配置，并继续用原工具维护结果。
 
-本仓库处于 **v0.1.0-beta.1 预发布阶段**。当前采用显式读取试用，未安装到技能目录，也未启用自动调用。下载源码或压缩包不会安装 Skill。
+本地交付为 **v0.2.0-beta.1 候选，尚未完成本阶段验收或发布**。最终 Vivado 入口的干净构建通过，但同根再生成在 XSim 设置阶段连续出现工具内部错误，原因未定；不以历史成功替代。详见[当前验收状态](docs/validation.md)。
 
-## 解决什么问题
+首批专用指南覆盖 STM32CubeMX、FreeRTOS、TouchGFX 和 Vivado；陌生工具按当前工程与官方机制主动适配，并说明实际验证程度。采用显式读取试用，未安装、未启用自动调用。下载源码或压缩包不会安装 Skill。
 
-- MCU 基础配置错误修回图形配置源；PWM 频率、死区等应用参数集中在用户层，并核对采样和控制时序。
-- 工具生成基础代码后，在受支持的保留区或独立 APP/BSP、View/Presenter/Model 等用户文件中扩展；再生成后同时检查调用链与编译接入。
-- FPGA 模块先比较已有实现、厂商 IP/XPM、开源和自研；简单逻辑可直接写 RTL，学习与移植目标优先。
-- 区分 FPGA 静态设计参数与真正运行时寄存器；配置源、生成产物和用户 wrapper 各有明确归属。
-- 保存成功基线，优先解释首个故障；只增加能区分候选原因的测量，分别报告源码、构建、仿真和板测证据。
+## 工作方式
 
-主入口很短，按当前任务读取对应指南。普通小修改无需完整访谈、全仓审计或每轮新增报告。
+**读取用途与用户设计约定 → 识别原生配置/组件复用/自写代码 → 在授权范围内配置和生成 → 用户层实现 → 验证实际接入 → 保留可维护、可续接的结果。**
+
+| 用户可以预设 | AI 在约定内负责 |
+|---|---|
+| 外设、中间件、引脚、时钟、DMA 和中断关系 | 推导必要建议，修改明确的配置源，真实生成并接入应用 |
+| 任务、同步对象、职责、容量与内存策略 | 通过工具支持的对象骨架接入独立业务，不隐藏新增任务绕过约定 |
+| 页面、控件、资源、导航与交互 | 保留 Designer 结构，在用户 View/Presenter/Model 中实现动态行为 |
+| IP、接口、时钟域、连接和可调范围 | 比较成熟组件与自研，完成配置、RTL 适配及相应验证 |
+| 构建、存储布局和阶段验收条件 | 核对实际构建与证据，恢复时保护用户新改动 |
+
+配置来源、决定权和生效时点分别明确。已有配置不自动全部冻结，授权范围内不逐文件询问；确需突破明确约束时提出有证据的具体方案。静态内存分配、C `static`、创建时机和设计期/运行期参数分别处理。
+
+主入口按需加载指南。小修改不强制完整访谈、全仓审计、任务数据库或每轮新增报告。Skill 提供协作规则与资源；实际生成和执行需要本机工具及相应授权，不自动获得 GUI、硬件或后台常驻能力。
 
 ## 显式试用
 
-将下列路径替换成你下载仓库后的实际绝对路径，向 Codex 提供：
+把下列占位路径替换为你下载仓库后的绝对路径：
 
 ```text
 请显式读取 <仓库绝对路径>/skills/embedded-project-workflow/SKILL.md。
-本轮任务是：在隔离副本中重新生成 CubeMX 工程，检查用户代码与构建接入。
-先核对现有材料，只询问会影响本轮设计的缺失信息。
-只修改指定工作副本，不连接硬件。分别报告生成、构建与未验证事项。
+本轮目标：……；工程与硬件资料：……；验收终点：……。
+我已预设的结构和约束：……；允许你自主调整的范围：……。
+允许在指定工作副本中代配置、生成、编程及运行相应离线验证。
+先读取已有材料，自行判断工具配置、组件复用与用户代码的分工。
+范围内直接推进；确需改变明确约定时给出原因、影响和最小方案。
+保护我的最新配置，分阶段保留成功版本和续接信息；本轮不连接硬件。
 ```
 
-其他合适的小任务：调整已成功工程的 PWM 频率、TouchGFX 增加动态数值、选择异步 FIFO、修改 Vivado IP 的静态宽度或深度。提供工程位置、当前成功状态和本轮终点即可，不必预先填写全部外设参数。
+不用为了套模板重复填写工程中已有的信息。合适的小任务包括：在预设任务中加入遥测；保留页面导航新增动态数值；调整已授权范围内的 IP 参数；在用户修改配置后继续生成；从项目状态记录恢复未完成任务。
 
-未安装时，不假定 `$embedded-project-workflow` 能自动解析到这个仓库。`agents/openai.yaml` 的 `allow_implicit_invocation: false` 保留显式使用意图；本仓库没有安装器或全局配置修改脚本。
+未安装时，不假定 `$embedded-project-workflow` 能自动解析到本仓库。`agents/openai.yaml` 保留 `allow_implicit_invocation: false`；没有安装器或全局配置修改脚本。
 
-## 内容与验证
+## 指南与可重建材料
 
 | 入口 | 内容 |
 |---|---|
-| [Skill 主入口](skills/embedded-project-workflow/SKILL.md) | 配置责任、按需路由、实现与调试原则 |
-| [来源与许可](docs/sources-and-license.md) | 原创范围、固定来源及采用边界 |
-| [验证说明](docs/validation.md) | 行为案例、真实工具证据与限制 |
-| [Vivado 示例](examples/vivado/README.md) | Clocking Wizard、XPM FIFO 的可重建小工程 |
-| [发布与校验](docs/releasing.md) | 独立文件清单、包验证及本地负例测试 |
+| [Skill 主入口](skills/embedded-project-workflow/SKILL.md) | 按需路由、配置与实现分工 |
+| [用户设计约定](skills/embedded-project-workflow/references/configuration-contracts.md) | 主控边界、人工修改、陌生工具适配 |
+| [长期任务](skills/embedded-project-workflow/references/long-project-workflow.md) | 阶段结果、证据身份、中断恢复 |
+| [FreeRTOS 指南](skills/embedded-project-workflow/references/freertos.md) | 对象骨架、分配策略与真实入口 |
+| [验证说明](docs/validation.md) | 历史及本轮行为、工具证据与限制 |
+| [Vivado 示例](examples/vivado/README.md) | Clocking Wizard、XPM FIFO，以及[用户约定与续接](examples/vivado/controlled-project/README.md) |
+| [CubeMX / RTOS 示例](examples/cubemx-rtos/README.md) | 原创对象配置、再生成与链接负例 |
+| [TouchGFX 示例](examples/touchgfx/README.md) | 两页面用户逻辑、人工配置变化与再生成 |
+| [新增行为案例](evaluations/v02/README.md) | 可公开合成输入及复核方法 |
+| [来源与许可](docs/sources-and-license.md) | 原创范围、第三方与厂商边界 |
 
-历史评估中 16 类案例达到关键行为要求；两个旧版/新版成对案例均通过，不能据此证明新版更节省额度或降低故障率。实际 Vivado 2025.1 生成、XSim 与综合已经完成，本轮公开入口另有完整五阶段执行及 Windows PATH 选择修复的针对性验证。
+实际结果按验证说明分层报告。模型回答、编译和仿真都不能替代板测；现有数据不证明降低多少故障率、节省多少额度或缩短多少开发时间。Zephyr 用于陌生工具资料与工程分析案例，没有声称已做真实 Zephyr 构建。
 
-真实 STM32/CubeMX 隔离试用已完成：经历配套工程文件缺失和生成覆盖导致的失败，修复配置及构建所有权后，连续两次完整生成保持关键接入，最终主机回归与干净构建通过。两项针对本次规则修订的合成案例复核通过；未对全部16类历史案例重新评估。原工程及旧 Skill 材料哈希不变。完整失败过程、证据层级及限制见[验证说明](docs/validation.md)；未进行硬件下载或板测。
+## 轻量检查与发行
 
-轻量检查只需要 Python 3.12 标准库：
+结构和包检查只需 Python 3.12 标准库：
 
-```powershell
+```text
 python -B scripts/release.py validate
 python -B scripts/release.py self-test
 python -B scripts/release.py pack
 python -B scripts/release.py verify-packages
 ```
 
-GitHub Actions 执行这些检查，不安装厂商工具、不调用收费模型，也不把结构检查称为行为评估。真实 Vivado 示例需要用户已有的 Vivado 2025.1，运行方式见示例目录。
+GitHub Actions 运行上述检查，不安装厂商工具、不调用收费模型、不操作硬件。真实例子需要用户已有的厂商工具；脚本拒绝覆盖非空构建目录，完整原始日志留在本地。Skill 与 Vivado ZIP 沿用独立发行；新增 CubeMX、TouchGFX 源例子从仓库获取。详见[发行说明](docs/releasing.md)。
 
 ## English overview
 
-A task-scoped Codex skill for embedded and FPGA projects: configuration ownership, generated/user code boundaries, IP selection, incremental debugging, and evidence-based reporting. Initial adapters cover STM32CubeMX, TouchGFX, and Vivado. Read `SKILL.md` explicitly from your local checkout; this beta does not install or enable automatic invocation. Existing evaluations are case observations, not proof of lower failure rates or token cost.
+A task-scoped Codex skill for user-directed embedded and FPGA engineering. Discover native configuration and reusable components, preserve user-defined structure and interfaces, implement within delegated boundaries, verify generated/user integration, and resume multi-stage work from actual project state. Dedicated guides cover STM32CubeMX, FreeRTOS, TouchGFX, and Vivado; unfamiliar tools require version-specific research and evidence. This beta remains explicit-only and does not install itself.
 
 ## 许可与反馈
 
-原创 Skill、脚本和示例采用 [MIT](LICENSE)，Copyright (c) 2026 YuWYY。厂商软件和引用的第三方仓库不包含在授权范围内，也不打包随附。参见[详细边界](docs/sources-and-license.md)。
+原创 Skill、脚本、合成案例和用户实现采用 [MIT](LICENSE)，Copyright (c) 2026 YuWYY。厂商软件、库、模板、字体及第三方内容不随包重新授权。示例依赖本机已有安装，不分发厂商框架和生成物。
 
-请通过任务反馈模板提供版本、工具、任务终点、实际行为和最小可公开案例。私有固件、设备凭据与原始注册日志不需要上传。后续规则只围绕可复现的问题修订。
+反馈请提供版本、工具、任务终点、用户约定、实际行为及最小可公开案例。无需上传私有固件、凭据或注册日志；后续修订围绕可复现问题进行。

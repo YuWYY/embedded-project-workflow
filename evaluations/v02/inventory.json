@@ -1,0 +1,62 @@
+[
+  {
+    "case": "17_prescribed_structure",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "18_authorized_adjustment",
+    "access": "isolated-edit",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "19_explicit_conflict",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "20_allocation_semantics",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "21_user_ui_change",
+    "access": "isolated-edit",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "22_unsupported_gui_object",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "23_partial_generation",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "24_resume_new_source",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "25_unfamiliar_zephyr",
+    "access": "read-only",
+    "source": "synthetic-original-v02",
+    "public": true
+  },
+  {
+    "case": "26_local_small_edit",
+    "access": "isolated-edit",
+    "source": "synthetic-original-v02",
+    "public": true
+  }
+]

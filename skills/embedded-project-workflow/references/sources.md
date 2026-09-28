@@ -51,3 +51,17 @@
 后续AXI专项候选：[Taxi](https://github.com/fpganinja/taxi/tree/cc70b270b910d369ab1ad7b3855e76399fd461f1)（`cc70b270b910`，CERN-OHL-S-2.0/另行商业授权）与[原verilog-axi](https://github.com/alexforencich/verilog-axi/tree/516bd5dadc3365b7f9e225d2af8fe0b8d804fe53)（`516bd5dadc33`，MIT、README已有弃用/迁移说明）。不自动换库，未来按接口、许可、迁移成本和对应模块证据评估。
 
 未发现完整满足本项目“已有模块/厂商IP/XPM/开源/自研”选择规则的现成技能；选型规则是本交付的独立设计。固定提交仅用于可追溯，不是长期冻结所有项目版本的要求。
+
+## v0.2 用户主导配置与扩展机制
+
+核查日期：**2026-09-28**。以下指南独立编写；本地源代码读证用于核对实际版本，不将厂商源码纳入原创MIT内容。
+
+| 来源 | 采用点与版本边界 |
+|---|---|
+| [ST UM1718 CubeMX](https://www.st.com/resource/en/user_manual/um1718-stm32cubemx-for-stm32-configuration-and-initialization-c-code-generation-stmicroelectronics.pdf) | 用户配置任务与对象，再生成框架；结合本机CubeMX 6.18.1模板核对对象、入口和栈单位，不把配置描述文件名当内核版本 |
+| [FreeRTOS Static vs Dynamic](https://www.freertos.org/Documentation/02-Kernel/02-Kernel-features/09-Memory-management/03-Static-vs-Dynamic-memory-allocation) | 两种分配方式的实际含义及共存；不把C static、启动创建和全工程无堆混为一谈 |
+| [Arm CMSIS线程属性](https://arm-software.github.io/CMSIS_6/main/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html)、[CMSIS-FreeRTOS 11.2限制](https://arm-software.github.io/CMSIS-FreeRTOS/v11.2.0/page_technical_data.html) | 属性、存储与适配器依赖；本机G4 FW1.6.3所带旧适配器行为另外读证，不把11.2能力套入10.3.1源码 |
+| [TouchGFX交互](https://support.touchgfx.com/docs/development/ui-development/designer-user-guide/interactions-view)、[多人协作](https://support.touchgfx.com/4.26/docs/development/ui-development/working-with-touchgfx/multiple-developers)、[构建](https://support.touchgfx.com/docs/development/ui-development/working-with-touchgfx/compiling-and-flashing) | 用户预设导航与交互、磁盘配置与Designer内存副本冲突、原生生成/模拟器构建；本机版本4.26.1，未由模拟器推断目标板显示性能 |
+| [Zephyr Devicetree vs Kconfig](https://docs.zephyrproject.org/latest/build/dts/dt-vs-kconfig.html) | 陌生工具适配的声明源职责案例；仅作为资料与工程分析测试，不宣称已做Zephyr真实构建 |
+
+用户设计约定和长期任务状态规则来自本轮协作需求与隔离验证方法，不引入第三方工作流框架；不自动写入全局规则或记忆。

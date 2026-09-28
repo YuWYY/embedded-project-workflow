@@ -1,0 +1,474 @@
+{
+  "date": "2026-09-28",
+  "status": "INCOMPLETE_FINAL_REGENERATION_TOOL_FAILURE",
+  "purpose": "User-owned configuration, preserved interface/reset contract, and evidence-aware continuation in one isolated case.",
+  "tools": {
+    "vivado": "2025.1",
+    "ip": "xilinx.com:ip:clk_wiz:6.0",
+    "device": "xc7a200tfbg484-2"
+  },
+  "contract": {
+    "ports": [
+      "clk_in",
+      "reset",
+      "clk_out",
+      "reset_out",
+      "locked"
+    ],
+    "reset": "three-stage asynchronous assertion and output-domain synchronous release",
+    "input_mhz": 50,
+    "allowed_output_mhz": [
+      100,
+      125
+    ],
+    "authoritative_source": "config/clock-config.tcl"
+  },
+  "historical_baseline100": {
+    "stage": "clock100",
+    "source_sha256": {
+      "config/clock-config.tcl": "3d2e5bc63ecf658cd19b6f9b50bd625e30f0be1a7e0feaacdcb7836910f5d9f5",
+      "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+      "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+      "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4",
+      "scripts/clock.tcl": "63a15f3e72bb94243b39bc4327ec2aae4161977d646d67aaba1e329616f9fc62",
+      "scripts/run_clock.py": "404e7e5d17356f31bef68cacccca7ef400019014d733fe9bcf1dac7c78623dfa"
+    },
+    "status": "pass",
+    "coverage": "IP generation, XSim, IP/top synthesis only",
+    "returncode": 0,
+    "elapsed_seconds": 111.17,
+    "sources_unchanged": true,
+    "completion": "CLOCK_COMPLETE mhz=100 synth_status=synth_design Complete!",
+    "simulation": "PASS samples=400 resets=2 expected_ns=10.000"
+  },
+  "independent_continuation": {
+    "fresh_cli_without_parent_conversation": true,
+    "read_sources": "PROJECT.md, STATE.md, current files and existing stage evidence; no grading rubric",
+    "execution_exit_code": 0,
+    "current_config_was_125_while_latest_evidence_was_100": true,
+    "changed_since_baseline": [
+      "config/clock-config.tcl"
+    ],
+    "historical_100_evidence_unchanged_verified_again": true,
+    "original_source_sha256": {
+      "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+      "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+      "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+      "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4",
+      "scripts/clock.tcl": "63a15f3e72bb94243b39bc4327ec2aae4161977d646d67aaba1e329616f9fc62",
+      "scripts/run_clock.py": "404e7e5d17356f31bef68cacccca7ef400019014d733fe9bcf1dac7c78623dfa"
+    },
+    "stages": [
+      {
+        "stage": "clock125-regenerate",
+        "status": "pass",
+        "elapsed_seconds": 119.8,
+        "simulation": "PASS samples=400 resets=2 expected_ns=8.000",
+        "xci_parameters": {
+          "PRIM_IN_FREQ": 50.0,
+          "CLKOUT1_REQUESTED_OUT_FREQ": 125.0,
+          "MMCM_DIVCLK_DIVIDE": 1.0,
+          "MMCM_CLKFBOUT_MULT_F": 20.0,
+          "MMCM_CLKOUT0_DIVIDE_F": 8.0
+        },
+        "reported_input_period_ns": 20.0,
+        "reported_output_period_ns": 8.0,
+        "check_timing_counts": {
+          "no_clock": 0,
+          "constant_clock": 0,
+          "pulse_width_clock": 0,
+          "unconstrained_internal_endpoints": 0,
+          "no_input_delay": 1,
+          "no_output_delay": 1,
+          "multiple_clock": 0,
+          "generated_clocks": 0,
+          "loops": 0,
+          "partial_input_delay": 0,
+          "partial_output_delay": 0,
+          "latch_loops": 0
+        },
+        "synthesis_timing_only": {
+          "WNS_ns": 7.182,
+          "TNS_ns": 0.0,
+          "WHS_ns": 0.037,
+          "THS_ns": 0.0,
+          "WPWS_ns": 3.5
+        },
+        "warning_counts": {
+          "Board 49-26": 51,
+          "Project 1-5713": 1,
+          "VRFC 10-3532": 1,
+          "Synth 8-7080": 2,
+          "Constraints 18-619": 2,
+          "Synth 8-565": 1
+        },
+        "ip_and_top_synthesis_successes": 2,
+        "user_rtl_and_testbench_in_compile_list": true,
+        "reset_flip_flops": 3
+      },
+      {
+        "stage": "clock125-clean",
+        "status": "pass",
+        "elapsed_seconds": 113.91,
+        "simulation": "PASS samples=400 resets=2 expected_ns=8.000",
+        "xci_parameters": {
+          "PRIM_IN_FREQ": 50.0,
+          "CLKOUT1_REQUESTED_OUT_FREQ": 125.0,
+          "MMCM_DIVCLK_DIVIDE": 1.0,
+          "MMCM_CLKFBOUT_MULT_F": 20.0,
+          "MMCM_CLKOUT0_DIVIDE_F": 8.0
+        },
+        "reported_input_period_ns": 20.0,
+        "reported_output_period_ns": 8.0,
+        "check_timing_counts": {
+          "no_clock": 0,
+          "constant_clock": 0,
+          "pulse_width_clock": 0,
+          "unconstrained_internal_endpoints": 0,
+          "no_input_delay": 1,
+          "no_output_delay": 1,
+          "multiple_clock": 0,
+          "generated_clocks": 0,
+          "loops": 0,
+          "partial_input_delay": 0,
+          "partial_output_delay": 0,
+          "latch_loops": 0
+        },
+        "synthesis_timing_only": {
+          "WNS_ns": 7.182,
+          "TNS_ns": 0.0,
+          "WHS_ns": 0.037,
+          "THS_ns": 0.0,
+          "WPWS_ns": 3.5
+        },
+        "warning_counts": {
+          "VRFC 10-3532": 1,
+          "Synth 8-7080": 2,
+          "Vivado 12-7122": 1,
+          "Constraints 18-619": 2,
+          "Synth 8-565": 1
+        },
+        "ip_and_top_synthesis_successes": 2,
+        "user_rtl_and_testbench_in_compile_list": true,
+        "reset_flip_flops": 3
+      }
+    ],
+    "startup_issue": "Default temporary path failed the ASCII guard before Vivado; explicit ASCII --build-root recovered without source changes.",
+    "interpretation_limit": "One continuation case; not statistical evidence of savings or reliability."
+  },
+  "public_portability": {
+    "historical_runner_sha256": "404e7e5d17356f31bef68cacccca7ef400019014d733fe9bcf1dac7c78623dfa",
+    "changes": [
+      "Remove private default executable path; use explicit --vivado or Windows PATH resolution.",
+      "Reuse three byte-identical sources from the parent sources directory; copy only those clock files.",
+      "Guard output against the whole Vivado source tree and explain non-ASCII path failures.",
+      "Require this example ownership marker and matching successful stage before regeneration.",
+      "Reject non-ASCII stage names consistently; refuse reused stage directories.",
+      "Remove previous result markers and match both completion frequency and simulation period to current unique config.",
+      "Disable IP cache only in the isolated project to exercise real OOC synthesis on same-frequency regeneration."
+    ],
+    "redacted_diff": "portability.diff",
+    "public_runner_actually_completed_new_clean125": true,
+    "initial_portability_runner_sha256": "af910e770e4aa0dd772ac703a805c8a1d79459236dde211f9e9fcbb51522d4cb",
+    "public_runner_sha256": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+    "public_tcl_sha256": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+    "rtl_tb_xdc_unchanged": true,
+    "final_revision_regeneration_complete": false
+  },
+  "public_clean125": {
+    "stage": "public-clean125",
+    "source_sha256": {
+      "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+      "scripts/clock.tcl": "63a15f3e72bb94243b39bc4327ec2aae4161977d646d67aaba1e329616f9fc62",
+      "scripts/run_clock.py": "af910e770e4aa0dd772ac703a805c8a1d79459236dde211f9e9fcbb51522d4cb",
+      "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+      "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+      "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+    },
+    "status": "pass",
+    "coverage": "IP generation, XSim, IP/top synthesis only",
+    "returncode": 0,
+    "elapsed_seconds": 101.06,
+    "sources_unchanged": true,
+    "completion": "CLOCK_COMPLETE mhz=125 synth_status=synth_design Complete!",
+    "simulation": "PASS samples=400 resets=2 expected_ns=8.000",
+    "revision_scope": "Initial portability revision, before ownership and project-cache changes."
+  },
+  "public_clean125_details": {
+    "ip_parameters": {
+      "IPDEF": "xilinx.com:ip:clk_wiz:6.0",
+      "CONFIG.PRIM_IN_FREQ": "50",
+      "CONFIG.CLKOUT1_REQUESTED_OUT_FREQ": "125",
+      "CONFIG.MMCM_DIVCLK_DIVIDE": "1",
+      "CONFIG.MMCM_CLKFBOUT_MULT_F": "20.000",
+      "CONFIG.MMCM_CLKOUT0_DIVIDE_F": "8.000",
+      "CONFIG.USE_RESET": "true",
+      "CONFIG.USE_LOCKED": "true"
+    },
+    "reset_flip_flops": 3,
+    "ip_and_top_synthesis_successes": 2,
+    "check_timing_counts": {
+      "no_clock": 0,
+      "constant_clock": 0,
+      "pulse_width_clock": 0,
+      "unconstrained_internal_endpoints": 0,
+      "no_input_delay": 1,
+      "no_output_delay": 1,
+      "multiple_clock": 0,
+      "generated_clocks": 0,
+      "loops": 0,
+      "partial_input_delay": 0,
+      "partial_output_delay": 0,
+      "latch_loops": 0
+    },
+    "existing_stage_cli_rejected_without_changes": true
+  },
+  "public_initial_failure": {
+    "status": "fail",
+    "returncode": 1,
+    "elapsed_seconds": 21.72,
+    "source_sha256": {
+      "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+      "scripts/clock.tcl": "63a15f3e72bb94243b39bc4327ec2aae4161977d646d67aaba1e329616f9fc62",
+      "scripts/run_clock.py": "af910e770e4aa0dd772ac703a805c8a1d79459236dde211f9e9fcbb51522d4cb",
+      "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+      "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+      "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+    },
+    "phase": "Vivado simulation setup",
+    "error": "Tcl could not read installed msgcat-1.6.1.tm: invalid argument",
+    "root_cause": "Not determined. No installation or source change was applied; retry in a new ASCII directory completed.",
+    "same_source_hashes_on_retry": true
+  },
+  "coverage": {
+    "ip_generation": true,
+    "xsim": true,
+    "ip_and_top_synthesis": true,
+    "regeneration_125": false,
+    "clean_rebuild_125": true,
+    "implementation": false,
+    "timing_closure": false,
+    "bitstream": false,
+    "board_test": false,
+    "historical_original_regeneration_125": true,
+    "coverage_scope": "Final public revision unless explicitly marked historical."
+  },
+  "not_covered": [
+    "Final public revision same-root regeneration did not complete: XSim setup errors and one failed same-source retry.",
+    "Implementation/place/route and timing closure",
+    "Bitstream, hardware connection, programming or board tests",
+    "Board-level reset/reset_out external delays",
+    "Additional stopped-input/loss-of-lock fault injection, jitter/PVT or metastability validation"
+  ],
+  "public_package_sha256": {
+    "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+    "portability.diff": "ac4a506f3fdd19f1bda9296a18aebad5535eafc8505ffd3cec59be4fa35d1a9e",
+    "PROJECT.md": "0fca73bebf990451129180ff0bcb605b4c1f9aa43af043b2a50d4a554b95f238",
+    "README.md": "68343c11a0d0ad036030203b5a1324b85c78fa4938bbf9e1bec3796d33186bb0",
+    "scripts/clock.tcl": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+    "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+    "STATE.md": "827b9fe438ab7aeacdf49418aac1ca65d2bc6fd9c61fb717261d54fb1d360bba"
+  },
+  "public_package_sha256_scope": "All delivered controlled-project files except this summary itself; final shared clock hashes are in final_revision.source_sha256.",
+  "publication_ready": false,
+  "final_revision": {
+    "source_sha256": {
+      "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+      "scripts/clock.tcl": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+      "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+      "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+      "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+      "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+    },
+    "actual_stages": [
+      {
+        "stage": "verified-clean125",
+        "status": "pass",
+        "returncode": 0,
+        "elapsed_seconds": 105.53,
+        "sources_unchanged": true,
+        "completion": "CLOCK_COMPLETE mhz=125 synth_status=synth_design Complete!",
+        "simulation": "PASS samples=400 resets=2 expected_ns=8.000",
+        "source_sha256": {
+          "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+          "scripts/clock.tcl": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+          "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+          "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+          "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+          "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+        },
+        "coverage": "IP generation, XSim, IP/top synthesis only",
+        "requested_output_mhz": 125.0,
+        "expected_period_ns": 8.0,
+        "removed_old_result_files": []
+      },
+      {
+        "stage": "verified-regenerate125",
+        "status": "fail",
+        "returncode": 1,
+        "elapsed_seconds": 14.95,
+        "sources_unchanged": true,
+        "completion": "",
+        "simulation": "",
+        "source_sha256": {
+          "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+          "scripts/clock.tcl": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+          "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+          "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+          "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+          "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+        },
+        "coverage": "IP generation, XSim, IP/top synthesis only",
+        "requested_output_mhz": 125.0,
+        "expected_period_ns": 8.0,
+        "removed_old_result_files": [
+          "completed.txt",
+          "clock_result.txt"
+        ]
+      },
+      {
+        "stage": "verified-regenerate125-retry",
+        "status": "fail",
+        "returncode": 2147483651,
+        "elapsed_seconds": 14.91,
+        "sources_unchanged": true,
+        "completion": "",
+        "simulation": "",
+        "source_sha256": {
+          "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+          "scripts/clock.tcl": "269e8770e42d3664fa86cec43d7a122a04d9b4a03ea1d44ccba2cc2e8935734e",
+          "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+          "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+          "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+          "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+        },
+        "coverage": "IP generation, XSim, IP/top synthesis only",
+        "requested_output_mhz": 125.0,
+        "expected_period_ns": 8.0,
+        "removed_old_result_files": []
+      }
+    ],
+    "clean_rebuild_passed": true,
+    "same_root_regeneration_passed": false,
+    "negative_preflight_and_result_tests": {
+      "runner_sha256": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+      "actual_cli_negative_cases": [
+        {
+          "case": "unowned-project",
+          "exit_code": 2,
+          "rejected_before_tool_call": true,
+          "fixture_bytes_unchanged": true,
+          "source_bytes_unchanged": true
+        },
+        {
+          "case": "wrong-marker",
+          "exit_code": 2,
+          "rejected_before_tool_call": true,
+          "fixture_bytes_unchanged": true,
+          "source_bytes_unchanged": true
+        },
+        {
+          "case": "missing-success-evidence",
+          "exit_code": 2,
+          "rejected_before_tool_call": true,
+          "fixture_bytes_unchanged": true,
+          "source_bytes_unchanged": true
+        },
+        {
+          "case": "wrong-evidence-owner",
+          "exit_code": 2,
+          "rejected_before_tool_call": true,
+          "fixture_bytes_unchanged": true,
+          "source_bytes_unchanged": true
+        },
+        {
+          "case": "non-ascii-stage",
+          "exit_code": 2,
+          "rejected_before_tool_call": true,
+          "output_directory_not_created": true
+        }
+      ],
+      "result_matching": {
+        "correct_current_result_accepted": true,
+        "old_frequency_and_period_rejected": true,
+        "old_period_alone_rejected": true,
+        "old_frequency_alone_rejected": true
+      }
+    },
+    "negative_test_scope": "Executed against this final Python hash before only Tcl cache-setting change; unaffected Python tests were not repeated.",
+    "first_regeneration_failure": {
+      "phase": "XSim setup before simulation",
+      "error": "USF-XSim-11: Failed to open file to read generated xsim.ini",
+      "source_unchanged": true,
+      "completion_or_simulation_pass": false
+    },
+    "one_same_source_retry": {
+      "phase": "XSim setup after xsim.ini copy",
+      "error": "called Tcl_Close on channel with refCount > 0; EXCEPTION_BREAKPOINT",
+      "returncode": 2147483651,
+      "source_unchanged": true,
+      "completion_or_simulation_pass": false,
+      "further_tool_calls": false
+    },
+    "environment_conclusion": "Root cause unresolved. Installed and generated xsim.ini were readable after process exit; this does not prove accessibility during the failed runs. Do not claim a stable environment.",
+    "failure_artifact_limit": "Failed stage copies include prior clean synthesis reports. They are retained diagnostics, not evidence that synthesis ran in the failed stage.",
+    "owner_marker_last_successful_stage": "verified-clean125",
+    "old_result_markers_removed_before_first_regeneration": [
+      "completed.txt",
+      "clock_result.txt"
+    ]
+  },
+  "project_cache_revision": {
+    "preceding_clean": {
+      "stage": "final-clean125",
+      "status": "pass",
+      "returncode": 0,
+      "elapsed_seconds": 123.23,
+      "sources_unchanged": true,
+      "completion": "CLOCK_COMPLETE mhz=125 synth_status=synth_design Complete!",
+      "simulation": "PASS samples=400 resets=2 expected_ns=8.000",
+      "source_sha256": {
+        "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+        "scripts/clock.tcl": "63a15f3e72bb94243b39bc4327ec2aae4161977d646d67aaba1e329616f9fc62",
+        "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+        "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+        "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+        "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+      },
+      "coverage": "IP generation, XSim, IP/top synthesis only",
+      "requested_output_mhz": 125.0,
+      "expected_period_ns": 8.0,
+      "removed_old_result_files": []
+    },
+    "preceding_regeneration": {
+      "stage": "final-regenerate125",
+      "status": "fail",
+      "returncode": 1,
+      "elapsed_seconds": 32.33,
+      "sources_unchanged": true,
+      "completion": "",
+      "simulation": "PASS samples=400 resets=2 expected_ns=8.000",
+      "source_sha256": {
+        "config/clock-config.tcl": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
+        "scripts/clock.tcl": "63a15f3e72bb94243b39bc4327ec2aae4161977d646d67aaba1e329616f9fc62",
+        "scripts/run_clock.py": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
+        "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+        "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+        "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4"
+      },
+      "coverage": "IP generation, XSim, IP/top synthesis only",
+      "requested_output_mhz": 125.0,
+      "expected_period_ns": 8.0,
+      "removed_old_result_files": [
+        "completed.txt",
+        "clock_result.txt"
+      ]
+    },
+    "reason": "The original checker did not cover valid cached IP completion status. The cached synthesis artifacts existed; this was not demonstrated RTL or tool synthesis failure.",
+    "command": "config_ip_cache -disable_cache",
+    "observed_current_project_property": "IP_CACHE_PERMISSIONS=disable",
+    "scope": "Current isolated example project only; no global setting, shared cache purge, or installation change.",
+    "official_reference": "https://docs.amd.com/r/2025.1-English/ug835-vivado-tcl-commands/config_ip_cache",
+    "tcl_change": "Four inserted comment/command/log lines; all shared RTL, testbench, and XDC unchanged."
+  }
+}
