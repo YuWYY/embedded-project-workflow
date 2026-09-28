@@ -1,0 +1,35 @@
+name: 真实任务反馈
+description: 记录一次明确任务中的错误决策、无效步骤或生成覆盖问题。
+title: "[反馈] "
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Skill 版本或提交
+      description: 提供标签或 commit，以及显式读取的方式。
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: 任务与环境
+      description: 工具版本、器件、当前成功状态、本轮终点与允许修改的范围。
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: 实际行为与预期
+      description: 具体错误选择、重复提问、被覆盖文件或回归，以及你如何确认。
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: 最小可公开案例与证据
+      description: 提供必要的合成输入、片段或命令；无需上传私有固件、原始对话、注册信息或设备凭据。
+  - type: textarea
+    id: result
+    attributes:
+      label: 验证与人工干预
+      description: 分开说明源码、生成、构建、仿真、板测结果；未验证的项目直接说明。

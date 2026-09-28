@@ -1,0 +1,62 @@
+{
+  "status": "pass",
+  "platform": "Windows",
+  "part": "xc7a200tfbg484-2",
+  "source_sha256": {
+    "sources/clock.xdc": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+    "sources/clock_top.sv": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+    "sources/fifo.xdc": "557ecad2a532f42ae368d411a6a3940a06dd2061d1623fd492109579a4723e80",
+    "sources/fifo_top.sv": "62e3abd2885f06e318fbce7b1cab1f67fb697a79a1e4f4e01fc87c1ba4732a98",
+    "sources/tb_clock.sv": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4",
+    "sources/tb_fifo.sv": "31e43a4dd974302064f9684da4edd43acfedb15ae617a4efe9e4d9b2836c9b6d",
+    "scripts/clock.tcl": "473b564ed3ea1fbd51b687d0e3ff43b64dd01b8e0e3eac56e6f7249de77746c2",
+    "scripts/fifo.tcl": "f944eb010b85ad58ed0683b3b2905d326f4cb830f31aade3b5fcf5938bc87edf",
+    "scripts/rebuild.py": "458226d7ad274ad16629e827d3f4db0c71d69fa1ca57f06da8481ce0f59db492"
+  },
+  "stages": [
+    {
+      "name": "clock100",
+      "returncode": 0,
+      "completion": "CLOCK_COMPLETE mhz=100 synth_status=synth_design Complete!",
+      "sources_unchanged": true,
+      "elapsed_seconds": 135.31,
+      "simulation": "PASS samples=400 resets=2 expected_ns=10.000"
+    },
+    {
+      "name": "clock125_regenerated",
+      "returncode": 0,
+      "completion": "CLOCK_COMPLETE mhz=125 synth_status=synth_design Complete!",
+      "sources_unchanged": true,
+      "elapsed_seconds": 100.44,
+      "simulation": "PASS samples=400 resets=2 expected_ns=8.000"
+    },
+    {
+      "name": "clock125_clean",
+      "returncode": 0,
+      "completion": "CLOCK_COMPLETE mhz=125 synth_status=synth_design Complete!",
+      "sources_unchanged": true,
+      "elapsed_seconds": 104.28,
+      "simulation": "PASS samples=400 resets=2 expected_ns=8.000"
+    },
+    {
+      "name": "fifo_positive",
+      "returncode": 0,
+      "completion": "FIFO_COMPLETE synth_status=synth_design Complete!",
+      "sources_unchanged": true,
+      "elapsed_seconds": 71.67,
+      "simulation": "PASS written=3600 read=3500 discarded=100 pending=0 resets=2 full_cycles=20 empty_cycles=608 paused_cycles=1670 max_pending=513 corrupt=0"
+    },
+    {
+      "name": "fifo_negative",
+      "returncode": 0,
+      "completion": "NEGATIVE_CONTROL_DETECTED FAIL reason=data mismatch expected=1357 actual=1356 written=513 read=0 discarded=0 pending=512 corrupt=1",
+      "sources_unchanged": true,
+      "elapsed_seconds": 17.58,
+      "simulation": "FAIL reason=data mismatch expected=1357 actual=1356 written=513 read=0 discarded=0 pending=512 corrupt=1"
+    }
+  ],
+  "coverage": "IP generation, XSim, synthesis; no implementation or hardware",
+  "vivado_version": "2025.1",
+  "clean_rebuild_semantics_equal": true,
+  "sources_unchanged": true
+}

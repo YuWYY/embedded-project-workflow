@@ -1,0 +1,31 @@
+name: Validate public release
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate source manifest and skill
+        run: python -B scripts/release.py validate
+      - name: Check controlled failures
+        run: python -B scripts/release.py self-test
+      - name: Build release archives
+        run: python -B scripts/release.py pack
+      - name: Verify archive contents
+        run: python -B scripts/release.py verify-packages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: beta-release-packages
+          path: dist/*
+          if-no-files-found: error

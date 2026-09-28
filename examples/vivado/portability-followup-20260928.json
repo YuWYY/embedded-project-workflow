@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-28",
+  "status": "pass",
+  "full_run_summary": "validation-20260928.json",
+  "full_run_summary_sha256": "4aaaa4eaf4f71fa8720fcf6cfa736668092b1fd09792a0dd7c69022f761a99aa",
+  "executed_runner_sha256": "458226d7ad274ad16629e827d3f4db0c71d69fa1ca57f06da8481ce0f59db492",
+  "published_runner_sha256": "2fb787ee42958d51474cf7d37b786f44a477b133122061ebcfb55c78c97ed27d",
+  "change": "Windows PATH lookup prefers vivado.bat, then vivado.exe; the extensionless vivado file is a Unix shell script in this installation.",
+  "old_line": "executable = value or shutil.which(\"vivado\") or shutil.which(\"vivado.bat\")",
+  "new_line": "executable = value or shutil.which(\"vivado.bat\") or shutil.which(\"vivado.exe\")",
+  "only_this_line_changed": true,
+  "rtl_tcl_tb_unchanged_from_full_run": true,
+  "path_probe": {
+    "resolved_launcher": "vivado.bat",
+    "arguments": [
+      "-mode",
+      "batch",
+      "-notrace",
+      "-source",
+      "<isolated version-and-completion probe Tcl>"
+    ],
+    "returncode": 0,
+    "observed_version": "vivado v2025.1 (64-bit)",
+    "explicit_path_branch_matches": true,
+    "version_option_returncode": 1,
+    "version_option_note": "The native -version invocation printed its version but returned nonzero; the accepted check uses explicit Tcl completion and exit 0."
+  },
+  "final_runner_five_stage_rerun": false,
+  "scope": "All five hardware-tool stages ran before this one-line resolver fix; the final resolver was separately tested by actual PATH-based Vivado startup. No hardware or implementation."
+}

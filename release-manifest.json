@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "version": "0.1.0-beta.1",
+  "files": {
+    ".gitattributes": {
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "bytes": 8
+    },
+    ".github/ISSUE_TEMPLATE/task-feedback.yml": {
+      "sha256": "cf60b423aff8121a6a517f77fe3ce7cbd72082cca5038765aa14fbf3639d3333",
+      "bytes": 1234
+    },
+    ".github/workflows/validate.yml": {
+      "sha256": "52fc8bfd74421acb9cabc61542fd938bdb84c10ee7df16b192013e1f0879e28a",
+      "bytes": 811
+    },
+    ".gitignore": {
+      "sha256": "69d675d8d6df0f0b9aa70488bf954b80d880bd8babcddeb1f52ae6e62a812374",
+      "bytes": 75
+    },
+    "LICENSE": {
+      "sha256": "acd0962cf80e678ee1edc83e6b4225c03e9839bbd04ff7bcc007fbbce67b399c",
+      "bytes": 1062
+    },
+    "README.md": {
+      "sha256": "3b63562993b01926b2af52c54f577f7e85f1b65277a9327e58556f99e0a2fd7c",
+      "bytes": 4973
+    },
+    "docs/releasing.md": {
+      "sha256": "3ac4036f71a2f829fd85b9d58c762865c6de509e4bc678e79af79af05547ed47",
+      "bytes": 2775
+    },
+    "docs/sources-and-license.md": {
+      "sha256": "83719906e8e13758ec16791ef0fe68c8ed2eac9dd1610487a6becd179715920f",
+      "bytes": 2096
+    },
+    "docs/validation.md": {
+      "sha256": "f682198182c49e5481fecee5c191c83aeda15a91d02edd79e1c9577a8ae1d6c9",
+      "bytes": 8347
+    },
+    "examples/vivado/README.md": {
+      "sha256": "21f5d07d67efd44bea3a47c24fbce0775eb8ff934bc8e9f61a5c36f5a22d702c",
+      "bytes": 4471
+    },
+    "examples/vivado/portability-followup-20260928.json": {
+      "sha256": "a3abadda5c9ff2d363d6591985d39dd31a0dc147455ee3256ae8a51e7e874d0f",
+      "bytes": 1591
+    },
+    "examples/vivado/scripts/clock.tcl": {
+      "sha256": "473b564ed3ea1fbd51b687d0e3ff43b64dd01b8e0e3eac56e6f7249de77746c2",
+      "bytes": 3744
+    },
+    "examples/vivado/scripts/fifo.tcl": {
+      "sha256": "f944eb010b85ad58ed0683b3b2905d326f4cb830f31aade3b5fcf5938bc87edf",
+      "bytes": 2792
+    },
+    "examples/vivado/scripts/rebuild.py": {
+      "sha256": "2fb787ee42958d51474cf7d37b786f44a477b133122061ebcfb55c78c97ed27d",
+      "bytes": 8020
+    },
+    "examples/vivado/sources/clock.xdc": {
+      "sha256": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
+      "bytes": 61
+    },
+    "examples/vivado/sources/clock_top.sv": {
+      "sha256": "234bc76d9cf7bdc9cf4e5cafdb186626fbf58849fbab968dd623fa5c34f15d85",
+      "bytes": 608
+    },
+    "examples/vivado/sources/fifo.xdc": {
+      "sha256": "557ecad2a532f42ae368d411a6a3940a06dd2061d1623fd492109579a4723e80",
+      "bytes": 272
+    },
+    "examples/vivado/sources/fifo_top.sv": {
+      "sha256": "62e3abd2885f06e318fbce7b1cab1f67fb697a79a1e4f4e01fc87c1ba4732a98",
+      "bytes": 1397
+    },
+    "examples/vivado/sources/tb_clock.sv": {
+      "sha256": "ce99b0772ade4fea90b8ea60b6c79adf7af2d4a427898fa5390616ff41c6ddf4",
+      "bytes": 1791
+    },
+    "examples/vivado/sources/tb_fifo.sv": {
+      "sha256": "31e43a4dd974302064f9684da4edd43acfedb15ae617a4efe9e4d9b2836c9b6d",
+      "bytes": 4829
+    },
+    "examples/vivado/validation-20260928.json": {
+      "sha256": "4aaaa4eaf4f71fa8720fcf6cfa736668092b1fd09792a0dd7c69022f761a99aa",
+      "bytes": 2831
+    },
+    "scripts/release.py": {
+      "sha256": "bd8e66012175f32e153d345950c8c99598fe9ed6f03897998ad7c5cb20c5c772",
+      "bytes": 12981
+    },
+    "skills/embedded-project-workflow/SKILL.md": {
+      "sha256": "eb08b3039c9588a7e218ab4f234111ec80dd556bd2eab2113b1e8e2b1e686d74",
+      "bytes": 7177
+    },
+    "skills/embedded-project-workflow/agents/openai.yaml": {
+      "sha256": "f4bc6a099b2398fbec2dcdf36f8b2482adc4b7e4b6609176402326ef14e64a79",
+      "bytes": 410
+    },
+    "skills/embedded-project-workflow/references/debug-retrospective.md": {
+      "sha256": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
+      "bytes": 4886
+    },
+    "skills/embedded-project-workflow/references/ip-selection.md": {
+      "sha256": "0fb50ea98bbe40d128d8f830c237d802e8389e56cd4056f3050a8712b0f4f19c",
+      "bytes": 4565
+    },
+    "skills/embedded-project-workflow/references/project-facts-template.md": {
+      "sha256": "0f7c1ac42fdcaef16ecc6e245d20181b3280da7776a627c269effc5717f37895",
+      "bytes": 1473
+    },
+    "skills/embedded-project-workflow/references/sources.md": {
+      "sha256": "bfe3575069e09ccc24c3a5c22c71d1b21729f31966ed9ab4ac0d548a44e05866",
+      "bytes": 9166
+    },
+    "skills/embedded-project-workflow/references/stm32-cubemx.md": {
+      "sha256": "231118989a824cc90ecab4976bd7bdbbbabda76ec83c415121e42621acd12424",
+      "bytes": 6595
+    },
+    "skills/embedded-project-workflow/references/touchgfx.md": {
+      "sha256": "7ee1d7e920a5d63a184c702f64e5bbf66b0c5a8ca2a76d7380fb8bfc01d3f938",
+      "bytes": 5574
+    },
+    "skills/embedded-project-workflow/references/vivado-workflow.md": {
+      "sha256": "04a4c21bdc0e7e4c843db2c2101aa749f9a1307638f3b44cd66afed7c1669ec1",
+      "bytes": 6779
+    },
+    "source-files.txt": {
+      "sha256": "1dfe5de0e6d78e2e6e188284f3b807c91c9885b80359d91cb3f5736627db5d06",
+      "bytes": 1173
+    }
+  }
+}

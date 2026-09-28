@@ -1,0 +1,11 @@
+dist/
+.cache/
+__pycache__/
+*.pyc
+*.jou
+*.log
+*.pb
+*.dcp
+*.bit
+.Xil/
+build/
