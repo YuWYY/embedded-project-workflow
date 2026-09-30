@@ -33,7 +33,7 @@ python -B scripts/release.py verify-packages
 
 CubeMX/FreeRTOS、TouchGFX 原创示例及10例合成评估材料在仓库中交付，不另打入 Skill ZIP。Vivado ZIP 包含原始两个示例及受控配置与续接示例。厂商依赖始终由本机已有安装提供。
 
-CI 执行 validate、self-test、合成案例准备、pack、verify-packages，并上传构建附件。案例准备只复制原创输入与 Skill，不能代替模型执行和行为评分。CI 不自动创建 Release，不运行厂商工具，不安装 Skill，不操作硬件。
+CI 执行 validate、self-test、隔离runner证据/路径回归、合成案例准备、pack、verify-packages，并上传构建附件。runner回归模拟厂商子进程，不运行Vivado。案例准备只复制原创输入与 Skill，不能代替模型执行和行为评分。CI 不自动创建 Release，不运行厂商工具，不安装 Skill，不操作硬件。
 
 ## GitHub 预发布
 

@@ -76,7 +76,9 @@ examples/vivado/controlled-project/config/clock-config.tcl
 examples/vivado/controlled-project/portability.diff
 examples/vivado/controlled-project/scripts/clock.tcl
 examples/vivado/controlled-project/scripts/run_clock.py
+examples/vivado/controlled-project/tests/test_runner.py
 examples/vivado/controlled-project/validation-20260928.json
+examples/vivado/controlled-project/validation-20260930.json
 examples/vivado/portability-followup-20260928.json
 examples/vivado/scripts/clock.tcl
 examples/vivado/scripts/fifo.tcl

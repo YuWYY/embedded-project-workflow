@@ -11,8 +11,8 @@
       "bytes": 1234
     },
     ".github/workflows/validate.yml": {
-      "sha256": "0f5af2abce2649ba9200d4095b57707d4d3178068e6c7c9586baf161f2832e19",
-      "bytes": 972
+      "sha256": "0b99b397a956ae1144427d9f63c161d2a04b61c3598c349fb3c215eaa413cf33",
+      "bytes": 1106
     },
     ".gitignore": {
       "sha256": "3d06f774e264cb6c65343e2c1c64c79062138f30eeb36890d1f45ffeb0118fe5",
@@ -23,20 +23,20 @@
       "bytes": 1062
     },
     "README.md": {
-      "sha256": "96f63362df3eb100c65101079bc924afce2b947ffb25c09d8118265980e35fc0",
-      "bytes": 6647
+      "sha256": "80d845af9bc6733778738d8f9f84d72edf61ed75398e7ba7cbb2c574ef26c796",
+      "bytes": 6695
     },
     "docs/releasing.md": {
-      "sha256": "ceb58d5c10fed7491fca6e9bc0e2e2875440514569981bec2b3fed7983f3a2d2",
-      "bytes": 3242
+      "sha256": "b1707b2eeca8bb85d41df3724dc5a9c14cb7fce555184fa8966ae55a3418078c",
+      "bytes": 3330
     },
     "docs/sources-and-license.md": {
       "sha256": "cb31f310097f7118aa01c272ba51f5b0e40d8264442264a62e6881b84142117c",
       "bytes": 3042
     },
     "docs/validation.md": {
-      "sha256": "509ccd2cd7af955695efef67c58a032fe29d63bd2ffa8e6cf80c58b94edfb98a",
-      "bytes": 16329
+      "sha256": "425a994e3eb0d10e723ee69b9101d54f6d3a4c5fa6c0605f795f4054c51979d6",
+      "bytes": 20105
     },
     "evaluations/v02/README.md": {
       "sha256": "f0bbbc5db6bf40d4590982e6f793f03118a66076fed4f7b80b4ad42524689ea4",
@@ -291,12 +291,12 @@
       "bytes": 1845
     },
     "examples/vivado/controlled-project/README.md": {
-      "sha256": "68343c11a0d0ad036030203b5a1324b85c78fa4938bbf9e1bec3796d33186bb0",
-      "bytes": 6300
+      "sha256": "43fb0ead0928660bef55c4e86ef09ca2425f3fdc6a0a5481b037f211f4f9ebb9",
+      "bytes": 7886
     },
     "examples/vivado/controlled-project/STATE.md": {
-      "sha256": "827b9fe438ab7aeacdf49418aac1ca65d2bc6fd9c61fb717261d54fb1d360bba",
-      "bytes": 3129
+      "sha256": "ba8798e052629b418938ae489f9dff3102b228883f42574b8b21326a78bd7f48",
+      "bytes": 3554
     },
     "examples/vivado/controlled-project/config/clock-config.tcl": {
       "sha256": "5cf049d2bb1d2d9ca76d626ecfe84456701dba5020c173b34556f95b321d9582",
@@ -311,12 +311,20 @@
       "bytes": 4201
     },
     "examples/vivado/controlled-project/scripts/run_clock.py": {
-      "sha256": "dc7287db92dd80ed6b42101c21b182033dbdc33ea8a45bf1a9f2b7f5ce352b52",
-      "bytes": 9299
+      "sha256": "34ef309ee9bf81ddb4dccbd2709cd6ef415b0557cf8b1e7e2bc098b2cc76a2b4",
+      "bytes": 13522
+    },
+    "examples/vivado/controlled-project/tests/test_runner.py": {
+      "sha256": "f4bdf9302411b406ad9e2cff4f0ebedcd4fa82ecaba4e3f5b42f090946e00d8e",
+      "bytes": 13604
     },
     "examples/vivado/controlled-project/validation-20260928.json": {
       "sha256": "3905c72aecbe0d824c923914a22e079324f629e96f15bfefd1e61d4556bb4b3a",
       "bytes": 22141
+    },
+    "examples/vivado/controlled-project/validation-20260930.json": {
+      "sha256": "6a1f6222b69c15b8aa503522627c1cb4e4d5576d1db9504033e1ac8b36f08568",
+      "bytes": 13591
     },
     "examples/vivado/portability-followup-20260928.json": {
       "sha256": "a3abadda5c9ff2d363d6591985d39dd31a0dc147455ee3256ae8a51e7e874d0f",
@@ -415,8 +423,8 @@
       "bytes": 7160
     },
     "source-files.txt": {
-      "sha256": "088610d963e4ec13fbd3d60332aa8a06b8067aadd7963871d2829356ce82257d",
-      "bytes": 5092
+      "sha256": "4bf46069c36172ed8764a9dcca27b23fd770d375eaad789a873a866336898e32",
+      "bytes": 5208
     }
   }
 }

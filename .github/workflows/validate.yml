@@ -20,6 +20,8 @@ jobs:
         run: python -B scripts/release.py validate
       - name: Check controlled failures
         run: python -B scripts/release.py self-test
+      - name: Check isolated runner evidence and paths
+        run: python -B examples/vivado/controlled-project/tests/test_runner.py
       - name: Prepare public synthetic evaluation inputs
         run: python -B evaluations/v02/prepare.py --output "${{ runner.temp }}/embedded-workflow-cases"
       - name: Build release archives

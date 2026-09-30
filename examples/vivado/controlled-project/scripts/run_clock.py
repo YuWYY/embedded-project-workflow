@@ -23,6 +23,12 @@ def sha(path):
 CLOCK_SOURCES = ('clock.xdc', 'clock_top.sv', 'tb_clock.sv')
 OWNER_FILE = '.controlled-clock-project.json'
 OWNER_FORMAT = 'embedded-project-workflow/controlled-clock'
+EVIDENCE_FILES = (
+    'utilization.rpt', 'clocks.rpt', 'timing_synth.rpt', 'cdc.rpt',
+    'check_timing.rpt', 'ip_properties.txt', 'tool_version.txt', 'completed.txt',
+    'p/c.sim/sim_1/behav/xsim/clock_result.txt',
+    'p/c.sim/sim_1/behav/xsim/simulate.log',
+)
 
 
 def inventory(package, source_root=None):
@@ -37,6 +43,88 @@ def inventory(package, source_root=None):
 
 def write_json(path, obj):
     path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+
+
+def source_copy_plan(package, shared_sources, root):
+    """List the exact directories/files to copy, including individual targets."""
+    directories = [root / 'sources']
+    files = [(shared_sources / name, root / 'sources' / name) for name in CLOCK_SOURCES]
+    for folder in ('scripts', 'config'):
+        source_dir = package / folder
+        directories.append(root / folder)
+        for source in sorted(source_dir.rglob('*')):
+            if '__pycache__' in source.relative_to(source_dir).parts:
+                continue
+            target = root / source.relative_to(package)
+            if source.is_dir():
+                directories.append(target)
+            elif source.is_file():
+                files.append((source, target))
+    return directories, files
+
+
+def check_write_targets(root, work, evidence, directories, files):
+    """Reject linked destinations outside this root before the first write."""
+    targets = [root, work, root / OWNER_FILE, evidence,
+               evidence / 'result.json', evidence / 'stdout.log',
+               evidence / 'clock-config.tcl', *directories,
+               *(destination for _, destination in files)]
+    for target in targets:
+        if not target.resolve().is_relative_to(root):
+            raise ValueError(f'Write target escapes the isolated build root: {target}')
+    # This runner owns the small build tree. Reject external links anywhere in
+    # it, including native-tool outputs, without traversing an external target.
+    pending = [root] if root.exists() else []
+    visited = set()
+    while pending:
+        directory = pending.pop()
+        resolved = directory.resolve()
+        if resolved in visited:
+            continue
+        visited.add(resolved)
+        for child in directory.iterdir():
+            if not child.resolve().is_relative_to(root):
+                raise ValueError(f'Build tree link escapes the isolated build root: {child}')
+            if child.is_dir():
+                pending.append(child)
+    checked_artifact_paths(root, work, evidence)
+
+
+def checked_artifact_paths(root, work, evidence):
+    """Resolve every known artifact before moving or collecting any of them."""
+    root = root.resolve()
+    paths = [(relative, work / relative, evidence / Path(relative).name,
+              evidence / 'preexisting-artifacts' / relative)
+             for relative in EVIDENCE_FILES]
+    for relative, source, destination, archived in paths:
+        if any(not path.resolve().is_relative_to(root)
+               for path in (source, destination, archived)):
+            raise ValueError(f'Artifact path escapes the isolated build root: {relative}')
+        if source.exists() and not source.is_file():
+            raise ValueError(f'Expected a generated evidence file: {relative}')
+    return paths
+
+
+def archive_preexisting_artifacts(root, work, evidence):
+    paths = checked_artifact_paths(root, work, evidence)
+    if any(archived.exists() for _, _, _, archived in paths):
+        raise ValueError('Preexisting artifact archive already contains evidence')
+    archived_files = []
+    for relative, source, _, archived in paths:
+        if source.is_file():
+            archived.parent.mkdir(parents=True, exist_ok=True)
+            source.replace(archived)
+            archived_files.append(relative)
+    return archived_files
+
+
+def collect_current_artifacts(root, work, evidence):
+    collected = []
+    for relative, source, destination, _ in checked_artifact_paths(root, work, evidence):
+        if source.is_file():
+            shutil.copy2(source, destination)
+            collected.append(relative)
+    return collected
 
 
 def output_frequency(config):
@@ -124,57 +212,57 @@ def main():
     evidence = root / 'stage-results' / args.stage
     if evidence.exists():
         parser.error('Stage evidence already exists; choose a new stage name')
+    try:
+        copy_directories, copy_files = source_copy_plan(package, shared_sources, root)
+        check_write_targets(root, work, evidence, copy_directories, copy_files)
+    except (OSError, RuntimeError, ValueError) as error:
+        parser.error(str(error))
     root.mkdir(parents=True, exist_ok=True)
     work.mkdir(exist_ok=True)
     evidence.mkdir(parents=True)
     write_json(root / OWNER_FILE, owner)
     initial = inventory(package, shared_sources)
-    for folder in ('scripts', 'config'):
-        shutil.copytree(package / folder, root / folder, dirs_exist_ok=True,
-                        ignore=shutil.ignore_patterns('__pycache__'))
-    (root / 'sources').mkdir(exist_ok=True)
-    for name in CLOCK_SOURCES:
-        shutil.copy2(shared_sources / name, root / 'sources' / name)
+    for directory in copy_directories:
+        directory.mkdir(parents=True, exist_ok=True)
+    for source, destination in copy_files:
+        shutil.copy2(source, destination)
     shutil.copy2(package / 'config/clock-config.tcl', evidence / 'clock-config.tcl')
     marker = work / 'completed.txt'
     sim = work / 'p/c.sim/sim_1/behav/xsim/clock_result.txt'
-    removed_old_results = []
-    for old_result in (marker, sim):
-        if old_result.exists():
-            old_result.unlink()
-            removed_old_results.append(old_result.name)
+    archived_files = archive_preexisting_artifacts(root, work, evidence)
+    removed_old_results = [Path(relative).name for relative in archived_files
+                           if Path(relative).name in ('completed.txt', 'clock_result.txt')]
     command = [str(executable), '-mode', 'batch', '-notrace', '-source',
                str(root / 'scripts/clock.tcl'), '-tclargs', str(root / 'sources')]
     if args.regenerate:
         command.append('regenerate')
+    # Give the Windows batch launcher its own hidden console and explicit input.
+    # This is a process-launch choice, not a claim to fix native Tcl I/O errors.
+    startup = subprocess.STARTUPINFO()
+    startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    startup.wShowWindow = subprocess.SW_HIDE
     started = time.monotonic()
     record = {'stage': args.stage, 'command': command, 'cwd': str(work),
               'build_root': str(root), 'source_sha256': initial,
               'owner_id': owner['owner_id'], 'requested_output_mhz': requested_mhz,
               'expected_period_ns': 1000.0 / requested_mhz,
               'removed_old_result_files': removed_old_results,
+              'archived_preexisting_artifacts': archived_files,
+              'process_io': 'DEVNULL stdin, file stdout/stderr, hidden new console',
               'status': 'running', 'coverage': 'IP generation, XSim, IP/top synthesis only'}
     write_json(evidence / 'result.json', record)
     print('Build directory:', root, flush=True)
     with (evidence / 'stdout.log').open('w', encoding='utf-8') as output:
-        result = subprocess.run(command, cwd=work, stdout=output,
+        result = subprocess.run(command, cwd=work, stdin=subprocess.DEVNULL, stdout=output,
                                 stderr=subprocess.STDOUT, check=False,
-                                creationflags=subprocess.CREATE_NO_WINDOW)
+                                startupinfo=startup,
+                                creationflags=subprocess.CREATE_NEW_CONSOLE)
     record.update(returncode=result.returncode,
                   elapsed_seconds=round(time.monotonic()-started, 2),
                   sources_unchanged=(initial == inventory(package, shared_sources) == inventory(root)))
     record['completion'] = marker.read_text(encoding='utf-8').strip() if marker.exists() else ''
     record['simulation'] = sim.read_text(encoding='utf-8').strip() if sim.exists() else ''
-    for p in work.glob('*.rpt'):
-        shutil.copy2(p, evidence / p.name)
-    for name in ('ip_properties.txt', 'completed.txt', 'tool_version.txt'):
-        if (work / name).is_file():
-            shutil.copy2(work / name, evidence / name)
-    if sim.is_file():
-        shutil.copy2(sim, evidence / sim.name)
-    simlog = sim.with_name('simulate.log')
-    if simlog.is_file():
-        shutil.copy2(simlog, evidence / 'simulate.log')
+    record['collected_current_artifacts'] = collect_current_artifacts(root, work, evidence)
     record['status'] = ('pass' if result.returncode == 0
                         and record['sources_unchanged']
                         and matching_results(record['completion'], record['simulation'], requested_mhz)
