@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextDatabase xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="texts.xsd" Version="4.26.1">
+  <Languages><Language Id="GB" /></Languages>
+  <Texts><TextGroup Id="HumanControl">
+    <Text Id="DashboardTitle" Alignment="Left" TypographyId="Default"><Translation Language="GB">Dashboard</Translation></Text>
+    <Text Id="SettingsTitle" Alignment="Left" TypographyId="Default"><Translation Language="GB">Settings</Translation></Text>
+    <Text Id="CounterValue" Alignment="Left" TypographyId="Default"><Translation Language="GB">Count: &lt;value&gt;</Translation></Text>
+    <Text Id="PausedValue" Alignment="Left" TypographyId="Default"><Translation Language="GB">Paused: &lt;value&gt;</Translation></Text>
+    <Text Id="InitialValue" Alignment="Left" TypographyId="Default"><Translation Language="GB">0</Translation></Text>
+    <Text Id="SettingsLabel" Alignment="Left" TypographyId="Default"><Translation Language="GB">Settings</Translation></Text>
+    <Text Id="DashboardLabel" Alignment="Left" TypographyId="Default"><Translation Language="GB">Dashboard</Translation></Text>
+    <Text Id="ToggleLabel" Alignment="Left" TypographyId="Default"><Translation Language="GB">Pause / Resume</Translation></Text>
+  </TextGroup></Texts>
+  <Typographies><Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacters="0123456789" /></Typographies>
+</TextDatabase>

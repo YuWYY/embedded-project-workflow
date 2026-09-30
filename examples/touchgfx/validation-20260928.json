@@ -1,0 +1,99 @@
+{
+  "tool_version": "4.26.1",
+  "stages": [
+    {
+      "name": "tool-version",
+      "returncode": 0,
+      "seconds": 0.235
+    },
+    {
+      "name": "create-local",
+      "returncode": 0,
+      "seconds": 0.765
+    },
+    {
+      "name": "generate-before-user-code",
+      "returncode": 0,
+      "seconds": 4.204
+    },
+    {
+      "name": "compile-original-user-design",
+      "returncode": 0,
+      "seconds": 6.453
+    },
+    {
+      "name": "generate-user-rename-and-move",
+      "returncode": 0,
+      "seconds": 1.891
+    },
+    {
+      "name": "compile-stale-reference-expected-failure",
+      "returncode": 2,
+      "seconds": 2.281
+    },
+    {
+      "name": "compile-adapted-user-code",
+      "returncode": 0,
+      "seconds": 2.11
+    },
+    {
+      "name": "generate-retention",
+      "returncode": 0,
+      "seconds": 1.906
+    },
+    {
+      "name": "compile-retention",
+      "returncode": 0,
+      "seconds": 1.125
+    },
+    {
+      "name": "compile-production-model-test",
+      "returncode": 0,
+      "seconds": 0.204
+    },
+    {
+      "name": "production-model-pass",
+      "returncode": 0,
+      "seconds": 9.093
+    },
+    {
+      "name": "production-model-negative-control",
+      "returncode": 1,
+      "seconds": 0.016
+    }
+  ],
+  "user_source_preserved": true,
+  "user_code_preserved_by_regeneration": true,
+  "model_test": "PASS",
+  "negative_control": "EXPECTED_FAILURE",
+  "simulator_build": "PASS",
+  "gui_launch": "NOT_RUN",
+  "gui_interaction": "NOT_RUN",
+  "target_build": "NOT_RUN",
+  "hardware": "NOT_RUN",
+  "source_unchanged": true,
+  "simulator_sha256": "bd6a2f8620c185bc674e311f4322bf1950c0026b313b7af4ab451cc4352818e9",
+  "validation_date": "2026-09-28",
+  "kind": "actual_native_tool_integration_not_independent_agent_evaluation",
+  "compiler": "MinGW GCC 13.2.0",
+  "make": "GNU Make 4.1",
+  "designer_gui": "NOT_OPERATED",
+  "dependencies": "Existing local TouchGFX installation; no installation or download",
+  "fixture_development_findings": [
+    "Serialized no-transition name is ScreenTransitionNone, not None or NoTransition; invalid initial fixture caused native generation failures.",
+    "TextRotation must be set explicitly to 0 in this authored fixture; source audit caught an empty generated rotation symbol before user code was compiled.",
+    "Native new defaults to 1bpp; source .touchgfx SelectedColorDepth and application.config asset format must both be changed to 16bpp."
+  ],
+  "success_scope": [
+    "Native local-package project creation",
+    "Native code and asset generation before user implementation",
+    "Actual TouchGFX simulator compile and link",
+    "User source rename/move is reflected in generated interface",
+    "Unchanged user files survive regeneration",
+    "Stale user reference is rejected by actual compiler",
+    "Only user View references adapt to the new name",
+    "Repeated regeneration preserves final implementation",
+    "Actual production Model.cpp independent host assertions and rejecting negative control",
+    "Clean-directory rebuild of this entry point"
+  ]
+}

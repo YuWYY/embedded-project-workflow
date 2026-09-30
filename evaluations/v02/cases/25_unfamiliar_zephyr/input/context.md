@@ -1,0 +1,1 @@
+示例为合成结构；需要把LED逻辑引脚从gpio0.5改为gpio0.7，同时把默认日志级别调整为信息级(先查当前版本配置含义)。应用只通过led0 alias访问。build目录中的autoconf.h、devicetree_generated.h为已有构建输出，本轮没有Zephyr SDK。官方入口：https://docs.zephyrproject.org/latest/build/dts/dt-vs-kconfig.html 。未给准确release，需说明版本依赖，不能假装已核对引脚电气。

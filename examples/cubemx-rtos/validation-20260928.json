@@ -1,0 +1,270 @@
+{
+  "date": "2026-09-28",
+  "kind": "real_vendor_tool_trial_not_independent_agent_behavior_evaluation",
+  "status": "PASS",
+  "tools": {
+    "cubemx": "6.18.1",
+    "firmware": "STM32Cube_FW_G4_V1.6.3",
+    "rtos": "FreeRTOS 10.3.1 with bundled ST CMSIS-RTOS2 adapter",
+    "compiler": "ARMCC 5.06 update 7 build 960",
+    "device_pack": "Keil.STM32G4xx_DFP.2.0.0"
+  },
+  "device": "STM32G474RET6",
+  "coverage": {
+    "native_generation": true,
+    "target_build": true,
+    "linkage": true,
+    "runtime_scheduling": false,
+    "board_test": false,
+    "download": false
+  },
+  "source_sha256": {
+    "LICENSE": "acd0962cf80e678ee1edc83e6b4225c03e9839bbd04ff7bcc007fbbce67b399c",
+    "README.md": "803dc95aff0a0cc37764824683dd1f5d1ae95dbf34c4f36f78debf570649a5c5",
+    "rebuild.py": "e178c32ec9cf850a19339ba5f9f34e607425719732282ac783e586081d01e767",
+    "rtos_ownership.ioc": "8b63079c7e34aaf69c8cb6c8fa388b930f80dc637905d2cb508101a3fafa1ad9",
+    "APP/rtos_app.c": "010008dee4e39903af188e5f71246874a7ed04e65cf50ab0a1bbea3e01f5b40c",
+    "APP/rtos_app.h": "ec0614a37c1e6ede3e1315bdf838198da796b299c43c55d6fb101f0fb81b1294"
+  },
+  "configuration_checks": {
+    "initial_configuration": {
+      "checks": {
+        "two_unique_task_creations": true,
+        "one_queue_creation": true,
+        "external_producer": true,
+        "external_consumer": true,
+        "consumer_has_no_generated_body": true,
+        "first_task_weak_fallback_is_known": true,
+        "queue_capacity": true,
+        "queue_static_storage": true,
+        "consumer_words": true,
+        "creation_check_hook": true,
+        "producer_static_buffer_words": true,
+        "producer_bytes_from_sizeof": true,
+        "compiler_version_retained": true,
+        "armcc5_selected": true,
+        "device_pack_retained": true,
+        "app_compiled_once": true
+      },
+      "producer_stack_words": 256,
+      "producer_stack_bytes": 1024,
+      "queue_elements": 8,
+      "queue_data_bytes": 32,
+      "producer_allocation": "Static"
+    },
+    "edited_configuration": {
+      "checks": {
+        "two_unique_task_creations": true,
+        "one_queue_creation": true,
+        "external_producer": true,
+        "external_consumer": true,
+        "consumer_has_no_generated_body": true,
+        "first_task_weak_fallback_is_known": true,
+        "queue_capacity": true,
+        "queue_static_storage": true,
+        "consumer_words": true,
+        "creation_check_hook": true,
+        "producer_static_buffer_words": true,
+        "producer_bytes_from_sizeof": true,
+        "compiler_version_retained": true,
+        "armcc5_selected": true,
+        "device_pack_retained": true,
+        "app_compiled_once": true
+      },
+      "producer_stack_words": 384,
+      "producer_stack_bytes": 1536,
+      "queue_elements": 16,
+      "queue_data_bytes": 64,
+      "producer_allocation": "Static"
+    },
+    "dynamic_configuration": {
+      "checks": {
+        "two_unique_task_creations": true,
+        "one_queue_creation": true,
+        "external_producer": true,
+        "external_consumer": true,
+        "consumer_has_no_generated_body": true,
+        "first_task_weak_fallback_is_known": true,
+        "queue_capacity": true,
+        "queue_static_storage": true,
+        "consumer_words": true,
+        "creation_check_hook": true,
+        "producer_dynamic_no_static_buffer": true,
+        "producer_bytes_from_words": true,
+        "compiler_version_retained": true,
+        "armcc5_selected": true,
+        "device_pack_retained": true,
+        "app_compiled_once": true
+      },
+      "producer_stack_words": 256,
+      "producer_stack_bytes": 1024,
+      "queue_elements": 8,
+      "queue_data_bytes": 32,
+      "producer_allocation": "Dynamic"
+    }
+  },
+  "application_preserved_after_regeneration": true,
+  "stages": {
+    "generate_initial": {
+      "exit_code": 0,
+      "seconds": 29.11,
+      "expected_products_present": true,
+      "ioc_sha256": "e856af808b6a678db772a321cbb740f18bfe6bd364f26393ed4d01825f9ac4ee"
+    },
+    "build_initial": {
+      "exit_code": 0,
+      "seconds": 18.08,
+      "errors": 0,
+      "warnings": 0,
+      "expected_failure": false,
+      "generated_hook_flags_disabled": [],
+      "application_symbols_resolve_to_user_object": true,
+      "map_static_storage_bytes": {
+        "ProducerStack": 1024,
+        "ConsumerStack": 1024,
+        "SamplesStorage": 32
+      },
+      "map_sha256": "f53b483b7987c3fa5a268da67881c244837e7779dd77aaa96cd900d63be0cc5d",
+      "axf_sha256": "53d912a2ce93c5a258763c01125a47c031e5b03cd6c2fe1f9a991402b93cf58a"
+    },
+    "generate_edited": {
+      "exit_code": 0,
+      "seconds": 31.67,
+      "expected_products_present": true,
+      "ioc_sha256": "78a916c53017b8926d54b37e1437b59913d5b63dd4239fc3aae79ea2ec673e1b"
+    },
+    "build_edited": {
+      "exit_code": 0,
+      "seconds": 16.27,
+      "errors": 0,
+      "warnings": 0,
+      "expected_failure": false,
+      "generated_hook_flags_disabled": [
+        "RunUserProg2"
+      ],
+      "application_symbols_resolve_to_user_object": true,
+      "map_static_storage_bytes": {
+        "ProducerStack": 1536,
+        "ConsumerStack": 1024,
+        "SamplesStorage": 64
+      },
+      "map_sha256": "11d1c915c4c711c9aaae70badc4a9b2759fddf3d0312d5485cff800b62e92d84",
+      "axf_sha256": "41e9e647e75355f5647a50081ed2fca2945e0852e93423d3a6d202c1f8fd8adb"
+    },
+    "generate_dynamic": {
+      "exit_code": 0,
+      "seconds": 30.33,
+      "expected_products_present": true,
+      "ioc_sha256": "cddde6d6c521db62e36a2897267b19f5e4835eb228772f11230b77afcd0bf54b"
+    },
+    "build_dynamic": {
+      "exit_code": 0,
+      "seconds": 18.78,
+      "errors": 0,
+      "warnings": 0,
+      "expected_failure": false,
+      "generated_hook_flags_disabled": [],
+      "application_symbols_resolve_to_user_object": true,
+      "map_static_storage_bytes": {
+        "ConsumerStack": 1024,
+        "SamplesStorage": 32
+      },
+      "map_sha256": "fbd1585429cb1be11c1c77462ba21e4834d248872ff1b67b7c07568295c887fb",
+      "axf_sha256": "dc3a4263c098f0e3ff0bbe757b8ad1bc607a9bc316dfb1a2bcc520b47bc2c022"
+    },
+    "missing_external_negative": {
+      "exit_code": 2,
+      "seconds": 17.86,
+      "errors": 1,
+      "warnings": 0,
+      "expected_failure": true,
+      "generated_hook_flags_disabled": [],
+      "expected_missing_external_symbol_detected": true
+    }
+  },
+  "findings": [
+    "First configured task still receives a generated weak fallback despite As external; MAP verifies user strong implementation.",
+    "Second external task has no generated body; missing Consumer implementation fails linking with L6218E.",
+    "Regeneration restores an empty AfterMake RunUserProg2 flag; the isolated runner disables all project action hooks before rebuild.",
+    "Task-table stack units are words, CMSIS attributes are bytes; static map sizes match configuration.",
+    "Static tasks and a static queue do not establish that the complete firmware performs no heap allocation."
+  ],
+  "development_history": [
+    "Initial native generation succeeded, then the trial runner stopped because newly generated Keil metadata lacked optional compiler fields. The runner was corrected; no build or board action occurred in that attempt.",
+    "A second empty-directory run completed generation, regeneration, static/dynamic builds and the missing-entry link negative.",
+    "The final runner added per-build action-hook disabling and MAP storage-size checks, then repeated the complete trial in another empty directory.",
+    "Independent review found report overwrite and source-tree output risks. Preflight guards were corrected and six actual CLI rejection cases passed without source/sentinel changes. Native generation/build code is unchanged; no new full vendor run is claimed for the final runner hash."
+  ],
+  "limitations": [
+    "No application execution, board test, flash, debugger, serial, scheduling, latency, stack watermark or heap-peak validation.",
+    "Generated vendor sources, compiler outputs and raw logs are private external-build artifacts; only original source and sanitized summary are published.",
+    "The generated weak first-task behavior and CMSIS memory details are version-specific."
+  ],
+  "source_sha256_scope": "Full native tool run before the later preflight-only revision; these are historical source identities.",
+  "post_run_preflight_revision": {
+    "scope": "preflight path protection and explanatory README only",
+    "full_vendor_flow_repeated": false,
+    "full_run_runner_sha256": "e178c32ec9cf850a19339ba5f9f34e607425719732282ac783e586081d01e767",
+    "final_runner_sha256": "bda8358b529e2b385f3243d13043388ef860bef051b95e92771e04cb4219cb7a",
+    "tool_workflow_after_preflight_unchanged": true,
+    "cases": [
+      {
+        "case": "nonempty-report",
+        "exit_code": 2,
+        "expected_rejection": true,
+        "source_bytes_unchanged": true,
+        "no_output_directories_created": true,
+        "sentinel_bytes_unchanged": true
+      },
+      {
+        "case": "source-child-build",
+        "exit_code": 2,
+        "expected_rejection": true,
+        "source_bytes_unchanged": true,
+        "no_output_directories_created": true,
+        "sentinel_bytes_unchanged": true
+      },
+      {
+        "case": "source-child-report",
+        "exit_code": 2,
+        "expected_rejection": true,
+        "source_bytes_unchanged": true,
+        "no_output_directories_created": true,
+        "sentinel_bytes_unchanged": true
+      },
+      {
+        "case": "source-root-build",
+        "exit_code": 2,
+        "expected_rejection": true,
+        "source_bytes_unchanged": true,
+        "no_output_directories_created": true,
+        "sentinel_bytes_unchanged": true
+      },
+      {
+        "case": "source-root-report",
+        "exit_code": 2,
+        "expected_rejection": true,
+        "source_bytes_unchanged": true,
+        "no_output_directories_created": true,
+        "sentinel_bytes_unchanged": true
+      },
+      {
+        "case": "nonempty-build",
+        "exit_code": 2,
+        "expected_rejection": true,
+        "source_bytes_unchanged": true,
+        "no_output_directories_created": true,
+        "sentinel_bytes_unchanged": true
+      }
+    ]
+  },
+  "current_source_sha256": {
+    "LICENSE": "acd0962cf80e678ee1edc83e6b4225c03e9839bbd04ff7bcc007fbbce67b399c",
+    "README.md": "fffa4db14735ef280cf6451db6153af1fe2a4ac5f9411b37e318e964c5ff3df2",
+    "rebuild.py": "bda8358b529e2b385f3243d13043388ef860bef051b95e92771e04cb4219cb7a",
+    "rtos_ownership.ioc": "8b63079c7e34aaf69c8cb6c8fa388b930f80dc637905d2cb508101a3fafa1ad9",
+    "APP/rtos_app.c": "010008dee4e39903af188e5f71246874a7ed04e65cf50ab0a1bbea3e01f5b40c",
+    "APP/rtos_app.h": "ec0614a37c1e6ede3e1315bdf838198da796b299c43c55d6fb101f0fb81b1294"
+  },
+  "current_source_sha256_scope": "Current original source files, excluding this self-referencing validation JSON."
+}

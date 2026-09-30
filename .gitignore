@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 *.jou
 *.log
+# Original synthetic fixture, not a captured vendor log.
+!evaluations/v02/cases/23_partial_generation/input/run.log
 *.pb
 *.dcp
 *.bit

@@ -1,0 +1,293 @@
+{
+  "version": "0.2.0-beta.1",
+  "date": "2026-09-28",
+  "status": "PASS",
+  "case_count": 26,
+  "pass_count": 26,
+  "fail_count": 0,
+  "candidate_files": 12,
+  "candidate_manifest_sha256": "21fed5a1997a1a42a3a8062bcf9cc5e87403027c1c52a53f50f44b54430b665b",
+  "method": "Six fresh ephemeral executor sessions received original cases and candidate skill, not rubrics or parent conversation. Context was shared within each group. A separate reviewer checked rubrics, replies, tool events, actual changes and evidence. Reviewer had prior design context.",
+  "protected_input_files": 174,
+  "protected_inputs_unchanged": true,
+  "public_input_cases": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26
+  ],
+  "limits": [
+    "Cases 01-16 include private historical materials and are not a fully public benchmark.",
+    "No statistical efficiency or failure-rate conclusion.",
+    "Case 25 uses official documentation and source analysis only, without a Zephyr build.",
+    "Environment startup failures before case access are excluded from behavioral results."
+  ],
+  "cases": [
+    {
+      "case": "01_new_project",
+      "status": "PASS",
+      "review": "读取已知板卡事实，询问用途/负载、输出关系和速率缺口，给出晶体/时钟、引脚、同步ADC、Circular DMA及HT/TC建议；未写工程或声称已生成。",
+      "limitations": [
+        "新工程的IRQ具体设置仍需在用途/RTOS关系确定后细化；仅需求与配置建议。"
+      ],
+      "group": "regression_01_04_active",
+      "inputs_public": false
+    },
+    {
+      "case": "02_base_configuration",
+      "status": "PASS",
+      "review": "定位24MHz晶体与8MHz Bypass、Normal DMA与持续半区消费两处源配置错误，保留正确映射和半字属性，给出源配置修正与重新生成核对。",
+      "limitations": [
+        "没有运行CubeMX或硬件，未将配置原因当成已验证唯一故障原因。"
+      ],
+      "group": "regression_01_04_active",
+      "inputs_public": false
+    },
+    {
+      "case": "03_operating_parameters",
+      "status": "PASS",
+      "review": "仅修改APP/app_config.h，频率100kHz/死区250ns，并从物理输入推导ADC中点和40us控制周期；原verify_params实际先失败后通过，baseline/Core/IOC未改。",
+      "limitations": [
+        "离线算术与结构检查；执行者另指出夹具Period=159999超常规16位TIM1范围，这是缩减夹具限制，未借此修改生成层。"
+      ],
+      "group": "regression_01_04_active",
+      "inputs_public": false
+    },
+    {
+      "case": "04_touchgfx_user_code",
+      "status": "PASS",
+      "review": "仅修改用户Presenter/View两个cpp，激活取模型值、通知转发、整数提升与字面负号处理int16全范围，按钮操作模型状态并invalidate。",
+      "limitations": [
+        "没有厂商库；实际为源码检查和独立十进制参考边界核算，没有生产TouchGFX执行。"
+      ],
+      "group": "regression_01_04_active",
+      "inputs_public": false
+    },
+    {
+      "case": "05_after_regeneration",
+      "status": "PASS",
+      "review": "正确定位APP文件仍在但构建引用丢失，以及IOC禁用DMA IRQ/handler缺失，保留既有App_Start并建议正式用户区接入与重新生成核对。",
+      "limitations": [
+        "只读合成缩减工程，缺完整NVIC/向量状态，未假称回调已恢复。"
+      ],
+      "group": "regression_05_08_active",
+      "inputs_public": false
+    },
+    {
+      "case": "06_real_v2_f3",
+      "status": "PASS",
+      "review": "解析历史记录及源码，区分采样半区期限、控制周期、预算计数和实际故障分支，识别遥测字段来源及缺失的首错证据，保留具体首因未定。",
+      "limitations": [
+        "真实历史材料没有故障对应二进制身份及首错快照；无本轮板测或修改。"
+      ],
+      "group": "regression_05_08_active",
+      "inputs_public": false
+    },
+    {
+      "case": "07_current_telemetry",
+      "status": "PASS",
+      "review": "不把20Hz平均显示当峰值，也不把保护动作当真实超流证明；建议带预触发同步测放大器输出/PWM并据结果区分物理峰值、测量链尖峰、阈值/通道配置。",
+      "limitations": [
+        "首错路径/原码/波形缺失；只有只读判断和鉴别下一步。"
+      ],
+      "group": "regression_05_08_active",
+      "inputs_public": false
+    },
+    {
+      "case": "08_small_baseline_change",
+      "status": "PASS",
+      "review": "仅将<H无符号解码改为<h有符号小端int16；实际原测试先失败后3方法通过，字节差异仅该字符，测试与协议未改。",
+      "limitations": [
+        "主机协议行为，没有控制器或硬件验证。"
+      ],
+      "group": "regression_05_08_active",
+      "inputs_public": false
+    },
+    {
+      "case": "09_simple_rtl",
+      "status": "PASS",
+      "review": "真正实现同步复位优先的16位使能计数器和同域上升沿检测，不引入IP或CDC；原XSim runner编译/展开/仿真通过，CASE_PASS和655496ns结束记录存在。",
+      "limitations": [
+        "仅RTL仿真；未综合、实现或板测。工作目录新增test_log.txt为实际运行证据，不是逻辑或测试改写。"
+      ],
+      "group": "regression_09_12_active",
+      "inputs_public": false
+    },
+    {
+      "case": "10_async_transfer",
+      "status": "PASS",
+      "review": "识别逐位同步不能保证16位总线一致性，推荐器件适配的厂商异步FIFO及FWFT握手适配；按20M笔/s和12us暂停估算240笔积压，说明512余量、反压与平均吞吐限制。",
+      "limitations": [
+        "只读选型，无实际IP生成；已选择FIFO Generator，未以XPM代码行数误认自研，也无需为了评分强制选择XPM。"
+      ],
+      "group": "regression_09_12_active",
+      "inputs_public": false
+    },
+    {
+      "case": "11_clock_reset",
+      "status": "PASS",
+      "review": "使用Clocking Wizard/MMCM满足50到100/125MHz，核对输入/输出、缓冲与locked；每域独立异步置位同步释放，明确业务同步复位停钟时不会立即清零，不将!locked反馈形成锁死。",
+      "limitations": [
+        "只读方案；无IP生成或板测，抖动/内部恢复行为须在具体实例验证。"
+      ],
+      "group": "regression_09_12_active",
+      "inputs_public": false
+    },
+    {
+      "case": "12_parameter_ownership",
+      "status": "PASS",
+      "review": "实际修改唯一JSON源深度512/输出125，运行原emitter更新Tcl，运行时默认水位96；保持50MHz输入/16位宽/CSR和合法非法写契约，原5项测试全部通过。",
+      "limitations": [
+        "仅自有脚本及假传输主机验证；没有运行Vivado，报告明确旧硬件implemented_depth不能随源配置提前变更。"
+      ],
+      "group": "regression_09_12_active",
+      "inputs_public": false
+    },
+    {
+      "case": "13_regenerated_wrapper",
+      "status": "PASS",
+      "review": "比较before/after确认实际编译旧wrapper缺stream_reset_n，提出唯一wrapper源引用与受维护接口修复，保留top，不改BD生成内部。",
+      "limitations": [
+        "没有真实BD/XPR，未执行Vivado综合；复位内部行为仍待工程核查。"
+      ],
+      "group": "regression_13_16_active",
+      "inputs_public": false
+    },
+    {
+      "case": "14_locked_ip",
+      "status": "PASS",
+      "review": "分别处理旧版锁定且有归档产物、器件硬资源/IP支持不符、供应商评估许可；保留匹配工具/已有产物路径，不盲目升级或声称等价替代。",
+      "limitations": [
+        "输入为合成报告；未验证真实DCP兼容或许可，额外官方器件分析为条件式结论。"
+      ],
+      "group": "regression_13_16_active",
+      "inputs_public": false
+    },
+    {
+      "case": "15_module_contract",
+      "status": "PASS",
+      "review": "读取完整模拟契约与依赖，识别单端复位与共同复位契约冲突、ACK不明导致恰好一次风险、package源序和省略实现；保留来源模拟属性。",
+      "limitations": [
+        "缺完整实现，不能做功能验证；协议方案仍需具体系统副作用/持久状态设计。"
+      ],
+      "group": "regression_13_16_active",
+      "inputs_public": false
+    },
+    {
+      "case": "16_small_regression",
+      "status": "PASS",
+      "review": "仅把stream_slice的更新条件改为s_ready，实际原TB在305ns捕捉停顿覆盖，修复后1690ns CASE_PASS；testbench/runner/baseline均保持。",
+      "limitations": [
+        "XSim RTL仿真，不含综合/布局/板测；既有TB没有完整任意停顿与待消费事务中复位覆盖。"
+      ],
+      "group": "regression_13_16_active",
+      "inputs_public": false
+    },
+    {
+      "case": "17_prescribed_structure",
+      "status": "PASS",
+      "review": "保留Acq/Service两个任务职责与Service独占UART，用现有队列和允许合并的最近完整样本实现1Hz建议，明确CubeMX创建与APP业务落点。",
+      "limitations": [
+        "只读结构建议，未验证栈和具体发送时序。"
+      ],
+      "group": "new_17_21_active",
+      "inputs_public": true
+    },
+    {
+      "case": "18_authorized_adjustment",
+      "status": "PASS",
+      "review": "真正修改work/config.json容量为16，并实际执行现有generate.py更新头文件；任务数2和static分配保持，没有重新请求已授权决定。",
+      "limitations": [
+        "合成自有生成器，不是CubeMX；无目标构建。"
+      ],
+      "group": "new_17_21_active",
+      "inputs_public": true
+    },
+    {
+      "case": "19_explicit_conflict",
+      "status": "PASS",
+      "review": "识别0.80ms串行需求与0.50ms周期矛盾，队列/同核任务不能补持续算力；提出保持既定语义的等价优化、需达到的预算、验证和回退。",
+      "limitations": [
+        "尚无算法源码/优化计时，未宣称新目标已满足。"
+      ],
+      "group": "new_17_21_active",
+      "inputs_public": true
+    },
+    {
+      "case": "20_allocation_semantics",
+      "status": "PASS",
+      "review": "区分静态任务存储、只有name的static属性、事件自动分配与timer回调包装分配，分别判断全程无堆不满足、启动后是否分配未定。",
+      "limitations": [
+        "实际适配器/完整运行调用链未全审，保留范围限制且不盲关宏。"
+      ],
+      "group": "new_17_21_active",
+      "inputs_public": true
+    },
+    {
+      "case": "21_user_ui_change",
+      "status": "PASS",
+      "review": "仅将用户View.cpp中的value引用改为reading；arm-none-eabi-g++实际-fsyntax-only先复现错误后退出0，配置坐标/生成基类/基线保留。",
+      "limitations": [
+        "合成接口语法检查，不是实际TouchGFX库构建或GUI运行。"
+      ],
+      "group": "new_17_21_active",
+      "inputs_public": true
+    },
+    {
+      "case": "22_unsupported_gui_object",
+      "status": "PASS",
+      "review": "依据当前工具缺少事件GUI字段，选择正式用户扩展和应用提供控制块；保留两个任务、唯一事件创建，内核初始化后且首次使用前建立并检查失败。",
+      "limitations": [
+        "只读能力方案，具体控制块容量需实际头文件；不假造GUI选项、不升级或声称全工程无堆。"
+      ],
+      "group": "new_22_26_active",
+      "inputs_public": true
+    },
+    {
+      "case": "23_partial_generation",
+      "status": "PASS",
+      "review": "交叉读取失败日志与状态，识别退出0和A产物不证明B生成/构建完成；指出配套uvoptx缺失及部分更新可能，提出修复真实依赖后重新生成并核查接入。",
+      "limitations": [
+        "只读合成日志，不声称工具已修复或生成完成。"
+      ],
+      "group": "new_22_26_active",
+      "inputs_public": true
+    },
+    {
+      "case": "24_resume_new_source",
+      "status": "PASS",
+      "review": "明确当前125源与100MHz/10ns历史证据不同，保留新源与接口复位，继续未完成生成/8ns仿真/综合；不改回100，不重复询问范围内授权。",
+      "limitations": [
+        "本例为只读恢复材料检查；没有新增Vivado运行证据，实际续接工具试验应另列。"
+      ],
+      "group": "new_22_26_active",
+      "inputs_public": true
+    },
+    {
+      "case": "25_unfamiliar_zephyr",
+      "status": "PASS",
+      "review": "实际调用官方网页/官方Kconfig源码，区分overlay硬件与prj.conf软件，保留led0，识别INFO已为3，无须误改数值；不修派生头，说明SDK/release未定。",
+      "limitations": [
+        "查询latest/main与项目匹配版本分开报告；没有Zephyr真实构建或板级引脚验证。"
+      ],
+      "group": "new_22_26_active",
+      "inputs_public": true
+    },
+    {
+      "case": "26_local_small_edit",
+      "status": "PASS",
+      "review": "仅将格式字面量中的=替换为:，实际字节级对比唯一字符变化，baseline不变且无新增文件，不建立任务文档或配置框架。",
+      "limitations": [
+        "按用户要求仅源码字节核对；没有额外C编译或运行。"
+      ],
+      "group": "new_22_26_active",
+      "inputs_public": true
+    }
+  ]
+}

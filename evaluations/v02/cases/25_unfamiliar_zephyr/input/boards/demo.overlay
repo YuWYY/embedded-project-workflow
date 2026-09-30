@@ -1,0 +1,1 @@
+/ { leds { compatible = "gpio-leds"; status_led: status_led { gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>; }; }; aliases { led0 = &status_led; }; };
