@@ -1,0 +1,26 @@
+{
+  "identity_sha256": "a7d8ac810531e60c000238651e754ab55e608b457622cfeace52844e14b558e7",
+  "files": {
+    "assets/texts/texts.xml": "1ae31d7f7833a870630fa224955945303eb435a14501b79fb447ac83b2850c36",
+    "gui/include/epw_stats.h": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+    "gui/include/gui/controls_screen/ControlsPresenter.hpp": "2ebbfe6562029037b8b8c74e67d5e855498031a34b0c39de4da2622d9d231f44",
+    "gui/include/gui/controls_screen/ControlsView.hpp": "6477d64c53258b6819c148d4e2467ba34155fea3d8631e4184741170225a2b54",
+    "gui/include/gui/dashboard_screen/DashboardPresenter.hpp": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+    "gui/include/gui/dashboard_screen/DashboardView.hpp": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+    "gui/include/gui/model/Model.hpp": "433a576f2628ad6b6112f7f144266cc3e02016ad6f1292c22b5e8b5a3b68eddc",
+    "gui/include/gui/model/ModelListener.hpp": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+    "gui/include/gui/statistics_screen/StatisticsPresenter.hpp": "2d65972eb697834d1a0f063493229c101eb1ba790a49466c71ef27849c4ef1dc",
+    "gui/include/gui/statistics_screen/StatisticsView.hpp": "ec4004e37ec0b1900b4a797c47b6bf0c4924c02c6d68df9ea0b70bf69ac1016a",
+    "gui/src/controls_screen/ControlsPresenter.cpp": "1d9579b4479d3e4d836a1fc10e5f4914e6c07519c870324d919913e00fc00dca",
+    "gui/src/controls_screen/ControlsView.cpp": "2031f11334a72565ec7793f18dedd92b50dab3c3d64ebdfa8fd971d4eda63ec7",
+    "gui/src/core/epw_stats.c": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+    "gui/src/dashboard_screen/DashboardPresenter.cpp": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+    "gui/src/dashboard_screen/DashboardView.cpp": "2b47c5c994b50ef4d8a191d302b5ddfa47aa2d828e6674f637ab820054b5de17",
+    "gui/src/model/Model.cpp": "396138e37892d91d93bc3eb0a29f724b28223b9c7361d474523c15e0ded450c3",
+    "gui/src/statistics_screen/StatisticsPresenter.cpp": "54bf6b4ffc2d53c74a41c51bffdf2956b793c77071b4296375684fc4b2c00ba8",
+    "gui/src/statistics_screen/StatisticsView.cpp": "1b07b231ddd5868e6c107bfeccd7fd34dd5a2064aa934c8efbce4db388867f55",
+    "README.md": "da86cb69e7e6f5fc859f7c3c682022a1e69adfd25100c9c8c6a8d0f360cee9a8",
+    "StatisticsHandoff.touchgfx": "f985bd782f9b8dc20ccdc18922669e47cd0cae03e45408b84e73c67e2f310e96",
+    "validation.json": "5fd329c550d4761e01437ba05a75722377254d688eb9f91a2bd4d49acb28bc59"
+  }
+}

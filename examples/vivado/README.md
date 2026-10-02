@@ -1,6 +1,8 @@
 # Vivado 可重建验证示例
 
-原创 Tcl、RTL、测试平台及 Python 入口采用仓库根目录 MIT 许可。AMD IP 与 XPM 从本机 Vivado 安装读取，未随仓库分发；其许可仍由 AMD 提供。运行需要 Windows、Python 3.10+、Vivado 2025.1、Artix-7 `xc7a200tfbg484-2` 器件支持、Clocking Wizard 6.0 与 XSim。器件与参数仅用于此案例。
+原创 Tcl、RTL、测试平台及 Python 入口采用仓库根目录 MIT 许可。AMD IP 与 XPM 从本机 Vivado 安装读取，未随仓库分发；其许可仍由 AMD 提供。下述时钟/FIFO入口需要 Windows、Python 3.10+、Vivado 2025.1、Artix-7 `xc7a200tfbg484-2` 器件支持、Clocking Wizard 6.0 与 XSim。器件与参数仅用于各自案例。
+
+v0.5 增加独立的 [MPSoC/GPIO 交接案例](soc-handoff/README.md)，使用 ZCU102/MPSoC、BD、XSA 和 SDT。它有自己的依赖、入口和验证边界，不运行下述 Artix-7 流程，也不要求已有 A53 软件编译环境。该案例的本地说明同时列出分层证据与未覆盖事项。
 
 在仓库根目录运行：
 

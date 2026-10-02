@@ -1,0 +1,73 @@
+{
+  "tool": "TouchGFX 4.26.1",
+  "template": "Simulator 2.0.0",
+  "received_native_sha256": "9726dd1e9bcb9408d099693a6f11818d8dcb9ce892896e8eae80b629033f2f10",
+  "final_native_sha256": "f985bd782f9b8dc20ccdc18922669e47cd0cae03e45408b84e73c67e2f310e96",
+  "authorship": {
+    "HUMAN": "resetButton geometry/style and click -> function1 interaction",
+    "AI": "Reset native text/resources, dash glyph and statistics-only user behavior"
+  },
+  "native_generation": {
+    "name": "generate",
+    "status": "PASS",
+    "returncode": 0,
+    "seconds": 3.453
+  },
+  "clean_simulator_build": {
+    "name": "build",
+    "status": "PASS",
+    "returncode": 0,
+    "seconds": 5.703
+  },
+  "simulator_sha256": "5b58c84a25cffb3040bba69b878540f45b09a02792d6b8854434598b7567a86d",
+  "source_preserved_during_generation_build": true,
+  "host_check": "PASS",
+  "generated_reset_caption_advance_pixels": 33,
+  "gui_launch": "USER_REPORTED_SIMULATOR_RUN",
+  "gui_interaction": "PASS_USER_REPORTED",
+  "target_build": "NOT_RUN",
+  "hardware": "NOT_RUN",
+  "actual_source_sha256": {
+    "StatisticsHandoff.touchgfx": "f985bd782f9b8dc20ccdc18922669e47cd0cae03e45408b84e73c67e2f310e96",
+    "assets/texts/texts.xml": "1ae31d7f7833a870630fa224955945303eb435a14501b79fb447ac83b2850c36",
+    "gui/include/epw_stats.h": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+    "gui/include/gui/controls_screen/ControlsPresenter.hpp": "2ebbfe6562029037b8b8c74e67d5e855498031a34b0c39de4da2622d9d231f44",
+    "gui/include/gui/controls_screen/ControlsView.hpp": "6477d64c53258b6819c148d4e2467ba34155fea3d8631e4184741170225a2b54",
+    "gui/include/gui/dashboard_screen/DashboardPresenter.hpp": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+    "gui/include/gui/dashboard_screen/DashboardView.hpp": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+    "gui/include/gui/model/Model.hpp": "433a576f2628ad6b6112f7f144266cc3e02016ad6f1292c22b5e8b5a3b68eddc",
+    "gui/include/gui/model/ModelListener.hpp": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+    "gui/include/gui/statistics_screen/StatisticsPresenter.hpp": "2d65972eb697834d1a0f063493229c101eb1ba790a49466c71ef27849c4ef1dc",
+    "gui/include/gui/statistics_screen/StatisticsView.hpp": "ec4004e37ec0b1900b4a797c47b6bf0c4924c02c6d68df9ea0b70bf69ac1016a",
+    "gui/src/controls_screen/ControlsPresenter.cpp": "1d9579b4479d3e4d836a1fc10e5f4914e6c07519c870324d919913e00fc00dca",
+    "gui/src/controls_screen/ControlsView.cpp": "2031f11334a72565ec7793f18dedd92b50dab3c3d64ebdfa8fd971d4eda63ec7",
+    "gui/src/core/epw_stats.c": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+    "gui/src/dashboard_screen/DashboardPresenter.cpp": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+    "gui/src/dashboard_screen/DashboardView.cpp": "2b47c5c994b50ef4d8a191d302b5ddfa47aa2d828e6674f637ab820054b5de17",
+    "gui/src/model/Model.cpp": "396138e37892d91d93bc3eb0a29f724b28223b9c7361d474523c15e0ded450c3",
+    "gui/src/statistics_screen/StatisticsPresenter.cpp": "54bf6b4ffc2d53c74a41c51bffdf2956b793c77071b4296375684fc4b2c00ba8",
+    "gui/src/statistics_screen/StatisticsView.cpp": "1b07b231ddd5868e6c107bfeccd7fd34dd5a2064aa934c8efbce4db388867f55"
+  },
+  "agent_gui_launch": "NOT_RUN",
+  "agent_gui_interaction": "NOT_RUN",
+  "user_simulator_feedback": {
+    "status": "PASS_USER_REPORTED",
+    "actor": "USER",
+    "date": "2026-09-30",
+    "timezone": "Asia/Shanghai",
+    "raw_reply": "五项均通过",
+    "source": "Current chat response to HumanStatistics Simulator five-check question",
+    "checks": {
+      "statistics_updates": true,
+      "paused_reset_clears_window_to_zero_and_no_data": true,
+      "reset_retains_count_and_pause": true,
+      "navigation_retains_state": true,
+      "resume_continues_current_progress": true
+    },
+    "native_config_sha256": "f985bd782f9b8dc20ccdc18922669e47cd0cae03e45408b84e73c67e2f310e96",
+    "simulator_sha256": "5b58c84a25cffb3040bba69b878540f45b09a02792d6b8854434598b7567a86d",
+    "model_sha256": "396138e37892d91d93bc3eb0a29f724b28223b9c7361d474523c15e0ded450c3",
+    "view_sha256": "1b07b231ddd5868e6c107bfeccd7fd34dd5a2064aa934c8efbce4db388867f55",
+    "evidence_limit": "User reported actual Simulator interactions; not automated click trace or board evidence."
+  }
+}

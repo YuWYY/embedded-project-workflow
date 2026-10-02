@@ -10,6 +10,8 @@
 
 需要图形化配置时，按“配置项 → 软件位置 → 建议值 → 原因 → 核对方法”给出必要建议，默认由用户操作。用户明确要求代操作后，使用可用的图形工具或厂商生成命令；已有授权不重复询问。缺少操作能力时说明实际可做的部分，不声称完成配置或生成。
 
+引导人工编辑时给出确切工程和页面，将控件名称、显示文字、交互函数分别说明。用户不熟悉界面时分成短步骤，并说明完成后应看到什么；不要只给一串内部标识符。用户报告保存后，以最新源文件核对实际变化；若所需结构缺失，先核对工程位置和当前操作，保护已保存内容。
+
 ## 按生成来源划分可编辑范围
 
 | 内容 | 维护方式 |
@@ -49,5 +51,18 @@ CubeMX 的 `target/generated` 会再次生成；`target` 同时含有可编辑�
 若涉及显示或存储配置，同时核对 CubeMX 与 Designer 的尺寸/像素格式，帧缓冲大小、地址和存储区域，以及外存初始化早于首次访问。项目采用 cache、DMA 或链接区段时，检查相关变动；不为纯文本更新扩展成全板内存审计。
 
 区分生成完成、模拟器运行、目标构建与真机显示/触摸结果。模拟器通过不能证明外存或显示中断正确；未执行的验证直接标明。
+
+## 既有Simulator工程入口
+
+随包的 [touchgfx_project.py](../scripts/touchgfx_project.py) 提供 `inspect`、`generate`、`build`，首版只验证 Windows / TouchGFX 4.26.1 / Simulator 2.0.0 原生布局与命令。先核对支持范围，不能将其解释为任意硬件工程导入器。
+
+```text
+python -B <Skill目录>/scripts/touchgfx_project.py inspect --project <当前工程目录> --touchgfx-root <已有安装目录>
+python -B <Skill目录>/scripts/touchgfx_project.py build --project <当前工程目录> --touchgfx-root <已有安装目录> --reports <新的报告目录> --timeout 300
+```
+
+`inspect`只读，不启动工具。`generate`使用当前配置生成；`build`已包含一次真实生成和干净Simulator构建，无需事先重复调用generate。报告目录须与工程、工具目录互不包含，并与工程在同一卷；旧generated/build会移入本轮报告以区分陈旧产物。输入路径与原生构建布局有额外窄限制，具体以帮助和检查结果为准。
+
+入口不创建模板、不回灌Screens、不覆盖用户gui。工具允许新增的派生用户类仍可能由原生生成器创建，已有用户文件必须保留。新增交互时沿生成按钮回调、用户override、Presenter和Model检查实际业务；默认空虚函数能构建，不能仅凭编译宣布交互完成。示例准备与既有工程接手的边界见[既有工程指南](existing-projects.md)。
 
 本指南根据 2026-09-27 可见的 TouchGFX 4.26 文档编写；执行时以实际工程版本和生成标记为准。来源及采用边界见 [sources.md](sources.md)。

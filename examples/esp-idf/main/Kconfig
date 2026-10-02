@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 YuWYY
+menu "EPW statistics example"
+
+    config EPW_STATS_WINDOW
+        int "Rolling statistics window capacity"
+        range 1 16
+        default 8
+        help
+            Number of latest synthetic samples retained by the example.
+            Storage is provided by app_main; changing this value requires
+            configuration processing and rebuilding the application.
+
+endmenu

@@ -1,0 +1,582 @@
+{
+  "scope": "Actual unmodified A and B artifacts; no BSP or runtime reproduction",
+  "results": [
+    {
+      "case": "A-A-A",
+      "exit_code": 0,
+      "terminal_state": "PASS",
+      "failure_type": null,
+      "error": null,
+      "sources": {
+        "bd": {
+          "sha256": "96f97b535642dd6c96ff4d633a8213cbd44a49511347d8056570c2ea53334f90"
+        },
+        "xsa": {
+          "sha256": "1b68df0c0d7e603ac97c30fbe69c80d0ccec467ef61bf2b669cab424c251050d"
+        },
+        "sdt": {
+          "dependencies": {
+            "system-top.dts": "514c4c4209be11790680b1e8aeb9b86e7c6f2a3aaa93f022ce81ff3ff50eb465",
+            "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+            "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e",
+            "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+            "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+            "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+            "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+            "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+            "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+            "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+            "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+            "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+            "pl.dtsi": "a03e9937e0fe5b77c37741e28771d5e0288da5d660edfe7536f9d6af0669f0dc",
+            "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+            "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+            "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+            "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+            "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+            "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+            "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+            "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb"
+          }
+        },
+        "checker_sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+      },
+      "artifacts": {
+        "bd": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "tool_version": "2025.1",
+          "base": 2684354560,
+          "range": 65536,
+          "defaults_used": [
+            "C_ALL_INPUTS",
+            "C_ALL_OUTPUTS_2"
+          ]
+        },
+        "xsa": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "base": 2684354560,
+          "range": 65536,
+          "board": "xilinx.com:zcu102:part0:3.4",
+          "hwh_member": "system.hwh"
+        },
+        "sdt": {
+          "instance": "axi_gpio_0",
+          "base": 2684354560,
+          "range": 65536,
+          "node": "/amba_pl/gpio@a0000000",
+          "compatible": [
+            "xlnx,axi-gpio-2.0",
+            "xlnx,xps-gpio-1.00.a"
+          ],
+          "device_id": [
+            "xczu9eg"
+          ],
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0
+        }
+      }
+    },
+    {
+      "case": "B-A-A",
+      "exit_code": 1,
+      "terminal_state": "FAIL",
+      "failure_type": "STALE_BD_XSA",
+      "error": "BD -> XSA base mismatch: 2684420096 != 2684354560",
+      "sources": {
+        "bd": {
+          "sha256": "9933869db6957caa3ed3a4882a2006e4f8e406ad1d420d45ff93ef3d39167bfe"
+        },
+        "xsa": {
+          "sha256": "1b68df0c0d7e603ac97c30fbe69c80d0ccec467ef61bf2b669cab424c251050d"
+        },
+        "sdt": {
+          "dependencies": {
+            "system-top.dts": "514c4c4209be11790680b1e8aeb9b86e7c6f2a3aaa93f022ce81ff3ff50eb465",
+            "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+            "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e",
+            "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+            "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+            "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+            "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+            "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+            "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+            "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+            "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+            "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+            "pl.dtsi": "a03e9937e0fe5b77c37741e28771d5e0288da5d660edfe7536f9d6af0669f0dc",
+            "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+            "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+            "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+            "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+            "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+            "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+            "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+            "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb"
+          }
+        },
+        "checker_sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+      },
+      "artifacts": {
+        "bd": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "tool_version": "2025.1",
+          "base": 2684420096,
+          "range": 65536,
+          "defaults_used": [
+            "C_ALL_INPUTS",
+            "C_ALL_OUTPUTS_2"
+          ]
+        },
+        "xsa": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "base": 2684354560,
+          "range": 65536,
+          "board": "xilinx.com:zcu102:part0:3.4",
+          "hwh_member": "system.hwh"
+        },
+        "sdt": {
+          "instance": "axi_gpio_0",
+          "base": 2684354560,
+          "range": 65536,
+          "node": "/amba_pl/gpio@a0000000",
+          "compatible": [
+            "xlnx,axi-gpio-2.0",
+            "xlnx,xps-gpio-1.00.a"
+          ],
+          "device_id": [
+            "xczu9eg"
+          ],
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0
+        }
+      }
+    },
+    {
+      "case": "B-B-A",
+      "exit_code": 1,
+      "terminal_state": "FAIL",
+      "failure_type": "STALE_XSA_SDT",
+      "error": "XSA -> SDT base mismatch: 2684420096 != 2684354560",
+      "sources": {
+        "bd": {
+          "sha256": "9933869db6957caa3ed3a4882a2006e4f8e406ad1d420d45ff93ef3d39167bfe"
+        },
+        "xsa": {
+          "sha256": "90c2b442596efcd25f92a16192f6b9a57a822ac4db35b3d4139661249ed9557f"
+        },
+        "sdt": {
+          "dependencies": {
+            "system-top.dts": "514c4c4209be11790680b1e8aeb9b86e7c6f2a3aaa93f022ce81ff3ff50eb465",
+            "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+            "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e",
+            "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+            "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+            "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+            "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+            "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+            "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+            "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+            "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+            "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+            "pl.dtsi": "a03e9937e0fe5b77c37741e28771d5e0288da5d660edfe7536f9d6af0669f0dc",
+            "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+            "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+            "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+            "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+            "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+            "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+            "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+            "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb"
+          }
+        },
+        "checker_sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+      },
+      "artifacts": {
+        "bd": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "tool_version": "2025.1",
+          "base": 2684420096,
+          "range": 65536,
+          "defaults_used": [
+            "C_ALL_INPUTS",
+            "C_ALL_OUTPUTS_2"
+          ]
+        },
+        "xsa": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "base": 2684420096,
+          "range": 65536,
+          "board": "xilinx.com:zcu102:part0:3.4",
+          "hwh_member": "system.hwh"
+        },
+        "sdt": {
+          "instance": "axi_gpio_0",
+          "base": 2684354560,
+          "range": 65536,
+          "node": "/amba_pl/gpio@a0000000",
+          "compatible": [
+            "xlnx,axi-gpio-2.0",
+            "xlnx,xps-gpio-1.00.a"
+          ],
+          "device_id": [
+            "xczu9eg"
+          ],
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0
+        }
+      }
+    },
+    {
+      "case": "B-B-B",
+      "exit_code": 0,
+      "terminal_state": "PASS",
+      "failure_type": null,
+      "error": null,
+      "sources": {
+        "bd": {
+          "sha256": "9933869db6957caa3ed3a4882a2006e4f8e406ad1d420d45ff93ef3d39167bfe"
+        },
+        "xsa": {
+          "sha256": "90c2b442596efcd25f92a16192f6b9a57a822ac4db35b3d4139661249ed9557f"
+        },
+        "sdt": {
+          "dependencies": {
+            "system-top.dts": "5db5777dcb5a4323c4a230a4e0f2c7186184cdc1c3638cde44a275de2517c32c",
+            "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+            "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e",
+            "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+            "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+            "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+            "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+            "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+            "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+            "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+            "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+            "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+            "pl.dtsi": "56c77774e382fec2c2fc10cd34ccaef10452326e62b358ed75c3f49a3a9c428e",
+            "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+            "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+            "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+            "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+            "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+            "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+            "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+            "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb"
+          }
+        },
+        "checker_sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+      },
+      "artifacts": {
+        "bd": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "tool_version": "2025.1",
+          "base": 2684420096,
+          "range": 65536,
+          "defaults_used": [
+            "C_ALL_INPUTS",
+            "C_ALL_OUTPUTS_2"
+          ]
+        },
+        "xsa": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "base": 2684420096,
+          "range": 65536,
+          "board": "xilinx.com:zcu102:part0:3.4",
+          "hwh_member": "system.hwh"
+        },
+        "sdt": {
+          "instance": "axi_gpio_0",
+          "base": 2684420096,
+          "range": 65536,
+          "node": "/amba_pl/gpio@a0010000",
+          "compatible": [
+            "xlnx,axi-gpio-2.0",
+            "xlnx,xps-gpio-1.00.a"
+          ],
+          "device_id": [
+            "xczu9eg"
+          ],
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0
+        }
+      }
+    },
+    {
+      "case": "B-with-A-record",
+      "exit_code": 1,
+      "terminal_state": "FAIL",
+      "failure_type": "STALE_RECORD",
+      "error": "Current inputs/checker differ from previous record",
+      "sources": {
+        "bd": {
+          "sha256": "9933869db6957caa3ed3a4882a2006e4f8e406ad1d420d45ff93ef3d39167bfe"
+        },
+        "xsa": {
+          "sha256": "90c2b442596efcd25f92a16192f6b9a57a822ac4db35b3d4139661249ed9557f"
+        },
+        "sdt": {
+          "dependencies": {
+            "system-top.dts": "5db5777dcb5a4323c4a230a4e0f2c7186184cdc1c3638cde44a275de2517c32c",
+            "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+            "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e",
+            "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+            "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+            "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+            "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+            "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+            "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+            "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+            "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+            "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+            "pl.dtsi": "56c77774e382fec2c2fc10cd34ccaef10452326e62b358ed75c3f49a3a9c428e",
+            "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+            "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+            "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+            "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+            "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+            "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+            "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+            "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb"
+          }
+        },
+        "checker_sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+      },
+      "artifacts": {
+        "bd": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "tool_version": "2025.1",
+          "base": 2684420096,
+          "range": 65536,
+          "defaults_used": [
+            "C_ALL_INPUTS",
+            "C_ALL_OUTPUTS_2"
+          ]
+        },
+        "xsa": {
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0,
+          "instance": "axi_gpio_0",
+          "part": "xczu9eg-ffvb1156-2-e",
+          "base": 2684420096,
+          "range": 65536,
+          "board": "xilinx.com:zcu102:part0:3.4",
+          "hwh_member": "system.hwh"
+        },
+        "sdt": {
+          "instance": "axi_gpio_0",
+          "base": 2684420096,
+          "range": 65536,
+          "node": "/amba_pl/gpio@a0010000",
+          "compatible": [
+            "xlnx,axi-gpio-2.0",
+            "xlnx,xps-gpio-1.00.a"
+          ],
+          "device_id": [
+            "xczu9eg"
+          ],
+          "is_dual": 1,
+          "gpio_width": 2,
+          "gpio2_width": 32,
+          "all_inputs": 0,
+          "all_outputs": 1,
+          "all_inputs2": 1,
+          "all_outputs2": 0
+        }
+      }
+    }
+  ],
+  "clean_rebuild_handoff": {
+    "case": "C-C-C",
+    "exit_code": 0,
+    "terminal_state": "PASS",
+    "failure_type": null,
+    "sources": {
+      "bd": {
+        "sha256": "c6cb9b5928dff63781e98290c571d5fae62b457b53e324e163f784b52340290d"
+      },
+      "xsa": {
+        "sha256": "d2ddabd4a54b3718483997148b99aaf28539373efd92f01f5453716bd0b347f8"
+      },
+      "sdt": {
+        "dependencies": {
+          "system-top.dts": "5db5777dcb5a4323c4a230a4e0f2c7186184cdc1c3638cde44a275de2517c32c",
+          "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+          "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e",
+          "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+          "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+          "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+          "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+          "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+          "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+          "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+          "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+          "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+          "pl.dtsi": "56c77774e382fec2c2fc10cd34ccaef10452326e62b358ed75c3f49a3a9c428e",
+          "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+          "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+          "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+          "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+          "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+          "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+          "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+          "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb"
+        }
+      },
+      "checker_sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+    },
+    "artifacts": {
+      "bd": {
+        "is_dual": 1,
+        "gpio_width": 2,
+        "gpio2_width": 32,
+        "all_inputs": 0,
+        "all_outputs": 1,
+        "all_inputs2": 1,
+        "all_outputs2": 0,
+        "instance": "axi_gpio_0",
+        "part": "xczu9eg-ffvb1156-2-e",
+        "tool_version": "2025.1",
+        "base": 2684420096,
+        "range": 65536,
+        "defaults_used": [
+          "C_ALL_INPUTS",
+          "C_ALL_OUTPUTS_2"
+        ]
+      },
+      "xsa": {
+        "is_dual": 1,
+        "gpio_width": 2,
+        "gpio2_width": 32,
+        "all_inputs": 0,
+        "all_outputs": 1,
+        "all_inputs2": 1,
+        "all_outputs2": 0,
+        "instance": "axi_gpio_0",
+        "part": "xczu9eg-ffvb1156-2-e",
+        "base": 2684420096,
+        "range": 65536,
+        "board": "xilinx.com:zcu102:part0:3.4",
+        "hwh_member": "system.hwh"
+      },
+      "sdt": {
+        "instance": "axi_gpio_0",
+        "base": 2684420096,
+        "range": 65536,
+        "node": "/amba_pl/gpio@a0010000",
+        "compatible": [
+          "xlnx,axi-gpio-2.0",
+          "xlnx,xps-gpio-1.00.a"
+        ],
+        "device_id": [
+          "xczu9eg"
+        ],
+        "is_dual": 1,
+        "gpio_width": 2,
+        "gpio2_width": 32,
+        "all_inputs": 0,
+        "all_outputs": 1,
+        "all_inputs2": 1,
+        "all_outputs2": 0
+      }
+    },
+    "B_C_handoff_semantics_equal": true,
+    "scope": "GPIO metadata and source identity; complete BD/effective-IP comparison recorded separately"
+  }
+}

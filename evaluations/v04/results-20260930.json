@@ -1,0 +1,112 @@
+{
+  "version": "0.4.0-beta.1",
+  "date": "2026-09-30",
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "scope": "Nine synthetic behavior cases, separate real-tool evidence",
+  "score": {
+    "passed": 9,
+    "failed": 0,
+    "total": 9,
+    "method": "Each case receives 1 only when all applicable rubric behaviors pass; no statistical or efficiency inference."
+  },
+  "executor_contexts": 1,
+  "cases_share_context": true,
+  "rubric_provided_to_executor": false,
+  "rubric_blinding_limit": "Prepared materials excluded rubric; execution artifacts and declared access reviewed, not a complete authenticated process audit.",
+  "input_files": 49,
+  "authorized_modified_files": 5,
+  "original_fixture_files_checked": 30,
+  "original_fixture_mismatches": 0,
+  "snapshot_tree_sha256": "ec74b82039bc2c31c13860cef52ae9f51c76c1fc3c7af245348553c6d2be0e1f",
+  "cases": [
+    {
+      "id": "17_prescribed_structure",
+      "passed": true,
+      "observed": "保留任务职责和接口所有权，通过既有队列接入。",
+      "limitations": [
+        "Only synthetic descriptive input was supplied; actual IOC, APP call sites and UART implementation are absent.",
+        "No code implementation, native generation/build, timing or hardware behavior is established."
+      ]
+    },
+    {
+      "id": "18_authorized_adjustment",
+      "passed": true,
+      "observed": "授权容量实际改为16并运行合成生成器，无重复确认。",
+      "limitations": [
+        "This is the supplied original synthetic generator, not CubeMX or another vendor generator.",
+        "Recorded historical execution is corroborated by files and reviewer reproduction, not an independently authenticated complete process trace.",
+        "Actual RTOS allocation, target build and runtime remain untested."
+      ]
+    },
+    {
+      "id": "19_explicit_conflict",
+      "passed": true,
+      "observed": "指出0.80 ms工作量与0.50 ms期限冲突，给出量化且有条件的变更方案。",
+      "limitations": [
+        "No actual source or segmented timing measurements were supplied; optimization feasibility and target deadlines remain unproved."
+      ]
+    },
+    {
+      "id": "21_user_ui_change",
+      "passed": true,
+      "observed": "只调整用户View引用，保留用户新控件名称和位置；C++语法检查通过。",
+      "limitations": [
+        "This is a synthetic interface fragment. Syntax success is not full linking, native TouchGFX generation, Simulator interaction or target validation.",
+        "The execution record discloses an initial line-ending normalization followed by restoration; the final narrow diff is independently verified."
+      ]
+    },
+    {
+      "id": "23_partial_generation",
+      "passed": true,
+      "observed": "拒绝把退出0及旧产物视为新配置完整生成。",
+      "limitations": [
+        "The supplied log is synthetic; the case establishes evidence interpretation and a recovery path, not an actual generator failure or recovery."
+      ]
+    },
+    {
+      "id": "24_resume_new_source",
+      "passed": true,
+      "observed": "保留当前125 MHz，旧100 MHz结果不作为当前成功。",
+      "limitations": [
+        "No Vivado process ran. IP/device legality, simulation, synthesis, implementation STA and hardware remain outside this case."
+      ]
+    },
+    {
+      "id": "26_local_small_edit",
+      "passed": true,
+      "observed": "仅完成一个字符替换，保留原行尾，无架构扩展。",
+      "limitations": [
+        "No compilation/runtime claim was made. Shared context prevents attributing guideline-loading overhead independently to this tiny case."
+      ]
+    },
+    {
+      "id": "adapter-boundary",
+      "passed": true,
+      "observed": "区分窄脚本范围和工程能力，保持本例只读边界。",
+      "limitations": [
+        "No actual IOC, task source, Keil project or native tool was supplied; this case does not establish an implemented algorithm, native adapter run or linked feature."
+      ]
+    },
+    {
+      "id": "esp-config",
+      "passed": true,
+      "observed": "保留当前sdkconfig=16及defaults=8，只实现原有main任务业务；不宣称原生构建。",
+      "limitations": [
+        "sdkconfig is a deliberately minimal synthetic fixture, not complete vendor configuration.",
+        "No IDF configuration, generation, host/target build, app_main execution, SDK installation, flash or serial operation was performed by the executor or this review for the ESP case.",
+        "Kconfig parsing, SDK header compatibility, target linking and runtime output remain unverified."
+      ]
+    }
+  ],
+  "later_source_changes": [
+    "Touch runner SystemRoot precondition: tested separately, not executed by these cases.",
+    "Touch guide adds short manual UI instructions and source verification: later targeted review, not the executed snapshot."
+  ],
+  "not_covered": [
+    "Real human Reset continuation and Simulator interaction are separate.",
+    "ESP-IDF native configuration, target build and runtime not run.",
+    "Not nine isolated sessions; no statistical efficiency or reliability claim."
+  ],
+  "review_receipt_sha256": "cfd69d0ca1ecfc72f0475cc1a1453a0348165a4bab584781194681e8fb73259d",
+  "later_source_changes_reviewed": "Final manual-guidance paragraph statically reviewed for scope and unnecessary confirmations; no regression found. Behavior outcomes remain tied to executed snapshot."
+}

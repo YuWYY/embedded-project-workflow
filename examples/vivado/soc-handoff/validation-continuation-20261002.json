@@ -1,0 +1,252 @@
+{
+  "version": "0.5.0-beta.1",
+  "date": "2026-10-02",
+  "scope": "Actual human edit, fresh-agent continuation, native reconstruction and separately executed post-validation; no software or board execution",
+  "human": {
+    "actor": "user in Vivado",
+    "base_before": "0xA0000000",
+    "base_after": "0xA0010000",
+    "range": "0x10000",
+    "independent_snapshot_diff": "Only GPIO offset and validation bookkeeping changed in system.bd",
+    "additional_empty_bd": "design_1.bd retained; not used by system_wrapper synthesis",
+    "counter_sha256": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+    "continuation_context": "Fresh agent initially received current project, contract, state and Skill; root supplied independent diff feedback after its initial reading"
+  },
+  "B": {
+    "native_stages": [
+      {
+        "name": "export",
+        "status": "pass",
+        "returncode": 0,
+        "timeout_seconds": 900.0,
+        "interrupted": false,
+        "elapsed_seconds": 205.828,
+        "process_cleanup_complete": true
+      },
+      {
+        "name": "sdt",
+        "status": "pass",
+        "returncode": 0,
+        "timeout_seconds": 900.0,
+        "interrupted": false,
+        "elapsed_seconds": 8.594,
+        "process_cleanup_complete": true
+      }
+    ],
+    "original_overall_status": "fail",
+    "original_failure_phase": "source_retention",
+    "original_result_sha256": "6a5ab5f3a48197b83f8c93c337e36899b9400bd5f2b26240ee15394e03935d7b",
+    "native_runner_sha256": "95f01a85e79578b03df939de1629d1a61a74b955c00469db52b18df22cafbc82",
+    "post_validation": {
+      "status": "PASS",
+      "scope": "Post-validation of actual B products and source ownership; no native rerun and original FAIL unchanged",
+      "current_runner_sha256": "9c48614eea04fb1a93f9e49451241851f3e8014a1721a4da5a1bd72d2f1a3f21",
+      "original_result_sha256": "6a5ab5f3a48197b83f8c93c337e36899b9400bd5f2b26240ee15394e03935d7b",
+      "generated_wrapper_difference": "only Date comment changed",
+      "xsa_integrity": {
+        "sha256": "90c2b442596efcd25f92a16192f6b9a57a822ac4db35b3d4139661249ed9557f",
+        "declared_top_hwh": "system.hwh",
+        "top_hwh_sha256": "417d10eda513ea3626a66910b790603fd00bfee2762ca5178006214c6d8738ec"
+      },
+      "sdt_product_sha256": {
+        "system-top.dts": "5db5777dcb5a4323c4a230a4e0f2c7186184cdc1c3638cde44a275de2517c32c",
+        "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+        "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+        "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+        "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb",
+        "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+        "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+        "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+        "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+        "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+        "pl.dtsi": "56c77774e382fec2c2fc10cd34ccaef10452326e62b358ed75c3f49a3a9c428e",
+        "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+        "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+        "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+        "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+        "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+        "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+        "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+        "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+        "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+        "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e"
+      }
+    },
+    "post_validation_record_sha256": "0d8cdb349db9d246dc55bae295ea6cc30a98828b616251e8ae564d5b634da3bd",
+    "boundary": "Original FAIL retained; post-validation exercised repaired ownership/product checks on the actual completed native products, not another native run"
+  },
+  "C": {
+    "configuration_source": "Saved current BD and XPR resource properties; original counter RTL; no initial prepare.tcl or previous build products",
+    "native_stages": [
+      {
+        "name": "import_current",
+        "status": "pass",
+        "returncode": 0,
+        "timeout_seconds": 900.0,
+        "interrupted": false,
+        "elapsed_seconds": 44.828,
+        "process_cleanup_complete": true
+      },
+      {
+        "name": "export",
+        "status": "pass",
+        "returncode": 0,
+        "timeout_seconds": 900.0,
+        "interrupted": false,
+        "elapsed_seconds": 332.922,
+        "process_cleanup_complete": true
+      },
+      {
+        "name": "sdt",
+        "status": "pass",
+        "returncode": 0,
+        "timeout_seconds": 900.0,
+        "interrupted": false,
+        "elapsed_seconds": 8.141,
+        "process_cleanup_complete": true
+      }
+    ],
+    "native_runner_sha256": "9c48614eea04fb1a93f9e49451241851f3e8014a1721a4da5a1bd72d2f1a3f21",
+    "native_copied_inputs_sha256": {
+      "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+      "scripts/rebuild_current.py": "5a70934cbf8a2292aff02d8634bed08155b9c0b85d3373fc0e9318007781f58b",
+      "scripts/rebuild_current.tcl": "5cc205e5fd82dc9c38a45e087a92d382ad95bde3492b48cff1d3c455d160b5dd",
+      "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+      "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+      "input_bd/design_1/design_1.bd": "dd3007ff0010946ac5d4a5e190f2ebfde372ae35d7f3348c0e1789fe8a37747d",
+      "input_bd/system/system.bd": "398caa2a57b09380930ab02a90ee869943d317eb4a5519bcbd4705cd624c40a5"
+    },
+    "original_overall_status": "fail",
+    "original_failure_phase": "semantic_and_retention_checks",
+    "original_result_sha256": "fca1c20f84b041d7d15c46bb0f9b5c5b62f1df402f6eb6d73a443038cf7e234a",
+    "original_cli_exit_code": 2,
+    "original_reader_failure": "Native ImportPath file provenance initially rejected as a custom compiler setting",
+    "first_post_validation": {
+      "status": "fail",
+      "record_sha256": "bedb619ff74f69c9cf777eb1e8ad04f5dce7e823e739cf272b52e099273bed83",
+      "reason": "An optional XCI model_parameters container was absent in a module reference; reader repaired and retested"
+    },
+    "post_validation": {
+      "status": "pass",
+      "post_validator_sha256": "3d7e98e1c1cd0fd28a929e77b224cbfd31f5e6e28b96b42b602522b1e3452ded",
+      "native_result_sha256": "fca1c20f84b041d7d15c46bb0f9b5c5b62f1df402f6eb6d73a443038cf7e234a",
+      "raw_bd_differences": {
+        "system": [
+          {
+            "path": "/components/zynq_ultra_ps_e_0/parameters/PSU_MIO_22_INPUT_TYPE",
+            "before": null,
+            "after": {
+              "value": "cmos"
+            }
+          }
+        ],
+        "design_1": []
+      },
+      "effective_xci_differences": [],
+      "effective_hwh_differences": [],
+      "explained_native_expansions": [
+        {
+          "path": "/components/zynq_ultra_ps_e_0/parameters/PSU_MIO_22_INPUT_TYPE",
+          "before": null,
+          "after": {
+            "value": "cmos"
+          },
+          "effective_value": "cmos",
+          "reason": "B and C complete XCI component/model values and HWH module attributes/parameters agree"
+        }
+      ],
+      "raw_bd_equal": false,
+      "effective_configuration_equal": true,
+      "user_rtl_retention": "pass",
+      "xsa_identities": {
+        "reference": {
+          "sha256": "90c2b442596efcd25f92a16192f6b9a57a822ac4db35b3d4139661249ed9557f",
+          "declared_top_hwh": "system.hwh",
+          "top_hwh_sha256": "417d10eda513ea3626a66910b790603fd00bfee2762ca5178006214c6d8738ec"
+        },
+        "rebuilt": {
+          "sha256": "d2ddabd4a54b3718483997148b99aaf28539373efd92f01f5453716bd0b347f8",
+          "declared_top_hwh": "system.hwh",
+          "top_hwh_sha256": "f9c4a37467983c645839bc880e2ab64e154f72e42df1a074e64b70425f7849f1"
+        }
+      },
+      "sdt_product_sha256": {
+        "system-top.dts": "5db5777dcb5a4323c4a230a4e0f2c7186184cdc1c3638cde44a275de2517c32c",
+        "zcu102-rev1.0.dtsi": "64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6",
+        "zcu102-revb.dtsi": "f4d04f3a88cbbc62ca01d29dd87887749d861a5a3dbec73cb1c943fd76e25d56",
+        "zcu102-reva.dtsi": "4165c912e59793d512ffb378498e4c41d0235b0f1d885c4758939289bed7f2b0",
+        "include/dt-bindings/phy/phy.h": "170c5b9e1e14a4cef4b2d7f5163bcf305407937b4727e2232001d8e80e1865cb",
+        "include/dt-bindings/pinctrl/pinctrl-zynqmp.h": "c00b79917d25731c99e03321b6ff1905bf2c523daeec97b321648660ec1e436e",
+        "include/dt-bindings/gpio/gpio.h": "9459754421011352d52db59d3f5d51b8151043cae13bf430e177308ba89eb671",
+        "include/dt-bindings/input/input.h": "a6dafc4347f068f2b79296868906b22dc3f81f06251291d6656c42de52e8df0a",
+        "include/dt-bindings/input/linux-event-codes.h": "9a9b0af4181b872f8a665d318611f4d5c9a32acfe595d2d8f2b9057d95d1ac72",
+        "pcw.dtsi": "329dda4da84721b50b08382f978bb3c252f89428d0df03e58e9912d11f85a4bf",
+        "pl.dtsi": "56c77774e382fec2c2fc10cd34ccaef10452326e62b358ed75c3f49a3a9c428e",
+        "zynqmp-clk-ccf.dtsi": "b0b445c927072f9c9ee9a3d56429c2491ccfe5e3e13a07a784d9e15d995714e3",
+        "include/dt-bindings/clock/xlnx-zynqmp-clk.h": "ec39a1df89a6620a0adedda516f94c87333942bb689023329007115dfb848233",
+        "zynqmp-u-boot.dtsi": "923f395c5dfb183e71d305d5d05a84e770a01958106a2f42277814b2721ae5f9",
+        "zynqmp.dtsi": "fee1af551394ce6a2fc6996ffca1e4e45000e90165d6b6ae40c7a0942ffc12fb",
+        "include/dt-bindings/thermal/thermal.h": "d74d498871c3bf3d6aa985ad01c15dfa916614369dbcd832bdcb9d2d45b15e08",
+        "include/dt-bindings/reset/xlnx-zynqmp-resets.h": "335755446a4bd67b7131ea25f8713c98647f4159304f7b0f0ef3a53b1b8e32ef",
+        "include/dt-bindings/power/xlnx-zynqmp-power.h": "1375fe3ebe74a79bfef41b29eec3670a797b92b2a33d9919200e5951ce1baa4b",
+        "include/dt-bindings/interrupt-controller/irq.h": "dd596b1a607b3ef68a85a0741fdf3c63e9a9266e6f8fbd61a739e0f155aa5baa",
+        "include/dt-bindings/interrupt-controller/arm-gic.h": "5d0403f41890bbf4fe7cc3519ccc69bc643065f230bb885831a3ebae037e379b",
+        "include/dt-bindings/dma/xlnx-zynqmp-dpdma.h": "003dcbe17830190984304269a5224ed4cd8580ba48b66b616c512ccf66147a4e"
+      }
+    },
+    "post_validation_record_sha256": "fd91f003faf35d3b519e3008fd4bfe5cf54c4192aa841618e02b179540142585",
+    "boundary": "Separate actual post-validation; native execution scripts and old FAIL remain unchanged. Equality of recorded configuration semantics is not formal netlist equivalence or board proof"
+  },
+  "preserved_failed_attempts": [
+    {
+      "attempt": "C1",
+      "reason": "Windows batch split a comma-joined BD list; corrected to one argument per BD"
+    },
+    {
+      "attempt": "C2",
+      "reason": "Vivado native Tcl invalid-argument while reading builtin.tcl; path-length warning also observed. Shorter C3 succeeded; causal root not proven"
+    }
+  ],
+  "not_run": [
+    "Vitis platform/domain",
+    "BSP",
+    "A53 application compile/link",
+    "implementation",
+    "bitstream",
+    "PS MMIO transactions",
+    "DDR",
+    "boot",
+    "board"
+  ],
+  "current_source_sha256": {
+    "examples/vivado/soc-handoff/scripts/run.py": "9c48614eea04fb1a93f9e49451241851f3e8014a1721a4da5a1bd72d2f1a3f21",
+    "examples/vivado/soc-handoff/scripts/rebuild_current.py": "3d7e98e1c1cd0fd28a929e77b224cbfd31f5e6e28b96b42b602522b1e3452ded",
+    "examples/vivado/soc-handoff/scripts/rebuild_current.tcl": "5cc205e5fd82dc9c38a45e087a92d382ad95bde3492b48cff1d3c455d160b5dd",
+    "skills/embedded-project-workflow/scripts/soc_handoff.py": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604"
+  },
+  "preservation": {
+    "v04": {
+      "expected_files": 623,
+      "actual_files": 623,
+      "matched": 623,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "exact_inventory_preserved": true
+    },
+    "baseline_A": {
+      "expected_files": 417,
+      "actual_files": 417,
+      "matched": 417,
+      "changed": [],
+      "missing": [],
+      "added": [],
+      "exact_inventory_preserved": true
+    },
+    "human_inputs": {
+      "declared_input_count": 6,
+      "all_declared_inputs_preserved": true,
+      "scope": "Six declared source inputs; not an inventory assertion about every GUI cache file"
+    }
+  }
+}

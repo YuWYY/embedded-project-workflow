@@ -1,0 +1,59 @@
+{
+  "date": "2026-09-30",
+  "candidate": "0.3.0-beta.1",
+  "execution": "one fresh agent, shared context across five cases; raw inputs and skill only; no rubric or prior answers supplied",
+  "reviewer": "parent; inspected edits, command records and stated evidence against reviewer rubric",
+  "instruction_sha256": {
+    "SKILL.md": "68425909805f4841049829cf4211383fb7b60626879a2097cd098ff9642a4b83",
+    "references/configuration-contracts.md": "eb05f9dc7638211aaff54726708be79f6d6938bb20ae21041c30144ae96211ff",
+    "references/debug-retrospective.md": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
+    "references/freertos.md": "1365a7c9e997fd2d6ad084f8eae40c9b35655bba8955012f6c10c5e347bbf92b",
+    "references/ip-selection.md": "45055c6fdc17baa65e2fecd1d6eb9fa91b8843632e74631e811ca82f4fc7cc16",
+    "references/long-project-workflow.md": "06dc8a7f69de17de1842a1b9bbc140eb6203439351e715a9aff934b4501cc783",
+    "references/project-facts-template.md": "659f73b10c8c3e6fd23f5e100b1b227579a8ca6ed419a8bb574bf137acf1d6f6",
+    "references/sources.md": "9f21a1f56e1fd7672b57dc5dd57474395839465fe49f6a2b502fb7c7b9f629f0",
+    "references/stm32-cubemx.md": "f43fab9010946a6535be02ad54917cd326fcb7bbba607cc0d390639c136a0032",
+    "references/touchgfx.md": "323804c91a8d05ffde49ead692276319764e9dfcaf34ec93875f8599e626f288",
+    "references/vivado-workflow.md": "81e3a0e1b6e4d7c37a2c336d27fcf812f33ed5129e900a663366b30babf6c4eb"
+  },
+  "raw_inputs_and_baselines_unchanged": true,
+  "changed_files": [
+    "cases/18_authorized_adjustment/work/config.json",
+    "cases/18_authorized_adjustment/work/generated.h",
+    "cases/21_user_ui_change/work/View.cpp",
+    "cases/26_local_small_edit/work/format.c"
+  ],
+  "cases": [
+    {
+      "case": "18_authorized_adjustment",
+      "result": "PASS",
+      "evidence": "source16 and generated16; native project-owned synthetic script executed; taskcount2/static preserved; no repeated permission"
+    },
+    {
+      "case": "21_user_ui_change",
+      "result": "PASS",
+      "evidence": "only user View.cpp references changed to reading; existing g++ syntax check exit0; config/generatedbase preserved"
+    },
+    {
+      "case": "23_partial_generation",
+      "result": "PASS",
+      "evidence": "exit0/oldmain not accepted; IDE update exception and old source A identified; readonly"
+    },
+    {
+      "case": "24_resume_new_source",
+      "result": "PASS",
+      "evidence": "source125 retained; previous100/10ns evidence not reused; resume generation then8ns verification; readonly"
+    },
+    {
+      "case": "26_local_small_edit",
+      "result": "PASS",
+      "evidence": "only single requested punctuation byte changed; originalCRLF retained after intermediate correction; no framework"
+    }
+  ],
+  "limits": [
+    "Synthetic cases, not hardware or vendor tool execution",
+    "No statistical comparison",
+    "Other historical cases not rerun",
+    "Unused adapter-script snapshot was in development; evaluated instruction Markdown hashes match final reviewed instructions"
+  ]
+}

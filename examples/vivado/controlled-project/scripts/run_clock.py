@@ -6,11 +6,13 @@ Copyright (c) 2026 YuWYY. SPDX-License-Identifier: MIT
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import uuid
@@ -41,8 +43,31 @@ def inventory(package, source_root=None):
     return found
 
 
-def write_json(path, obj):
-    path.write_text(json.dumps(obj, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+def checked_target(path, root):
+    if not path.resolve().is_relative_to(root.resolve()):
+        raise ValueError(f'Write target escapes the isolated build root: {path}')
+
+
+def write_json(path, obj, root=None):
+    """Validate, verify and atomically replace a JSON file in its own directory."""
+    root = root or path.parent
+    temporary = path.with_name(f'.{path.name}.{uuid.uuid4().hex}.tmp')
+    checked_target(path, root)
+    checked_target(temporary, root)
+    try:
+        with temporary.open('x', encoding='utf-8') as output:
+            output.write(json.dumps(obj, ensure_ascii=False, indent=2) + '\n')
+            output.flush()
+        if json.loads(temporary.read_text(encoding='utf-8')) != obj:
+            raise OSError('Temporary JSON verification failed')
+        checked_target(path, root)
+        checked_target(temporary, root)
+        temporary.replace(path)
+    finally:
+        try:
+            temporary.unlink(missing_ok=True)
+        except OSError:
+            pass
 
 
 def source_copy_plan(package, shared_sources, root):
@@ -105,11 +130,11 @@ def checked_artifact_paths(root, work, evidence):
     return paths
 
 
-def archive_preexisting_artifacts(root, work, evidence):
+def archive_preexisting_artifacts(root, work, evidence, archived_files=None):
     paths = checked_artifact_paths(root, work, evidence)
     if any(archived.exists() for _, _, _, archived in paths):
         raise ValueError('Preexisting artifact archive already contains evidence')
-    archived_files = []
+    archived_files = [] if archived_files is None else archived_files
     for relative, source, _, archived in paths:
         if source.is_file():
             archived.parent.mkdir(parents=True, exist_ok=True)
@@ -118,12 +143,23 @@ def archive_preexisting_artifacts(root, work, evidence):
     return archived_files
 
 
-def collect_current_artifacts(root, work, evidence):
-    collected = []
-    for relative, source, destination, _ in checked_artifact_paths(root, work, evidence):
-        if source.is_file():
-            shutil.copy2(source, destination)
-            collected.append(relative)
+def collect_current_artifacts(root, work, evidence, collected=None):
+    collected = [] if collected is None else collected
+    errors = []
+    for relative in EVIDENCE_FILES:
+        source, destination = work / relative, evidence / Path(relative).name
+        try:
+            checked_target(source, root)
+            checked_target(destination, root)
+            if source.exists() and not source.is_file():
+                raise ValueError(f'Expected a generated evidence file: {relative}')
+            if source.is_file():
+                shutil.copy2(source, destination)
+                collected.append(relative)
+        except (OSError, RuntimeError, ValueError) as error:
+            errors.append(f'{relative}: {error}')
+    if errors:
+        raise OSError('; '.join(errors))
     return collected
 
 
@@ -167,12 +203,79 @@ def existing_owner(root):
     return marker
 
 
+def positive_timeout(value):
+    try:
+        seconds = float(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError('Timeout must be a positive finite number') from error
+    if not math.isfinite(seconds) or seconds <= 0:
+        raise argparse.ArgumentTypeError('Timeout must be a positive finite number')
+    return seconds
+
+
+def hidden_startup():
+    startup = subprocess.STARTUPINFO()
+    startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    startup.wShowWindow = subprocess.SW_HIDE
+    return startup
+
+
+def cleanup_owned_process(process):
+    """Only taskkill the still-live PID from our own Popen, never by image name."""
+    cleanup = {'attempted': False, 'complete': False, 'pid': process.pid,
+               'taskkill_returncode': None, 'diagnostics': []}
+    helper = None
+    try:
+        if process.poll() is not None:
+            cleanup['diagnostics'].append('Owned launcher already exited; descendant state is unknown')
+            return cleanup
+        # Resolve a fixed Windows utility path; do not use PATH or a shell.
+        taskkill = str(Path(os.environ['SystemRoot']) / 'System32/taskkill.exe')
+        command = [taskkill, '/PID', str(process.pid), '/T', '/F']
+        cleanup.update(attempted=True, command=command)
+        helper = subprocess.Popen(command, stdin=subprocess.DEVNULL,
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                                  startupinfo=hidden_startup(),
+                                  creationflags=subprocess.CREATE_NEW_CONSOLE)
+        try:
+            cleanup['taskkill_returncode'] = helper.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            cleanup['diagnostics'].append('taskkill exceeded its 10 second limit')
+            helper.kill()  # This is our cleanup helper, not a process-name search.
+            try:
+                helper.wait(timeout=0)
+            except subprocess.TimeoutExpired:
+                cleanup['diagnostics'].append('Cleanup helper has not yet exited')
+    except (KeyError, OSError, ValueError, KeyboardInterrupt) as error:
+        cleanup['diagnostics'].append(f'{type(error).__name__}: {error}')
+        if helper is not None and helper.poll() is None:
+            try:
+                helper.kill()
+            except OSError as stop_error:
+                cleanup['diagnostics'].append(f'Cleanup helper stop failed: {stop_error}')
+    try:
+        process.wait(timeout=5)
+    except (subprocess.TimeoutExpired, OSError, KeyboardInterrupt) as error:
+        cleanup['diagnostics'].append(f'Owned launcher did not finish cleanup: {type(error).__name__}: {error}')
+    cleanup['complete'] = (cleanup['taskkill_returncode'] == 0 and
+                           process.returncode is not None and not cleanup['diagnostics'])
+    return cleanup
+
+
+def save_record(path, record, root):
+    write_json(path, record, root)
+    if json.loads(path.read_text(encoding='utf-8')) != record:
+        raise OSError('Saved result verification failed')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--vivado', help='Existing Vivado executable; otherwise resolve Windows vivado.bat/exe from PATH')
     parser.add_argument('--build-root')
     parser.add_argument('--regenerate', action='store_true')
     parser.add_argument('--stage', required=True)
+    parser.add_argument('--timeout', type=positive_timeout, default=900.0,
+                        help='Positive finite wall-clock seconds per Vivado process (default: 900)')
     args = parser.parse_args()
     if not re.fullmatch(r'[A-Za-z0-9_-]+', args.stage):
         parser.error('Stage name must use ASCII letters, digits, hyphens or underscores')
@@ -217,62 +320,155 @@ def main():
         check_write_targets(root, work, evidence, copy_directories, copy_files)
     except (OSError, RuntimeError, ValueError) as error:
         parser.error(str(error))
-    root.mkdir(parents=True, exist_ok=True)
-    work.mkdir(exist_ok=True)
-    evidence.mkdir(parents=True)
-    write_json(root / OWNER_FILE, owner)
-    initial = inventory(package, shared_sources)
-    for directory in copy_directories:
-        directory.mkdir(parents=True, exist_ok=True)
-    for source, destination in copy_files:
-        shutil.copy2(source, destination)
-    shutil.copy2(package / 'config/clock-config.tcl', evidence / 'clock-config.tcl')
     marker = work / 'completed.txt'
     sim = work / 'p/c.sim/sim_1/behav/xsim/clock_result.txt'
-    archived_files = archive_preexisting_artifacts(root, work, evidence)
-    removed_old_results = [Path(relative).name for relative in archived_files
-                           if Path(relative).name in ('completed.txt', 'clock_result.txt')]
     command = [str(executable), '-mode', 'batch', '-notrace', '-source',
                str(root / 'scripts/clock.tcl'), '-tclargs', str(root / 'sources')]
     if args.regenerate:
         command.append('regenerate')
-    # Give the Windows batch launcher its own hidden console and explicit input.
-    # This is a process-launch choice, not a claim to fix native Tcl I/O errors.
-    startup = subprocess.STARTUPINFO()
-    startup.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-    startup.wShowWindow = subprocess.SW_HIDE
     started = time.monotonic()
     record = {'stage': args.stage, 'command': command, 'cwd': str(work),
-              'build_root': str(root), 'source_sha256': initial,
+              'build_root': str(root), 'source_sha256': {},
               'owner_id': owner['owner_id'], 'requested_output_mhz': requested_mhz,
               'expected_period_ns': 1000.0 / requested_mhz,
-              'removed_old_result_files': removed_old_results,
-              'archived_preexisting_artifacts': archived_files,
+              'removed_old_result_files': [], 'archived_preexisting_artifacts': [],
+              'collected_current_artifacts': [], 'returncode': None, 'pid': None,
+              'sources_unchanged': None, 'completion': '', 'simulation': '',
+              'timeout_seconds': args.timeout, 'timed_out': False, 'interrupted': False,
+              'phase': 'initialize', 'failure_phase': None, 'failure_type': None,
+              'diagnostics': [], 'cleanup': None,
               'process_io': 'DEVNULL stdin, file stdout/stderr, hidden new console',
               'status': 'running', 'coverage': 'IP generation, XSim, IP/top synthesis only'}
-    write_json(evidence / 'result.json', record)
-    print('Build directory:', root, flush=True)
-    with (evidence / 'stdout.log').open('w', encoding='utf-8') as output:
-        result = subprocess.run(command, cwd=work, stdin=subprocess.DEVNULL, stdout=output,
-                                stderr=subprocess.STDOUT, check=False,
-                                startupinfo=startup,
-                                creationflags=subprocess.CREATE_NEW_CONSOLE)
-    record.update(returncode=result.returncode,
-                  elapsed_seconds=round(time.monotonic()-started, 2),
-                  sources_unchanged=(initial == inventory(package, shared_sources) == inventory(root)))
-    record['completion'] = marker.read_text(encoding='utf-8').strip() if marker.exists() else ''
-    record['simulation'] = sim.read_text(encoding='utf-8').strip() if sim.exists() else ''
-    record['collected_current_artifacts'] = collect_current_artifacts(root, work, evidence)
-    record['status'] = ('pass' if result.returncode == 0
-                        and record['sources_unchanged']
-                        and matching_results(record['completion'], record['simulation'], requested_mhz)
-                        else 'fail')
-    write_json(evidence / 'result.json', record)
+    result_path = evidence / 'result.json'
+    process = None
+    initial = None
+
+    def failure(phase, error, kind=None):
+        if isinstance(error, KeyboardInterrupt):
+            record['interrupted'] = True
+        if record['failure_phase'] is None:
+            record['failure_phase'] = phase
+            record['failure_type'] = kind or (
+                'timeout' if isinstance(error, subprocess.TimeoutExpired) else
+                'interrupted' if isinstance(error, KeyboardInterrupt) else
+                'launch_error' if phase == 'launch' else
+                'io_error' if isinstance(error, OSError) else 'runtime_error')
+        record['diagnostics'].append(f'{phase}: {type(error).__name__}: {error}')
+        record['status'] = 'fail'
+
+    def checkpoint(phase):
+        record['phase'] = phase
+        save_record(result_path, record, root)
+
+    try:
+        root.mkdir(parents=True, exist_ok=True)
+        evidence.mkdir(parents=True)
+        # Persist the production record before source copying, owner writes or archive moves.
+        checkpoint('initialize')
+        work.mkdir(exist_ok=True)
+        if not args.regenerate:
+            checkpoint('initialize_owner')
+            write_json(root / OWNER_FILE, owner, root)
+        checkpoint('inventory')
+        initial = inventory(package, shared_sources)
+        record['source_sha256'] = initial
+        checkpoint('copy_sources')
+        for directory in copy_directories:
+            checked_target(directory, root)
+            directory.mkdir(parents=True, exist_ok=True)
+        for source, destination in copy_files:
+            checked_target(destination, root)
+            shutil.copy2(source, destination)
+        checked_target(evidence / 'clock-config.tcl', root)
+        shutil.copy2(package / 'config/clock-config.tcl', evidence / 'clock-config.tcl')
+        checkpoint('archive_preexisting_artifacts')
+        archive_preexisting_artifacts(root, work, evidence, record['archived_preexisting_artifacts'])
+        record['removed_old_result_files'] = [Path(relative).name
+            for relative in record['archived_preexisting_artifacts']
+            if Path(relative).name in ('completed.txt', 'clock_result.txt')]
+        checkpoint('launch')
+        print('Build directory:', root, flush=True)
+        checked_target(evidence / 'stdout.log', root)
+        with (evidence / 'stdout.log').open('w', encoding='utf-8') as output:
+            process = subprocess.Popen(command, cwd=work, stdin=subprocess.DEVNULL,
+                                       stdout=output, stderr=subprocess.STDOUT,
+                                       startupinfo=hidden_startup(),
+                                       creationflags=subprocess.CREATE_NEW_CONSOLE)
+            record['pid'] = process.pid
+            checkpoint('running')
+            record['returncode'] = process.wait(timeout=args.timeout)
+    except subprocess.TimeoutExpired as error:
+        record['timed_out'] = True
+        failure(record['phase'], error)
+    except KeyboardInterrupt as error:
+        record['interrupted'] = True
+        failure(record['phase'], error)
+    except Exception as error:
+        failure(record['phase'], error)
+    finally:
+        if process is not None:
+            if record['failure_phase'] is not None:
+                record['cleanup'] = cleanup_owned_process(process)
+            record['returncode'] = process.returncode
+
+    record['removed_old_result_files'] = [Path(relative).name
+        for relative in record['archived_preexisting_artifacts']
+        if Path(relative).name in ('completed.txt', 'clock_result.txt')]
+
+    # An archive/copy failure cannot turn untouched previous-stage files into current evidence.
+    if process is not None:
+        for field, path in (('completion', marker), ('simulation', sim)):
+            try:
+                checked_target(path, root)
+                record[field] = path.read_text(encoding='utf-8').strip() if path.exists() else ''
+            except (Exception, KeyboardInterrupt) as error:
+                failure('read_' + field, error)
+        try:
+            collect_current_artifacts(root, work, evidence, record['collected_current_artifacts'])
+        except Exception as error:
+            failure('collect_current_artifacts', error)
+        except KeyboardInterrupt as error:
+            record['interrupted'] = True
+            failure('collect_current_artifacts', error)
+    if initial is not None:
+        try:
+            record['sources_unchanged'] = (initial == inventory(package, shared_sources) == inventory(root))
+        except (Exception, KeyboardInterrupt) as error:
+            failure('verify_sources', error)
+    if record['failure_phase'] is None:
+        if (record['returncode'] == 0 and record['sources_unchanged'] and
+                matching_results(record['completion'], record['simulation'], requested_mhz)):
+            record['status'] = 'pass'
+        else:
+            kind = ('nonzero_exit' if record['returncode'] != 0 else
+                    'source_integrity' if not record['sources_unchanged'] else 'evidence_mismatch')
+            failure('verify_results', RuntimeError('Tool exit, source integrity or completion/simulation evidence failed'), kind)
+    record.update(phase='complete', elapsed_seconds=round(time.monotonic() - started, 2))
+    try:
+        save_record(result_path, record, root)
+    except (Exception, KeyboardInterrupt) as error:
+        failure('save_result', error)
+        print(f'Unable to save final result: {error}', file=sys.stderr, flush=True)
+        # A transient write failure may permit saving terminal failure, never reporting PASS.
+        try:
+            save_record(result_path, record, root)
+        except (Exception, KeyboardInterrupt) as retry_error:
+            failure('save_result', retry_error)
+            print(f'Terminal result remains unverified: {retry_error}', file=sys.stderr, flush=True)
     if record['status'] == 'pass':
-        owner['last_successful_stage'] = args.stage
-        write_json(root / OWNER_FILE, owner)
+        updated_owner = dict(owner, last_successful_stage=args.stage)
+        try:
+            write_json(root / OWNER_FILE, updated_owner, root)
+        except (Exception, KeyboardInterrupt) as error:
+            failure('save_owner', error)
+            print(f'Unable to advance ownership marker: {error}', file=sys.stderr, flush=True)
+            try:
+                save_record(result_path, record, root)
+            except (Exception, KeyboardInterrupt) as save_error:
+                failure('save_result', save_error)
+                print(f'Terminal result remains unverified: {save_error}', file=sys.stderr, flush=True)
     print(json.dumps(record, ensure_ascii=False, indent=2), flush=True)
-    return 0 if record['status'] == 'pass' else 1
+    return 130 if record['interrupted'] else (0 if record['status'] == 'pass' else 1)
 
 
 if __name__ == '__main__':

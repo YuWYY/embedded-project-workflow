@@ -1,0 +1,426 @@
+{
+  "recorded_at_utc": "2026-10-02T14:25:55.404277+00:00",
+  "scope": "Preparation-agent evidence only; no claim of completion of later human continuation",
+  "tool": "Vivado 2025.1 and installed 2025.1 SDTGen",
+  "device": "xczu9eg-ffvb1156-2-e",
+  "board": "ZCU102 rev1.0, board file 3.4",
+  "initial_base": "0xA0000000",
+  "range": "0x00010000",
+  "requested_clock_hz": 100000000,
+  "native_derived_clock_hz": 99990005,
+  "cases": {
+    "baseline_A": {
+      "status": "pass",
+      "command": "prepare",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "74bdcc24e043e7d8bdba5902b66b92562de92e7071f57365fdd8b2a5a162e650",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "e9622979758d6b3184e1e1ad6146da783eae62e751b7f0d4aff12b0fb4dcfa0d",
+        "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+        "sources/tb_counter32.sv": "f4751e01ca85a52cc6ed7b4519fd62dd8684286b926b1a628ccdf180ece4af48"
+      },
+      "stages": [
+        {
+          "name": "prepare",
+          "status": "pass",
+          "returncode": 0,
+          "elapsed_seconds": 22.984,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        },
+        {
+          "name": "export",
+          "status": "pass",
+          "returncode": 0,
+          "elapsed_seconds": 463.703,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        },
+        {
+          "name": "sdt",
+          "status": "pass",
+          "returncode": 0,
+          "elapsed_seconds": 10.078,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/run.py",
+          "scripts/unassigned.tcl",
+          "sources/tb_counter32.sv"
+        ],
+        "added_since_run": [
+          "scripts/overlap.tcl"
+        ],
+        "removed_since_run": []
+      }
+    },
+    "counter_positive": {
+      "status": "pass",
+      "command": "sim",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "2bf52d78ed5736229c1f8cdcd9bcf197e28dfced0a3eb5f06f38b68e92737660",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "e9622979758d6b3184e1e1ad6146da783eae62e751b7f0d4aff12b0fb4dcfa0d",
+        "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+        "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+      },
+      "stages": [
+        {
+          "name": "simulate",
+          "status": "pass",
+          "returncode": 0,
+          "elapsed_seconds": 22.828,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/run.py",
+          "scripts/unassigned.tcl"
+        ],
+        "added_since_run": [
+          "scripts/overlap.tcl"
+        ],
+        "removed_since_run": []
+      }
+    },
+    "counter_missing_clear": {
+      "status": "pass",
+      "command": "sim-missing-clear",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "0e4725c79e0b62baabce0fcaf9f4f1c27854ccd98af8cf0cf1bfdc8534e94091",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "e9622979758d6b3184e1e1ad6146da783eae62e751b7f0d4aff12b0fb4dcfa0d",
+        "sources/counter32.v": "ddced4b67712da70d1cb40df659e139989c5b3a8c8cec7fbe2d14180d7b0b3d8",
+        "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+      },
+      "stages": [
+        {
+          "name": "simulate",
+          "status": "pass",
+          "returncode": 1,
+          "elapsed_seconds": 17.734,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/run.py",
+          "scripts/unassigned.tcl",
+          "sources/counter32.v"
+        ],
+        "added_since_run": [
+          "scripts/overlap.tcl"
+        ],
+        "removed_since_run": []
+      }
+    },
+    "counter_missing_pause": {
+      "status": "pass",
+      "command": "sim-missing-pause",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "0e4725c79e0b62baabce0fcaf9f4f1c27854ccd98af8cf0cf1bfdc8534e94091",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "e9622979758d6b3184e1e1ad6146da783eae62e751b7f0d4aff12b0fb4dcfa0d",
+        "sources/counter32.v": "fc4eb55acc2767d0133bdc2fdb324b5f8b702807e4adbbfea81caafc70e3f3ec",
+        "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+      },
+      "stages": [
+        {
+          "name": "simulate",
+          "status": "pass",
+          "returncode": 1,
+          "elapsed_seconds": 17.984,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/run.py",
+          "scripts/unassigned.tcl",
+          "sources/counter32.v"
+        ],
+        "added_since_run": [
+          "scripts/overlap.tcl"
+        ],
+        "removed_since_run": []
+      }
+    },
+    "unassigned_diagnostic_not_native_rejection": {
+      "status": "fail",
+      "command": "address-unassigned",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "0e4725c79e0b62baabce0fcaf9f4f1c27854ccd98af8cf0cf1bfdc8534e94091",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "e9622979758d6b3184e1e1ad6146da783eae62e751b7f0d4aff12b0fb4dcfa0d",
+        "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+        "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+      },
+      "stages": [
+        {
+          "name": "prepare",
+          "status": "pass",
+          "returncode": 0,
+          "elapsed_seconds": 18.578,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        },
+        {
+          "name": "unassigned",
+          "status": "pass",
+          "returncode": 1,
+          "elapsed_seconds": 13.765,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/run.py",
+          "scripts/unassigned.tcl"
+        ],
+        "added_since_run": [
+          "scripts/overlap.tcl"
+        ],
+        "removed_since_run": []
+      }
+    },
+    "overlap_preparation_tool_failure": {
+      "status": "fail",
+      "command": "address-overlap",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/overlap.tcl": "4fd4b9ee93cbfc8e2feb5d9b9361d1145c2a2a3d06cad263a1862d1180e8634a",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "b84c338ef5d31fd5f3ff74db6a2f1a29212b19a5a8ee86162d93da5075fe1cd5",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "0056643bc3173fe56cd9cc06bbd6e9a0de693e0c4f9b69de06ca246a4a6a2f7e",
+        "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+        "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+      },
+      "stages": [
+        {
+          "name": "prepare",
+          "status": "fail",
+          "returncode": 1,
+          "elapsed_seconds": 16.906,
+          "failure_phase": "validate_exit",
+          "failure_type": "RuntimeError",
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": false,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        },
+        {
+          "name": "overlap",
+          "status": "NOT_RUN",
+          "returncode": null,
+          "elapsed_seconds": null,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": null,
+          "interrupted": null,
+          "process_cleanup_complete": null,
+          "utility_sha256": null
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/overlap.tcl",
+          "scripts/run.py"
+        ],
+        "added_since_run": [],
+        "removed_since_run": []
+      }
+    },
+    "overlap_native_rejection": {
+      "status": "pass",
+      "command": "address-overlap",
+      "source_sha256": {
+        "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+        "scripts/overlap.tcl": "8a96e369320148291fcab243a9426d7f4e97b23b8f8a5a003831fb03b3ff2035",
+        "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+        "scripts/run.py": "7eabf94be2668670c4afa6ec75698d308de82d5eaac12267645ec4ce5123c6e0",
+        "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+        "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+        "scripts/unassigned.tcl": "0056643bc3173fe56cd9cc06bbd6e9a0de693e0c4f9b69de06ca246a4a6a2f7e",
+        "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+        "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+      },
+      "stages": [
+        {
+          "name": "overlap",
+          "status": "pass",
+          "returncode": 1,
+          "elapsed_seconds": 19.531,
+          "failure_phase": null,
+          "failure_type": null,
+          "timed_out": false,
+          "interrupted": false,
+          "process_cleanup_complete": true,
+          "utility_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+        }
+      ],
+      "differences_from_current_authored_source": {
+        "changed": [
+          "scripts/run.py"
+        ],
+        "added_since_run": [],
+        "removed_since_run": []
+      }
+    }
+  },
+  "independent_A_checker": {
+    "status": "PASS",
+    "scope": "Metadata consistency only; no native generation/build, PS bus access or board validation",
+    "stage_statuses": {
+      "bd": "PASS",
+      "xsa": "PASS",
+      "sdt": "PASS",
+      "consistency": "PASS",
+      "source_identity": "PASS"
+    },
+    "actual_semantics": {
+      "bd": {
+        "is_dual": 1,
+        "gpio_width": 2,
+        "gpio2_width": 32,
+        "all_inputs": 0,
+        "all_outputs": 1,
+        "all_inputs2": 1,
+        "all_outputs2": 0,
+        "instance": "axi_gpio_0",
+        "part": "xczu9eg-ffvb1156-2-e",
+        "tool_version": "2025.1",
+        "base": 2684354560,
+        "range": 65536,
+        "defaults_used": [
+          "C_ALL_INPUTS",
+          "C_ALL_OUTPUTS_2"
+        ]
+      },
+      "xsa": {
+        "is_dual": 1,
+        "gpio_width": 2,
+        "gpio2_width": 32,
+        "all_inputs": 0,
+        "all_outputs": 1,
+        "all_inputs2": 1,
+        "all_outputs2": 0,
+        "instance": "axi_gpio_0",
+        "part": "xczu9eg-ffvb1156-2-e",
+        "base": 2684354560,
+        "range": 65536,
+        "board": "xilinx.com:zcu102:part0:3.4",
+        "hwh_member": "system.hwh"
+      },
+      "sdt": {
+        "instance": "axi_gpio_0",
+        "base": 2684354560,
+        "range": 65536,
+        "node": "/amba_pl/gpio@a0000000",
+        "compatible": [
+          "xlnx,axi-gpio-2.0",
+          "xlnx,xps-gpio-1.00.a"
+        ],
+        "device_id": [
+          "xczu9eg"
+        ],
+        "is_dual": 1,
+        "gpio_width": 2,
+        "gpio2_width": 32,
+        "all_inputs": 0,
+        "all_outputs": 1,
+        "all_inputs2": 1,
+        "all_outputs2": 0
+      }
+    }
+  },
+  "native_business_results": {
+    "counter_positive": "PASS checks=18",
+    "missing_clear": "CLEAR_DOMINANCE expected=00000000 actual=00000004, 86 ns",
+    "missing_pause": "PAUSE_HOLD expected=00000000 actual=00000001, 26 ns",
+    "overlap": "BD 41-1075 native assign_bd_address rejection",
+    "unassigned": "BD 41-1356 and 41-2909 critical warnings; validate returned success; runner did not count as native rejection"
+  },
+  "limits": [
+    "No implementation or bitstream",
+    "No A53 native build or runtime",
+    "No board access",
+    "No PS AXI transactions validated by counter-only XSim",
+    "Tcl scope failure root cause remains unresolved; single-thread setting does not guarantee success",
+    "Prepared human copy is not evidence of a human edit or independent continuation",
+    "Final runner revisions differ from A native stage inputs; see per-stage source identities"
+  ],
+  "preserved_A": {
+    "files": 417,
+    "archive_sha256": "98e794599902bd0c69364bc565a70f4dae95bf4e5123bb07141227cbb21a427d",
+    "unchanged": true
+  },
+  "current_authored_source_sha256": {
+    "scripts/export.tcl": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+    "scripts/overlap.tcl": "8a96e369320148291fcab243a9426d7f4e97b23b8f8a5a003831fb03b3ff2035",
+    "scripts/prepare.tcl": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+    "scripts/run.py": "95f01a85e79578b03df939de1629d1a61a74b955c00469db52b18df22cafbc82",
+    "scripts/sdt.tcl": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+    "scripts/simulate.tcl": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+    "scripts/unassigned.tcl": "0056643bc3173fe56cd9cc06bbd6e9a0de693e0c4f9b69de06ca246a4a6a2f7e",
+    "sources/counter32.v": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+    "sources/tb_counter32.sv": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442"
+  },
+  "authored_source_snapshot_scope": "current_authored_source_sha256 was captured at preparation-agent handoff. Later wrapper ownership and current-project reconstruction changes have separate records; these hashes are not relabelled as final-candidate hashes."
+}

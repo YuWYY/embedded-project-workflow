@@ -1,0 +1,178 @@
+{
+  "version": "0.4.0-beta.1",
+  "date": "2026-09-30",
+  "scope": "OFFLINE_FEATURE_VALIDATION_AND_USER_REPORTED_SIMULATOR",
+  "source_files": {
+    "skills/embedded-project-workflow/scripts/touchgfx_project.py": "4a320d8e1fb382f776452460efa0f989840130caf7dac3083ccd1e04e72bf62e",
+    "examples/feature-handoff/touchgfx/tests/check_model.py": "495aca28eb2e5bcdaab3322d07973dffbbcfd0dfc558ddde12e2068398fdfb72",
+    "examples/feature-handoff/touchgfx/tests/model_contract.cpp": "9da87e7e3afb41e1a5aa1dcbeccaee1d7620c720147f51171480db74cadb92b8",
+    "examples/feature-handoff/cubemx/prepare.py": "7a9efc408b89c5165a032a71cf151ad76563e3df484b03ef2bbe0a59159e718e",
+    "examples/feature-handoff/cubemx/implementation/apply.py": "e421af9df83e7d0c15558442c0e906ef1d2fddd69699d627440b9b0489eaa3d2",
+    "examples/common/rolling-stats/epw_stats.c": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+    "examples/common/rolling-stats/epw_stats.h": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59"
+  },
+  "common_core": {
+    "status": "PASS",
+    "host_only": true,
+    "wrong_mean_negative_compiled": true,
+    "wrong_mean_negative_returncode": 1,
+    "capacity_range": [
+      1,
+      16
+    ],
+    "window8_10_to_90": {
+      "count": 8,
+      "minimum": 20,
+      "maximum": 90,
+      "mean": 55
+    }
+  },
+  "cubemx": {
+    "status": "PASS",
+    "device": "STM32G474RE",
+    "tools": {
+      "CubeMX": "6.18.1",
+      "G4_FW": "1.6.3",
+      "CMSIS": "ST CMSIS-RTOS2",
+      "ARMCC": "5.06 u7 build960"
+    },
+    "generation_returncode": 0,
+    "rebuild_returncode": 0,
+    "errors": 0,
+    "warnings": 0,
+    "linked_owners": {
+      "SampleFeed_Entry": "sample_feed.o",
+      "StatsWorker_Entry": "statistics_worker.o",
+      "epw_stats_init": "epw_stats.o",
+      "epw_stats_push": "epw_stats.o",
+      "epw_stats_read": "epw_stats.o"
+    },
+    "static_storage_map_bytes": {
+      "SampleFeedStack": 1024,
+      "SampleQueueStorage": 48
+    },
+    "source_bindings_preserved": true,
+    "compilation_inputs_stable": true,
+    "baseline_preserved": true,
+    "artifacts": {
+      "sample_statistics.map": "d705b06b85432c7e8c785e02c5abd2329ef030938a2a1c355df9e4677eef2772",
+      "sample_statistics.axf": "ca7e7cec4a3ae72ee82adc42cb4cd7d5d52dbeb3a3a9867a65ca18403d8c8e8d"
+    },
+    "task_host_test": "Actual task code with mock CMSIS calls; not RTOS runtime",
+    "preflight_fix": "11 author negatives plus valid intercepted resume; independent 5 negatives and2 positives; then current native generation/rebuild",
+    "board": "NOT_RUN"
+  },
+  "touchgfx": {
+    "status": "PASS_NATIVE_AND_HOST",
+    "tools": "TouchGFX4.26.1 / Simulator2.0.0",
+    "native_stages": [
+      {
+        "name": "inspect",
+        "status": "PASS",
+        "returncode": null
+      },
+      {
+        "name": "tool-version",
+        "status": "PASS",
+        "returncode": 0
+      },
+      {
+        "name": "generate",
+        "status": "PASS",
+        "returncode": 0
+      },
+      {
+        "name": "build",
+        "status": "PASS",
+        "returncode": 0
+      },
+      {
+        "name": "source-integrity",
+        "status": "PASS",
+        "returncode": null
+      }
+    ],
+    "source_preserved": true,
+    "simulator_sha256": "5b58c84a25cffb3040bba69b878540f45b09a02792d6b8854434598b7567a86d",
+    "human_input": {
+      "button": "resetButton",
+      "callback": "function1",
+      "geometry": [
+        414,
+        -2,
+        50,
+        50
+      ],
+      "native_source_sha256": "9726dd1e9bcb9408d099693a6f11818d8dcb9ce892896e8eae80b629033f2f10",
+      "variation": "Human retained default function1; AI uses actual generated interface, rather than requiring planned name."
+    },
+    "ai_changes": "Native Reset label and dash glyph; user View/Presenter/Model clearing and no-data rendering",
+    "model_host": {
+      "status": "PASS",
+      "scope": "HOST_MODEL_ONLY",
+      "stages": [
+        {
+          "name": "compile",
+          "status": "PASS",
+          "returncode": 0
+        },
+        {
+          "name": "positive",
+          "status": "PASS",
+          "returncode": 0
+        },
+        {
+          "name": "compile-mutated-model",
+          "status": "PASS",
+          "returncode": 0
+        },
+        {
+          "name": "compile-negative",
+          "status": "PASS",
+          "returncode": 0
+        },
+        {
+          "name": "noop-reset-negative",
+          "status": "PASS",
+          "returncode": 1
+        }
+      ]
+    },
+    "human_simulator": {
+      "status": "PASS_USER_REPORTED",
+      "actor": "USER",
+      "date": "2026-09-30",
+      "timezone": "Asia/Shanghai",
+      "raw_reply": "五项均通过",
+      "source": "Current chat response to HumanStatistics Simulator five-check question",
+      "checks": {
+        "statistics_updates": true,
+        "paused_reset_clears_window_to_zero_and_no_data": true,
+        "reset_retains_count_and_pause": true,
+        "navigation_retains_state": true,
+        "resume_continues_current_progress": true
+      },
+      "native_config_sha256": "f985bd782f9b8dc20ccdc18922669e47cd0cae03e45408b84e73c67e2f310e96",
+      "simulator_sha256": "5b58c84a25cffb3040bba69b878540f45b09a02792d6b8854434598b7567a86d",
+      "model_sha256": "396138e37892d91d93bc3eb0a29f724b28223b9c7361d474523c15e0ded450c3",
+      "view_sha256": "1b07b231ddd5868e6c107bfeccd7fd34dd5a2064aa934c8efbce4db388867f55",
+      "evidence_limit": "User reported actual Simulator interactions; not automated click trace or board evidence."
+    },
+    "hardware": "NOT_RUN"
+  },
+  "esp_idf": {
+    "target": "v5.5.4 / ESP32",
+    "documentation_and_source_review": "PASS",
+    "common_business_host_tests": "PASS",
+    "native_configure": "NOT_RUN",
+    "target_build": "NOT_RUN",
+    "runtime": "NOT_RUN",
+    "sdk_install": "NOT_RUN"
+  },
+  "limits": [
+    "User GUI observations are a report, not automated click capture.",
+    "No MCU-GUI communication or hardware operation.",
+    "No new Vivado/FIFO run; historical evidence retained.",
+    "Full vendor projects/logs stay local; original source and sanitized results only."
+  ]
+}

@@ -65,3 +65,54 @@
 | [Zephyr Devicetree vs Kconfig](https://docs.zephyrproject.org/latest/build/dts/dt-vs-kconfig.html) | 陌生工具适配的声明源职责案例；仅作为资料与工程分析测试，不宣称已做Zephyr真实构建 |
 
 用户设计约定和长期任务状态规则来自本轮协作需求与隔离验证方法，不引入第三方工作流框架；不自动写入全局规则或记忆。
+
+## v0.3 执行记录与进程清理
+
+核查日期：2026-09-30。[Python 3.12 subprocess](https://docs.python.org/3.12/library/subprocess.html)用于核对Popen、等待超时、实际退出码与日志重定向；[Microsoft taskkill](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/taskkill)用于核对PID限定及子进程树参数。实现独立编写，清理只针对本轮仍持有的存活进程，不按程序名扫描终止。
+
+CubeMX窄适配的字段和单位还依赖本轮实际生成的IOC、C与MAP及本机版本信息；不能由工具目录名或注册表单独宣称兼容。多文件生成不是事务，原子JSON/IOC写入也不消除断电和持续存储故障。
+
+## v0.4 既有工程与组件接入
+
+核查日期：2026-09-30。接手与结构变化规则来自本轮需求，采用当前项目原生来源和用户扩展，不引入第三方执行框架。
+
+- [TouchGFX 4.26 Interactions](https://support.touchgfx.com/4.26/docs/development/ui-development/designer-user-guide/interactions-view)：按钮触发、Call new virtual function、导航；结合本机4.26.1生成的空虚函数与用户派生层核对。构建成功不能证明空处理函数已接通业务。
+- [ESP-IDF v5.5.4 Build System](https://docs.espressif.com/projects/esp-idf/en/v5.5.4/esp32/api-guides/build-system.html)：当前sdkconfig、默认值、组件与派生输出的职责。详细机制与来源见[ESP-IDF指南](esp-idf.md)。本轮只进行资料及源码分析，没有安装或原生构建。
+
+新指南和合成案例独立编写，原创部分沿用MIT；官方资料链接不意味着将SDK、模板、字体或框架重新授权。
+
+## v0.5 板级依据与SoC交接
+
+核查日期：**2026-10-02**。新增指南独立编写，使用下列官方机制及本机2025.1实际文件核对，不复制厂商实现。动态Wiki页面只作为所述机制的来源，不由其发布时间推定本轮工具兼容。
+
+| 官方来源 | 采用内容与边界 |
+|---|---|
+| [PG201 Board Preset](https://docs.amd.com/r/3.4-English/pg201-zynq-ultrascale-plus-processing-system/Board-Preset)、[Xilinx Board Store](https://github.com/Xilinx/XilinxBoardStore) | 匹配板卡配置来源；PG201页面为IP文档3.4，不将其当Vivado2025.1版本号；具体属性以本地IP及板文件为准 |
+| [UG994 2025.1 BD校验](https://docs.amd.com/r/2025.1-English/ug994-vivado-ip-subsystems/Validating-a-Block-Design) | 原生BD校验入口及后续配置核对；校验不证明PS访问或板测 |
+| [UG1400 2025.1硬件更新](https://docs.amd.com/r/2025.1-English/ug1400-vitis-embedded/Updating-the-Hardware-Specification) | 已有平台需显式接入新XSA；不能以同名文件替换或Build PASS代替来源检查 |
+| [UG1400 2025.1 Python CLI](https://docs.amd.com/r/2025.1-English/ug1400-vitis-embedded/Python-API-A-Command-line-Tool-for-Creating-and-Managing-Projects-in-Vitis) | 使用本地API文档、原生脚本入口；API在盘不代表目标编译器可用 |
+| [UG1647 2025.1 SDTGen](https://docs.amd.com/r/2025.1-English/ug1647-porting-embeddedsw-components/Generating-a-System-Device-Tree-Using-SDTGen) | XSA、HSI、SDT和board_dts关系；SDT不等于BSP、应用或部署用设备树 |
+| [XD260 2025.1驱动YAML](https://docs.amd.com/r/2025.1-English/Vitis-Tutorials-Embedded-Software/Vitis-YAML-file) | compatible及驱动配置生成；实例初始化接口另外读取本机GPIO4.12源码，不猜DEVICE_ID宏 |
+| [AMD MPSoC Cache Coherency](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842098/Zynq+UltraScale+MPSoC+Cache+Coherency) | HPC路径、事务属性及CPU/CCI设置共同决定一致性；本轮只分析，不声明完成DMA或Linux运行 |
+
+### 本地实际来源及许可
+
+板库安装记录`data/xhub/boards/XilinxBoardStore/version.dat`给出分支`2025.1`、固定提交`1597af0edc68f39a0eca2744572140953b698e40`。这是本机安装元数据的来源记录；本次远端提交查询因连接失败未独立确认，不将网页默认`2022.2`分支当成本机来源。[固定来源链接](https://github.com/Xilinx/XilinxBoardStore/tree/1597af0edc68f39a0eca2744572140953b698e40)用于追溯。
+
+ZCU102的`3.4/board.xml`声明硬件revision1.0和1.1，文件版本3.4；其文件头、preset文件头及板库根许可为Apache-2.0。其他板文件仍须核对自己的声明，不能将根许可推广到整个第三方生态。
+
+本机`system-device-tree-xlnx/license.txt`声明GPL-2.0-or-later；本轮只调用已安装工具、读证，不将生成器源码打入原创包。`embeddedsw/.../gpio_v4_12/src/xgpio_sinit.c`及`xgpio.h`文件头为MIT；本轮独立编写应用，未拷贝驱动。SDTGen和embeddedsw安装目录无`.git`，本次未取得可证实的上游固定提交；以下哈希固定实际读证文件，不能冒充上游commit或整个安装的完整身份。
+
+下表路径均相对AMD 2025.1安装目录的`data/`，避免公开个人安装路径。
+
+| 文件 | SHA-256 |
+|---|---|
+| `xhub/boards/XilinxBoardStore/version.dat` | `2a8523b071ac6bf19234cb7a04ff6bc5052e00f7b600281e741a2107257ea064` |
+| `xhub/boards/XilinxBoardStore/boards/Xilinx/zcu102/3.4/board.xml` | `16f388953f960faecb21bbb86718682ddea24e7607474e0d319ac76bbbfa2b1d` |
+| `xhub/boards/XilinxBoardStore/boards/Xilinx/zcu102/3.4/preset.xml` | `50ff451f51025f22e1077163532d54e4f899ca9bdba207ce58e0570a0b9b8820` |
+| `system-device-tree-xlnx/device_tree/data/device_tree.tcl` | `9ad52334291641f57d2e64728e84d402358c0398e9de7f56819ea45ee5088bff` |
+| `system-device-tree-xlnx/device_tree/data/kernel_dtsi/2025.1/BOARD/zcu102-rev1.0.dtsi` | `64552da0570508fbe1e0d7455da62d159cf2a2ede064d889e3b5fc6ce93c1eb6` |
+| `embeddedsw/XilinxProcessorIPLib/drivers/gpio_v4_12/src/xgpio_sinit.c` | `4ae0a15b1467c45524edd2c7912179a8e12da6e6cad38256bb845b83abbc983a` |
+| `embeddedsw/XilinxProcessorIPLib/drivers/gpio_v4_12/src/xgpio.h` | `661191fb572f995a8dedc75c86458ba09cc117d1f325184a7cab46811d5c39c9` |
+
+原作者验证、本地工具验证和目标板验证是独立证据层级。本轮计数RTL仿真或元数据一致性不形成DDR、DMA、软件运行及启动验证；历史原生工具异常未因后续成功而归因闭合。

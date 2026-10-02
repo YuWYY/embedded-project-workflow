@@ -1,0 +1,4 @@
+# ORIGINAL SYNTHETIC FIXTURE INPUT, NOT ESP-IDF GENERATED OUTPUT.
+# Only the fields relevant to this isolated source-editing scenario are present.
+CONFIG_IDF_TARGET="esp32"
+CONFIG_EPW_STATS_WINDOW=16

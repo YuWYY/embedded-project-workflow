@@ -1,6 +1,6 @@
 # Vivado：配置源、生成产物与用户 RTL
 
-用于Vivado IP/XPM/BD配置、生成、接入及相关回归。首批具体规则覆盖时钟、复位、CDC、FIFO和存储；不是完整Zynq/Vitis/Linux或高速接口设计手册。先按[IP选型](ip-selection.md)决定是否需要IP；简单自有RTL不必走IP生成流程。
+用于Vivado IP/XPM/BD配置、生成、接入及相关回归。先按[IP选型](ip-selection.md)决定是否需要IP；简单自有RTL不必走IP生成流程。涉及板卡依据读[板级资料](board-evidence.md)，PS/PL与BD系统读[Zynq/MPSoC](zynq-mpsoc.md)，XSA下游或工具交界问题读[Vitis交接](vitis-handoff.md)。这些指南不声明完整Linux、多核、DDR或高速接口的已验证支持。
 
 ## 识别实际工程
 
