@@ -31,8 +31,8 @@
       "bytes": 4141
     },
     "docs/releasing.md": {
-      "sha256": "2e4b28a2de3b90c56715500474714e6b81462ad6cd20fe164ae07bc228028fd7",
-      "bytes": 4472
+      "sha256": "1a22d66063b0c78574d31e7d34710ce2cab0fe43fa26727b73f7af76c5a34b77",
+      "bytes": 5014
     },
     "docs/soc-handoff.md": {
       "sha256": "5ebf922efeb8ae69287945b8d820beab8267eba49a63179779cb8c901e1ec030",
@@ -919,8 +919,8 @@
       "bytes": 8200
     },
     "examples/vivado/soc-handoff/tests/test_rebuild_current.py": {
-      "sha256": "d6913c2e788333406c390bee570da69487679e25ed145294164404a570a7670d",
-      "bytes": 25915
+      "sha256": "b5221c1834a23c0b0f72c33f9fe5c119b90ee731c417db7f680d12d27f01bc5d",
+      "bytes": 26174
     },
     "examples/vivado/soc-handoff/tests/test_runner.py": {
       "sha256": "1a6d2e24111344cc8f68de3ba009b8b5f6b573a99d4a1c79b4eb9cf35b3e08df",

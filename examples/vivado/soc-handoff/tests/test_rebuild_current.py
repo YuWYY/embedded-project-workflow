@@ -26,7 +26,10 @@ SPEC.loader.exec_module(rebuild)
 class ReconstructionTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='epw-rebuild-host-')
-        self.root = Path(self.temp.name)
+        # Match the real CLI preflight: TEMP may use an 8.3 alias on Windows.
+        # project_inputs returns canonical paths, so fixture expectations must
+        # use the same checked spelling rather than the environment's alias.
+        self.root = rebuild.runner.unlinked(Path(self.temp.name))
         self.owned = self.root/'owned'
         self.project = self.owned/'project/soc_handoff.xpr'
         self.project.parent.mkdir(parents=True)
