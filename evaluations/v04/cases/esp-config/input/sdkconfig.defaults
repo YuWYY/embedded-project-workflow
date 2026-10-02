@@ -1,0 +1,3 @@
+# Original fixture defaults, not the user's current selection.
+CONFIG_IDF_TARGET="esp32"
+CONFIG_EPW_STATS_WINDOW=8

@@ -1,7 +1,7 @@
 interface:
   display_name: "嵌入式与 FPGA 工程协作"
-  short_description: "尊重用户预设结构，主动发现配置与IP能力，在约定内完成实现、验证及长期任务续接"
-  default_prompt: "使用 $embedded-project-workflow，读取用户设计约定和最新配置，主动判断工具生成、组件复用与用户代码分工，在授权范围内完成本轮工作并保留可续接证据。"
+  short_description: "依据板级资料和用户约定，选择原生配置、IP与自写代码，完成实现及跨工具交接"
+  default_prompt: "使用 $embedded-project-workflow，读取用户约定、板级依据与最新配置，主动选择工具配置、IP复用及用户代码，在授权范围内实施并核对跨工具交接和实际验证层级。"
 
 policy:
   allow_implicit_invocation: false

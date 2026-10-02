@@ -22,8 +22,54 @@ jobs:
         run: python -B scripts/release.py self-test
       - name: Check isolated runner evidence and paths
         run: python -B examples/vivado/controlled-project/tests/test_runner.py
+      - name: Check MCU and UI failure handling
+        run: |
+          python -B examples/cubemx-rtos/tests/test_rebuild_failures.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B examples/touchgfx/tests/test_rebuild_failures.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -O examples/cubemx-rtos/tests/test_rebuild_failures.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check owned Windows process trees
+        run: python -B examples/cubemx-rtos/tests/test_process_tree.py
+      - name: Check narrow existing-project adapter
+        run: |
+          python -B -m unittest discover -s tests -p test_cubemx_rtos.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -O -m unittest discover -s tests -p test_cubemx_rtos.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Check existing TouchGFX project executor
+        run: |
+          python -B -m unittest discover -s tests -p test_touchgfx_project.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -B -O -m unittest discover -s tests -p test_touchgfx_project.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Prepare public synthetic evaluation inputs
         run: python -B evaluations/v02/prepare.py --output "${{ runner.temp }}/embedded-workflow-cases"
+      - name: Check narrow SoC handoff inspection and runner failures
+        run: |
+          python -X utf8 -B -m unittest discover -s tests -p test_soc_handoff.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B -O -m unittest discover -s tests -p test_soc_handoff.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B examples/vivado/soc-handoff/tests/test_runner.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B -O examples/vivado/soc-handoff/tests/test_runner.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B examples/vivado/soc-handoff/tests/test_process_tree.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B -O examples/vivado/soc-handoff/tests/test_process_tree.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B examples/vivado/soc-handoff/tests/test_rebuild_current.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -X utf8 -B -O examples/vivado/soc-handoff/tests/test_rebuild_current.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Prepare selected v03 regression inputs
+        run: python -B evaluations/v03/prepare.py --output "${{ runner.temp }}/embedded-workflow-v03-cases"
+      - name: Prepare v04 handoff evaluation inputs
+        run: python -B evaluations/v04/prepare.py --output "${{ runner.temp }}/embedded-workflow-v04-cases"
+      - name: Prepare v05 board and SoC evaluation inputs
+        run: python -X utf8 -B evaluations/v05/prepare.py --output "${{ runner.temp }}/embedded-workflow-v05-cases"
       - name: Build release archives
         run: python -B scripts/release.py pack
       - name: Verify archive contents

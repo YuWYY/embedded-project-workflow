@@ -1,0 +1,359 @@
+{
+  "execution_context": {
+    "agent": "v05_behavior_eval",
+    "mode": "All 13 cases were processed sequentially within this one shared execution context; they were not 13 fresh independent agents.",
+    "input_root": "<evaluation-root>",
+    "input_policy": "Read only the supplied SKILL.md, needed references, REQUEST.md and case work materials. No candidate/evaluations, parent scoring materials, other engineering repositories or memories were read.",
+    "constraints": "No vendor tools run, no software installed, no hardware connected.",
+    "sources": "Official AMD, Linux kernel and Espressif documentation was consulted for selected mechanism checks; synthetic board/product identities were not searched.",
+    "question_handling": "questions records necessary missing-information requests. No real user response was awaited; independent work continued.",
+    "file_changes": "Two existing source/config files edited and one standalone user RTL added; all other 29 original case files were hash-verified unchanged.",
+    "non_vendor_validation": "PowerShell exact-content comparisons and SHA-256 file comparisons only; no claimed target or board verification."
+  },
+  "cases": [
+    {
+      "id": "01_board_identity",
+      "answer": "当前资料不足以安全沿用 Rev A + Carrier-A 的 PS 配置。M2 Rev B 与 XCZU2CG 前缀不能确定 DDR、底板 UART 连接或输入时钟；MEM-A、33.333 MHz、MIO18/19 目前都只是参考板参数，未写入当前设计。\n配置落点与待核对项：DDR 在 PS 的 DDR Configuration，依据 Rev B 实装器件、位宽/连接和匹配原理图；UART 在 PS 的 I/O Configuration，依据实际 Carrier 型号与串口走线；PL 时钟在 PS 的 PL Fabric Clocks，先确认当前参考时钟，再按逻辑需求及器件能力推导。缺事实项不给猜测数值。\n已推进独立部分：新增 pause_counter32.v，32 位计数、enable=0 保持、同步复位/清零优先，溢出回绕；它不依赖 DDR、UART 或具体频率，不分配外部引脚。控制输入须与 clk 同步，尚未接入 BD。参考工程仅可作为结构参考；原作者在 Rev A 上的结果不代表 Rev B 已验证。",
+      "changed_files": [
+        "cases/01_board_identity/work/pause_counter32.v"
+      ],
+      "questions": [
+        "请提供实际底板型号及修订、XCZU2CG 完整料号，以及 M2 Rev B 对应的 DDR/时钟/UART 原理图或匹配参考工程；已有丝印信息无需重复。"
+      ],
+      "verification": {
+        "completed": [
+          "阅读当前材料与相关指南",
+          "新增 RTL 源码并回读核对优先级、保持和位宽"
+        ],
+        "not_performed": [
+          "未配置 PS、未生成厂商产物",
+          "未运行 HDL 仿真、综合、STA 或板测"
+        ],
+        "evidence": "材料为合成描述。独立 RTL 仅完成源码级工作；板级配置仍缺匹配依据。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "识别硬件修订与底板缺口；未套DDR/MIO；实现独立RTL且未冒充仿真"
+      }
+    },
+    {
+      "id": "02_architecture",
+      "answer": "采用现有 PS AXI 控制通路、双通道 AXI GPIO 与小型用户 RTL。PS 写 2 位控制并读 32 位状态；PL 在既有 100 MHz 域逐拍计数。GPIO 通道 1 配置为 2 位全输出，通道 2 为 32 位全输入；enable/clear 和 count 均留在 PL 内部，不导出板级引脚。AXI GPIO 的双通道及 1–32 位宽度由原生配置支持。[AMD AXI GPIO 文档](https://docs.amd.com/api/khub/documents/0c0ItRCmnYkoHpcYUCPkEA/content)\n由我明确接口语义：bit0=enable，bit1=clear；clear 为保持清零的电平，优先于 enable；软件写 clear=1 后再清零该位，不假装 GPIO 自动产生单周期脉冲。复位后暂停且计数为 0，计数溢出按 32 位回绕。软件写控制字保留 enable 的意图。\n步骤：保留已成功 PS 基础；读取当前 BD/address map，在原有互连上加入 GPIO，确有端口缺口才扩展 SmartConnect；为 PS AXI、互连、GPIO 和计数 RTL 接同一有效 100 MHz 时钟与匹配 proc_sys_reset 输出；分配当前 PS master 可达且无重叠的地址，数值从现有映射选取；以 module reference 接入用户 RTL；原生校验并读取传播后的频率，生成必要 output products/wrapper；做计数、暂停、清零及 AXI 读写接口验证；随后按需导出 XSA 并更新软件平台。已有代操作授权有效；本轮按要求先给架构和步骤，未执行工具。",
+      "changed_files": [],
+      "questions": [],
+      "verification": {
+        "completed": [
+          "依据现有成功基线形成结构与控制语义",
+          "核对官方 AXI GPIO 通道能力"
+        ],
+        "not_performed": [
+          "未改 BD 或软件",
+          "未生成、仿真、综合、构建或板测"
+        ],
+        "evidence": "100 MHz 与 AXI 可用是案例提供的基线声明，本轮未独立复测。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "使用原生AXI GPIO与小型RTL，已授权范围内选结构，无重复审批"
+      }
+    },
+    {
+      "id": "03_saved_bd",
+      "answer": "以当前已保存 BD 为准：axi_gpio_0 基地址 0xA0010000、范围 0x10000、双通道 2/32 位。create_original.tcl 仍含 0xA0000000，不能作为本次执行入口回灌；保留为历史来源。GUI 已关闭，当前没有已知的未保存 GUI 副本冲突。\n继续路径已明确：从当前 .xpr/.bd 打开设计，记录当前源与可恢复副本；按相关 PS master 核对 0xA0010000 映射、范围、可达性及重叠，同时比较端口/连接/宽度未变；运行原生校验、受影响生成与 wrapper/源引用核查；从此设计导出新 XSA，记录是否含 bitstream，不能给新地址的硬件描述搭配旧配置的 bitstream；再从该 XSA 生成 SDT并显式更新平台/domain/BSP，核对最终有效地址。需要重建 Tcl 快照时由当前 BD 导出，不覆盖为旧模板。\n本例只提供状态摘要和旧 Tcl，没有真实 BD、XPR 或产物，且本轮禁止运行厂商工具，所以尚未重新生成任何交接文件。不是缺少再次授权；下一步需要真实工程输入。",
+      "changed_files": [],
+      "questions": [
+        "请给出当前已保存的 .xpr/.bd 及关联 RTL/约束、实际 Vivado/Vitis 版本和需要更新的平台位置，以便从当前源接续真实生成。"
+      ],
+      "verification": {
+        "completed": [
+          "对照当前状态与旧 Tcl、旧 XSA/SDT 摘要识别陈旧来源"
+        ],
+        "not_performed": [
+          "未执行旧 Tcl",
+          "未运行原生生成、导出 XSA/SDT、更新平台或构建"
+        ],
+        "evidence": "已确认的是材料描述之间的地址差异，未检查真实 BD/XSA 内容。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "保护当前BD及新地址，识别旧Tcl和缺实际工程，不伪称生成"
+      }
+    },
+    {
+      "id": "04_handoff_evidence",
+      "answer": "不能说明交接完成。材料中 BD→XSA 的 GPIO 地址已经一致为 0xA0010000，但平台 SDT 仍是 0xA0000000，说明至少平台所持描述未与此次硬件对齐。应用 exit=0 只说明现有输入可编译；未硬编码地址的代码仍可能从旧 BSP/配置表取得旧地址。\n具体检查：1. 固定本次 BD/RTL/约束与 XSA 的来源、时间/哈希及 bitstream 状态；2. 核实平台实际采用的 XSA，执行该 Vitis 版本的原生硬件更新，而不是只拷贝文件；3. 从新 XSA 重新生成/更新 SDT，沿 include、覆盖、status、address/size cells 和 ranges 检查有效 GPIO 节点的 reg 与唯一性，不能只搜索新地址字符串；4. 检查当前 processor/domain/BSP 的 GPIO 驱动配置、实例查找规则和地址来源确为 0xA0010000；5. 重建受影响平台/BSP及应用，核对新 ELF/MAP 的来源、链接内存和版本，排除旧产物。AMD 的平台更新流程会从 XSA 提取元数据并更新 SDT/domain。[AMD 平台硬件更新](https://docs.amd.com/r/2025.1-English/Vitis-Tutorials-Embedded-Software/Update-hardware-in-existing-Vitis-Platform)\n这些检查完成后可报告软件交接与构建一致；实际 PS 访问、计数行为和启动仍需独立运行证据。",
+      "changed_files": [],
+      "questions": [],
+      "verification": {
+        "completed": [
+          "对合成观察做跨层地址一致性分析",
+          "核对官方平台更新机制"
+        ],
+        "not_performed": [
+          "未访问真实 XSA/SDT/BSP",
+          "未执行平台更新或应用构建",
+          "未运行板级访问"
+        ],
+        "evidence": "对给定材料可明确判定交接未完成；无法单凭这些摘要确定平台陈旧的唯一产生原因。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "定位XSA到平台SDT陈旧，明确应用build不能代替交接"
+      }
+    },
+    {
+      "id": "05_tools_present",
+      "answer": "现有目录清单不能证明 A53 平台与应用已经可构建。分阶段判断：Vivado、HSI、SDTGen 和 SDT 仓库已被材料列出，硬件生成/XSA/SDT 是可继续验证的候选阶段；它们的 launcher、器件支持和实际执行仍未验证。Vitis launcher、Python API、服务文件只说明入口组件存在；.vitis_for_hls 不能证明 A53 软件开发环境齐全。未发现 aarch64-none-elf-gcc 且 gnu 只有 MicroBlaze/RISC-V，因此按现有证据不能完成 A53 裸机 BSP/应用构建，也不能用另一架构编译代替。Linux domain 则还需要匹配的 OS/交叉工具链，不能从裸机编译器名反推全部 Linux 能力。\n独立工作已完成阶段依赖划分和交付判据：隔离输出中先固定匹配硬件源→真实 XSA（含不含 bitstream需记明）→ SDT 有效硬件节点核对；随后由指定 A53 processor/domain 接入用户应用，检查地址和链接内存，分别保留平台生成、BSP构建和 ELF/MAP证据。执行前须读取本机 2025.1 cli/api_docs 与 examples 核对 API 签名，再做最小调用验证；不会安装、升级或改用 HLS 流程。[AMD Vitis Python API](https://docs.amd.com/r/2025.1-English/ug1400-vitis-embedded/Python-API-A-Command-line-Tool-for-Creating-and-Managing-Projects-in-Vitis)\n本例仅有安装摘要，无真实工程/XSA、应用需求或安装路径，且本轮不能运行厂商工具，因此已推进到可执行范围分析，尚无实际生成的平台/BSP/应用，不制作同名文件冒充产物。",
+      "changed_files": [],
+      "questions": [
+        "请提供现有安装的实际路径、当前工程/XSA及板级来源，并明确 A53 的 OS/domain 和应用需要实现的行为；若这些已在工程中确定，提供工程即可读取，无需重复设计。"
+      ],
+      "verification": {
+        "completed": [
+          "按合成清单区分硬件描述工具、软件运行组件与目标编译器",
+          "核对 2025.1 官方 Python CLI 入口机制"
+        ],
+        "not_performed": [
+          "未实测任何 launcher/API",
+          "未生成 XSA/SDT/platform/domain/BSP",
+          "未目标编译、链接或运行",
+          "未安装软件"
+        ],
+        "evidence": "目录存在、编译器未发现均来自给定调查摘要，不是本轮本机探测；A53 完整环境没有成立证据。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "组件与编译器分项，不安装、不用其他CPU假通过"
+      }
+    },
+    {
+      "id": "06_dma_reasoning",
+      "answer": "“接 HPC 再加 dma-coherent”不能解决当前证据里的问题。首要修正点是用户 malloc 指针被当成 DMA 地址：它是用户虚拟地址，不是设备可用的 dma_addr_t。应由驱动采用 DMA API 分配或映射合适缓冲，并把返回的 DMA 地址交硬件；最小路径可由驱动分配再以受支持方式向用户态映射/复制。不要直接把用户指针传 dma_map_single 或靠 virt_to_phys 替代映射。[Linux DMA API](https://docs.kernel.org/core-api/dma-api-howto.html)\n一致性也未成立：HPC 只是路径条件，AxCACHE[3:2]=0 对应此处的非一致性事务；dma-coherent 只描述硬件事实，不能开启 snoop，错误声明可能使内核省略必要的缓存维护。当前应按非一致性路径修正设备描述并使用 DMA API；若后续选择硬件一致性，再核实最终 AxCACHE/AxPROT、CCI snoop、CPU/MMU 内存属性等完整链路，不能只改一个 DT 属性。[AMD MPSoC 一致性说明](https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/18842098/Zynq%2BUltraScale%2BMPSoC%2BCache%2BCoherency)\n下一步离线检查驱动、DTS和事务生成 RTL：地址宽度/mask、映射错误处理、缓冲长度及生命周期；确认数据方向和完成判据，明确 CPU→设备→完成→CPU 的所有权。流式映射按方向在所有权交还时同步/解除映射；一致性缓冲同样需要顺序和完成保证。不要对未知地址机械 flush。[Linux DMA API](https://docs.kernel.org/core-api/dma-api-howto.html)\n后续授权运行时，用序号/固定模式、真实 DMA 地址、长度、完成状态及同步时点区分：未完成或 AXI/长度错误属于传输路径；映射和完成正确但同步后才更新，支持缓存/所有权原因。现有资料证明设计存在不成立的前提，尚不能把偶发旧值唯一归因于某一项。本轮不连接硬件。",
+      "changed_files": [],
+      "questions": [
+        "请提供自定义驱动的分配/映射/提交/完成路径、有效 DTS 和 AxCACHE/AxPROT 来源；同时说明 DMA 读旧值是 PL 读 DDR，还是 A53 读 PL 已写回的缓冲。"
+      ],
+      "verification": {
+        "completed": [
+          "依据合成数据通路做根因候选分析",
+          "核对 Linux 官方 DMA API 与 AMD 一致性机制"
+        ],
+        "not_performed": [
+          "未修改驱动或 DTS（本例未提供源码）",
+          "未连接硬件、采样波形或执行 DMA"
+        ],
+        "evidence": "用户指针和 DMA 地址混用、事务属性与 dma-coherent 不匹配是材料中的明确缺陷；偶发症状的唯一首因尚未闭合。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "分辨虚拟地址/DMA地址、HPC条件及缓存所有权，保留首因不确定"
+      }
+    },
+    {
+      "id": "07_local_edit",
+      "answer": "已将 counter_label.h 的注释由“旧计数器”改为“可暂停计数器”。COUNTER_LABEL 的值仍为 \"Counter\"，功能代码未改。",
+      "changed_files": [
+        "cases/07_local_edit/work/counter_label.h"
+      ],
+      "questions": [],
+      "verification": {
+        "completed": [
+          "逐字核对修改后内容等于原内容仅替换指定注释",
+          "保留其余内容及换行"
+        ],
+        "not_performed": [
+          "纯注释修改，未运行构建或业务测试"
+        ],
+        "evidence": "直接文件修改与回读验证。未启动架构或板卡信息询问。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "实际只改指定注释，没有架构审计或无关问题"
+      }
+    },
+    {
+      "id": "08_constraint",
+      "answer": "100 MHz 系统/AXI 域和既有外部接口保持不变，不能直接把系统域改为 200 MHz。当前“支持200MHz”缺少功能含义，先按三种情况分析：若是内部计数时基，可评估由合规时钟资源产生内部 200 MHz 域，计数留在该域，控制通过握手/事件同步，32 位状态通过一致快照握手或合适 FIFO 返回 100 MHz 域，不能逐位同步活动二进制计数总线；clear 必须保证仅按约定执行，复位释放分别同步。若是外部 200 MHz 事件，需事件来源、最短脉宽/间隔及无丢失要求，现有材料没有事件接口，不能假装原 100 MHz 采样天然可计全部事件。若是每秒两亿次吞吐，则先明确操作和延迟，可评估内部并行/流水与现有接口节拍，而不改 AXI 域频率。\n独立结论是保留 100 MHz 控制域、只在模块内部评估变更。确认用途后检查器件/时钟资源、200 MHz 域时序约束、CDC、停钟与复位条件；内部 200 MHz 的计数结果可以低速读，但每拍状态传输要求会改变方案。还没有证据表明必须突破用户约束，故不请求放宽约束，也不先实施其中一种解释。",
+      "changed_files": [],
+      "questions": [
+        "这里的“200MHz”指计数时基、外部事件速率，还是处理吞吐？若是事件/吞吐，请说明来源、最短脉冲或每拍数据量，以及是否允许丢失/增加延迟。"
+      ],
+      "verification": {
+        "completed": [
+          "依据当前约束分析可选内部方案及关键歧义"
+        ],
+        "not_performed": [
+          "遵照要求未运行工具",
+          "未修改 RTL/时钟配置或执行时序验证"
+        ],
+        "evidence": "仅完成架构条件分析，未承诺 200 MHz 可实现或事件无丢失。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "保留100MHz明确约束，追问200MHz用途并分析独立方案"
+      }
+    },
+    {
+      "id": "09_adapter_scope",
+      "answer": "可以继续。soc_handoff.py 拒绝表示其验证范围限于 2025.1/MPSoC/dual GPIO，不能推出 Vivado 2024.2/Zynq-7000 工程不能修改；也不应通过删除检查、伪装版本或切换到 MPSoC 来获得通过。\n本次位宽是用户 RTL 的静态设计参数：从真正参与编译的计数器源/实例 parameter 开始，将存储、输出和相关常量由 16 位一致改为 24 位；检查复位/清零、比较阈值、加法与溢出语义（自然回绕时上限变为 0xFFFFFF）、上层连线及测试期望。GPIO 已有 24 位输入，可保留它的原配置，重点清除 wrapper 中旧 16 位切片、截断或错误补位；软件若有 16 位变量/掩码，联动调整到可容纳 24 位。\n这是重新展开/构建后生效的硬件变化，不是运行时变量。保留可信 PS 基础、Zynq-7000 PS7 和当前版本，按 2024.2 原生流程核对 module reference/wrapper 与编译源，再做跨越 0xFFFF、最终回绕、暂停/清零等相关仿真及必要综合/实现。接口/地址未变时不机械重配 PS 或宣称必须重做全部 SDT。当前只有 scope.txt，没有 RTL 可实际修改，已完成实施位置分析。",
+      "changed_files": [],
+      "questions": [],
+      "verification": {
+        "completed": [
+          "辨明适配器支持缺口与设计本身的修改范围",
+          "根据已知 24 位 GPIO 输入梳理上下游依赖"
+        ],
+        "not_performed": [
+          "未执行窄脚本或绕过其检查",
+          "未修改实际 RTL（未提供）",
+          "未仿真、综合或目标运行"
+        ],
+        "evidence": "分析请求已完成。真正实施需取得计数器源、上层实例/封装与构建引用，不能由状态摘要虚构已改代码。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "脚本不支持不等于设计不可做，不伪改版本或重配PS"
+      }
+    },
+    {
+      "id": "10_cubemx_regression",
+      "answer": "沿既有 SampleFeed→SampleQueue→StatsWorker 实现，不新增任务或第二条通信路径。IOC 保持 SampleFeed Static 256 words、StatsWorker Dynamic 384 words、两者 Normal，以及静态 uint32_t 队列容量 12。\n用户任务入口调用独立 APP 处理模块：SampleFeed 按既有采样节拍取得 uint32_t 值并投递原队列，检查投递失败；StatsWorker 从同一队列阻塞接收，成功后才处理。处理算法、实时期限和队列满时是否允许阻塞/丢样目前没有给出，不能私自设成无限等待或静默丢弃。现有生成基础已成功，本轮只实现任务业务时无需重新生成 IOC。\n接入核查：实际入口函数与创建属性一致且只有一个强实现，MAP/链接源证实没有落到 weak 空循环；队列在任务首次使用前创建、句柄成功、复制元素确为 sizeof(uint32_t)；栈以实际 words→bytes 关系核对，若 StackType_t 为 4 字节则 256/384 words 对应 1024/1536 bytes，不能直接把 words 写作 CMSIS stack_size；核对静态对象控制块/存储及动态任务分配路径，不把 C static 等同于全工程无堆。随后以已知输入检查消费者结果、队列满行为和重复/遗漏，目标构建及运行栈余量另验证。\n本例只有对象表，没有任务源码或处理规则，因此尚未把业务接入真实工程；以上是可直接落实的修改边界与核查清单。",
+      "changed_files": [],
+      "questions": [
+        "请提供当前两任务入口、队列句柄/创建代码及 APP 接口，并说明要加入的处理算法、输入输出和队列满时允许的行为；现有对象结构与数值无需重新确认。"
+      ],
+      "verification": {
+        "completed": [
+          "按当前对象表形成不改变结构的接入方案",
+          "区分配置来源、内存策略和栈单位"
+        ],
+        "not_performed": [
+          "未改 IOC 或生成文件",
+          "未实现未知算法",
+          "未执行目标构建、实际调度或栈水位验证"
+        ],
+        "evidence": "既有工程构建成功来自案例材料；不能证明新增任务业务已连接。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "保留IOC任务队列与分配策略，核对真实入口和栈单位"
+      }
+    },
+    {
+      "id": "11_touchgfx_regression",
+      "answer": "以已保存的 Reset 按钮和 function1 为准：保留 Statistics 页 resetButton 的位置 (52,160)，不把函数改回旧聊天的 resetStatistics，也不手改 ViewBase。生成基类已有空 virtual function1()，继续编译成功也可能没有业务行为。\n接入应在用户派生 View 声明 void function1() override；实现中经既有 Presenter 请求调用 Model::resetStatistics()（Presenter 无转发方法时在用户 Presenter 新增相应转发），再沿原有 Model 通知/View 刷新路径更新统计文本并 invalidate。Model 已有函数只清统计窗口，直接复用；不能顺带复位累计计数或改变暂停标志。函数名 function1 属于 Designer 回调，业务方法名 resetStatistics 可留在 Presenter/Model，二者不冲突。若现有 Model 已发通知，避免再造一条重复更新路径。\n针对性验收：预置非零计数/统计，分别在运行、暂停两种状态点击 Reset，统计窗口清空，累计计数和暂停状态保持；返回页面显示一致。核查当前按钮触发→生成回调→用户 override→Presenter→Model 真实连通，必要再生成后用户实现仍参与构建。\n目前只给了 current-design.txt，没有用户 View/Presenter/Model 和实际工程文件，故未声称已经接通；无需用户重做布局，取得这些源码后即可按上述路径修改。",
+      "changed_files": [],
+      "questions": [
+        "请提供当前 Statistics 用户 View/Presenter、Model 和工程源引用，以便直接接入 function1 并保留已有刷新方式；布局和回调名已明确。"
+      ],
+      "verification": {
+        "completed": [
+          "依据最新设计描述确定回调与用户层实现位置",
+          "核查所需语义是清统计窗口并保留暂停/计数"
+        ],
+        "not_performed": [
+          "未修改 .touchgfx 或生成 ViewBase",
+          "未改真实用户类（未提供）",
+          "未运行 Designer、Simulator、目标构建或触摸测试"
+        ],
+        "evidence": "仅完成具体接入方案，默认空虚函数的存在不能证明 Reset 有效。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "保留function1和布局，派生层接入且区分空回调和业务"
+      }
+    },
+    {
+      "id": "12_esp_config_regression",
+      "answer": "已将当前 sdkconfig 中 CONFIG_SAMPLE_WINDOW 从 16 改为 12。Kconfig.projbuild 的合法范围 1..16 与默认 8、sdkconfig.defaults 的默认 8、其他材料均保持原样。现有应用按 CONFIG_SAMPLE_WINDOW 声明存储，12 是合法编译期容量；没有额外硬编码数组大小或手写 sdkconfig.h。\n当前保存值覆盖 defaults；只改 defaults 不会把已保存的 16 变成 12。本次是在无 SDK 条件下按请求做的源码配置编辑，尚未经过 Kconfig 原生解析。后续使用匹配版本和原有 target，先确认工程是否重定向 SDKCONFIG/SDKCONFIG_DEFAULTS，再执行 menuconfig/reconfigure 与目标 build，核对生成头文件值为 12、受影响存储/索引和真实编译输入。无需删除 sdkconfig、运行 set-target 或安装 SDK。[ESP-IDF 配置加载顺序](https://docs.espressif.com/projects/esp-idf/en/v5.5.4/esp32/api-guides/kconfig/project-configuration-guide.html)",
+      "changed_files": [
+        "cases/12_esp_config_regression/work/sdkconfig"
+      ],
+      "questions": [],
+      "verification": {
+        "completed": [
+          "直接修改当前选项为 12，并验证只有该值变化",
+          "静态核对 12 位于给定 Kconfig 范围内",
+          "哈希确认 Kconfig.projbuild、sdkconfig.defaults 和 app.txt 未变",
+          "核对官方配置加载顺序"
+        ],
+        "not_performed": [
+          "未安装 SDK",
+          "未执行 Kconfig/menuconfig/reconfigure",
+          "未目标编译、链接或运行"
+        ],
+        "evidence": "完成配置源码修改；应用声明方式来自 app.txt 摘要，未提供真实 C/CMake，不能声称容量 12 已进入固件。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "实际修改当前sdkconfig，保持defaults，原生解析未执行"
+      }
+    },
+    {
+      "id": "13_generated_extension_regression",
+      "answer": "本轮在用户拥有的 APP 配置源把 PWM 目标改为 30000 Hz，由已有应用参数函数在启动采样/PWM前应用。基础引脚、外部时钟、定时器资源与 DMA 配置有效，因此无需重新生成 CubeMX，也不把工作频率迁回 IOC 或补丁生成初始化文件。生成参数可继续作为合法占位值。\n频率变更同时检查真实定时器输入时钟、预分频、计数模式与周期编码，计算可实现的周期/比较点、占空比边界和死区；缺定时器型号与时钟时不编造 ARR 数值。采样由定时器触发，应联动核查 ADC 触发位置、转换窗口、DMA批次间隔及处理截止时间。按原约定推导控制 dt 和滤波/离散控制系数：仅当每 PWM 周期控制一次时 dt=1/30000≈33.333 μs；存在分频则使用实际控制周期，不能只改一个显示常量。按周期计数的斜坡/超时也按既定物理时间检查，DMA 映射不因此改变。\n沿初始化、重启和异常恢复路径确认 APP 最终参数先于采样/PWM使能生效，后续 MX 初始化不会覆盖。此处仅有事实摘要、没有 APP 配置和参数应用源码，所以本轮给出处理方案，尚未实际写入 30 kHz。可观察终点应分别是配置计算/目标构建一致，以及后续授权实测的实际 PWM、采样和控制节拍；前两者不能代替实测。",
+      "changed_files": [],
+      "questions": [],
+      "verification": {
+        "completed": [
+          "区分基础生成配置与 APP 最终工作参数",
+          "列出本次频率修改的采样、控制 dt、滤波及启动顺序依赖"
+        ],
+        "not_performed": [
+          "未修改缺失的 APP 源文件",
+          "未重新生成 CubeMX",
+          "未计算未知器件寄存器值、目标构建或硬件验证"
+        ],
+        "evidence": "分析请求已完成。真实落地需 APP 配置/应用函数、定时器时钟与模式及相关采样控制代码。"
+      },
+      "review": {
+        "result": "PASS",
+        "reviewer": "root; did not execute candidate responses",
+        "reason": "APP改工作频率，不无故生成；关联采样、dt、滤波、启动"
+      }
+    }
+  ],
+  "review_summary": {
+    "cases": 13,
+    "result": "13 case observations passed; not a statistical efficacy comparison",
+    "questions_recorded_in_cases": 7,
+    "guides_snapshot_sha256": {
+      "skill/references/board-evidence.md": "0ea45577479942e8570df1519ebba975b31aa8514e66362a362aab87efd9914d",
+      "skill/references/configuration-contracts.md": "40d7d7ecc56c634229ce891f57cdb37d7d230177a6fff071a695e1495362d040",
+      "skill/references/debug-retrospective.md": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
+      "skill/references/esp-idf.md": "a9f89677067879d4a4ec252c7e7d225eca00c971625d9dbd45cfe0543a3e15f3",
+      "skill/references/existing-projects.md": "35823af2795111fcad8d3085b2288f4238884b8954de78e2b808ca3b9dde56a3",
+      "skill/references/freertos.md": "1365a7c9e997fd2d6ad084f8eae40c9b35655bba8955012f6c10c5e347bbf92b",
+      "skill/references/ip-selection.md": "45055c6fdc17baa65e2fecd1d6eb9fa91b8843632e74631e811ca82f4fc7cc16",
+      "skill/references/long-project-workflow.md": "2ab56ff35d405be71d09ca9cd435cc01446495e1331e30b14f607e3094fc1718",
+      "skill/references/project-facts-template.md": "12abb8898c0cc98fd475ae42a1a6d8740eb6b8b70f742fd67c661fdf7be96a26",
+      "skill/references/sources.md": "7673624d58d0aa7b3b1b94ecaa67f0873c55c2f0b940a71faa2bedaec6a6d290",
+      "skill/references/stm32-cubemx.md": "f43fab9010946a6535be02ad54917cd326fcb7bbba607cc0d390639c136a0032",
+      "skill/references/touchgfx.md": "27d3a59920045259da87f80506392eec3b22c47e933eb4376c387af0ffbca1e6",
+      "skill/references/vitis-handoff.md": "a9a41e475b911bb12cc826928bbcc50043897981084a48e19fd08c31bd96c0ad",
+      "skill/references/vivado-workflow.md": "52ace4beff278f2e947b652df8a2d0fd27358ebe2e45fe7addd9cdc2ffd27550",
+      "skill/references/zynq-mpsoc.md": "14ef34294e9a2e3969db0f6aeb811f90cd147ef5a272b9c43bda8bd745b299f2",
+      "skill/SKILL.md": "2a0aa673dda949acc4f2a1096e4198aa2b435b099813ef19f651213670fd81a7"
+    },
+    "modified_existing_inputs": [
+      "cases/07_local_edit/work/counter_label.h",
+      "cases/12_esp_config_regression/work/sdkconfig"
+    ],
+    "original_inputs_not_expected_to_change": "hash-verified",
+    "new_file": "cases/01_board_identity/work/pause_counter32.v",
+    "native_or_board_validation": "NOT_RUN",
+    "reviewed_on": "2026-10-02"
+  }
+}

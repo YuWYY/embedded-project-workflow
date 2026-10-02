@@ -1,0 +1,291 @@
+{
+  "version": "0.3.0-beta.1",
+  "date": "2026-09-30",
+  "delivery": "local candidate only; not merged, pushed, published, installed or implicitly enabled",
+  "implementation_sha256": {
+    "examples/cubemx-rtos/rebuild.py": "34b63c8869ae010ee8d6948c800c35bc3868b1d61ab2a93fccd0f5d5c046de3b",
+    "examples/touchgfx/rebuild.py": "f963e4ea2dfe97e77e28491b52896f7d08818a0f5532204a5cfca06354cba5ae",
+    "examples/vivado/controlled-project/scripts/run_clock.py": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783",
+    "skills/embedded-project-workflow/scripts/cubemx_rtos.py": "66bb5440cc10984cce083405ecaab25b69fbd9d08fabf8779d9aac7678d89edf"
+  },
+  "host_tests": [
+    {
+      "label": "cubemx-normal",
+      "exit_code": 0,
+      "source": "examples/cubemx-rtos/rebuild.py",
+      "source_sha256": "34b63c8869ae010ee8d6948c800c35bc3868b1d61ab2a93fccd0f5d5c046de3b"
+    },
+    {
+      "label": "cubemx-optimized",
+      "exit_code": 0,
+      "source": "examples/cubemx-rtos/rebuild.py",
+      "source_sha256": "34b63c8869ae010ee8d6948c800c35bc3868b1d61ab2a93fccd0f5d5c046de3b"
+    },
+    {
+      "label": "touchgfx-normal",
+      "exit_code": 0,
+      "source": "examples/touchgfx/rebuild.py",
+      "source_sha256": "f963e4ea2dfe97e77e28491b52896f7d08818a0f5532204a5cfca06354cba5ae"
+    },
+    {
+      "label": "touchgfx-optimized",
+      "exit_code": 0,
+      "source": "examples/touchgfx/rebuild.py",
+      "source_sha256": "f963e4ea2dfe97e77e28491b52896f7d08818a0f5532204a5cfca06354cba5ae"
+    },
+    {
+      "label": "vivado-normal",
+      "exit_code": 0,
+      "source": "examples/vivado/controlled-project/scripts/run_clock.py",
+      "source_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+    },
+    {
+      "label": "vivado-optimized",
+      "exit_code": 0,
+      "source": "examples/vivado/controlled-project/scripts/run_clock.py",
+      "source_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783"
+    },
+    {
+      "label": "adapter-normal",
+      "exit_code": 0,
+      "source": "skills/embedded-project-workflow/scripts/cubemx_rtos.py",
+      "source_sha256": "66bb5440cc10984cce083405ecaab25b69fbd9d08fabf8779d9aac7678d89edf"
+    },
+    {
+      "label": "adapter-optimized",
+      "exit_code": 0,
+      "source": "skills/embedded-project-workflow/scripts/cubemx_rtos.py",
+      "source_sha256": "66bb5440cc10984cce083405ecaab25b69fbd9d08fabf8779d9aac7678d89edf"
+    }
+  ],
+  "host_test_counts": {
+    "cubemx": 19,
+    "touchgfx": 15,
+    "vivado": 28,
+    "adapter": 27,
+    "vivado_file_symlink_skips": 4
+  },
+  "cubemx_fixed": {
+    "status": "PASS",
+    "stages": 17,
+    "native_generation_invocations": 3,
+    "keil_rebuild_invocations": 4,
+    "missing_entry_actual_exit": 2,
+    "user_entry_definition_owner": "rtos_app.o",
+    "board": "NOT_RUN"
+  },
+  "touchgfx_fixed": {
+    "status": "PASS",
+    "stages": 18,
+    "model_positive": "PASS",
+    "model_negative": "expected startup failure with exit1",
+    "real_simulator_build": "PASS"
+  },
+  "human_roundtrip": {
+    "human_edits": [
+      {
+        "rename": "sampleValue to readingValue",
+        "position": [
+          48,
+          80
+        ]
+      },
+      {
+        "position": [
+          56,
+          80
+        ]
+      }
+    ],
+    "new_agent_received": "project, design contract and continuation state only",
+    "user_code_change": "three identifiers in DashboardView.cpp; no generated class edits",
+    "generation_and_build_after_each_edit": "PASS",
+    "actual_interaction": {
+      "actor": "user",
+      "reported_result": "All five passed",
+      "checks": [
+        "incrementing value",
+        "bidirectional page navigation",
+        "pause",
+        "resume",
+        "state retention across navigation"
+      ],
+      "evidence_kind": "explicit user report from actual Simulator interaction",
+      "independent_agent_gui_execution": false,
+      "configuration_sha256": "94773e6e1e8993c345f2609421a756117bf8cf18e9a9254b7064930fb80e08db",
+      "user_source_sha256": "e923fa56ad377e96150a71f54d4232709a17a0aa6a2999b9e2b91b0b3ebeaeb5",
+      "simulator_sha256": "f6d48ef380a4d4227c2d694d2bab555d33ede39476950a14f3e3d7e4d007f89e",
+      "configuration_matches_edit02_verified": true,
+      "simulator_matches_edit02_verified": true,
+      "hardware": "NOT_RUN"
+    },
+    "gui_observation_source": "explicit user confirmation; not automated UI inspection"
+  },
+  "vivado": {
+    "final_four_stages": true,
+    "runner_sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783",
+    "cycles_per_stage": 400,
+    "reset_checks_per_stage": 2,
+    "earlier_native_io_failure_root_cause_resolved": false,
+    "detail": "../examples/vivado/controlled-project/validation-v03-20260930.json"
+  },
+  "adapter_native": {
+    "status": "PASS",
+    "adapter_sha256": "66bb5440cc10984cce083405ecaab25b69fbd9d08fabf8779d9aac7678d89edf",
+    "actual_cli_steps": 13,
+    "fixture_source_sha256": {
+      "examples/cubemx-rtos/rtos_ownership.ioc": "8b63079c7e34aaf69c8cb6c8fa388b930f80dc637905d2cb508101a3fafa1ad9",
+      "examples/cubemx-rtos/APP/rtos_app.c": "010008dee4e39903af188e5f71246874a7ed04e65cf50ab0a1bbea3e01f5b40c",
+      "examples/cubemx-rtos/APP/rtos_app.h": "ec0614a37c1e6ede3e1315bdf838198da796b299c43c55d6fb101f0fb81b1294",
+      "examples/cubemx-rtos/adapter-fixture-b/setup.py": "315e1c7b0b8cb250a2d8496dcb60878fcad839d53b52f6944058e044e5699644",
+      "examples/cubemx-rtos/adapter-fixture-b/Application/Telemetry/telemetry_tasks.c": "8af341b4fb14e6da80f485e92c2dfbde00c10096510fba225b01d002f08f719a",
+      "examples/cubemx-rtos/adapter-fixture-b/Application/Telemetry/telemetry_tasks.h": "3d900938b3b70c9b33e50d4c6aad6a13a1f10b8bd69f37e26395edfd53dd8f61",
+      "examples/cubemx-rtos/adapter-fixture-b/telemetry_fixture.ioc": "664ae77a457f77fef1675d4c408d4b6e9bc9417cfcf1182c278e5a6f63cff6db"
+    },
+    "negative_causes_checked": {
+      "a-04-negative-postbuild-source": {
+        "expected_error": "Project changed after plan (create a new plan): ['APP/rtos_app.c']",
+        "actual_error": "Project changed after plan (create a new plan): ['APP/rtos_app.c']",
+        "cause_checked": true,
+        "exit_code": 1
+      },
+      "b-01-negative-postplan-mxproject": {
+        "expected_error": "Project changed after plan (create a new plan): ['.mxproject']",
+        "actual_error": "Project changed after plan (create a new plan): ['.mxproject']",
+        "cause_checked": true,
+        "exit_code": 1,
+        "rejected_before_generation_report_directory": true,
+        "same_plan_applied_after_exact_byte_restoration": true,
+        "pre_tool_host_test": "test_all_project_source_drift_rejected_before_tool_execution verifies doctor/run are not called"
+      }
+    },
+    "fixtures": {
+      "a": {
+        "plan_id": "574f3aebfc43e6bf586f0b4e6e26fc9bb37d80121d454fb77563db1dbfb11d62",
+        "changes": [
+          {
+            "name": "Producer",
+            "kind": "tasks",
+            "unit": "stack_words",
+            "before": 256,
+            "after": 384,
+            "before_bytes": 1024,
+            "after_bytes": 1536
+          },
+          {
+            "name": "Samples",
+            "kind": "queues",
+            "unit": "capacity_elements",
+            "before": 8,
+            "after": 16,
+            "before_bytes": 32,
+            "after_bytes": 64
+          }
+        ],
+        "verification": {
+          "status": "PASS",
+          "profile": "windows-cubemx-6.18.1-g474re-cmsis2-armcc5-v1",
+          "plan_id": "574f3aebfc43e6bf586f0b4e6e26fc9bb37d80121d454fb77563db1dbfb11d62",
+          "unique_creations_and_attributes": true,
+          "user_sources_compiled_once": true,
+          "entry_owners": {
+            "Producer_Entry": "rtos_app.o",
+            "Consumer_Entry": "rtos_app.o"
+          },
+          "user_source_retention": true,
+          "user_code_retention": true,
+          "static_storage_map_bytes": {
+            "ProducerStack": 1536,
+            "ConsumerStack": 1024,
+            "SamplesStorage": 64
+          },
+          "map_sha256": "a9f58e063ba5b10d1822ec01e8e777b477ca42f2867afb294f9d78db436a146c",
+          "runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "generation_exit_code": 0,
+        "build_exit_code": 0,
+        "errors": 0,
+        "warnings": 0,
+        "compilation_inputs_count": 1103,
+        "source_snapshot_count": 1331,
+        "product_sha256": {
+          "map": "a9f58e063ba5b10d1822ec01e8e777b477ca42f2867afb294f9d78db436a146c",
+          "axf": "82c96e5ac008140a0729d7b4e2623c167f01b8771ba0b27e741b73ba2e8c0e5d"
+        }
+      },
+      "b": {
+        "plan_id": "1df5a0be73921a8c54028d94833aac856cf002226fce3d7ce54251968d5c7b6d",
+        "changes": [
+          {
+            "name": "Logger",
+            "kind": "tasks",
+            "unit": "stack_words",
+            "before": 320,
+            "after": 448,
+            "before_bytes": 1280,
+            "after_bytes": 1792
+          },
+          {
+            "name": "Frames",
+            "kind": "queues",
+            "unit": "capacity_elements",
+            "before": 12,
+            "after": 20,
+            "before_bytes": 48,
+            "after_bytes": 80
+          }
+        ],
+        "verification": {
+          "status": "PASS",
+          "profile": "windows-cubemx-6.18.1-g474re-cmsis2-armcc5-v1",
+          "plan_id": "1df5a0be73921a8c54028d94833aac856cf002226fce3d7ce54251968d5c7b6d",
+          "unique_creations_and_attributes": true,
+          "user_sources_compiled_once": true,
+          "entry_owners": {
+            "Logger_Entry": "telemetry_tasks.o",
+            "Sampler_Entry": "telemetry_tasks.o"
+          },
+          "user_source_retention": true,
+          "user_code_retention": true,
+          "static_storage_map_bytes": {
+            "SamplerStack": 768,
+            "FramesStorage": 80
+          },
+          "map_sha256": "967f1dd49326883fd8153be0f7d09e83e019423be3bda069c98c4108d3eeb02f",
+          "runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "generation_exit_code": 0,
+        "build_exit_code": 0,
+        "errors": 0,
+        "warnings": 0,
+        "compilation_inputs_count": 1103,
+        "source_snapshot_count": 1331,
+        "product_sha256": {
+          "map": "967f1dd49326883fd8153be0f7d09e83e019423be3bda069c98c4108d3eeb02f",
+          "axf": "29ebf9b77a2c368c156cb0a4a2494dc090385b0302b768bf3fb60f0221f76118"
+        }
+      }
+    }
+  },
+  "review": {
+    "four_confirmed_findings": "corrected and independently checked",
+    "extra_map_owner_cross_reference_regression": "PASS"
+  },
+  "original_source_integrity": {
+    "files_checked": 107,
+    "changed": 0
+  },
+  "limits": [
+    "No firmware download or board test",
+    "Four file-symlink cases skipped for Windows privilege; junction guards tested",
+    "KeyboardInterrupt injected at a live process wait, not an OS console signal",
+    "Continuous storage failure/power loss/forced termination not established safe",
+    "Earlier intermittent native Vivado Tcl/XSim I/O cause remains unresolved",
+    "Historical FIFO and unrelated behavior cases not rerun",
+    "No statistical reliability or efficiency claim",
+    "Remote GitHub CI not run because this candidate is not pushed"
+  ],
+  "candidate_acceptance": "planned final checks complete; earlier native Vivado anomaly remains a documented unresolved limitation; not a release"
+}

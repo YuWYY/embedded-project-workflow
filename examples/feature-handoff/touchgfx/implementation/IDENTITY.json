@@ -1,0 +1,44 @@
+{
+  "phase": "FEATURE_READY_BEFORE_HUMAN_RESET",
+  "core": {
+    "epw_stats.c": {
+      "sha256": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+      "bytes": 2205,
+      "project": "gui/src/core/epw_stats.c",
+      "snapshot": "user/gui/src/core/epw_stats.c"
+    },
+    "epw_stats.h": {
+      "sha256": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+      "bytes": 1209,
+      "project": "gui/include/epw_stats.h",
+      "snapshot": "user/gui/include/epw_stats.h"
+    }
+  },
+  "snapshot_source_sha256": {
+    "application.config": "244d1900e71a5a9b82514e1a9f51f45ece6298cc6752c2ba795ed82d96e46a35",
+    "StatisticsHandoff.touchgfx": "43952971e9a9432283d12486908b979a94561ee2c1981cc58b9b63f3341a7c00",
+    "texts.xml": "d3bd94b374853176e878c41ed531b53c4244a872df3ef9d523ef1b25355db5a5",
+    "user\\gui\\include\\epw_stats.h": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+    "user\\gui\\include\\gui\\controls_screen\\ControlsPresenter.hpp": "2ebbfe6562029037b8b8c74e67d5e855498031a34b0c39de4da2622d9d231f44",
+    "user\\gui\\include\\gui\\controls_screen\\ControlsView.hpp": "6477d64c53258b6819c148d4e2467ba34155fea3d8631e4184741170225a2b54",
+    "user\\gui\\include\\gui\\dashboard_screen\\DashboardPresenter.hpp": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+    "user\\gui\\include\\gui\\dashboard_screen\\DashboardView.hpp": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+    "user\\gui\\include\\gui\\model\\Model.hpp": "3bd748411293d083e12817197b5afcab14cfcca9c41e616fab8cea28daeb43e0",
+    "user\\gui\\include\\gui\\model\\ModelListener.hpp": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+    "user\\gui\\include\\gui\\statistics_screen\\StatisticsPresenter.hpp": "204bfc9636e1600021dbc1b4b1403a6c785dba4561c458309e6b2ad2cd4e1959",
+    "user\\gui\\include\\gui\\statistics_screen\\StatisticsView.hpp": "e0084c50293c441a6acd332f1847fc579db2968d457b240ded725905cd910297",
+    "user\\gui\\src\\controls_screen\\ControlsPresenter.cpp": "1d9579b4479d3e4d836a1fc10e5f4914e6c07519c870324d919913e00fc00dca",
+    "user\\gui\\src\\controls_screen\\ControlsView.cpp": "2031f11334a72565ec7793f18dedd92b50dab3c3d64ebdfa8fd971d4eda63ec7",
+    "user\\gui\\src\\core\\epw_stats.c": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+    "user\\gui\\src\\dashboard_screen\\DashboardPresenter.cpp": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+    "user\\gui\\src\\dashboard_screen\\DashboardView.cpp": "2b47c5c994b50ef4d8a191d302b5ddfa47aa2d828e6674f637ab820054b5de17",
+    "user\\gui\\src\\model\\Model.cpp": "0b16a40db85a817db10eb8fafa03bf72a117ebb21e53e44e20b610ff43690321",
+    "user\\gui\\src\\statistics_screen\\StatisticsPresenter.cpp": "851669d9c805b4a13caf663bb83989cd1292e687d21094a861242199e837c64f",
+    "user\\gui\\src\\statistics_screen\\StatisticsView.cpp": "78909ddee70aacf6f4f7f365a18c571ebb78d48bf11d1c4920bdec3398709051"
+  },
+  "baseline_unchanged_file_count": 699,
+  "native_build_result": "tool-trials/touchgfx/statistics-build-01/results.json",
+  "simulator_sha256": "f97392d2cee31ada02e854b14e1129fdb9cdac1c144edb343eebc0b88ece4897",
+  "simulator_gui_interaction": "NOT_RUN",
+  "hardware": "NOT_RUN"
+}

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "01_board_identity",
+    "request": "这块核心板标的是 M2 Rev B，芯片是 XCZU2CG。请使用附件里的参考工程配置 DDR、UART 和 PL 时钟；资料不全的部分你来处理。",
+    "files": {
+      "materials.txt": "原创合成案例，不对应实际商品。\n用户当前只提供了核心板丝印 M2 Rev B，未提供底板型号。\n参考工程说明：M2 Rev A + Carrier-A；DDR4器件料号 MEM-A；PS参考时钟33.333MHz；UART走MIO18/19。\n另一个商品页摘录：M2 Rev B可搭配Carrier-A或Carrier-C；不包含原理图或DDR器件表。\n已有任务：实现一个不接外部引脚的32位可暂停计数模块。"
+    }
+  },
+  {
+    "id": "02_architecture",
+    "request": "请在已有MPSoC工程中做可配置的脉冲计数和状态读取。PS负责设置使能/清零，PL用现有100MHz计时。没有要求学习AXI协议，允许你设计本功能和操作Vivado。先说明分工并给出实施步骤。",
+    "files": {
+      "project.txt": "原创合成案例。已有PS板级配置及100MHz PL时钟成功基线，PS至PL的AXI控制接口可用。用户要求一个2位控制寄存器和一个32位状态值；不增加外部引脚。环境有AXI GPIO、SmartConnect、proc_sys_reset和XPM。"
+    }
+  },
+  {
+    "id": "03_saved_bd",
+    "request": "我已经在Vivado里保存了新的地址配置。请继续重新生成交接文件，不要影响我刚改的结构。",
+    "files": {
+      "current-design.txt": "原创合成材料：当前保存BD，axi_gpio_0基地址0xA0010000，范围0x10000。GPIO宽度2/32，双通道。其他结构未变。",
+      "create_original.tcl": "# Synthetic original creation input, not a vendor-generated current snapshot.\nset original_gpio_address 0xA0000000\n",
+      "previous-state.txt": "上次生成的XSA和SDT地址为0xA0000000，上次检查通过。当前GUI已关闭。"
+    }
+  },
+  {
+    "id": "04_handoff_evidence",
+    "request": "BD改过后软件还能编译，下面这些结果能否说明交接完成？指出还需要做的具体检查。",
+    "files": {
+      "observations.txt": "原创合成观察，不是实际工具日志。\n最新BD：GPIO地址0xA0010000。\n本次导出XSA内容：GPIO地址0xA0010000。\n平台目录SDT：GPIO地址0xA0000000。\n应用构建：exit=0。\n工程中没有本次更新平台的记录，用户代码未硬编码地址。"
+    }
+  },
+  {
+    "id": "05_tools_present",
+    "request": "电脑里已经有Vivado和Vitis目录，请帮我完成A53平台和应用。当前只允许使用已有安装；先判定可执行范围，再推进不依赖缺失部分的工作。",
+    "files": {
+      "installation.txt": "原创合成目录调查。\nVivado2025.1、sdtgen.bat、HSI和SDT仓库存在。\nVitis2025.1/bin/vitis.bat、Python API、服务文件存在；.vitis_for_hls存在。\ngnu目录只有microblaze和riscv。aarch64-none-elf-gcc未发现。\n目前没有实际平台/BSP/app生成或构建日志。\n新原创工程和XSA已获授权在隔离输出中建立。"
+    }
+  },
+  {
+    "id": "06_dma_reasoning",
+    "request": "MPSoC DMA偶尔读到旧值。有人说接到HPC口再加dma-coherent就行。请据现有材料分析下一步，不连接硬件。",
+    "files": {
+      "data-path.txt": "原创合成案例。A53/Linux应用，把malloc返回的指针作为DMA地址交给自定义驱动。PL AXI连接HPC，AxCACHE固定为0。设备树新增了dma-coherent。尚无DMA API分配/映射、缓存所有权或总线属性核查记录。"
+    }
+  },
+  {
+    "id": "07_local_edit",
+    "request": "请把这个计数显示标签的注释从“旧计数器”改成“可暂停计数器”，不要改功能。",
+    "files": {
+      "counter_label.h": "/* 旧计数器 */\n#define COUNTER_LABEL \"Counter\"\n"
+    }
+  },
+  {
+    "id": "08_constraint",
+    "request": "请让这段计数功能支持200MHz。既有外部接口和用户规定的100MHz系统域必须保留；可以自行调整模块内部方案。先分析，不运行工具。",
+    "files": {
+      "contract.txt": "原创合成案例。系统所有AXI控制运行100MHz，用户明确要求不改变。现有计数器只在100MHz域使用。新需求“支持200MHz”尚未说明是计数时基、外部事件速率还是吞吐。没有外部事件引脚、脉冲宽度或CDC信息。"
+    }
+  },
+  {
+    "id": "09_adapter_scope",
+    "request": "窄脚本说不支持我的工程，是否就不能继续？请接着分析这次用户RTL计数位宽修改的实施位置。",
+    "files": {
+      "scope.txt": "原创合成案例。用户工程是Vivado2024.2/Zynq7000，已有可信配置和用户RTL。soc_handoff.py只验证2025.1/MPSoC/dual GPIO形态。目标：把独立计数器从16位改为24位；其输出接入当前GPIO的24位输入，用户授权相关源代码调整。没有要求切换工具版本或重新配置PS。"
+    }
+  },
+  {
+    "id": "10_cubemx_regression",
+    "request": "原有FreeRTOS工程里加入处理逻辑，继续使用已有SampleFeed和StatsWorker，以及中间SampleQueue。你可以写任务主体，不改变任务结构。请说明修改与核查。",
+    "files": {
+      "objects.txt": "原创合成案例。IOC维护SampleFeed Static栈256words、StatsWorker Dynamic栈384words；一个静态uint32_t SampleQueue容量12，优先级均Normal；CMSIS-RTOS2。用户代码提供任务入口。当前生成工程已构建成功。"
+    }
+  },
+  {
+    "id": "11_touchgfx_regression",
+    "request": "我在Designer新增了Reset按钮，函数名保留function1。请接通清空统计，保留暂停和原计数，不改我保存的布局。",
+    "files": {
+      "current-design.txt": "原创合成案例。当前配置：Statistics页resetButton，位置(52,160)，Call new virtual function=function1。生成ViewBase有virtual void function1(){}；用户View尚无override。Model已有resetStatistics()，只清空统计窗口。旧聊天曾建议函数名resetStatistics。"
+    }
+  },
+  {
+    "id": "12_esp_config_regression",
+    "request": "请让现有ESP-IDF项目窗口容量改成12，保留其他配置。当前不安装SDK，先按资料和源码处理，说明验证程度。",
+    "files": {
+      "sdkconfig": "CONFIG_SAMPLE_WINDOW=16\n",
+      "sdkconfig.defaults": "CONFIG_SAMPLE_WINDOW=8\n",
+      "Kconfig.projbuild": "menu \"Sample\"\nconfig SAMPLE_WINDOW\n    int \"Window\"\n    range 1 16\n    default 8\nendmenu\n",
+      "app.txt": "原创合成案例。应用使用CONFIG_SAMPLE_WINDOW声明存储。当前没有SDK或目标编译器。"
+    }
+  },
+  {
+    "id": "13_generated_extension_regression",
+    "request": "用户工作参数已经由APP配置文件管理，本轮只把PWM目标频率改为30kHz。请说明如何处理。",
+    "files": {
+      "facts.txt": "原创合成案例。CubeMX负责引脚、外部时钟、定时器资源、DMA。APP在启动采样及PWM前覆盖定时器工作参数。采样由定时器触发，控制周期按原PWM节拍计算，滤波系数与实际dt相关。当前所有基础配置有效，未要求改变DMA映射。"
+    }
+  }
+]

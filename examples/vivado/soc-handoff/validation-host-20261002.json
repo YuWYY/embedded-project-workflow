@@ -1,0 +1,734 @@
+{
+  "date": "2026-10-02",
+  "scope": "Host parsing and controlled failure tests; three real Python process-tree scenarios in normal and optimized mode; no AMD or board operations",
+  "records": [
+    {
+      "phase": "checker-and-shared-helper",
+      "results": [
+        {
+          "name": "checker-normal",
+          "exit_code": 0,
+          "tests": 35
+        },
+        {
+          "name": "checker-optimized",
+          "exit_code": 0,
+          "tests": 35
+        },
+        {
+          "name": "shared-helper-regression",
+          "exit_code": 0,
+          "tests": 28
+        }
+      ],
+      "source_hashes": {
+        "tests/test_soc_handoff.py": "78dac0b2cc6ec0e5eb4a66bee6528b647775959fabdc375c681952ef78025e9a",
+        "skills/embedded-project-workflow/scripts/soc_handoff.py": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604",
+        "examples/vivado/controlled-project/scripts/run_clock.py": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783",
+        "examples/vivado/controlled-project/tests/test_runner.py": "92c4d8c61f7a5a94134dd7190f5f51fc7e639c705710ce48278b72246ab0fa56"
+      }
+    },
+    {
+      "phase": "final-native-runner-host-checks",
+      "results": [
+        {
+          "name": "runner-normal",
+          "exit_code": 0,
+          "tests": 28
+        },
+        {
+          "name": "runner-optimized",
+          "exit_code": 0,
+          "tests": 28
+        },
+        {
+          "name": "process-tree-normal",
+          "exit_code": 0,
+          "tests": 3
+        },
+        {
+          "name": "process-tree-optimized",
+          "exit_code": 0,
+          "tests": 3
+        },
+        {
+          "name": "release-selftest",
+          "exit_code": 0,
+          "tests": null
+        }
+      ],
+      "source_hashes": {
+        "examples/vivado/soc-handoff/scripts/run.py": "95f01a85e79578b03df939de1629d1a61a74b955c00469db52b18df22cafbc82",
+        "examples/vivado/soc-handoff/tests/test_runner.py": "b6eee782cdc6662c43ce1415e1b10b2b350d64755bd93ad138388cddfc53bbfa",
+        "examples/vivado/soc-handoff/tests/test_process_tree.py": "07ac7316e9bbbb95c40d07e779aacb0ccdfaece4d53ef54d8a719d5607638ca4",
+        "examples/vivado/controlled-project/scripts/run_clock.py": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783",
+        "scripts/release.py": "56337fd1932f5fec1a22832b9a147ca24713fe684529f3e3e5ed37aac4c929bc"
+      }
+    }
+  ],
+  "process_tree_assertions": [
+    "All held parent/child/grandchild process handles signaled after owned cleanup",
+    "Independent same-executable Python remained alive",
+    "KeyboardInterrupt and final-save failure injected; Popen/taskkill/exit observation real"
+  ],
+  "limits": [
+    "Persistent write failure may leave RUNNING; this is unconfirmed, never accepted as success",
+    "Packaging self-test recorded before later documentation-only updates; final packages require fresh manifest verification",
+    "No claim that synthetic products contain valid hardware semantics"
+  ],
+  "independent_product_review": {
+    "reviewer": "v05_soc_checker; did not author native runner",
+    "runs": [
+      {
+        "optimized": false,
+        "runner_sha256": "95f01a85e79578b03df939de1629d1a61a74b955c00469db52b18df22cafbc82",
+        "review_script_sha256": "5942c91bddd99ea82de065a3aa7aed7c1a76f55f78e84a8da76c581e3f2f8eae",
+        "vendor_processes": "NOT_RUN",
+        "material": "original synthetic files; zero exit injected",
+        "results": [
+          {
+            "case": "xsa-missing",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "export_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "NOT_RUN",
+                "returncode": null
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "xsa-empty",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "export_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "NOT_RUN",
+                "returncode": null
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "xsa-corrupt",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "export_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "NOT_RUN",
+                "returncode": null
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-missing",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-empty",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-include-missing",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-include-empty",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-include-escape",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-syntax-unsupported",
+            "review_check": "PASS",
+            "expected_failure": false,
+            "status": "pass",
+            "failure_phase": null,
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "pass"
+          }
+        ]
+      },
+      {
+        "optimized": true,
+        "runner_sha256": "95f01a85e79578b03df939de1629d1a61a74b955c00469db52b18df22cafbc82",
+        "review_script_sha256": "5942c91bddd99ea82de065a3aa7aed7c1a76f55f78e84a8da76c581e3f2f8eae",
+        "vendor_processes": "NOT_RUN",
+        "material": "original synthetic files; zero exit injected",
+        "results": [
+          {
+            "case": "xsa-missing",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "export_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "NOT_RUN",
+                "returncode": null
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "xsa-empty",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "export_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "NOT_RUN",
+                "returncode": null
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "xsa-corrupt",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "export_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "NOT_RUN",
+                "returncode": null
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-missing",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-empty",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-include-missing",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-include-empty",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-include-escape",
+            "review_check": "PASS",
+            "expected_failure": true,
+            "status": "fail",
+            "failure_phase": "sdt_products",
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "NOT_RUN"
+          },
+          {
+            "case": "sdt-syntax-unsupported",
+            "review_check": "PASS",
+            "expected_failure": false,
+            "status": "pass",
+            "failure_phase": null,
+            "stages": [
+              {
+                "name": "prepare",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "export",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              },
+              {
+                "name": "sdt",
+                "status": "pass",
+                "returncode": 0,
+                "interrupted": false,
+                "process_cleanup_complete": true
+              }
+            ],
+            "artifact_generation": "pass"
+          }
+        ]
+      }
+    ],
+    "boundary": "Container/include-file integrity can accept nonempty syntactically invalid DTS; the independent semantic parser rejected that separate synthetic material. Documentation now states this boundary explicitly."
+  },
+  "wrapper_ownership_revision": {
+    "scope": "New wrapper ownership checks and existing runner faults; no native tool rerun",
+    "results": [
+      {
+        "mode": "normal",
+        "tests": 33,
+        "exit_code": 0
+      },
+      {
+        "mode": "optimized",
+        "tests": 33,
+        "exit_code": 0
+      }
+    ],
+    "source_sha256": {
+      "examples/vivado/soc-handoff/scripts/run.py": "9c48614eea04fb1a93f9e49451241851f3e8014a1721a4da5a1bd72d2f1a3f21",
+      "examples/vivado/soc-handoff/tests/test_runner.py": "1a6d2e24111344cc8f68de3ba009b8b5f6b573a99d4a1c79b4eb9cf35b3e08df"
+    },
+    "unchanged_function_source_since_B": {
+      "native": true,
+      "check_xsa": true,
+      "check_sdt": true,
+      "project_inputs": true
+    },
+    "process_tree_coverage": "Earlier real process tree checks cover unchanged native() and unchanged shared helper; not relabelled as a rerun."
+  },
+  "current_rebuild_independent_review": {
+    "scope": "Independent host regression and read-only actual artifact comparison; no AMD process",
+    "status": "pass",
+    "source_sha256": {
+      "examples/vivado/soc-handoff/scripts/rebuild_current.py": "3d7e98e1c1cd0fd28a929e77b224cbfd31f5e6e28b96b42b602522b1e3452ded",
+      "examples/vivado/soc-handoff/scripts/run.py": "9c48614eea04fb1a93f9e49451241851f3e8014a1721a4da5a1bd72d2f1a3f21",
+      "examples/vivado/soc-handoff/tests/test_rebuild_current.py": "d6913c2e788333406c390bee570da69487679e25ed145294164404a570a7670d"
+    },
+    "tests": [
+      {
+        "mode": "normal",
+        "returncode": 0,
+        "case_count": 38,
+        "log_sha256": "bfb3ab7554888dd4e15e81c0239287855dfc1ae28c425d35fca1995da9201768"
+      },
+      {
+        "mode": "optimized",
+        "returncode": 0,
+        "case_count": 38,
+        "log_sha256": "842b783b9bbbf85bcc66b77a12207445395e582b051aace30f69fca79b624255"
+      }
+    ],
+    "actual_artifacts": {
+      "old_A_xsa_current_B_bd": {
+        "status": "expected_rejection",
+        "reason": "Reference/current BD and XSA GPIO handoff disagree"
+      },
+      "B_C_effective_configuration": {
+        "status": "pass",
+        "raw_differences": [
+          {
+            "path": "/components/zynq_ultra_ps_e_0/parameters/PSU_MIO_22_INPUT_TYPE",
+            "before": null,
+            "after": {
+              "value": "cmos"
+            }
+          }
+        ],
+        "explained": [
+          {
+            "path": "/components/zynq_ultra_ps_e_0/parameters/PSU_MIO_22_INPUT_TYPE",
+            "before": null,
+            "after": {
+              "value": "cmos"
+            },
+            "effective_value": "cmos",
+            "reason": "B and C complete XCI component/model values and HWH module attributes/parameters agree"
+          }
+        ],
+        "xci_instances": 7,
+        "hwh_instances": 7,
+        "reference_xsa_sha256": "90c2b442596efcd25f92a16192f6b9a57a822ac4db35b3d4139661249ed9557f",
+        "current_xsa_sha256": "d2ddabd4a54b3718483997148b99aaf28539373efd92f01f5453716bd0b347f8",
+        "scope": "effective configuration comparison only; full post-validation is a separate record"
+      },
+      "unchanged": true
+    },
+    "review_record_sha256": "191e337b5b14e6d4ea22a8abb3c97dc3516b49ca56fe2739b08083214075c3a2"
+  }
+}

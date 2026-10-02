@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.2.0-beta.1",
+  "version": "0.5.0-beta.1",
   "files": {
     ".gitattributes": {
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
@@ -11,8 +11,8 @@
       "bytes": 1234
     },
     ".github/workflows/validate.yml": {
-      "sha256": "0b99b397a956ae1144427d9f63c161d2a04b61c3598c349fb3c215eaa413cf33",
-      "bytes": 1106
+      "sha256": "ff79502038fbed17056a609043fd90d46c74be8f02bcbe0295dfe6aca2c07469",
+      "bytes": 4065
     },
     ".gitignore": {
       "sha256": "3d06f774e264cb6c65343e2c1c64c79062138f30eeb36890d1f45ffeb0118fe5",
@@ -23,20 +23,44 @@
       "bytes": 1062
     },
     "README.md": {
-      "sha256": "80d845af9bc6733778738d8f9f84d72edf61ed75398e7ba7cbb2c574ef26c796",
-      "bytes": 6695
+      "sha256": "b93aa99f245bfaee77f2abe361cc9a03b98132d105ab981fb9be1b25cc2857f1",
+      "bytes": 9480
+    },
+    "docs/cubemx-adapter.md": {
+      "sha256": "a728d6f1782bf21b3f389f4a1335946ac5639e8f09527ad3f78c73197c58dcce",
+      "bytes": 4141
     },
     "docs/releasing.md": {
-      "sha256": "b1707b2eeca8bb85d41df3724dc5a9c14cb7fce555184fa8966ae55a3418078c",
-      "bytes": 3330
+      "sha256": "1a22d66063b0c78574d31e7d34710ce2cab0fe43fa26727b73f7af76c5a34b77",
+      "bytes": 5014
+    },
+    "docs/soc-handoff.md": {
+      "sha256": "5ebf922efeb8ae69287945b8d820beab8267eba49a63179779cb8c901e1ec030",
+      "bytes": 6655
     },
     "docs/sources-and-license.md": {
-      "sha256": "cb31f310097f7118aa01c272ba51f5b0e40d8264442264a62e6881b84142117c",
-      "bytes": 3042
+      "sha256": "47aa0d619b393a9a7497e62e68155e237c7fe5715a803b126a1a7cd98b2f82c9",
+      "bytes": 3992
+    },
+    "docs/validation-v03.json": {
+      "sha256": "41ff9dd71512cd5cdc549260f070da74661c1ef2a506e1f1cf97607e38f2e18f",
+      "bytes": 11723
+    },
+    "docs/validation-v03.md": {
+      "sha256": "7d1a16ceb7bb26f82467cad2ec2c96c41347d522ebe46e0f69cd00f3b2b4f405",
+      "bytes": 7302
+    },
+    "docs/validation-v04.md": {
+      "sha256": "9e0df7ceb18b75b3477bdec7c7623d8e56c334896f88843b84543b6bf0bc6c2e",
+      "bytes": 7840
+    },
+    "docs/validation-v05.md": {
+      "sha256": "136fa01350e2ce1553c517c316e314f6588c3c49b4db9c3b0de686334fefce7f",
+      "bytes": 9918
     },
     "docs/validation.md": {
-      "sha256": "425a994e3eb0d10e723ee69b9101d54f6d3a4c5fa6c0605f795f4054c51979d6",
-      "bytes": 20105
+      "sha256": "37d139b24c819e0fe26233c2a91f72646f7e78a4c7063656eaf5e2f9ccd6897d",
+      "bytes": 20298
     },
     "evaluations/v02/README.md": {
       "sha256": "f0bbbc5db6bf40d4590982e6f793f03118a66076fed4f7b80b4ad42524689ea4",
@@ -182,6 +206,102 @@
       "sha256": "43bb4276ebcf65fb9f03dd41c3d6cd423da46d8536e612530e1ac24933b6217c",
       "bytes": 2364
     },
+    "evaluations/v03/README.md": {
+      "sha256": "963895a5619c6c8ac053d451b0b003244354763b55aa3dbf7a9941f29974e57e",
+      "bytes": 1158
+    },
+    "evaluations/v03/prepare.py": {
+      "sha256": "5bcec07886d83ba0bd8b2c3ae08a732c9a78c42d083222d13635bbee3570b4b3",
+      "bytes": 1679
+    },
+    "evaluations/v03/results-20260930.json": {
+      "sha256": "fa7156bfb3c7fa57947554eba45c948d3ed7c6378efb933256ca75989e36422d",
+      "bytes": 3109
+    },
+    "evaluations/v04/README.md": {
+      "sha256": "e38e0d8834ef10da7dfb4c03bfe484c7fe85751b894f4b0bc6a173d9318736b9",
+      "bytes": 1541
+    },
+    "evaluations/v04/cases/adapter-boundary/USER_REQUEST.md": {
+      "sha256": "251ea3cea5d6a2113af776a1709cf7d3688ac5e8821ca3c9372af6d1895b726b",
+      "bytes": 453
+    },
+    "evaluations/v04/cases/adapter-boundary/input/adapter.txt": {
+      "sha256": "62b323847378604091f1f62d2aaf89e0ab6510ae8d318d17c95eb53133a99ee9",
+      "bytes": 231
+    },
+    "evaluations/v04/cases/adapter-boundary/input/project.md": {
+      "sha256": "43d96fdcb86f251a646a824bba6093095794833fa733145a9c2744d0b08b12f0",
+      "bytes": 510
+    },
+    "evaluations/v04/cases/esp-config/USER_REQUEST.md": {
+      "sha256": "98c77d4869917864def33c27f41e483bba2c5075d83bd2ad9123f192e2099411",
+      "bytes": 689
+    },
+    "evaluations/v04/cases/esp-config/input/context.md": {
+      "sha256": "8c799d0370f3054119e0edf0678b66383ca9bebfa8bd2241a8ee6a97b3512bfc",
+      "bytes": 842
+    },
+    "evaluations/v04/cases/esp-config/input/main/app_main.c": {
+      "sha256": "762e4ce5a4c5e6f815897a79cbf57beccb1d4c180207df248cf2a4d81f72f78d",
+      "bytes": 218
+    },
+    "evaluations/v04/cases/esp-config/input/sdkconfig": {
+      "sha256": "409b7cba37e88704ff2fcd6f8e7417068f32a1c23adb765b32f77faad8ed84cc",
+      "bytes": 200
+    },
+    "evaluations/v04/cases/esp-config/input/sdkconfig.defaults": {
+      "sha256": "9a4a2fc550fb7a76030c7f6a36556f939483aad129ef58be48de173998692a01",
+      "bytes": 115
+    },
+    "evaluations/v04/prepare.py": {
+      "sha256": "ca73c517254872a2b45fd71334c26438a28c3a743f2177fd8e8f15897ac77caa",
+      "bytes": 2839
+    },
+    "evaluations/v04/results-20260930.json": {
+      "sha256": "092ceb24c30917b10987c85b77f80e9b4c4e89ee967ed59a6aa99edab04e6b5e",
+      "bytes": 5555
+    },
+    "evaluations/v04/reviewer-rubric.md": {
+      "sha256": "555571dd279f3146f37b60ce2d576260ddb007d51b09215502ab6bc67c264252",
+      "bytes": 902
+    },
+    "evaluations/v05/README.md": {
+      "sha256": "f615cc88bf53f85eb446d705dee3e4440752260e0bddae8fb4275a62d9ac3c77",
+      "bytes": 873
+    },
+    "evaluations/v05/cases.json": {
+      "sha256": "22e2624b823eab764da454c3e170db6f2633eb1277b672599ffc0cbf192c87d9",
+      "bytes": 7121
+    },
+    "evaluations/v05/prepare.py": {
+      "sha256": "f9c0624fee8333038da6da49d29c0b0d4591ff9ef81a6aa428d8d35d103e5d4e",
+      "bytes": 1997
+    },
+    "evaluations/v05/results-20261002.json": {
+      "sha256": "5bde8ba64970b188bd300bec377de602dbec44f9eb1bf83bd3cc994023bb2d08",
+      "bytes": 31805
+    },
+    "examples/common/rolling-stats/README.md": {
+      "sha256": "a117bafd97efec47b7e01a1239fb88ffa01ffef7685b82817f0c2b46aa64d5cb",
+      "bytes": 1256
+    },
+    "examples/common/rolling-stats/epw_stats.c": {
+      "sha256": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+      "bytes": 2205
+    },
+    "examples/common/rolling-stats/epw_stats.h": {
+      "sha256": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+      "bytes": 1209
+    },
+    "examples/common/rolling-stats/tests/check.py": {
+      "sha256": "510834aa7078a5243737fad99f196a6a22f00d64b0b66ab9e76bbc66172fedb1",
+      "bytes": 3700
+    },
+    "examples/common/rolling-stats/tests/stats_contract.c": {
+      "sha256": "fac085ae9024a2a84b17e4bb8991a3ee4ca46e157adf528f48a9f0028eea253e",
+      "bytes": 2457
+    },
     "examples/cubemx-rtos/APP/rtos_app.c": {
       "sha256": "010008dee4e39903af188e5f71246874a7ed04e65cf50ab0a1bbea3e01f5b40c",
       "bytes": 1231
@@ -195,32 +315,416 @@
       "bytes": 1062
     },
     "examples/cubemx-rtos/README.md": {
-      "sha256": "fffa4db14735ef280cf6451db6153af1fe2a4ac5f9411b37e318e964c5ff3df2",
-      "bytes": 4820
+      "sha256": "20261aaed596b8ee3ea78df4c1ffba4cde98fb15e9283733b7f50d47ff267854",
+      "bytes": 5419
+    },
+    "examples/cubemx-rtos/adapter-fixture-b/Application/Telemetry/telemetry_tasks.c": {
+      "sha256": "8af341b4fb14e6da80f485e92c2dfbde00c10096510fba225b01d002f08f719a",
+      "bytes": 1167
+    },
+    "examples/cubemx-rtos/adapter-fixture-b/Application/Telemetry/telemetry_tasks.h": {
+      "sha256": "3d900938b3b70c9b33e50d4c6aad6a13a1f10b8bd69f37e26395edfd53dd8f61",
+      "bytes": 226
+    },
+    "examples/cubemx-rtos/adapter-fixture-b/setup.py": {
+      "sha256": "315e1c7b0b8cb250a2d8496dcb60878fcad839d53b52f6944058e044e5699644",
+      "bytes": 7142
+    },
+    "examples/cubemx-rtos/adapter-fixture-b/telemetry_fixture.ioc": {
+      "sha256": "664ae77a457f77fef1675d4c408d4b6e9bc9417cfcf1182c278e5a6f63cff6db",
+      "bytes": 3179
     },
     "examples/cubemx-rtos/rebuild.py": {
-      "sha256": "bda8358b529e2b385f3243d13043388ef860bef051b95e92771e04cb4219cb7a",
-      "bytes": 14529
+      "sha256": "34b63c8869ae010ee8d6948c800c35bc3868b1d61ab2a93fccd0f5d5c046de3b",
+      "bytes": 23812
     },
     "examples/cubemx-rtos/rtos_ownership.ioc": {
       "sha256": "8b63079c7e34aaf69c8cb6c8fa388b930f80dc637905d2cb508101a3fafa1ad9",
       "bytes": 3198
     },
+    "examples/cubemx-rtos/tests/test_process_tree.py": {
+      "sha256": "dca6869e1fefb19388e2c6b23f664dde21506c0ae58bed38ceb7096585c513ea",
+      "bytes": 5814
+    },
+    "examples/cubemx-rtos/tests/test_rebuild_failures.py": {
+      "sha256": "61c9d8b4a08a69923b1e16bd414dea479a38ce22bab69ac911bc8ef3c00d88ae",
+      "bytes": 14890
+    },
     "examples/cubemx-rtos/validation-20260928.json": {
       "sha256": "95da8c6a8682cf047bac84831a78182c6109f8c8a7bee7115be10c7f92611e50",
       "bytes": 11163
     },
+    "examples/esp-idf/.gitignore": {
+      "sha256": "b2231eff854667af74255abd9f6718494a244c62cb343088ee7e9a91a58cd25d",
+      "bytes": 75
+    },
+    "examples/esp-idf/CMakeLists.txt": {
+      "sha256": "3eceab08ea92132a37c6ee98603e09be92667cc69f766777dd2c6d09bad990b7",
+      "bytes": 173
+    },
+    "examples/esp-idf/README.md": {
+      "sha256": "06fa3936c54d1882839a000c3b288c6585cdea7fddcfa69b0d78df28179c552c",
+      "bytes": 5150
+    },
+    "examples/esp-idf/components/epw_stats/CMakeLists.txt": {
+      "sha256": "176424a3f5f818b9261a75beefca4f331c02ae5224d6efaebe003b5e9c6b6f2f",
+      "bytes": 304
+    },
+    "examples/esp-idf/main/CMakeLists.txt": {
+      "sha256": "f57addac004ae215e33065e000e898fd9578d4cd1998175a726cd9f5e5d5a163",
+      "bytes": 151
+    },
+    "examples/esp-idf/main/Kconfig": {
+      "sha256": "56cd832ff376bebebb62f6be75fd6d0f1f94193a65b973e8ca3ff95f80ddc903",
+      "bytes": 440
+    },
+    "examples/esp-idf/main/app_main.c": {
+      "sha256": "ee32881abd56ed95ce8eb9a237be3f16c4b014f4e29525c0a050bdb5270a22b5",
+      "bytes": 1257
+    },
+    "examples/esp-idf/sdkconfig.defaults": {
+      "sha256": "df6bf0c59bfabdd9396e17b8d08e8c0e34a5c76db3a1d8ceaf9c3e43de685d9d",
+      "bytes": 117
+    },
+    "examples/feature-handoff/README.md": {
+      "sha256": "8748b764d0a9ad3f9e6b98f839eb0c52e5f683829702d1808d8fccf735975335",
+      "bytes": 1351
+    },
+    "examples/feature-handoff/cubemx/Domain/Statistics/statistics_worker.c": {
+      "sha256": "cd3458030b020088b63f5633862bb1d4f36122116a214126142ff4992ab9bfef",
+      "bytes": 285
+    },
+    "examples/feature-handoff/cubemx/Domain/Statistics/statistics_worker.h": {
+      "sha256": "7aad76a41432b80c35d5fafa4fd1269f77d5c61547ae404824e95d927f96a0d1",
+      "bytes": 166
+    },
+    "examples/feature-handoff/cubemx/PROJECT.md": {
+      "sha256": "07a176e669590403b5e28a04fad2be205bffe7d866921b122b7ae4e7ae77f4c2",
+      "bytes": 4877
+    },
+    "examples/feature-handoff/cubemx/README.md": {
+      "sha256": "d1cc3f251de60f201558517113fcf5d0e276ca86f2728819ac321bdd7dd66751",
+      "bytes": 1755
+    },
+    "examples/feature-handoff/cubemx/STATE.md": {
+      "sha256": "c370f40018a63af86ac43fb8de3800391d5e88749125d819e7a2451bda6b4046",
+      "bytes": 2898
+    },
+    "examples/feature-handoff/cubemx/Services/Sampling/sample_feed.c": {
+      "sha256": "550e2ab9bfbec6263078d7581b133c837a998bec09189df561a66fe9392de237",
+      "bytes": 569
+    },
+    "examples/feature-handoff/cubemx/Services/Sampling/sample_feed.h": {
+      "sha256": "9ba317288665854f5836fd49a8cb207edbd66e90bed345c55329ccb4838f7643",
+      "bytes": 187
+    },
+    "examples/feature-handoff/cubemx/implementation/Domain/Statistics/statistics_worker.c": {
+      "sha256": "83f42c3dd0c2b047952318f8f3819eec9f1637e7c4e221b2b298826716757f08",
+      "bytes": 1626
+    },
+    "examples/feature-handoff/cubemx/implementation/Domain/Statistics/statistics_worker.h": {
+      "sha256": "1e14ec8b5b7e3146556dce937c47b4c983bafeb695a63abbedfe8251a4e7caff",
+      "bytes": 580
+    },
+    "examples/feature-handoff/cubemx/implementation/README.md": {
+      "sha256": "ac8c9b0fd0470e94abb0b5599c68699d34ef50e20f5a1f42fa50bd8dae532821",
+      "bytes": 6978
+    },
+    "examples/feature-handoff/cubemx/implementation/Services/Sampling/sample_feed.c": {
+      "sha256": "419ec7619b383182a613eb0c0c777b24c4c5c02be0cd12b58775e61092b589d5",
+      "bytes": 1731
+    },
+    "examples/feature-handoff/cubemx/implementation/Services/Sampling/sample_feed.h": {
+      "sha256": "47ddf297c71d799c7b2174911ed48bc2eee60a737bdfa932725244e6f22d5ef3",
+      "bytes": 536
+    },
+    "examples/feature-handoff/cubemx/implementation/apply.py": {
+      "sha256": "e421af9df83e7d0c15558442c0e906ef1d2fddd69699d627440b9b0489eaa3d2",
+      "bytes": 21000
+    },
+    "examples/feature-handoff/cubemx/implementation/tests/check_resume_boundary.py": {
+      "sha256": "1f548a154f8f414df4615ccbdeedbcf7d6385b1b1b51b5351f6774ae63b1617c",
+      "bytes": 9050
+    },
+    "examples/feature-handoff/cubemx/prepare.py": {
+      "sha256": "7a9efc408b89c5165a032a71cf151ad76563e3df484b03ef2bbe0a59159e718e",
+      "bytes": 12772
+    },
+    "examples/feature-handoff/cubemx/sample_statistics.ioc": {
+      "sha256": "fabf1fe9b386e747fa5a42aab2d6e52d802c1a5615061eeb218083ca6b5d45c9",
+      "bytes": 3351
+    },
+    "examples/feature-handoff/touchgfx/CounterHandoff.touchgfx": {
+      "sha256": "3eb966f22c213a46a870180586e1f100be0472d790ac6349fdd44f5b17e96eb6",
+      "bytes": 11924
+    },
+    "examples/feature-handoff/touchgfx/PROJECT.md": {
+      "sha256": "80c71a03eb03f0b7bbb226dc41bbdc3c431d145242834c27725a6ba6dfa9901c",
+      "bytes": 4101
+    },
+    "examples/feature-handoff/touchgfx/README.md": {
+      "sha256": "d7bade6bf96dd602765c2851322a15a6f1d22221521ec859bf507f6a0cb4c5b3",
+      "bytes": 3345
+    },
+    "examples/feature-handoff/touchgfx/application.config": {
+      "sha256": "244d1900e71a5a9b82514e1a9f51f45ece6298cc6752c2ba795ed82d96e46a35",
+      "bytes": 605
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/MANIFEST.json": {
+      "sha256": "535b91d3d637ae3a45f5c2357dd5828cbb34d963c9b9b2bd1e1a300b1a2a8ccb",
+      "bytes": 2525
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/README.md": {
+      "sha256": "da86cb69e7e6f5fc859f7c3c682022a1e69adfd25100c9c8c6a8d0f360cee9a8",
+      "bytes": 3425
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/StatisticsHandoff.touchgfx": {
+      "sha256": "f985bd782f9b8dc20ccdc18922669e47cd0cae03e45408b84e73c67e2f310e96",
+      "bytes": 20858
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/assets/texts/texts.xml": {
+      "sha256": "1ae31d7f7833a870630fa224955945303eb435a14501b79fb447ac83b2850c36",
+      "bytes": 3059
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/epw_stats.h": {
+      "sha256": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+      "bytes": 1209
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/controls_screen/ControlsPresenter.hpp": {
+      "sha256": "2ebbfe6562029037b8b8c74e67d5e855498031a34b0c39de4da2622d9d231f44",
+      "bytes": 586
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/controls_screen/ControlsView.hpp": {
+      "sha256": "6477d64c53258b6819c148d4e2467ba34155fea3d8631e4184741170225a2b54",
+      "bytes": 512
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/dashboard_screen/DashboardPresenter.hpp": {
+      "sha256": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+      "bytes": 569
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/dashboard_screen/DashboardView.hpp": {
+      "sha256": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+      "bytes": 505
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/model/Model.hpp": {
+      "sha256": "433a576f2628ad6b6112f7f144266cc3e02016ad6f1292c22b5e8b5a3b68eddc",
+      "bytes": 689
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/model/ModelListener.hpp": {
+      "sha256": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+      "bytes": 381
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/statistics_screen/StatisticsPresenter.hpp": {
+      "sha256": "2d65972eb697834d1a0f063493229c101eb1ba790a49466c71ef27849c4ef1dc",
+      "bytes": 1018
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/include/gui/statistics_screen/StatisticsView.hpp": {
+      "sha256": "ec4004e37ec0b1900b4a797c47b6bf0c4924c02c6d68df9ea0b70bf69ac1016a",
+      "bytes": 625
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/controls_screen/ControlsPresenter.cpp": {
+      "sha256": "1d9579b4479d3e4d836a1fc10e5f4914e6c07519c870324d919913e00fc00dca",
+      "bytes": 460
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/controls_screen/ControlsView.cpp": {
+      "sha256": "2031f11334a72565ec7793f18dedd92b50dab3c3d64ebdfa8fd971d4eda63ec7",
+      "bytes": 382
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/core/epw_stats.c": {
+      "sha256": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+      "bytes": 2205
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/dashboard_screen/DashboardPresenter.cpp": {
+      "sha256": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+      "bytes": 433
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/dashboard_screen/DashboardView.cpp": {
+      "sha256": "2b47c5c994b50ef4d8a191d302b5ddfa47aa2d828e6674f637ab820054b5de17",
+      "bytes": 478
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/model/Model.cpp": {
+      "sha256": "396138e37892d91d93bc3eb0a29f724b28223b9c7361d474523c15e0ded450c3",
+      "bytes": 999
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/statistics_screen/StatisticsPresenter.cpp": {
+      "sha256": "54bf6b4ffc2d53c74a41c51bffdf2956b793c77071b4296375684fc4b2c00ba8",
+      "bytes": 631
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/gui/src/statistics_screen/StatisticsView.cpp": {
+      "sha256": "1b07b231ddd5868e6c107bfeccd7fd34dd5a2064aa934c8efbce4db388867f55",
+      "bytes": 1717
+    },
+    "examples/feature-handoff/touchgfx/human-continuation/validation.json": {
+      "sha256": "5fd329c550d4761e01437ba05a75722377254d688eb9f91a2bd4d49acb28bc59",
+      "bytes": 4431
+    },
+    "examples/feature-handoff/touchgfx/implementation/IDENTITY.json": {
+      "sha256": "65e8c8409c6eda02e3cdaac16c9492ae3f01c4b5b217e9d0313b01c78b981422",
+      "bytes": 3332
+    },
+    "examples/feature-handoff/touchgfx/implementation/README.md": {
+      "sha256": "9919a1522b725ba2e37bff178bc66ccaf39e696247476dc1e124512c8d33422d",
+      "bytes": 6341
+    },
+    "examples/feature-handoff/touchgfx/implementation/StatisticsHandoff.touchgfx": {
+      "sha256": "43952971e9a9432283d12486908b979a94561ee2c1981cc58b9b63f3341a7c00",
+      "bytes": 21737
+    },
+    "examples/feature-handoff/touchgfx/implementation/application.config": {
+      "sha256": "244d1900e71a5a9b82514e1a9f51f45ece6298cc6752c2ba795ed82d96e46a35",
+      "bytes": 605
+    },
+    "examples/feature-handoff/touchgfx/implementation/texts.xml": {
+      "sha256": "d3bd94b374853176e878c41ed531b53c4244a872df3ef9d523ef1b25355db5a5",
+      "bytes": 2409
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/epw_stats.h": {
+      "sha256": "2b1f028e738c00f91e1f2917687b4ce528dcfa57f828800413aa4993dd23eb59",
+      "bytes": 1209
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/controls_screen/ControlsPresenter.hpp": {
+      "sha256": "2ebbfe6562029037b8b8c74e67d5e855498031a34b0c39de4da2622d9d231f44",
+      "bytes": 586
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/controls_screen/ControlsView.hpp": {
+      "sha256": "6477d64c53258b6819c148d4e2467ba34155fea3d8631e4184741170225a2b54",
+      "bytes": 512
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/dashboard_screen/DashboardPresenter.hpp": {
+      "sha256": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+      "bytes": 569
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/dashboard_screen/DashboardView.hpp": {
+      "sha256": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+      "bytes": 505
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/model/Model.hpp": {
+      "sha256": "3bd748411293d083e12817197b5afcab14cfcca9c41e616fab8cea28daeb43e0",
+      "bytes": 662
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/model/ModelListener.hpp": {
+      "sha256": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+      "bytes": 381
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/statistics_screen/StatisticsPresenter.hpp": {
+      "sha256": "204bfc9636e1600021dbc1b4b1403a6c785dba4561c458309e6b2ad2cd4e1959",
+      "bytes": 990
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/include/gui/statistics_screen/StatisticsView.hpp": {
+      "sha256": "e0084c50293c441a6acd332f1847fc579db2968d457b240ded725905cd910297",
+      "bytes": 586
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/controls_screen/ControlsPresenter.cpp": {
+      "sha256": "1d9579b4479d3e4d836a1fc10e5f4914e6c07519c870324d919913e00fc00dca",
+      "bytes": 460
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/controls_screen/ControlsView.cpp": {
+      "sha256": "2031f11334a72565ec7793f18dedd92b50dab3c3d64ebdfa8fd971d4eda63ec7",
+      "bytes": 382
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/core/epw_stats.c": {
+      "sha256": "741b8925e33313f74fe708eb8e33ce7b5a2f443d4d996cdd17490107d2084d81",
+      "bytes": 2205
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/dashboard_screen/DashboardPresenter.cpp": {
+      "sha256": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+      "bytes": 433
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/dashboard_screen/DashboardView.cpp": {
+      "sha256": "2b47c5c994b50ef4d8a191d302b5ddfa47aa2d828e6674f637ab820054b5de17",
+      "bytes": 478
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/model/Model.cpp": {
+      "sha256": "0b16a40db85a817db10eb8fafa03bf72a117ebb21e53e44e20b610ff43690321",
+      "bytes": 833
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/statistics_screen/StatisticsPresenter.cpp": {
+      "sha256": "851669d9c805b4a13caf663bb83989cd1292e687d21094a861242199e837c64f",
+      "bytes": 552
+    },
+    "examples/feature-handoff/touchgfx/implementation/user/gui/src/statistics_screen/StatisticsView.cpp": {
+      "sha256": "78909ddee70aacf6f4f7f365a18c571ebb78d48bf11d1c4920bdec3398709051",
+      "bytes": 1328
+    },
+    "examples/feature-handoff/touchgfx/setup.py": {
+      "sha256": "a74b4ba68ccde723b5bbd211c36cd1254c5fdd7d2a4989a571c6610257695dae",
+      "bytes": 3669
+    },
+    "examples/feature-handoff/touchgfx/tests/check_model.py": {
+      "sha256": "495aca28eb2e5bcdaab3322d07973dffbbcfd0dfc558ddde12e2068398fdfb72",
+      "bytes": 4690
+    },
+    "examples/feature-handoff/touchgfx/tests/model_contract.cpp": {
+      "sha256": "9da87e7e3afb41e1a5aa1dcbeccaee1d7620c720147f51171480db74cadb92b8",
+      "bytes": 1728
+    },
+    "examples/feature-handoff/touchgfx/texts.xml": {
+      "sha256": "9f9ebbe258e5ff3e6e5d193f689603a1954d07685948a4a609e5d52537bfa422",
+      "bytes": 1516
+    },
+    "examples/feature-handoff/touchgfx/user/gui/include/gui/controls_screen/ControlsPresenter.hpp": {
+      "sha256": "2ebbfe6562029037b8b8c74e67d5e855498031a34b0c39de4da2622d9d231f44",
+      "bytes": 586
+    },
+    "examples/feature-handoff/touchgfx/user/gui/include/gui/controls_screen/ControlsView.hpp": {
+      "sha256": "6477d64c53258b6819c148d4e2467ba34155fea3d8631e4184741170225a2b54",
+      "bytes": 512
+    },
+    "examples/feature-handoff/touchgfx/user/gui/include/gui/dashboard_screen/DashboardPresenter.hpp": {
+      "sha256": "e85113a057be4989e876c20e190e0d41c089c00c9fb34de271f5d818ef140340",
+      "bytes": 569
+    },
+    "examples/feature-handoff/touchgfx/user/gui/include/gui/dashboard_screen/DashboardView.hpp": {
+      "sha256": "3c18ed858fd8c95e06d3621370153efd8fe5013c4e06e2d5677fac1975173fed",
+      "bytes": 505
+    },
+    "examples/feature-handoff/touchgfx/user/gui/include/gui/model/Model.hpp": {
+      "sha256": "8bd2788d2bc64d1c7c4306325d7113f35a87ebb55b1ca26a7d97ddcf8b635f18",
+      "bytes": 542
+    },
+    "examples/feature-handoff/touchgfx/user/gui/include/gui/model/ModelListener.hpp": {
+      "sha256": "e23f2c105016b285b1ebf647a38a7a8676d38e4d1618d9b84d5f79e7a3a62a51",
+      "bytes": 381
+    },
+    "examples/feature-handoff/touchgfx/user/gui/src/controls_screen/ControlsPresenter.cpp": {
+      "sha256": "1d9579b4479d3e4d836a1fc10e5f4914e6c07519c870324d919913e00fc00dca",
+      "bytes": 460
+    },
+    "examples/feature-handoff/touchgfx/user/gui/src/controls_screen/ControlsView.cpp": {
+      "sha256": "2031f11334a72565ec7793f18dedd92b50dab3c3d64ebdfa8fd971d4eda63ec7",
+      "bytes": 382
+    },
+    "examples/feature-handoff/touchgfx/user/gui/src/dashboard_screen/DashboardPresenter.cpp": {
+      "sha256": "bb9fcb54a8bd23e94040358011feeb341a46ec95c340af699387a8cf328a6db6",
+      "bytes": 433
+    },
+    "examples/feature-handoff/touchgfx/user/gui/src/dashboard_screen/DashboardView.cpp": {
+      "sha256": "2b47c5c994b50ef4d8a191d302b5ddfa47aa2d828e6674f637ab820054b5de17",
+      "bytes": 478
+    },
+    "examples/feature-handoff/touchgfx/user/gui/src/model/Model.cpp": {
+      "sha256": "a9aa8f3626ad3b292194b52adefcb8ce42731d9936d91029be85484815311e11",
+      "bytes": 571
+    },
+    "examples/feature-handoff/validation-20260930.json": {
+      "sha256": "9db6b7e3e94bc3540d4628d08c0ddcd6dba91098242ab289d308262454bf064c",
+      "bytes": 6298
+    },
     "examples/touchgfx/README.md": {
-      "sha256": "798756fa6d14c8f47257e573e2e09c6bad6572e06039622f885a524cdda7a3bd",
-      "bytes": 2686
+      "sha256": "5838b832ea44cbac80ed6bf305280c433eb6c28efcd9293cabf389e9c767c1e0",
+      "bytes": 3554
     },
     "examples/touchgfx/rebuild.py": {
-      "sha256": "3cc0d91ef34c82fe1eba653ba2e3b0e95d6a1b8f0ad7772f8259f45947738f22",
-      "bytes": 8306
+      "sha256": "f963e4ea2dfe97e77e28491b52896f7d08818a0f5532204a5cfca06354cba5ae",
+      "bytes": 17341
     },
     "examples/touchgfx/tests/model_test.cpp": {
       "sha256": "9598d71f65becbda51f0e621dcf0f7ec1f0aa0e6192612e6bae3e9df762d2b2e",
       "bytes": 2440
+    },
+    "examples/touchgfx/tests/test_rebuild_failures.py": {
+      "sha256": "3750050be6f0ce87ede4c3c0bdcea18a6d929f9f62508d201ea284b1571173e4",
+      "bytes": 10040
     },
     "examples/touchgfx/texts.xml": {
       "sha256": "617cbfa21abaae77ae1b0ac515a1b3ca53e11584bf39fab62ebcac0fd212e582",
@@ -283,16 +787,16 @@
       "bytes": 3167
     },
     "examples/vivado/README.md": {
-      "sha256": "54670d55971d9e25001ac19dd3b18a01ea726a9c540fb587b5e06e507970d160",
-      "bytes": 4949
+      "sha256": "a34d689e8417aeff0208b88fc95e34d1cece47b053ada3adff6e0a35b009160b",
+      "bytes": 5278
     },
     "examples/vivado/controlled-project/PROJECT.md": {
       "sha256": "0fca73bebf990451129180ff0bcb605b4c1f9aa43af043b2a50d4a554b95f238",
       "bytes": 1845
     },
     "examples/vivado/controlled-project/README.md": {
-      "sha256": "43fb0ead0928660bef55c4e86ef09ca2425f3fdc6a0a5481b037f211f4f9ebb9",
-      "bytes": 7886
+      "sha256": "a4e11880000a1cb9254b6e3e88d48d7baf867e59d361a36e62ca5311ce4efe3f",
+      "bytes": 8456
     },
     "examples/vivado/controlled-project/STATE.md": {
       "sha256": "ba8798e052629b418938ae489f9dff3102b228883f42574b8b21326a78bd7f48",
@@ -311,12 +815,12 @@
       "bytes": 4201
     },
     "examples/vivado/controlled-project/scripts/run_clock.py": {
-      "sha256": "34ef309ee9bf81ddb4dccbd2709cd6ef415b0557cf8b1e7e2bc098b2cc76a2b4",
-      "bytes": 13522
+      "sha256": "848505a573c9012ccd31f5c028c860701986cf62dc9befadc74f0cb693801783",
+      "bytes": 22738
     },
     "examples/vivado/controlled-project/tests/test_runner.py": {
-      "sha256": "f4bdf9302411b406ad9e2cff4f0ebedcd4fa82ecaba4e3f5b42f090946e00d8e",
-      "bytes": 13604
+      "sha256": "92c4d8c61f7a5a94134dd7190f5f51fc7e639c705710ce48278b72246ab0fa56",
+      "bytes": 28162
     },
     "examples/vivado/controlled-project/validation-20260928.json": {
       "sha256": "3905c72aecbe0d824c923914a22e079324f629e96f15bfefd1e61d4556bb4b3a",
@@ -325,6 +829,10 @@
     "examples/vivado/controlled-project/validation-20260930.json": {
       "sha256": "6a1f6222b69c15b8aa503522627c1cb4e4d5576d1db9504033e1ac8b36f08568",
       "bytes": 13591
+    },
+    "examples/vivado/controlled-project/validation-v03-20260930.json": {
+      "sha256": "fdc878253344db1e28ba09e258317d1bc0dec2c0acd67ab1179820f1ff69faab",
+      "bytes": 11176
     },
     "examples/vivado/portability-followup-20260928.json": {
       "sha256": "a3abadda5c9ff2d363d6591985d39dd31a0dc147455ee3256ae8a51e7e874d0f",
@@ -341,6 +849,98 @@
     "examples/vivado/scripts/rebuild.py": {
       "sha256": "2fb787ee42958d51474cf7d37b786f44a477b133122061ebcfb55c78c97ed27d",
       "bytes": 8020
+    },
+    "examples/vivado/soc-handoff/CURRENT_REBUILD.md": {
+      "sha256": "ba0d278250b2ff327dea45469c9af1f58ab8a5a44f5640cbfb352a340fe2bdc2",
+      "bytes": 5950
+    },
+    "examples/vivado/soc-handoff/PROJECT.md": {
+      "sha256": "8772ac59c03aa532bc6e4d1b60b48fb32077802409eb3e54fab1bc612e40a2ee",
+      "bytes": 2179
+    },
+    "examples/vivado/soc-handoff/README.md": {
+      "sha256": "6c0402be8ee13eed7b214c69a6890cf0befcadf67fb80ac7f49b373340f1da48",
+      "bytes": 9266
+    },
+    "examples/vivado/soc-handoff/scripts/export.tcl": {
+      "sha256": "7c46613d8b8eba3a2d614a38bd76f3510d996c280247122cc18698a893f7e702",
+      "bytes": 1556
+    },
+    "examples/vivado/soc-handoff/scripts/overlap.tcl": {
+      "sha256": "8a96e369320148291fcab243a9426d7f4e97b23b8f8a5a003831fb03b3ff2035",
+      "bytes": 1257
+    },
+    "examples/vivado/soc-handoff/scripts/prepare.tcl": {
+      "sha256": "6a1e855641ecb8292b0750c0a3f4cce5714beb3326bfa4da9678069d0228c7ce",
+      "bytes": 3408
+    },
+    "examples/vivado/soc-handoff/scripts/rebuild_current.py": {
+      "sha256": "3d7e98e1c1cd0fd28a929e77b224cbfd31f5e6e28b96b42b602522b1e3452ded",
+      "bytes": 28870
+    },
+    "examples/vivado/soc-handoff/scripts/rebuild_current.tcl": {
+      "sha256": "5cc205e5fd82dc9c38a45e087a92d382ad95bde3492b48cff1d3c455d160b5dd",
+      "bytes": 1791
+    },
+    "examples/vivado/soc-handoff/scripts/run.py": {
+      "sha256": "9c48614eea04fb1a93f9e49451241851f3e8014a1721a4da5a1bd72d2f1a3f21",
+      "bytes": 21843
+    },
+    "examples/vivado/soc-handoff/scripts/sdt.tcl": {
+      "sha256": "7eb0ea6314e51e66d76fc01cd7bc298d3e17cbec45868a9f08ad4166ecc95c03",
+      "bytes": 191
+    },
+    "examples/vivado/soc-handoff/scripts/simulate.tcl": {
+      "sha256": "9106d661001da3540b51e5d1294d05b8cde6d7eb75769620b01ac3547a210fc2",
+      "bytes": 1055
+    },
+    "examples/vivado/soc-handoff/scripts/unassigned.tcl": {
+      "sha256": "0056643bc3173fe56cd9cc06bbd6e9a0de693e0c4f9b69de06ca246a4a6a2f7e",
+      "bytes": 700
+    },
+    "examples/vivado/soc-handoff/software/README.md": {
+      "sha256": "d4700da78a3bc364a3db61c8471926d2e88d931277e7b7b7797206c96d0fb755",
+      "bytes": 4489
+    },
+    "examples/vivado/soc-handoff/software/app_main.c": {
+      "sha256": "55d1d5b44c9018a610a094fb7d3398d641f9bb62d64d431825f9d29136774ec2",
+      "bytes": 1674
+    },
+    "examples/vivado/soc-handoff/sources/counter32.v": {
+      "sha256": "7efbdd2484864fe34e8576c0ef61ea74ada954fdc45e2d311a9213f13618cbac",
+      "bytes": 778
+    },
+    "examples/vivado/soc-handoff/sources/tb_counter32.sv": {
+      "sha256": "5e37575b564c10bac368a3481062478c529de4ddf38919b34c54567093af0442",
+      "bytes": 1766
+    },
+    "examples/vivado/soc-handoff/tests/test_process_tree.py": {
+      "sha256": "07ac7316e9bbbb95c40d07e779aacb0ccdfaece4d53ef54d8a719d5607638ca4",
+      "bytes": 8200
+    },
+    "examples/vivado/soc-handoff/tests/test_rebuild_current.py": {
+      "sha256": "b5221c1834a23c0b0f72c33f9fe5c119b90ee731c417db7f680d12d27f01bc5d",
+      "bytes": 26174
+    },
+    "examples/vivado/soc-handoff/tests/test_runner.py": {
+      "sha256": "1a6d2e24111344cc8f68de3ba009b8b5f6b573a99d4a1c79b4eb9cf35b3e08df",
+      "bytes": 19123
+    },
+    "examples/vivado/soc-handoff/validation-20261002.json": {
+      "sha256": "e313e0b750220ba708408a35ffa8d81f34f376acc77c249b9511627d34c0cbf1",
+      "bytes": 17845
+    },
+    "examples/vivado/soc-handoff/validation-continuation-20261002.json": {
+      "sha256": "50bf0fc1772234343ce59f0d0af50dd32ac0c83899b25195c5d8888a0d5d3c62",
+      "bytes": 13324
+    },
+    "examples/vivado/soc-handoff/validation-handoff-20261002.json": {
+      "sha256": "509a6eaaac99a7bb84e2c64ebc41e86714f1cbaac4cfb43fb27f44d8a47bb6cf",
+      "bytes": 27340
+    },
+    "examples/vivado/soc-handoff/validation-host-20261002.json": {
+      "sha256": "42557a70ce97038cb7e5ac1bfa3d007447eea10fe3f020a4ff792e19d7c3b25b",
+      "bytes": 24084
     },
     "examples/vivado/sources/clock.xdc": {
       "sha256": "4da4eb12ed27b6ad7fd499c00f4d2a502286adbb12b875bd9631b615f783b607",
@@ -371,24 +971,36 @@
       "bytes": 2831
     },
     "scripts/release.py": {
-      "sha256": "f92467bff173937ecb6b97016764bc9fbde71ad4bf9905d4a63882341019ae28",
-      "bytes": 12981
+      "sha256": "56337fd1932f5fec1a22832b9a147ca24713fe684529f3e3e5ed37aac4c929bc",
+      "bytes": 13264
     },
     "skills/embedded-project-workflow/SKILL.md": {
-      "sha256": "545fb20f354b7127b89b4a20f125a1b44a1f94e104049577f282066090040330",
-      "bytes": 8668
+      "sha256": "2a0aa673dda949acc4f2a1096e4198aa2b435b099813ef19f651213670fd81a7",
+      "bytes": 9915
     },
     "skills/embedded-project-workflow/agents/openai.yaml": {
-      "sha256": "dfa29ac2c168ef976c37a62e0c7d861f451f842dc196f7d3bf6b1714c3e59228",
-      "bytes": 467
+      "sha256": "9ada78577e68f7d8932876763c0e6e573b2bb7607739229c0419f7e595be5d09",
+      "bytes": 469
+    },
+    "skills/embedded-project-workflow/references/board-evidence.md": {
+      "sha256": "0ea45577479942e8570df1519ebba975b31aa8514e66362a362aab87efd9914d",
+      "bytes": 3421
     },
     "skills/embedded-project-workflow/references/configuration-contracts.md": {
-      "sha256": "eb05f9dc7638211aaff54726708be79f6d6938bb20ae21041c30144ae96211ff",
-      "bytes": 5594
+      "sha256": "40d7d7ecc56c634229ce891f57cdb37d7d230177a6fff071a695e1495362d040",
+      "bytes": 5905
     },
     "skills/embedded-project-workflow/references/debug-retrospective.md": {
       "sha256": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
       "bytes": 4886
+    },
+    "skills/embedded-project-workflow/references/esp-idf.md": {
+      "sha256": "a9f89677067879d4a4ec252c7e7d225eca00c971625d9dbd45cfe0543a3e15f3",
+      "bytes": 6577
+    },
+    "skills/embedded-project-workflow/references/existing-projects.md": {
+      "sha256": "35823af2795111fcad8d3085b2288f4238884b8954de78e2b808ca3b9dde56a3",
+      "bytes": 4595
     },
     "skills/embedded-project-workflow/references/freertos.md": {
       "sha256": "1365a7c9e997fd2d6ad084f8eae40c9b35655bba8955012f6c10c5e347bbf92b",
@@ -399,32 +1011,64 @@
       "bytes": 4852
     },
     "skills/embedded-project-workflow/references/long-project-workflow.md": {
-      "sha256": "711da024a6aae426a63a6661d52f3f64504d5e64f7bebef568e65506ce67db40",
-      "bytes": 3239
+      "sha256": "2ab56ff35d405be71d09ca9cd435cc01446495e1331e30b14f607e3094fc1718",
+      "bytes": 4350
     },
     "skills/embedded-project-workflow/references/project-facts-template.md": {
-      "sha256": "659f73b10c8c3e6fd23f5e100b1b227579a8ca6ed419a8bb574bf137acf1d6f6",
-      "bytes": 2444
+      "sha256": "12abb8898c0cc98fd475ae42a1a6d8740eb6b8b70f742fd67c661fdf7be96a26",
+      "bytes": 2986
     },
     "skills/embedded-project-workflow/references/sources.md": {
-      "sha256": "035b3174753e22360c0ae893d5ff495f76f21beea3aec1379ea28baf6d364993",
-      "bytes": 11290
+      "sha256": "7673624d58d0aa7b3b1b94ecaa67f0873c55c2f0b940a71faa2bedaec6a6d290",
+      "bytes": 17577
     },
     "skills/embedded-project-workflow/references/stm32-cubemx.md": {
-      "sha256": "68fb9d48d271bd41d53ca61a3571872e411ee6b680931b8e320e5c99147726d0",
-      "bytes": 6951
+      "sha256": "f43fab9010946a6535be02ad54917cd326fcb7bbba607cc0d390639c136a0032",
+      "bytes": 8220
     },
     "skills/embedded-project-workflow/references/touchgfx.md": {
-      "sha256": "323804c91a8d05ffde49ead692276319764e9dfcaf34ec93875f8599e626f288",
-      "bytes": 6403
+      "sha256": "27d3a59920045259da87f80506392eec3b22c47e933eb4376c387af0ffbca1e6",
+      "bytes": 8223
+    },
+    "skills/embedded-project-workflow/references/vitis-handoff.md": {
+      "sha256": "a9a41e475b911bb12cc826928bbcc50043897981084a48e19fd08c31bd96c0ad",
+      "bytes": 7167
     },
     "skills/embedded-project-workflow/references/vivado-workflow.md": {
-      "sha256": "81e3a0e1b6e4d7c37a2c336d27fcf812f33ed5129e900a663366b30babf6c4eb",
-      "bytes": 7160
+      "sha256": "52ace4beff278f2e947b652df8a2d0fd27358ebe2e45fe7addd9cdc2ffd27550",
+      "bytes": 7294
+    },
+    "skills/embedded-project-workflow/references/zynq-mpsoc.md": {
+      "sha256": "14ef34294e9a2e3969db0f6aeb811f90cd147ef5a272b9c43bda8bd745b299f2",
+      "bytes": 4525
+    },
+    "skills/embedded-project-workflow/scripts/cubemx_rtos.py": {
+      "sha256": "66bb5440cc10984cce083405ecaab25b69fbd9d08fabf8779d9aac7678d89edf",
+      "bytes": 54743
+    },
+    "skills/embedded-project-workflow/scripts/soc_handoff.py": {
+      "sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604",
+      "bytes": 32585
+    },
+    "skills/embedded-project-workflow/scripts/touchgfx_project.py": {
+      "sha256": "4a320d8e1fb382f776452460efa0f989840130caf7dac3083ccd1e04e72bf62e",
+      "bytes": 21600
     },
     "source-files.txt": {
-      "sha256": "4bf46069c36172ed8764a9dcca27b23fd770d375eaad789a873a866336898e32",
-      "bytes": 5208
+      "sha256": "5c5cd0726d11fbfda71539d4623b3268135e06ef1821e045c8674675ef5bb609",
+      "bytes": 15190
+    },
+    "tests/test_cubemx_rtos.py": {
+      "sha256": "002ee84ef76dea07cb535c00e900bc09e327f5593bf24223282e61b9cbdf964b",
+      "bytes": 21954
+    },
+    "tests/test_soc_handoff.py": {
+      "sha256": "78dac0b2cc6ec0e5eb4a66bee6528b647775959fabdc375c681952ef78025e9a",
+      "bytes": 18886
+    },
+    "tests/test_touchgfx_project.py": {
+      "sha256": "6b2182376b896a77ee755f66d77b9a2ea3d6bf763ee3725a082913cce471fa2c",
+      "bytes": 10666
     }
   }
 }

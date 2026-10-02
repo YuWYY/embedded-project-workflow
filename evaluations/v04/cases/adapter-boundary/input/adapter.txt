@@ -1,0 +1,3 @@
+Synthetic example response, not a captured tool execution:
+Unsupported requested operation: add business feature.
+Supported operations: update existing named task stack_words; update existing static uint32 queue capacity_elements.

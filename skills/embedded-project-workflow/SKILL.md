@@ -1,6 +1,6 @@
 ---
 name: embedded-project-workflow
-description: 面向嵌入式与FPGA工程，按用户预设结构与约定划分原生配置、工具生成、IP复用和用户代码，完成实现、调试及多阶段续接。用于CubeMX/FreeRTOS/TouchGFX/Vivado配置与再生成、参数或接口调整，也可主动查明陌生工具的配置和扩展机制。普通排版、无关界面美化或已定位的小编辑无需加载整套流程。
+description: 面向嵌入式与FPGA工程，依据实际板卡及用户约定，划分原生配置、IP复用和用户代码，完成实现、调试与多阶段续接。用于CubeMX/FreeRTOS/TouchGFX/Vivado配置再生成、Zynq/MPSoC架构与Vitis硬件交接，也可查明陌生工具的配置机制。普通排版、无关界面美化或已定位的小编辑无需加载整套流程。
 ---
 
 # 嵌入式与 FPGA 工程协作
@@ -12,12 +12,18 @@ description: 面向嵌入式与FPGA工程，按用户预设结构与约定划分
 | 当前任务 | 读取内容 |
 |---|---|
 | 用户预配置、结构约定、跨工具分工或陌生工具适配 | [配置能力发现与用户设计约定](references/configuration-contracts.md) |
+| 接手既有工程完成新功能、用户结构变化后的关联接入 | [既有工程与结构变更](references/existing-projects.md)，再加载本次涉及的工具指南 |
 | 多阶段工程、中断续接或项目交接 | [长期任务与恢复](references/long-project-workflow.md) |
 | CubeMX新建、基础配置修复、重新生成、运行参数调整 | [CubeMX与配置所有权](references/stm32-cubemx.md) |
 | FreeRTOS任务/对象规划、创建或内存策略 | [FreeRTOS骨架与用户实现](references/freertos.md)；涉及生成时再读CubeMX指南 |
+| 已有G4/CMSIS-RTOS2工程按名称调整栈或静态队列 | [CubeMX指南](references/stm32-cubemx.md)的窄适配入口；先核实支持范围，不作为通用导入器 |
 | TouchGFX界面、硬件适配或再生成 | [TouchGFX生成与用户层](references/touchgfx.md)；涉及基础配置时再读[CubeMX指南](references/stm32-cubemx.md) |
+| ESP-IDF配置、组件组织或构建接入 | [ESP-IDF配置与组件](references/esp-idf.md)；本候选只有资料与源码案例，无原生构建验证 |
 | FPGA基础模块选型、自写RTL或复用IP、模块反复失败 | [IP选型与自研](references/ip-selection.md) |
+| 板级配置、商品/原理图资料缺口、参考工程或preset匹配 | [板级资料与适用性](references/board-evidence.md) |
 | Vivado配置、IP/XPM/BD接入、生成或版本问题 | [Vivado工作流](references/vivado-workflow.md)；尚未确定实现来源时再读IP选型 |
+| Zynq/MPSoC架构、PS/PL分工、BD地址/时钟/复位接入 | [Zynq/MPSoC原生设计](references/zynq-mpsoc.md) |
+| XSA/SDT/平台/BSP交接，Vivado/Vitis交界或DMA/启动诊断 | [Vitis交接与故障区分](references/vitis-handoff.md)；分别核实实际可执行阶段 |
 | 实机失败、时序/采样问题、版本回归、过程复盘 | [调试与证据](references/debug-retrospective.md) |
 | 需要建立或交接项目事实 | 复用现有记录，缺失时取用[短事实模板](references/project-facts-template.md) |
 | 需要核对机制或借鉴来源 | [来源与采用说明](references/sources.md) |
@@ -27,6 +33,8 @@ description: 面向嵌入式与FPGA工程，按用户预设结构与约定划分
 ## 从用途推导配置
 
 先读取现有工程、硬件资料与已知成功记录，辨明用途、当前目标、关键功能、实时/资源要求和实际工具版本。只询问不能从资料确定、且会改变设计的需求；不要让用户替AI逐项决定寄存器参数。
+
+板级缺口按设计依赖主动取得商品/板型、核心板与底板版本、相关原理图及参考工程，寻找匹配的厂商和成熟开源依据。同芯片不等于同板；原作者成功、本地构建和目标板验证分别记录。缺少事实时推进独立工作，不套用别板参数填空。
 
 主动识别当前工具能表达的结构与资源，再选择原生配置、已有组件或自写代码。分别明确配置来源、谁可决定改动及生效时点。任务、页面、接口和资源等用户预设应作为设计输入，不能通过隐藏实现绕过约定；已有配置也不自动成为永久冻结要求。范围内直接推进；确需突破明确约束时先形成有证据、有影响说明和验证办法的具体方案，继续独立工作。人工修改后重读最新配置，保护有效改动。
 
