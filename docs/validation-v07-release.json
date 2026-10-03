@@ -107,5 +107,10 @@
     "evidence/independent-release-review.json": "ab03f21f43abd546405c19a9e9d84bc911d9a275a69e494b5c3ef24ce49e380c",
     "evidence/local-checks/results.json": "0e67c10d4894ed4a12c42a22cdcdb704513226abc8e58bfb18135be48a43f8f0",
     "evidence/package-pre-publication/result.json": "2dce7227bb2de36bf38f2dede05d094e84314c5c8134cbeb48f29e013f7815e0"
+  },
+  "followup_evidence_ownership": {
+    "actor": "Extended actual-source full-period contract; fresh positive and removed-call negative target builds; source/CMake pattern linkage check",
+    "independent_reviewer": "Injected uint32 truncation and ran actor contract; inspected positive/negative actual ELF calls",
+    "limitation": "Pattern check is scoped to this known implementation, not a general control-flow proof"
   }
 }
