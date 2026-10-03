@@ -16,7 +16,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urlsplit
 
-VERSION = "0.5.0-beta.1"
+VERSION = "0.7.0-beta.1"
 SKILL = "skills/embedded-project-workflow"
 MANIFEST = "release-manifest.json"
 ALLOWLIST = "source-files.txt"
@@ -172,12 +172,15 @@ def package_contents(root: Path, names: list[str]) -> dict[str, dict[str, bytes]
                    for name in names if name.startswith(SKILL + "/")}
     example_files = {"vivado/" + name[len("examples/vivado/"):]: (root / name).read_bytes()
                      for name in names if name.startswith("examples/vivado/")}
+    source_files = {"embedded-project-workflow/" + name: (root / name).read_bytes()
+                    for name in [*names, MANIFEST]}
     need(bool(example_files), "No Vivado example sources")
     license_data = (root / "LICENSE").read_bytes()
     skill_files["embedded-project-workflow/LICENSE"] = license_data
     example_files["vivado/LICENSE"] = license_data
     return {f"embedded-project-workflow-v{VERSION}.zip": skill_files,
-            f"vivado-examples-v{VERSION}.zip": example_files}
+            f"vivado-examples-v{VERSION}.zip": example_files,
+            f"embedded-project-workflow-source-v{VERSION}.zip": source_files}
 
 
 def pack(root: Path) -> None:
@@ -251,17 +254,64 @@ def self_test(root: Path) -> None:
         extra.unlink()
         pack(copy)
         verify_packages(copy)
-        archive_path = copy / "dist" / f"embedded-project-workflow-v{VERSION}.zip"
-        with zipfile.ZipFile(archive_path, "a") as archive:
-            archive.writestr("unreviewed.txt", "controlled extra archive entry")
-        expect_failure(lambda: verify_packages(copy), "Archive inventory mismatch")
+        originals = {name: (copy / "dist" / name).read_bytes()
+                     for name in package_contents(copy, names)}
         pack(copy)
-        entries = package_contents(copy, names)[archive_path.name]
-        with zipfile.ZipFile(archive_path, "w") as archive:
-            for member, data in entries.items():
-                archive.writestr(member, data + b"\nchanged" if member.endswith("SKILL.md") else data)
-        expect_failure(lambda: verify_packages(copy), "Archive content mismatch")
-    print("PASS: changed source (CLI exit 1), extra source, extra ZIP entry and changed ZIP data rejected")
+        need(all((copy / "dist" / name).read_bytes() == data for name, data in originals.items()),
+             "Repeated packaging changed archive bytes")
+        for name, entries in package_contents(copy, names).items():
+            archive_path = copy / "dist" / name
+            original_archive = originals[name]
+            member = (f"embedded-project-workflow/{MANIFEST}"
+                      if "-source-v" in name else sorted(entries)[0])
+            try:
+                with zipfile.ZipFile(archive_path, "a") as archive:
+                    archive.writestr("unreviewed.txt", "controlled extra archive entry")
+                expect_failure(lambda: verify_packages(copy), f"Archive inventory mismatch: {name}")
+                archive_path.write_bytes(original_archive)
+
+                with zipfile.ZipFile(archive_path, "w") as archive:
+                    for item, data in entries.items():
+                        if item != member:
+                            archive.writestr(item, data)
+                expect_failure(lambda: verify_packages(copy), f"Archive inventory mismatch: {name}")
+                archive_path.write_bytes(original_archive)
+
+                with zipfile.ZipFile(archive_path, "w") as archive:
+                    for item, data in entries.items():
+                        archive.writestr(item, data + b"\nchanged" if item == member else data)
+                expect_failure(lambda: verify_packages(copy), f"Archive content mismatch: {name}: {member}")
+                archive_path.write_bytes(original_archive)
+
+                # Contents and CRC remain valid, but the saved checksum belongs to the old ZIP.
+                with zipfile.ZipFile(archive_path, "a") as archive:
+                    archive.comment = b"Controlled changed archive metadata"
+                expect_failure(lambda: verify_packages(copy), "Archive SHA256SUMS mismatch")
+                archive_path.write_bytes(original_archive)
+
+                archive_path.unlink()
+                expect_failure(lambda: verify_packages(copy), f"Missing archive: {name}")
+            finally:
+                archive_path.write_bytes(original_archive)
+            print(f"PASS: {name}: extra/missing member, changed data, stale checksum and missing ZIP rejected")
+        verify_packages(copy)
+        with tempfile.TemporaryDirectory(prefix="source-", dir=scratch) as source_temporary:
+            unpacked = Path(source_temporary)
+            with zipfile.ZipFile(copy / "dist" / f"embedded-project-workflow-source-v{VERSION}.zip") as archive:
+                # Remove only the checked archive wrapper to avoid another long Windows path level.
+                prefix = "embedded-project-workflow/"
+                for member in archive.namelist():
+                    need(member.startswith(prefix), f"Unexpected source archive prefix: {member}")
+                    target = source_path(unpacked, member[len(prefix):])
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    target.write_bytes(archive.read(member))
+            process = subprocess.run(
+                [sys.executable, "-B", str(unpacked / "scripts" / "release.py"), "validate"],
+                cwd=unpacked, capture_output=True, encoding="utf-8", errors="replace", check=False,
+            )
+            need(process.returncode == 0 and "PASS: validate" in process.stdout,
+                 f"Extracted source archive failed its own validation: {process.stderr}")
+    print("PASS: source mutations rejected; three deterministic archives verified, including extracted source CLI")
 
 
 def main() -> int:

@@ -116,3 +116,19 @@ ZCU102的`3.4/board.xml`声明硬件revision1.0和1.1，文件版本3.4；其文
 | `embeddedsw/XilinxProcessorIPLib/drivers/gpio_v4_12/src/xgpio.h` | `661191fb572f995a8dedc75c86458ba09cc117d1f325184a7cab46811d5c39c9` |
 
 原作者验证、本地工具验证和目标板验证是独立证据层级。本轮计数RTL仿真或元数据一致性不形成DDR、DMA、软件运行及启动验证；历史原生工具异常未因后续成功而归因闭合。
+
+## v0.6 入门、恢复与外部材料核验
+
+核查日期：**2026-10-03**。本轮采用方法并独立编写规则，不安装、复制或运行第三方Skill。以下固定提交由作者GitHub仓库API核对，源文件及许可证另外读取；完整仓库的 `docs/research-v06.md` 记录32个去重候选及15个深读项目，Skill独立包无需该文档即可使用。
+
+| 固定来源 | 采用及边界 |
+|---|---|
+| [Anthropic skill-creator](https://github.com/anthropics/skills/blob/8a1541c4a3ffa5a20a5a91de0dcf3f0bab1d1ef4/skills/skill-creator/SKILL.md)，该子目录Apache-2.0 | 旧版、候选和无Skill对照；输入与评分隔离。不直接移植执行器或将缺失结果记为通过 |
+| [Superpowers writing-skills](https://github.com/obra/superpowers/blob/8ca22dba9a94f28898bbce59f2537ff4d87c747d/skills/writing-skills/SKILL.md)，MIT | 根据真实失败选择指令形式，不复制多级批准和完整框架 |
+| [Spec Kit clarify](https://github.com/github/spec-kit/blob/e1fa857a7f536b22760d48c1aa9ace41df0fd1dc/templates/commands/clarify.md)，MIT | 只澄清影响设计的缺口，消除旧约定中的矛盾，不设通用问答次数 |
+| [OpenSpec onboard](https://github.com/Fission-AI/OpenSpec/blob/2500d6da971336167548b53731a35b2127df35ac/src/core/templates/workflows/onboard.ts)，MIT | 以具体对象和可见结果引导；本候选使用原创只读片段，不继承文档四件套或完成时间 |
+| [planning-with-files](https://github.com/OthmanAdi/planning-with-files/blob/dab9d16fbd9314448b319d112e99f497d7638d89/skills/planning-with-files/SKILL.md)，MIT | 明确副本身份和共享记录维护者，不导入hooks、自动历史回放或固定落盘频次 |
+| [Agent Skills](https://github.com/agentskills/agentskills/tree/69ef37e9424c0a7ea9dd2293b559e43ec8176379)，代码Apache-2.0、文档CC-BY-4.0 | 按需加载及结构校验，不能据格式通过承诺跨宿主行为 |
+| [Context Engineering](https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering/blob/58b55a8921758d13453b440704fb1b5b208c0b0e/skills/context-compression/SKILL.md)，MIT | 用目标、产物、决定和下一步检验接续，不沿用通用压缩比例或阈值 |
+
+外部Skill中的命令、配置字段和代码片段，仍须与对应版本官方资料及实际接口核对；作者身份、开源许可或案例成功均不代替技术验证。许可未明的项目仅作检索线索，不复制文件或实质性内容。本轮不把历史工程或宣传文章中的频率、电流、任务数、容量、板型和等待时间写成通用默认值。

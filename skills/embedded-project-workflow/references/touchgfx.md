@@ -56,10 +56,7 @@ CubeMX 的 `target/generated` 会再次生成；`target` 同时含有可编辑�
 
 随包的 [touchgfx_project.py](../scripts/touchgfx_project.py) 提供 `inspect`、`generate`、`build`，首版只验证 Windows / TouchGFX 4.26.1 / Simulator 2.0.0 原生布局与命令。先核对支持范围，不能将其解释为任意硬件工程导入器。
 
-```text
-python -B <Skill目录>/scripts/touchgfx_project.py inspect --project <当前工程目录> --touchgfx-root <已有安装目录>
-python -B <Skill目录>/scripts/touchgfx_project.py build --project <当前工程目录> --touchgfx-root <已有安装目录> --reports <新的报告目录> --timeout 300
-```
+命令、参数来源和路径要求集中在[最小调用：TouchGFX](execution-entries.md#touchgfx当前simulator生成与构建)，只有Skill包也可使用。
 
 `inspect`只读，不启动工具。`generate`使用当前配置生成；`build`已包含一次真实生成和干净Simulator构建，无需事先重复调用generate。报告目录须与工程、工具目录互不包含，并与工程在同一卷；旧generated/build会移入本轮报告以区分陈旧产物。输入路径与原生构建布局有额外窄限制，具体以帮助和检查结果为准。
 

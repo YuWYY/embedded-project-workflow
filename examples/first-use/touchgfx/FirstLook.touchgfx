@@ -1,0 +1,45 @@
+{
+  "Version": "4.26.1",
+  "Application": {
+    "Name": "FirstLook",
+    "Resolution": {
+      "Width": 480,
+      "Height": 272
+    },
+    "StartupScreenName": "OverviewScreen",
+    "Screens": [
+      {
+        "Name": "OverviewScreen",
+        "Components": [
+          {
+            "Name": "valueText",
+            "Type": "TextArea"
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "StatisticsScreen",
+        "Components": [
+          {
+            "Name": "resetButton",
+            "Type": "Button"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "resetStatistics",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "resetButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "resetStatistics"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

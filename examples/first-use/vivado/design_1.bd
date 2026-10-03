@@ -1,0 +1,25 @@
+{
+  "design": {
+    "design_info": {
+      "name": "design_1",
+      "tool_version": "2025.1",
+      "device": "xczu9eg-ffvb1156-2-e"
+    },
+    "components": {
+      "axi_gpio_0": {
+        "vlnv": "xilinx.com:ip:axi_gpio:2.0",
+        "parameters": {
+          "C_GPIO_WIDTH": {
+            "value": "8"
+          },
+          "C_ALL_INPUTS": {
+            "value": "1"
+          }
+        }
+      }
+    },
+    "nets": {},
+    "interface_nets": {},
+    "addressing": {}
+  }
+}

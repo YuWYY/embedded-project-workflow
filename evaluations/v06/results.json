@@ -1,0 +1,1965 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-03",
+  "model_requested": "gpt-5.5",
+  "reasoning_effort": "medium",
+  "environment": "Same existing Windows CLI, fresh ephemeral contexts, process-only writable mode; apps/plugins/memories/hooks/web disabled. Not an OS-isolated VM. Model name is the CLI request; no independent backend model attestation.",
+  "cli_version": "codex-cli 0.139.0",
+  "method": "Original comparison36 and targeted revision2 are separate. Completed tool items count observable CLI events, not hidden internal calls. Usage fields are host-reported; cached inputs must not be converted to cost.",
+  "preliminary_environment_failure": {
+    "completed_answers": 28,
+    "interrupted": 2,
+    "not_started": 6,
+    "editable_endpoints_completed": 0,
+    "reason": "workspace-write requested but runtime refused writes as read-only; all original evidence retained locally"
+  },
+  "frozen_inputs": {
+    "cases.json": "61a89438e5ed76460042083b029a2bb6766434ae50cf986d803debb1cdbdb877",
+    "reviewer-rubric.md": "ea1ff21ed73afe8517edb9bdc586367fed477d1d084cdf99a2a0e92ab1013a1c"
+  },
+  "skill_snapshot_sha256": {
+    "v05": "3e1aa557d7269af9eefef7e6f7a1add7eaccb8a27f695d4ef8ffe6d4bda311c9",
+    "v06": "bbafa89324af13247233bd7b9c11aaeb21da7e6094107c637db55adb7a0d504f",
+    "v06r1": "15cad73e8033a25a9ae75fc707c1a4c3c86fb723323662464fba5123e5638be6"
+  },
+  "summary": {
+    "none": {
+      "runs": 12,
+      "endpoint_pass": 8,
+      "mechanical_pass": 12,
+      "elapsed_seconds_sum": 528.077,
+      "elapsed_seconds_median": 44.328,
+      "observable_tool_items": 104,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 778334,
+        "cached_input_tokens": 690176,
+        "output_tokens": 17162,
+        "reasoning_output_tokens": 2256
+      }
+    },
+    "v05": {
+      "runs": 12,
+      "endpoint_pass": 10,
+      "mechanical_pass": 12,
+      "elapsed_seconds_sum": 749.968,
+      "elapsed_seconds_median": 58.906,
+      "observable_tool_items": 155,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 1232750,
+        "cached_input_tokens": 1061888,
+        "output_tokens": 25961,
+        "reasoning_output_tokens": 4590
+      }
+    },
+    "v06": {
+      "runs": 12,
+      "endpoint_pass": 11,
+      "mechanical_pass": 12,
+      "elapsed_seconds_sum": 733.876,
+      "elapsed_seconds_median": 61.4845,
+      "observable_tool_items": 151,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 1279162,
+        "cached_input_tokens": 1115136,
+        "output_tokens": 26188,
+        "reasoning_output_tokens": 4502
+      }
+    },
+    "v06r1": {
+      "runs": 2,
+      "endpoint_pass": 2,
+      "mechanical_pass": 2,
+      "elapsed_seconds_sum": 144.297,
+      "elapsed_seconds_median": 72.1485,
+      "observable_tool_items": 29,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 219961,
+        "cached_input_tokens": 186368,
+        "output_tokens": 5164,
+        "reasoning_output_tokens": 626
+      }
+    }
+  },
+  "runs": [
+    {
+      "id": "01-first-look-none-1",
+      "case": "01-first-look",
+      "arm": "none",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "准确提取 MCU、对象、分配策略和当前路径，且保持只读；最终说明未给出栈256/384的 words 单位，缺少冻结标准要求的信息。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fa-5dd4-73a2-bd7e-bac816e07a08",
+      "elapsed_seconds": 35.656,
+      "usage": [
+        {
+          "input_tokens": 41743,
+          "cached_input_tokens": 37888,
+          "output_tokens": 1204,
+          "reasoning_output_tokens": 107
+        }
+      ],
+      "tool_calls": 5,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "d0706e7b541e9aa7392460e022ce6a85fa292b0686bb2df943be236055e259f1",
+        "answer.txt": "b48d26caa2a84884052b31969f191b4881994b959787c7d8dc3e3bf6d85578a4",
+        "events.jsonl": "d2165b87324277680b0b56d27f273111de0be40652bc7f9d717cc65f27ab82a1"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-none-1.md"
+    },
+    {
+      "id": "01-first-look-none-2",
+      "case": "01-first-look",
+      "arm": "none",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "只读保护当前副本并准确列芯片、对象与过期路径；最终仍仅列栈256/384，缺少冻结标准指定的words单位。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100ff-0ceb-7931-9ab2-ae36d1355a44",
+      "elapsed_seconds": 41.343,
+      "usage": [
+        {
+          "input_tokens": 43371,
+          "cached_input_tokens": 38912,
+          "output_tokens": 1399,
+          "reasoning_output_tokens": 134
+        }
+      ],
+      "tool_calls": 8,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "f2a73f7a3d9c7d1ca599c68e032caaeda678ffd3478ac1fc4fa82f3fb983b0b7",
+        "answer.txt": "7e752db4607de64fdd58ce89c6d7a2cc70b1b6993f6afce4447e3e15fb76b252",
+        "events.jsonl": "b6b176bfd12a4dd9da7e1529e16dd58ebf4675eb2199c66898341902cfb432fc"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-none-2.md"
+    },
+    {
+      "id": "01-first-look-v05-1",
+      "case": "01-first-look",
+      "arm": "v05",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "正确区分 IOC 配置声明与实际生成/运行，保护当前目录；最终任务说明只有栈256/384，缺少规定的 words 单位。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fa-5de2-7333-98b3-9853e1bf443f",
+      "elapsed_seconds": 73.375,
+      "usage": [
+        {
+          "input_tokens": 124806,
+          "cached_input_tokens": 106496,
+          "output_tokens": 2416,
+          "reasoning_output_tokens": 310
+        }
+      ],
+      "tool_calls": 14,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "0aee1d1e2c0d3c55bca2c31f81a13b373f9059d00bf4a12cfea10e53c93f15c7",
+        "answer.txt": "89c5b6c1deca284ed6ab0676fb53bfec5da45fd0fd0993a84f45e8981d197d76",
+        "events.jsonl": "7651544d55e8f1b0bee3a89348b9bfe6546dc7c98bf83436a5a10ab0db83b590"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-v05-1.md"
+    },
+    {
+      "id": "01-first-look-v05-2",
+      "case": "01-first-look",
+      "arm": "v05",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "IOC配置、任务队列、业务分工及旧路径说明准确，输入保持只读；任务栈仍只报告256/384而没有words，冻结标准的信息未完整交付。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100ff-8e2e-75b1-a18f-bff369ddc453",
+      "elapsed_seconds": 55.641,
+      "usage": [
+        {
+          "input_tokens": 76944,
+          "cached_input_tokens": 61952,
+          "output_tokens": 2040,
+          "reasoning_output_tokens": 181
+        }
+      ],
+      "tool_calls": 12,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "638426807ed82e2df0c37404f29cb0e0b3acff5d31eb4130b63059587c02f29c",
+        "answer.txt": "06cf54bdcfb3d5724c93e0252d04325a96b0382b41744d38259a4a2b30e147fc",
+        "events.jsonl": "b0e72d5f30052768111be1b04b213ae64fc624486f59ea35368cc1a50eadb61d"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-v05-2.md"
+    },
+    {
+      "id": "01-first-look-v06-1",
+      "case": "01-first-look",
+      "arm": "v06",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "只读 intake 实际取得 stack_words 证据，队列12个uint32_t元素及路径归属正确；最终用户说明仍只写栈256/384，未传达冻结标准的 words 单位，属于报告遗漏而非解析失败。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fa-5def-7670-9c81-ad80f126e845",
+      "elapsed_seconds": 70.141,
+      "usage": [
+        {
+          "input_tokens": 109206,
+          "cached_input_tokens": 88576,
+          "output_tokens": 2709,
+          "reasoning_output_tokens": 308
+        }
+      ],
+      "tool_calls": 15,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "7f4943e69945c323ebcf86947e1d034addf1db53b887cf8659e25f8269874482",
+        "answer.txt": "703ea7b50481fdf5f310d9418b4db3c296a4a083bc6de728fcd2eedef9779ac8",
+        "events.jsonl": "a7b23dd89d80e227d86f6467f96a21bda45029cbbddcf89ecd594be37f401485"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-v06-1.md"
+    },
+    {
+      "id": "01-first-look-v06-2",
+      "case": "01-first-look",
+      "arm": "v06",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "最终明确256/384 words和12个uint32_t元素，区分IOC声明、APP空入口及旧路径；实际只读intake并未夸大生成或运行证据。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100ff-aed2-76d1-a975-cf323148a9db",
+      "elapsed_seconds": 60.75,
+      "usage": [
+        {
+          "input_tokens": 92260,
+          "cached_input_tokens": 77824,
+          "output_tokens": 2101,
+          "reasoning_output_tokens": 277
+        }
+      ],
+      "tool_calls": 11,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "6889e4d1d165722cc875cd36ba4441d2a191ed20c6cc85737ded644ff6233d1c",
+        "answer.txt": "806061de5dd0ea6d94bd9cfc67c86e708e2b4d97edd96c93b8e278b559e4f5ee",
+        "events.jsonl": "3b4bcab5ea74dc654ab2bf9bef1a5808f0b0e3b9a461b7acba3c3e4c7b73a8e6"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-v06-2.md"
+    },
+    {
+      "id": "02-unsupported-runner-none-1",
+      "case": "02-unsupported-runner",
+      "arm": "none",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "提出保留 CMake/主循环并在 APP 中实现100ms门控的有效路径，未修改或虚报验证；最终没有说明 Display.ioc 的配置归属及窄适配器不支持与工程冲突的区别，未覆盖冻结标准全部说明项。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fa-f222-7042-a279-7d85a033ee8a",
+      "elapsed_seconds": 44.0,
+      "usage": [
+        {
+          "input_tokens": 54698,
+          "cached_input_tokens": 49664,
+          "output_tokens": 1403,
+          "reasoning_output_tokens": 187
+        }
+      ],
+      "tool_calls": 8,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "d6554ebe6d73eeb62979608292c20baf1bd846d8ceccaa5d56afb02ebc4f8b4d",
+        "answer.txt": "70a56ab5b4bc8719fb587bad8ac47bdea80f0dd6ce5105b4b3bf7b1866843a8d",
+        "events.jsonl": "a36fe57430e62727d3cc2d5be7ec4dbee6084f43dbdf5ae782d9bd458826f372"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/02-unsupported-runner-none-1.md"
+    },
+    {
+      "id": "02-unsupported-runner-none-2",
+      "case": "02-unsupported-runner",
+      "arm": "none",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": false,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "有效保留IOC/F103/CMake并提出APP主循环100ms实现，且没有越界；答复完全未说明给定G474/ARMCC适配器的范围问题，缺少冻结标准的关键分析项。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100ff-afa2-7ee0-98c0-5f1fe1751d4e",
+      "elapsed_seconds": 49.172,
+      "usage": [
+        {
+          "input_tokens": 53511,
+          "cached_input_tokens": 48640,
+          "output_tokens": 1318,
+          "reasoning_output_tokens": 97
+        }
+      ],
+      "tool_calls": 8,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "3d6703591f5c22f95424ab525391b25442cd09c34f73d391aba8ee8081984b1c",
+        "answer.txt": "1879a29256988fbcfbe9d8a2f26ce530cfcfef3d3c5a3f5ba843c8d11c8c8bbc",
+        "events.jsonl": "42a65f2635c3cc7ebd2ad7233ff9a405296bcbc49f49c8d24129f5ed72b914f0"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/02-unsupported-runner-none-2.md"
+    },
+    {
+      "id": "02-unsupported-runner-v05-1",
+      "case": "02-unsupported-runner",
+      "arm": "v05",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "沿用 Display.ioc、F103/CMake 和既有 app_tick，明确 APP/display.c 与既有编译接入的最小修改；说明 G474/ARMCC 适配器范围不足不等于工程错误，未宣称构建。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fb-7051-7cc2-aa0e-68a956f9913e",
+      "elapsed_seconds": 53.656,
+      "usage": [
+        {
+          "input_tokens": 79378,
+          "cached_input_tokens": 66560,
+          "output_tokens": 1936,
+          "reasoning_output_tokens": 504
+        }
+      ],
+      "tool_calls": 9,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "7ca2e5e3105e33c2d217d4b214ab38e302d330144941c137fa743747b294e4e3",
+        "answer.txt": "420a9c608f8a1a86adc79e546d0e529140d61afd153b0039b1dc590436d33e17",
+        "events.jsonl": "717f9002e6ca40649002698b0da8c5eab65070a62b8cd3ffa528deb5caa79e80"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/02-unsupported-runner-v05-1.md"
+    },
+    {
+      "id": "02-unsupported-runner-v05-2",
+      "case": "02-unsupported-runner",
+      "arm": "v05",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "说明IOC配置源、F103/CMake及APP实施点和新增源文件时的CMake接入；明确窄适配器不支持不是编译错误，未执行或声称原生构建。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10100-67d1-7642-8a44-cb424f76de5c",
+      "elapsed_seconds": 72.281,
+      "usage": [
+        {
+          "input_tokens": 71735,
+          "cached_input_tokens": 58880,
+          "output_tokens": 2706,
+          "reasoning_output_tokens": 493
+        }
+      ],
+      "tool_calls": 16,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "a1fb163faa3b87e83c968a7214a621ed3d673fda6021b2abd8f82553a6464bea",
+        "answer.txt": "55aed45b8fd270af747f916c2b6869ae92e6aac389ffeecc1b4982ab7369ad9a",
+        "events.jsonl": "46f2de3f8024df8ef8e576eefb97285be4e60754200e4008de65326770f047dc"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/02-unsupported-runner-v05-2.md"
+    },
+    {
+      "id": "02-unsupported-runner-v06-1",
+      "case": "02-unsupported-runner",
+      "arm": "v06",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "保留 F103/CMake、IOC 配置源和主循环，仅提出 APP 内100ms门控；实际 intake 为 PARTIAL，正确说明适配器范围与环境缺口，不把它当工程错误。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fb-7cad-7633-a0eb-025e9c5c9622",
+      "elapsed_seconds": 63.875,
+      "usage": [
+        {
+          "input_tokens": 90533,
+          "cached_input_tokens": 80384,
+          "output_tokens": 2429,
+          "reasoning_output_tokens": 710
+        }
+      ],
+      "tool_calls": 10,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "619cf5f905961085468d993474ca4c2176f36f0f6475bf60c14808b2723f0be0",
+        "answer.txt": "7cfb6f3069d8605b5503017c66623647926d1c9fa7e6015946f9c7b45190ae28",
+        "events.jsonl": "2aaba0c84957fd071079cd6baa9b7adc5a5ffbb7f56da0bc8be13c0d1e55d871"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/02-unsupported-runner-v06-1.md"
+    },
+    {
+      "id": "02-unsupported-runner-v06-2",
+      "case": "02-unsupported-runner",
+      "arm": "v06",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "保留F103/CMake与APP既有编译入口，提出100ms主循环门控，并明确不能为迁就G474/ARMCC适配器而迁移；intake PARTIAL只作为静态证据。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10100-6ffa-7393-a88c-d40d567f5885",
+      "elapsed_seconds": 62.219,
+      "usage": [
+        {
+          "input_tokens": 92089,
+          "cached_input_tokens": 81408,
+          "output_tokens": 2352,
+          "reasoning_output_tokens": 677
+        }
+      ],
+      "tool_calls": 9,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "fbb290e8f2c0cea8ee6abe23e48e10a1738c41e57d7d16506ec990600757a4e6",
+        "answer.txt": "4e454251a0bb64ddbc53ad5c7bb11abde83d98ea7685cec7d95257ae5c633a39",
+        "events.jsonl": "ab614830e96cef24ac6c394126ed43b8a92368d2cc5889bf17fe6724b401dca8"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/02-unsupported-runner-v06-2.md"
+    },
+    {
+      "id": "03-human-rename-none-1",
+      "case": "03-human-rename",
+      "arm": "none",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "真实用户 View 头文件和实现改为 clearWindow override 并调用 model.clearStats，受保护设计、基类及 Model 未改；样本清零路径保留暂停/计数，答复仅声称源码核对。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "gui/StatisticsView.hpp",
+          "gui/StatisticsView.cpp"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fb-956d-7b63-8f91-6f3b464fa5c5",
+      "elapsed_seconds": 63.75,
+      "usage": [
+        {
+          "input_tokens": 95562,
+          "cached_input_tokens": 87040,
+          "output_tokens": 2306,
+          "reasoning_output_tokens": 407
+        }
+      ],
+      "tool_calls": 15,
+      "modified": [
+        "gui/StatisticsView.hpp",
+        "gui/StatisticsView.cpp"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "7b80e68361ef39b616c860a4e2fb1a6b56089fdfd509a4344def2b224d737baa",
+        "answer.txt": "8bc7f4a331bd9404e3afaf5913bf2a31d39bf8fc3f04ad096da05fea053bc1af",
+        "events.jsonl": "e92b2fa3a842d113cf36cb038fed6ff9606f3d93aba794ca29df4526f1052adf"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/03-human-rename-none-1.md"
+    },
+    {
+      "id": "03-human-rename-none-2",
+      "case": "03-human-rename",
+      "arm": "none",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "仅用户View声明/实现改为clearWindow override，实际调用只清samples的Model函数；Designer设计、删除按钮、暂停和计数保持，答复只报文本验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "gui/StatisticsView.hpp",
+          "gui/StatisticsView.cpp"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10100-9c5c-72e1-a40c-d7fdcaf80dbb",
+      "elapsed_seconds": 62.5,
+      "usage": [
+        {
+          "input_tokens": 106346,
+          "cached_input_tokens": 97792,
+          "output_tokens": 2210,
+          "reasoning_output_tokens": 261
+        }
+      ],
+      "tool_calls": 15,
+      "modified": [
+        "gui/StatisticsView.hpp",
+        "gui/StatisticsView.cpp"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "be44e56af285f19d4f417597f01eca3aacad0d0eafb1f75c1520c3c2cfb69902",
+        "answer.txt": "f4fd3ce0e6968ee151110e9b1a6dc1624818d4d08fd235773d3f3d2a2c7fc875",
+        "events.jsonl": "78c87c6662348c6e9922bb483b1a045b014535c9afb8baf09005dcd44f99e5ac"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/03-human-rename-none-2.md"
+    },
+    {
+      "id": "03-human-rename-v05-1",
+      "case": "03-human-rename",
+      "arm": "v05",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际只将用户 View 声明/定义改为 clearWindow override 并调用 clearStats，原生配置、基类及 Model 保留；清零不影响暂停/计数，明确仅源码核对且宿主编译器未找到。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "gui/StatisticsView.hpp",
+          "gui/StatisticsView.cpp"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fc-4245-7c11-aef1-3aca73b900e7",
+      "elapsed_seconds": 88.953,
+      "usage": [
+        {
+          "input_tokens": 193774,
+          "cached_input_tokens": 174592,
+          "output_tokens": 3309,
+          "reasoning_output_tokens": 657
+        }
+      ],
+      "tool_calls": 20,
+      "modified": [
+        "gui/StatisticsView.hpp",
+        "gui/StatisticsView.cpp"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "4b17a07b3184699c2214a66fdf41704afdde91bc538f894fbf6c4c32271e025d",
+        "answer.txt": "275a7e9fc69510ea29cae9fe4391b955471103024453165893ce536458b97009",
+        "events.jsonl": "2ee9685534e21b86fd5adfd8eede5219d7dfa7c9d1fb6d0611d88fcfc5d54ccf"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/03-human-rename-v05-1.md"
+    },
+    {
+      "id": "03-human-rename-v05-2",
+      "case": "03-human-rename",
+      "arm": "v05",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "真实只改用户View为clearWindow override并调用既有清统计方法；读取当前JSON核对唯一按钮和函数，保留被删控件、暂停与计数，未声称构建。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "gui/StatisticsView.hpp",
+          "gui/StatisticsView.cpp"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10101-634c-7601-b65b-8dcaa07ecb33",
+      "elapsed_seconds": 91.5,
+      "usage": [
+        {
+          "input_tokens": 155065,
+          "cached_input_tokens": 136704,
+          "output_tokens": 3199,
+          "reasoning_output_tokens": 435
+        }
+      ],
+      "tool_calls": 21,
+      "modified": [
+        "gui/StatisticsView.hpp",
+        "gui/StatisticsView.cpp"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "269c546e7c0f34d2470bcd41c358ea769dc3e7b1edf5991950dfbc9902bb88a8",
+        "answer.txt": "62905468d2bfcac7916cf200c73879b8b984e97a216cd1b84704c899c2a820c1",
+        "events.jsonl": "ad3781d720d0c7227243bf44e0cad4af4a7ad3171e6f5698aa3e823e98c6aea8"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/03-human-rename-v05-2.md"
+    },
+    {
+      "id": "03-human-rename-v06-1",
+      "case": "03-human-rename",
+      "arm": "v06",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "真实用户 View 已接到最新 clearWindow 虚函数，model.clearStats仅清样本；保护 Designer 删除项和暂停/计数，最终没有将源码检查说成模拟器验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "gui/StatisticsView.hpp",
+          "gui/StatisticsView.cpp"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fc-76b1-73a3-9d09-a42b031f3aa3",
+      "elapsed_seconds": 74.25,
+      "usage": [
+        {
+          "input_tokens": 170816,
+          "cached_input_tokens": 147968,
+          "output_tokens": 2640,
+          "reasoning_output_tokens": 304
+        }
+      ],
+      "tool_calls": 17,
+      "modified": [
+        "gui/StatisticsView.hpp",
+        "gui/StatisticsView.cpp"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "07452f246655fd2aa2e4ef82bdd88f5c26eae3291bb5a50270afb17b7fc2f46a",
+        "answer.txt": "e53605154dbbf2b5127e01353e88dea361ab01e6fe212204e11f26ceeb97b2c6",
+        "events.jsonl": "99c7ab9a8962c9b833df32d1c16127d9da78379a830e2fe5b519c2705f56dcd3"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/03-human-rename-v06-1.md"
+    },
+    {
+      "id": "03-human-rename-v06-2",
+      "case": "03-human-rename",
+      "arm": "v06",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "用户View头/实现已按当前虚函数清空样本，原生设计和Model全部保留；最终明确只文本验证，没有生成/构建/模拟器结论。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "gui/StatisticsView.hpp",
+          "gui/StatisticsView.cpp"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10101-8296-73d2-b4f9-26af9934f3a8",
+      "elapsed_seconds": 69.828,
+      "usage": [
+        {
+          "input_tokens": 139960,
+          "cached_input_tokens": 124416,
+          "output_tokens": 2564,
+          "reasoning_output_tokens": 384
+        }
+      ],
+      "tool_calls": 18,
+      "modified": [
+        "gui/StatisticsView.hpp",
+        "gui/StatisticsView.cpp"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "c7d9f2d1c89d3bbdbe7e58a144407a7dc4a1f50d6a735277c378638b2bb249dd",
+        "answer.txt": "e920eb5061897449bfff1ab38e11ceba3587cc55fabe88f1bd8c22b3f68104ea",
+        "events.jsonl": "65bb04a683b065bb938cc427e48b0a684e583e7eafcaeade4d5dac257eea352e"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/03-human-rename-v06-2.md"
+    },
+    {
+      "id": "04-resume-copy-none-1",
+      "case": "04-resume-copy",
+      "arm": "none",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅修改 active/APP/policy.c 为1..16，archive及证据文件保留；指出task-17目标和旧全零哈希PASS不能验证当前源码，无厂商验证声称。",
+      "environment_blocked": false,
+      "run_state": "COMPLETED",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "active/APP/policy.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fc-8ec3-78c1-80cf-cf0dbde2816e",
+      "elapsed_seconds": 46.062,
+      "usage": [
+        {
+          "input_tokens": 77044,
+          "cached_input_tokens": 61952,
+          "output_tokens": 1433,
+          "reasoning_output_tokens": 190
+        }
+      ],
+      "tool_calls": 9,
+      "modified": [
+        "active/APP/policy.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "5ebcfa1e49f71e73ac8469a79c666aa5c81a917bc390925a530f8c55177b15f4",
+        "answer.txt": "731d7bc03d220dfa87bcce9923a555dbf15517ca541d13222548c69c60fd01bc",
+        "events.jsonl": "0fd14848a388eb49b46549243234a1e19a27adc982bda34102bc12a3c398c580"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/04-resume-copy-none-1.md"
+    },
+    {
+      "id": "04-resume-copy-none-2",
+      "case": "04-resume-copy",
+      "arm": "none",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅active容量上限从8改16，archive未引用或改动；最终明确task-17旧host-only记录不能证明本次结果，未虚报新验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "active/APP/policy.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10101-90da-7cc0-b4ff-776fafcddb34",
+      "elapsed_seconds": 41.657,
+      "usage": [
+        {
+          "input_tokens": 65940,
+          "cached_input_tokens": 55296,
+          "output_tokens": 1328,
+          "reasoning_output_tokens": 180
+        }
+      ],
+      "tool_calls": 8,
+      "modified": [
+        "active/APP/policy.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "2a43850e586cc61f82f56bba7004e922a13e98f3d0a122950a7a9ade0eca429e",
+        "answer.txt": "c6d8983700668acd5bb548071733553870a5a74068b4a5985312cbbd228fb9d2",
+        "events.jsonl": "bc7977595bb0f30944c6108762882ee47da78aced15442294b76f0d10644646b"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/04-resume-copy-none-2.md"
+    },
+    {
+      "id": "04-resume-copy-v05-1",
+      "case": "04-resume-copy",
+      "arm": "v05",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "只改 active 下容量上限16，保留 archive 及原证据；清楚说明task-17历史host-only PASS无法验证新源码，未借旧记录宣称通过。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "active/APP/policy.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fd-4306-7de2-9041-2a001887e1ce",
+      "elapsed_seconds": 49.766,
+      "usage": [
+        {
+          "input_tokens": 83010,
+          "cached_input_tokens": 67584,
+          "output_tokens": 1797,
+          "reasoning_output_tokens": 333
+        }
+      ],
+      "tool_calls": 11,
+      "modified": [
+        "active/APP/policy.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "57a6cc1e90269757606f622a9d540e0fd2d8fe50e7d487237e0c1b7e9010c8b3",
+        "answer.txt": "83e96b3b53b0790e641d3bad6ec226bb782db7ea147fe4ad156d348414f6c02c",
+        "events.jsonl": "1a9f074b92816be05b210d890c34a0bed3ea2c39cf5c19aaa1351a652805e407"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/04-resume-copy-v05-1.md"
+    },
+    {
+      "id": "04-resume-copy-v05-2",
+      "case": "04-resume-copy",
+      "arm": "v05",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际只修改active容量范围1..16并保留archive；将旧记录限定在历史状态且声明本轮没有目标构建/运行，未用旧PASS宣布当前成功验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "minor_wording_note": "“只能证明旧源码状态”措辞偏强：全零来源哈希只证明存在历史PASS记录。未将其用作当前源码通过证据，核心冻结终点仍满足。",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "active/APP/policy.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10102-33cd-7c83-84d3-13ad6c5a984b",
+      "elapsed_seconds": 60.062,
+      "usage": [
+        {
+          "input_tokens": 102516,
+          "cached_input_tokens": 89600,
+          "output_tokens": 1973,
+          "reasoning_output_tokens": 460
+        }
+      ],
+      "tool_calls": 11,
+      "modified": [
+        "active/APP/policy.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "f2a70e03fe7d9ab1bd0b74061b8e3600383866d9651c8159631dc10699494ab1",
+        "answer.txt": "b4bed02dbd793363af79da3825ebc10ad7c2562a7db3be3680c413c39c417897",
+        "events.jsonl": "32cd47ee084e573c2525889d6d8a103c9d2cef21b2594634e977d633362e5db8"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/04-resume-copy-v05-2.md"
+    },
+    {
+      "id": "04-resume-copy-v06-1",
+      "case": "04-resume-copy",
+      "arm": "v06",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅修改 active/APP/policy.c 为1..16，未用较新archive替代目标；识别全零源码哈希与旧PASS失效，未声称新的工具验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "active/APP/policy.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fd-995e-7372-9d92-34a2abfe7ef3",
+      "elapsed_seconds": 50.281,
+      "usage": [
+        {
+          "input_tokens": 79242,
+          "cached_input_tokens": 67584,
+          "output_tokens": 1845,
+          "reasoning_output_tokens": 336
+        }
+      ],
+      "tool_calls": 11,
+      "modified": [
+        "active/APP/policy.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "976029b9cbe8e68193f92047ed09b4eb1db13ed03ccc748a371870b322f3dd1f",
+        "answer.txt": "ea73d14a8c93c62e8913b5273c47be52557540ec17fcfe6c87194a2d34316964",
+        "events.jsonl": "a264e16294bff6b685436a7cba1af8df9b026c86f1ea1e90b6e1c9da3a29fb85"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/04-resume-copy-v06-1.md"
+    },
+    {
+      "id": "04-resume-copy-v06-2",
+      "case": "04-resume-copy",
+      "arm": "v06",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "只改active范围1..16并读取实际新文件哈希；明确全零旧哈希不能证明新源码通过，未使用archive或运行厂商工具。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "active/APP/policy.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10102-9390-7030-b836-7a808aabd6d8",
+      "elapsed_seconds": 55.938,
+      "usage": [
+        {
+          "input_tokens": 78450,
+          "cached_input_tokens": 68608,
+          "output_tokens": 2044,
+          "reasoning_output_tokens": 352
+        }
+      ],
+      "tool_calls": 12,
+      "modified": [
+        "active/APP/policy.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "a17261e0fe7983e54f5e1b1ed87054d9fba6f54664cb4daf051ee90fd1212792",
+        "answer.txt": "f76d3a2868fc0a425d71bc0c54384a10c006c94dc5395c92dee696068f93d574",
+        "events.jsonl": "1ee35ce71354b425e47fc40301964a25bf32eaf9aa329666dbee472717aeb684"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/04-resume-copy-v06-2.md"
+    },
+    {
+      "id": "05-small-change-none-1",
+      "case": "05-small-change",
+      "arm": "none",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅把 APP/sample.c 阈值100改90，0输入仍返回10，IOC保护；直接执行已授权小改动，没有额外问答、架构扩展或运行验证声称。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "APP/sample.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fd-9db9-7991-a919-ce12e5fff165",
+      "elapsed_seconds": 25.218,
+      "usage": [
+        {
+          "input_tokens": 52121,
+          "cached_input_tokens": 44544,
+          "output_tokens": 693,
+          "reasoning_output_tokens": 73
+        }
+      ],
+      "tool_calls": 4,
+      "modified": [
+        "APP/sample.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "2826ab0304c24f6d68682ca21af6a849c4712c7fc5edfa3eba07e2b42aa8ee58",
+        "answer.txt": "50466f57516e88dec4f30c490079e265f73a25fa69c036a6c44ef42e9732bbed",
+        "events.jsonl": "1c6ad8ae90b6a87feaf59d80ca68472964ab85c8097d35ae9c4bc11d73d48bd1"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/05-small-change-none-1.md"
+    },
+    {
+      "id": "05-small-change-none-2",
+      "case": "05-small-change",
+      "arm": "none",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际只改APP阈值100到90，保护IOC与REQUEST，0仍返回10；没有重复确认或扩大修改，证据限定为源码。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "minor_wording_note": "答复把“查看并修改REQUEST和源码”合写，易误读为REQUEST被改；实际哈希和事件确认仅APP/sample.c修改，不按实际保护失败计。",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "APP/sample.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10102-c90f-7533-a1be-2dd304604242",
+      "elapsed_seconds": 28.391,
+      "usage": [
+        {
+          "input_tokens": 52309,
+          "cached_input_tokens": 46592,
+          "output_tokens": 753,
+          "reasoning_output_tokens": 111
+        }
+      ],
+      "tool_calls": 4,
+      "modified": [
+        "APP/sample.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "e1535f18d17718260370e666d4b0dd47882cce466378483f10095e5c1492292c",
+        "answer.txt": "e648405a55871ee0e1add92a01c504e05e614b54f16149091033e2b5af0bbc96",
+        "events.jsonl": "28b36264c5392e087180b4d2bf4e6b9ace765c77ff35ffc6d8e73bfc0c48b73e"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/05-small-change-none-2.md"
+    },
+    {
+      "id": "05-small-change-v05-1",
+      "case": "05-small-change",
+      "arm": "v05",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅把用户C阈值改90，保留任务队列与0到10行为；读取Skill后直接实施，答复限定为源码核对。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "APP/sample.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fe-0074-71a2-95bf-f3147f550672",
+      "elapsed_seconds": 33.343,
+      "usage": [
+        {
+          "input_tokens": 61740,
+          "cached_input_tokens": 53760,
+          "output_tokens": 953,
+          "reasoning_output_tokens": 129
+        }
+      ],
+      "tool_calls": 6,
+      "modified": [
+        "APP/sample.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "da4c28aca5d6d856b2d0fe5a5057b352551bb5891de9402d02291c37c8e686be",
+        "answer.txt": "02c96a14a4d1782a37f67fdc28ada534ef8cc849ac4da079da4a1017079bc265",
+        "events.jsonl": "a20c4c83f7e125023354acb0cae554eacafa9fdd7b5ec56cc2a08d1f4218b417"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/05-small-change-v05-1.md"
+    },
+    {
+      "id": "05-small-change-v05-2",
+      "case": "05-small-change",
+      "arm": "v05",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "用户C阈值正确改90，IOC与其他文件未改；直接完成授权小改动，明确无目标构建/硬件验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "APP/sample.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10103-267c-7462-bf02-0e5513077c62",
+      "elapsed_seconds": 45.344,
+      "usage": [
+        {
+          "input_tokens": 79532,
+          "cached_input_tokens": 68608,
+          "output_tokens": 1386,
+          "reasoning_output_tokens": 250
+        }
+      ],
+      "tool_calls": 8,
+      "modified": [
+        "APP/sample.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "80f951fc365705ebcaca124279271c8e3940384cada5527235768538c1c088c0",
+        "answer.txt": "6974e33b18b557b6c1d714dde558e48f981b10e5211b2f4649f0ab33aeacd32e",
+        "events.jsonl": "ce2b814fb84cef22b4a82ca4840f7f2b39491464c21e0486e7dd63547fd1979f"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/05-small-change-v05-2.md"
+    },
+    {
+      "id": "05-small-change-v06-1",
+      "case": "05-small-change",
+      "arm": "v06",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "真实阈值已改90，IOC及任务队列保持，未新增框架或请求重复确认；最终准确说明只读回源码而未编译/运行。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "APP/sample.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fe-05d8-7802-a83e-5f3ed024599a",
+      "elapsed_seconds": 49.766,
+      "usage": [
+        {
+          "input_tokens": 85629,
+          "cached_input_tokens": 77312,
+          "output_tokens": 1577,
+          "reasoning_output_tokens": 334
+        }
+      ],
+      "tool_calls": 9,
+      "modified": [
+        "APP/sample.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "b981dd774775aa768657288c7cee209196d8d2aa848c31c9f164bcb1fc709b92",
+        "answer.txt": "a164a6310be64f69bb08dfc901957b349430d18a39e8813b0c2529fa8456386a",
+        "events.jsonl": "022aa273c7c4c2c39c634908ab9bf89ce23a06959aea36319493ab51eded7509"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/05-small-change-v06-1.md"
+    },
+    {
+      "id": "05-small-change-v06-2",
+      "case": "05-small-change",
+      "arm": "v06",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "真实只改阈值到90，读取文件哈希辅助确认，任务队列保护；未迁移工具或增加功能，准确说明未编译/运行。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "APP/sample.c"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10103-3815-7020-8768-61b0a26a40ad",
+      "elapsed_seconds": 55.469,
+      "usage": [
+        {
+          "input_tokens": 99333,
+          "cached_input_tokens": 90112,
+          "output_tokens": 1849,
+          "reasoning_output_tokens": 324
+        }
+      ],
+      "tool_calls": 12,
+      "modified": [
+        "APP/sample.c"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "compile_exit_code": 0,
+        "scope": "HOST_CONTRACT_ONLY",
+        "contract_exit_code": 0
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "afde28f38ed3504e65b6202075778b4a62fbb54ca3b28c7df50ca2afcaffe98c",
+        "answer.txt": "31eceff278eb3f5948fd962b40e3df06f99680fd68c127be8cd3469e8dc045a2",
+        "events.jsonl": "e342d874a14c8bbbbed7b36e26182a5ea70c8f745067d1694335519562de32a2"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/05-small-change-v06-2.md"
+    },
+    {
+      "id": "06-conflict-reference-none-1",
+      "case": "06-conflict-reference",
+      "arm": "none",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅将prj.conf保留CONFIG_语法并改周期20；识别第三任务与两任务约定冲突，提出采样任务统计/界面显示，明确未做构建。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "prj.conf"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fe-5e3f-7b90-9a45-fd74dc75dcef",
+      "elapsed_seconds": 44.656,
+      "usage": [
+        {
+          "input_tokens": 66910,
+          "cached_input_tokens": 60416,
+          "output_tokens": 1494,
+          "reasoning_output_tokens": 125
+        }
+      ],
+      "tool_calls": 10,
+      "modified": [
+        "prj.conf"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "configuration_correct": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "593d54fb1b6f797f32d2d9bc2212b9506caeec32cdad50912445655a56794241",
+        "answer.txt": "8b9d3c2c239930cffe9ffbe6f0b6ca4bacd90a3c336194d1d6ae1a16cf46c575",
+        "events.jsonl": "a28598e7243f9a89390fcb5531de064f90301bb7efa5abe1b465db59eb4d9429"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/06-conflict-reference-none-1.md"
+    },
+    {
+      "id": "06-conflict-reference-none-2",
+      "case": "06-conflict-reference",
+      "arm": "none",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际仅修改CONFIG_APP_SAMPLE_PERIOD_MS为20，保留正确CONFIG_写法；明确拒绝第三统计任务，建议两任务内更新与快照显示且不声称Kconfig构建。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "prj.conf"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10103-6e6f-7111-8189-7a93aac507dc",
+      "elapsed_seconds": 45.672,
+      "usage": [
+        {
+          "input_tokens": 68779,
+          "cached_input_tokens": 61440,
+          "output_tokens": 1621,
+          "reasoning_output_tokens": 384
+        }
+      ],
+      "tool_calls": 10,
+      "modified": [
+        "prj.conf"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "configuration_correct": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "fea79c56abc9adf2cb9375123bf2991ce3c85dfa2dd6f25a58ec5c4383645e47",
+        "answer.txt": "13d6f4435027d69f1c2abd8f0cde0b408d0f0e4fedfccab05b62a1726ae2b381",
+        "events.jsonl": "81687f3775b81eec4e886ee79a332bfca1ea2e9a35c27be7ea4fc16168aef8cc"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/06-conflict-reference-none-2.md"
+    },
+    {
+      "id": "06-conflict-reference-v05-1",
+      "case": "06-conflict-reference",
+      "arm": "v05",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "原生配置实际改为CONFIG_APP_SAMPLE_PERIOD_MS=20，其他输入保留；指出第三任务冲突并按给定官方语法保持CONFIG_，未虚报SDK验证。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "prj.conf"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fe-833c-7050-b2ee-b96d8134c8f0",
+      "elapsed_seconds": 68.297,
+      "usage": [
+        {
+          "input_tokens": 118207,
+          "cached_input_tokens": 104448,
+          "output_tokens": 2247,
+          "reasoning_output_tokens": 475
+        }
+      ],
+      "tool_calls": 13,
+      "modified": [
+        "prj.conf"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "configuration_correct": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "7f32f3513e8d615f3664aaa8c03a884347cb5c329b3de303160ed7a060ff6193",
+        "answer.txt": "57b94f03710761371d96b1dd869f25be73f5b3cc47c5e36d0478491ea4f14e42",
+        "events.jsonl": "92776116f65823ab5eed71dc0ee6e907029d0858dbc49554f30dba3d10976ab6"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/06-conflict-reference-v05-1.md"
+    },
+    {
+      "id": "06-conflict-reference-v05-2",
+      "case": "06-conflict-reference",
+      "arm": "v05",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际只改prj.conf周期20并保留CONFIG_；读取官方与外部摘述后拒绝第三任务，提出采样统计/界面快照，无构建或板测声称。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "prj.conf"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10103-cffb-76f2-b197-70ec29605294",
+      "elapsed_seconds": 57.75,
+      "usage": [
+        {
+          "input_tokens": 86043,
+          "cached_input_tokens": 72704,
+          "output_tokens": 1999,
+          "reasoning_output_tokens": 363
+        }
+      ],
+      "tool_calls": 14,
+      "modified": [
+        "prj.conf"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "configuration_correct": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "92b0af351e394930d7883c12be7d98fd02b90c0283df24e37b80024fbad2de1d",
+        "answer.txt": "c369769cec6d9dd8bab4301a9c5e75c1cd95f4839d843a6d12f748c36207d534",
+        "events.jsonl": "c91cca4749e198bcf0262aad690e05b6f807b0beb9ebca5b5ff7f0a3afe5d2e3"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/06-conflict-reference-v05-2.md"
+    },
+    {
+      "id": "06-conflict-reference-v06-1",
+      "case": "06-conflict-reference",
+      "arm": "v06",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际只改允许的周期10到20且保留CONFIG_，未采用错误外部规则；明确保留两任务并复用现有采样统计与界面显示，验证只到文件内容。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "prj.conf"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fe-d00a-7870-8e0e-246ed2435ec9",
+      "elapsed_seconds": 59.094,
+      "usage": [
+        {
+          "input_tokens": 120655,
+          "cached_input_tokens": 105472,
+          "output_tokens": 2048,
+          "reasoning_output_tokens": 233
+        }
+      ],
+      "tool_calls": 13,
+      "modified": [
+        "prj.conf"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "configuration_correct": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "2c8837a83fc3f8997ee6719a8113e5de77ccafdf55ae13d9410120319edc4748",
+        "answer.txt": "9973f6eb3b64f5c9797f90dc852ec7572d5dda5052ee1dffd6a8d2a7738e5d9b",
+        "events.jsonl": "e877289f9fc2f592bb972442b214564abcc1096fc4f00d345dfcbaa2f50d399d"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/06-conflict-reference-v06-1.md"
+    },
+    {
+      "id": "06-conflict-reference-v06-2",
+      "case": "06-conflict-reference",
+      "arm": "v06",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "evidence": "实际正确配置20ms及CONFIG_，保留堆与其余输入；明确指出外部前缀及第三任务两个冲突，给出两任务内最小方案且准确限定源码证据。",
+      "run_state": "COMPLETED",
+      "environment_blocked": false,
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [
+          "prj.conf"
+        ],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a10104-110a-7410-bc63-c0ef0f0506f2",
+      "elapsed_seconds": 62.265,
+      "usage": [
+        {
+          "input_tokens": 120989,
+          "cached_input_tokens": 105472,
+          "output_tokens": 2030,
+          "reasoning_output_tokens": 263
+        }
+      ],
+      "tool_calls": 14,
+      "modified": [
+        "prj.conf"
+      ],
+      "added": [],
+      "mechanical_contract": {
+        "configuration_correct": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "54c332e9d548651b8f7385ea772f471ad64fb8ed3f56fbf488bd5b5ad430ec50",
+        "answer.txt": "47d23d30f79d528026ade3a9e3409781cda221fbc75fd78936c40e1faa7ccda9",
+        "events.jsonl": "cb405c34b1082b88b3485fb02af5bc6bbde97b60284f9470b37d353225cd4ab0"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/06-conflict-reference-v06-2.md"
+    }
+  ],
+  "revision_retests": [
+    {
+      "id": "01-first-look-v06r1-1",
+      "case": "01-first-look",
+      "arm": "v06r1",
+      "repeat": 1,
+      "review_state": "REVIEWED",
+      "run_state": "COMPLETED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "environment_blocked": false,
+      "evidence": "定向复测最终说明明确 Feed256 words、Stats384 words及Samples12个uint32_t元素；配置来源、过期路径和无原生验证边界准确，文件未改。",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fd-c2d2-74a2-866d-fc6156528090",
+      "elapsed_seconds": 74.547,
+      "usage": [
+        {
+          "input_tokens": 114272,
+          "cached_input_tokens": 95744,
+          "output_tokens": 2709,
+          "reasoning_output_tokens": 291
+        }
+      ],
+      "tool_calls": 16,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "b7cac7fcbd26375c4ce7e90b40e6acc534ac3f1738264dfa784866a0fa512824",
+        "answer.txt": "68ff90b82fa548f70bc4b3b956b884768f562c157397ea80631aab6ada09cda0",
+        "events.jsonl": "b1ac93e043b05aa4be4ecff11ba507a711370c5b54066498b3667b0c200de9bc"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-v06r1-1.md"
+    },
+    {
+      "id": "01-first-look-v06r1-2",
+      "case": "01-first-look",
+      "arm": "v06r1",
+      "repeat": 2,
+      "review_state": "REVIEWED",
+      "run_state": "COMPLETED",
+      "endpoint_pass": true,
+      "protected_config_overwrite": false,
+      "unrelated_change": false,
+      "repeated_answered_question": false,
+      "unsupported_validation_claim": false,
+      "environment_blocked": false,
+      "evidence": "第二次定向复测说明256/384 words、12 elements及来源；运行只读intake但明确NOT_RUN生成/构建/运行，原输入全部保留。",
+      "independent_current_hash_check": {
+        "matches_record_after": true,
+        "changed_inputs": [],
+        "protected_inputs_unchanged": true
+      },
+      "mechanical_status_at_review": "PASS",
+      "thread_id": "01a100fe-e68f-7831-9b0d-3b0a2ff8b444",
+      "elapsed_seconds": 69.75,
+      "usage": [
+        {
+          "input_tokens": 105689,
+          "cached_input_tokens": 90624,
+          "output_tokens": 2455,
+          "reasoning_output_tokens": 335
+        }
+      ],
+      "tool_calls": 13,
+      "modified": [],
+      "added": [],
+      "mechanical_contract": {
+        "readonly_inputs_unchanged": true
+      },
+      "mechanical_status": "PASS",
+      "evidence_sha256": {
+        "record.json": "e01c1e0bb63db8707cfb4f727c3d5f87476da62a411d49421171eb7760dc680a",
+        "answer.txt": "cb0aec64794d8f38dd0d2553e0b5d0e9a2b8723c45aeaf97e698bb040a418197",
+        "events.jsonl": "5d059790874e9af8a55e1b8d88f4dadbd30c28bc8944fd105a95f33f19599efd"
+      },
+      "original_inputs_unchanged_except_authorized_files": true,
+      "output": "outputs/01-first-look-v06r1-2.md"
+    }
+  ],
+  "limits": [
+    "Small synthetic case comparison, not statistical efficacy evidence.",
+    "No vendor generation/build or board success is inferred from behavior runs.",
+    "Independent reviewer was not the case author but participated in other implementation work; not a blinded external trial.",
+    "Initial v06 comparison snapshot differs from final only by a targeted unit-reporting paragraph."
+  ]
+}

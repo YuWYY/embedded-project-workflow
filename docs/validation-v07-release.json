@@ -1,0 +1,116 @@
+{
+  "version": "0.7.0-beta.1",
+  "date": "2026-10-04",
+  "phase": "PRE_PUBLICATION_LOCAL_VERIFICATION",
+  "initial_behavior": {
+    "pass": 1,
+    "fail": 1,
+    "feature_implementation": "PASS",
+    "feature_initial_verification_completeness": "FAIL"
+  },
+  "review_feedback_followup": "PASS",
+  "not_a_blind_rerun": true,
+  "original_13_results_unchanged": true,
+  "runs": [
+    {
+      "id": "01-first-look-v07-release-1",
+      "scope": "independent_initial_execution",
+      "process_exit_code": 0,
+      "elapsed_seconds": 61.25,
+      "tool_calls": 10,
+      "usage": [
+        {
+          "input_tokens": 82625,
+          "cached_input_tokens": 69632,
+          "output_tokens": 2310,
+          "reasoning_output_tokens": 300
+        }
+      ],
+      "record_sha256": "2ba5aff93bd104dcd900aef555bd59a914893ea1bf9595b22008ff131b5c2a8b"
+    },
+    {
+      "id": "07-existing-state-page-v07-release-1",
+      "scope": "independent_initial_execution",
+      "process_exit_code": 0,
+      "elapsed_seconds": 254.968,
+      "tool_calls": 29,
+      "usage": [
+        {
+          "input_tokens": 1094442,
+          "cached_input_tokens": 1016320,
+          "output_tokens": 9646,
+          "reasoning_output_tokens": 1345
+        }
+      ],
+      "record_sha256": "ee9a0b76ea8caa279a4e0e0f1fa6881584b2951594a789d2fe2f45aed55535b4"
+    },
+    {
+      "id": "07-review-feedback-followup-1",
+      "scope": "guided_followup",
+      "process_exit_code": 0,
+      "elapsed_seconds": 175.953,
+      "tool_calls": 27,
+      "usage": [
+        {
+          "input_tokens": 670832,
+          "cached_input_tokens": 613376,
+          "output_tokens": 5762,
+          "reasoning_output_tokens": 1522
+        }
+      ],
+      "record_sha256": "0261ffa280d6892eaef2694de368039f0f4b143a23a93cd99ded5fdd33bda766"
+    }
+  ],
+  "model_requested": "gpt-5.5",
+  "reasoning_effort": "medium",
+  "cli_version": "0.139.0",
+  "skill_snapshot_manifest_sha256": "f62de3f8faaba2b3ccf59672ebb8b3f2c4485e0801ec707ede7cd8055d98b313",
+  "source_hashes": {
+    "scripts/release.py": "50aa2d055486cac437030104c6e71d50d90ef5d2c68f4c3f323c9a9e98231329",
+    ".github/workflows/validate.yml": "47c9c355cfbc9c66888b2ed0119d7c6c2f9285226866182ef98d398d947afd9f",
+    "skills/embedded-project-workflow/SKILL.md": "a67fe9f6b8185444bdda6938e1a6fe050b0dcc9d1ed37ef55c8c29dbd6b59818",
+    "skills/embedded-project-workflow/references/existing-projects.md": "894b189ab14bd56f8f022a87f412c7441d557708723645fda78f369cb610e9f3"
+  },
+  "local_python": {
+    "tests_per_run": 142,
+    "modes": [
+      "Windows normal",
+      "Windows -O"
+    ],
+    "status": "PASS"
+  },
+  "intake_linux": {
+    "tests_per_run": 51,
+    "modes": [
+      "normal",
+      "-O"
+    ],
+    "status": "PASS"
+  },
+  "business_contracts": "PASS: actual statistics, Model, Reset, and status sources with controlled negatives",
+  "packages": "Three archives from reviewed allowlist, manifest and checksums; Windows normal and optimized self-tests passed",
+  "known_failures": [
+    "Initial source-archive self-test exceeded Windows path length; redundant extracted outer directory removed within test scratch only",
+    "Initial A implementation correct but actor missed complete-period self-test and read unrelated TouchGFX; retained as FAIL for targeted improvement"
+  ],
+  "remaining_limits": [
+    "Guidelines did not reliably eliminate unrelated reading or omitted verification in the initial execution",
+    "Follow-up received explicit review feedback and does not prove autonomous first-attempt compliance",
+    "No statistical productivity or cost reduction claim",
+    "No new external human trial or board/OLED/key validation",
+    "Vitis A53 software and ESP-IDF native builds remain unverified"
+  ],
+  "remote_ci": "See corresponding release commit Actions; not run at this local record stage",
+  "evidence_sha256": {
+    "evidence/final-review/release-behavior-review.json": "905ae9128ab7958c8b1bec1a37825bdde7f47582596a3d35284df9d695696164",
+    "evidence/final-review/guided-followup-review.json": "822f9f069a7372a76bb2c6b5442dacc4f8d198d71e8eb4216de35af89b25a9d5",
+    "evidence/independent-release-review.json": "ab03f21f43abd546405c19a9e9d84bc911d9a275a69e494b5c3ef24ce49e380c",
+    "evidence/local-checks/results.json": "0e67c10d4894ed4a12c42a22cdcdb704513226abc8e58bfb18135be48a43f8f0",
+    "evidence/package-pre-publication/result.json": "2dce7227bb2de36bf38f2dede05d094e84314c5c8134cbeb48f29e013f7815e0"
+  },
+  "followup_evidence_ownership": {
+    "actor": "Extended actual-source full-period contract; fresh positive and removed-call negative target builds; source/CMake pattern linkage check",
+    "independent_reviewer": "Injected uint32 truncation and ran actor contract; inspected positive/negative actual ELF calls",
+    "limitation": "Pattern check is scoped to this known implementation, not a general control-flow proof"
+  }
+}

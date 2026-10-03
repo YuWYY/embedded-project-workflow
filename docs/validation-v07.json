@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "version": "0.7.0-beta.1",
+  "date": "2026-10-03",
+  "publication": "NOT_RUN",
+  "automatic_invocation": false,
+  "original_inputs": {
+    "v06_source_count": 325,
+    "v06_changed": [],
+    "upstream_source_count": 1001,
+    "upstream_changed": [],
+    "current_skill_equals_final_behavior_snapshot": true
+  },
+  "upstream": {
+    "repository": "https://github.com/arona-jkb/OPEN-MCU-UI",
+    "commit": "2c08e5dfd7ddc237dfd61440dfc9d45705c19e1d",
+    "files": 1001,
+    "input_manifest_sha256": "d72656e99b2618ded33961b4e4dbd3c2a3b0f90a1fe52bca642e9043ec174bec",
+    "redistributed": false
+  },
+  "python_regression": {
+    "tests_per_run": 142,
+    "modes": [
+      "Windows normal",
+      "Windows -O"
+    ],
+    "status": "PASS",
+    "record_sha256": "a294b35e8f182c62d8e4947659f9fa9637e82c2cf18a78a89d3bff1188fa3285"
+  },
+  "intake": {
+    "tests_per_run": 51,
+    "modes": [
+      "Windows normal",
+      "Windows -O",
+      "WSL Ubuntu normal",
+      "WSL Ubuntu -O"
+    ],
+    "status": "PASS",
+    "record_sha256": "1f24576978351a9e3fc057ede353a9bf45346e5dde277dd5736000bb08b9a828",
+    "legacy_bd": {
+      "status": "PARTIAL",
+      "instances": 8,
+      "ordered_unexpanded_address_blocks": 13,
+      "native_execution": "NOT_RUN"
+    }
+  },
+  "host_business": {
+    "positive": "PASS",
+    "semantic_negative_count": 4,
+    "semantic_negatives": "EXPECTED_FAILURE",
+    "windows_and_linux": "PASS",
+    "compile_failure": "EXPECTED_FAILURE",
+    "record_sha256": "9d95faf2d05f302b1ebaa850897726415019c263a6ece1b0150b72bcd63bf1d8"
+  },
+  "native_compatibility": {
+    "status": "PASS_WITH_RECORDED_MIGRATION_PREPARATION",
+    "profile": {
+      "CubeMX": "6.18.1",
+      "database": "DB.6.0.181",
+      "STM32Cube_FW_F1": "1.8.6",
+      "target_toolchain": "CMake",
+      "build_type": "Debug",
+      "refresh_period_ms": 100,
+      "flash_region_bytes": 65536,
+      "ram_region_bytes": 20480
+    },
+    "successful_rounds": [
+      {
+        "round": 1,
+        "generation": "PASS",
+        "generation_sha256": "14bc0b3c5beba7710b7b30df8f8106eff2859603e64693ecf55838739b000cb6",
+        "build": "PASS",
+        "build_sha256": "5e65b87e73954c078de1e5f99f4bfa774eaf1ed39139553c866b1a9a62e11949",
+        "linkage": "PASS"
+      },
+      {
+        "round": 2,
+        "generation": "PASS",
+        "generation_sha256": "6f5f77c37545d1731e3c1f681e97258cd28a3d2d2abc5758ea679020208419f3",
+        "build": "PASS",
+        "build_sha256": "36e390a3e86d4b48b60ba41293cbe999769247ab83e02e8760a3df8abc15b6b5",
+        "linkage": "PASS"
+      }
+    ],
+    "record_sha256": "2f723baf420f217882306760b63f3510c9258c6864038f73e14902aa9566779b",
+    "migration_preparation": [
+      "Native GUI migration changed tool/database and initially chose FW1.8.7",
+      "Source configuration restored FW1.8.6 and LastFirmware=false",
+      "Old generator metadata archived; DeletePrevious=false in fixed-profile rounds"
+    ],
+    "hardware_keys_changed": 0,
+    "preserved_application_ui_cmake_files": 69,
+    "actually_compiled_hal_sources_matching_fw_1_8_6": 14
+  },
+  "behavior": {
+    "source": "../evaluations/v07/results.json",
+    "phases": {
+      "original10": {
+        "runs": 10,
+        "strict_pass": 7,
+        "strict_fail": 3,
+        "elapsed_seconds_sum": 1153.14,
+        "observable_tool_items": 197
+      },
+      "routing_revision2": {
+        "runs": 2,
+        "strict_pass": 2,
+        "strict_fail": 0,
+        "elapsed_seconds_sum": 127.999,
+        "observable_tool_items": 23
+      },
+      "functional_revision1": {
+        "runs": 1,
+        "strict_pass": 1,
+        "strict_fail": 0,
+        "elapsed_seconds_sum": 170.688,
+        "observable_tool_items": 22
+      }
+    },
+    "full_final_revision_rerun": false,
+    "external_blind_review": false,
+    "r2_complete_tick_contract": "Independent reviewer ran actual source; executing agent self-test coverage remained incomplete"
+  },
+  "not_run": [
+    "board",
+    "OLED interaction",
+    "new external human trial",
+    "remote CI",
+    "Vitis A53 platform BSP application native build",
+    "ESP-IDF native build",
+    "unchanged TouchGFX Vivado FIFO native regressions"
+  ],
+  "package_scope": "Original source and sanitized conclusions only; no full third-party tree, generated products, personal raw logs or private CAP materials"
+}

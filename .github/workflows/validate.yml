@@ -9,6 +9,91 @@ permissions:
   contents: read
 
 jobs:
+  first-use-read-only:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check read-only intake without vendor SDKs
+        run: python -B -m unittest discover -s tests -p test_project_intake.py -v
+      - name: Check optimized read-only intake
+        run: python -B -O -m unittest discover -s tests -p test_project_intake.py -v
+  host-business-contracts:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check actual rolling statistics C code and wrong-mean negative
+        run: >-
+          python -B examples/common/rolling-stats/tests/check.py
+          --cc "$(command -v gcc)"
+          --output "${{ runner.temp }}/epw-v06-stats"
+      - name: Check actual Model without an SDK
+        run: >-
+          python -B examples/feature-handoff/touchgfx/tests/check_model.py
+          --project examples/feature-handoff/touchgfx/implementation/user
+          --cxx "$(command -v g++)"
+          --output "${{ runner.temp }}/epw-v06-model"
+      - name: Check Reset behavior and no-op Reset negative without an SDK
+        run: >-
+          python -B examples/feature-handoff/touchgfx/tests/check_model.py
+          --project examples/feature-handoff/touchgfx/human-continuation
+          --cxx "$(command -v g++)" --with-reset
+          --output "${{ runner.temp }}/epw-v06-reset"
+      - name: Keep host contract records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: host-business-contract-evidence
+          path: |
+            ${{ runner.temp }}/epw-v06-stats/*.json
+            ${{ runner.temp }}/epw-v06-stats/*.log
+            ${{ runner.temp }}/epw-v06-model/*.json
+            ${{ runner.temp }}/epw-v06-model/*.log
+            ${{ runner.temp }}/epw-v06-reset/*.json
+            ${{ runner.temp }}/epw-v06-reset/*.log
+          if-no-files-found: warn
+      - name: Check runtime status contracts and four semantic negatives
+        run: >-
+          python -B examples/real-project-handoff/tests/check.py
+          --cc "$(command -v gcc)"
+          --output "${{ runner.temp }}/epw-v07-status"
+      - name: Keep runtime status contract records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runtime-status-host-evidence
+          path: |
+            ${{ runner.temp }}/epw-v07-status/*.json
+            ${{ runner.temp }}/epw-v07-status/*/*.log
+          if-no-files-found: warn
+      - name: Exercise source archive with the host compiler
+        shell: python
+        run: |
+          import os, pathlib, shutil, subprocess, sys, zipfile
+          subprocess.run([sys.executable, '-B', 'scripts/release.py', 'pack'], check=True)
+          subprocess.run([sys.executable, '-B', 'scripts/release.py', 'verify-packages'], check=True)
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'epw-source-host'
+          target.mkdir()
+          with zipfile.ZipFile('dist/embedded-project-workflow-source-v0.7.0-beta.1.zip') as archive:
+              archive.extractall(target)
+          source = target / 'embedded-project-workflow'
+          subprocess.run([sys.executable, '-B', str(source / 'examples/real-project-handoff/tests/check.py'),
+                          '--cc', shutil.which('gcc'), '--output', str(target / 'contracts')], check=True)
   validate:
     runs-on: windows-latest
     steps:
@@ -74,8 +159,29 @@ jobs:
         run: python -B scripts/release.py pack
       - name: Verify archive contents
         run: python -B scripts/release.py verify-packages
+      - name: Exercise extracted source and Skill entrypoints
+        shell: python
+        run: |
+          import os, pathlib, subprocess, sys, zipfile
+          target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'epw-release-unpacked'
+          target.mkdir()
+          for kind, filename in [('source', 'embedded-project-workflow-source-v0.7.0-beta.1.zip'),
+                                 ('skill', 'embedded-project-workflow-v0.7.0-beta.1.zip')]:
+              with zipfile.ZipFile(pathlib.Path('dist') / filename) as archive:
+                  archive.extractall(target / kind)
+          source = target / 'source/embedded-project-workflow'
+          skill = target / 'skill/embedded-project-workflow'
+          subprocess.run([sys.executable, '-B', 'scripts/release.py', 'validate'], cwd=source, check=True)
+          subprocess.run([sys.executable, '-B', str(skill / 'scripts/project_intake.py'), '--help'], check=True)
+          for kind in ['cubemx', 'touchgfx', 'vivado']:
+              subprocess.run([sys.executable, '-B', str(skill / 'scripts/project_intake.py'), 'inspect',
+                              '--project', str(source / 'examples/first-use' / kind)], check=True)
       - uses: actions/upload-artifact@v4
         with:
           name: beta-release-packages
-          path: dist/*
+          path: |
+            dist/embedded-project-workflow-source-v0.7.0-beta.1.zip
+            dist/embedded-project-workflow-v0.7.0-beta.1.zip
+            dist/vivado-examples-v0.7.0-beta.1.zip
+            dist/SHA256SUMS.txt
           if-no-files-found: error

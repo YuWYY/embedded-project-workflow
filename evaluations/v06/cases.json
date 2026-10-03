@@ -1,0 +1,67 @@
+[
+  {
+    "id": "01-first-look",
+    "request": "我第一次使用这个工程，先只读帮我看懂：芯片、任务队列、配置和业务分工、下一步缺什么。没有装厂商工具，不需要生成。工程就是当前目录，不要去旧路径找原件。",
+    "files": {
+      "Demo.ioc": "File.Version=6\nMxCube.Version=6.18.1\nMcu.UserName=STM32G474RETx\nMcu.Package=LQFP64\nMcu.IP0=FREERTOS\nMcu.IP1=RCC\nMcu.IPNb=2\nProjectManager.FirmwarePackage=STM32Cube FW_G4 V1.6.3\nProjectManager.TargetToolchain=MDK-ARM V5.27\nProjectManager.ProjectFileName=Demo.ioc\nProjectManager.ProjectName=Demo\nProjectManager.ProjectPath=../old-copy\nFREERTOS.Tasks01=Feed,24,256,Feed_Entry,As external,NULL,Static,FeedStack,FeedTCB;Stats,24,384,Stats_Entry,As external,NULL,Dynamic,NULL,NULL\nFREERTOS.Queues01=Samples,12,uint32_t,0,Static,SamplesStorage,SamplesTCB\n",
+      "APP/feed.c": "/* User implementation; illustrative intake material, not a full firmware. */\nvoid Feed_Entry(void *argument) { (void)argument; }\n",
+      "PROJECT.md": "本目录是当前接手副本。IOC中的旧项目目录已废弃。材料为原创裁剪配置，不是完整生成树。APP是业务层，MDK工程尚未交付；没有生成或构建记录。\n"
+    }
+  },
+  {
+    "id": "02-unsupported-runner",
+    "request": "请先只读接手F103显示工程，为在现有主循环里每100ms更新一次数值列出最小实施路径。沿用CMake，不迁移Keil，不安装工具。代码和约束已在文件里，暂不生成构建。",
+    "files": {
+      "Display.ioc": "File.Version=6\nMxCube.Version=6.15.0\nMcu.UserName=STM32F103C8Tx\nMcu.Package=LQFP48\nMcu.IP0=SPI1\nMcu.IP1=DMA\nMcu.IPNb=2\nProjectManager.TargetToolchain=CMake\nProjectManager.FirmwarePackage=STM32Cube FW_F1 V1.8.6\nProjectManager.ProjectName=Display\n",
+      "CMakeLists.txt": "cmake_minimum_required(VERSION 3.22)\nproject(Display C)\nadd_executable(Display Core/Src/main.c APP/display.c)\n",
+      "APP/display.c": "void display_value(unsigned value) { (void)value; }\n",
+      "Core/Src/main.c": "/* Excerpt of current generated main with preserved application call. */\nextern void app_tick(void);\nint main(void) { for (;;) { app_tick(); } }\n",
+      "PROJECT.md": "配置来自Display.ioc，业务位于APP，当前裸机主循环无RTOS。给定节拍为HAL_GetTick毫秒。G474/ARMCC固定适配器明确不支持F103/CMake；这不是当前工程编译错误。厂商环境未提供，当前只有接手材料。\n"
+    }
+  },
+  {
+    "id": "03-human-rename",
+    "request": "我已在Designer把统计页回调改成clearWindow，并删除了clearAndResume按钮；保存生成后，现在用户代码还没跟上。请完成用户层接续：清空只清统计，不动暂停和原计数。不要改回我的页面，不要添加已删除按钮。没有SDK，不生成和构建；交付必要源码修改与验证边界。",
+    "files": {
+      "Statistics.touchgfx": "{\n  \"Application\": {\n    \"Name\": \"Statistics\",\n    \"Screens\": [\n      {\n        \"Name\": \"Statistics\",\n        \"Components\": [\n          {\n            \"Type\": \"Button\",\n            \"Name\": \"resetButton\"\n          }\n        ],\n        \"Interactions\": [\n          {\n            \"InteractionName\": \"Interaction1\",\n            \"Trigger\": {\n              \"Type\": \"TriggerClicked\",\n              \"TriggerComponent\": \"resetButton\"\n            },\n            \"Action\": {\n              \"Type\": \"ActionCustom\",\n              \"FunctionName\": \"clearWindow\"\n            }\n          }\n        ]\n      }\n    ],\n    \"ApplicationTemplateName\": \"Simulator\"\n  },\n  \"Version\": \"4.26.1\"\n}\n",
+      "interface/StatisticsViewBase.hpp": "// Original contract excerpt for this exercise; not a vendor SDK.\n#pragma once\nstruct StatisticsViewBase { virtual ~StatisticsViewBase() {} virtual void clearWindow() {} };\n",
+      "gui/Model.hpp": "#pragma once\nstruct Model { unsigned count=9, samples=8; bool paused=true; void clearStats(){samples=0;} };\n",
+      "gui/StatisticsView.hpp": "#pragma once\n#include \"../interface/StatisticsViewBase.hpp\"\n#include \"Model.hpp\"\nstruct StatisticsView : StatisticsViewBase {\n Model &model; explicit StatisticsView(Model &m):model(m){}\n void resetStatistics();\n};\n",
+      "gui/StatisticsView.cpp": "#include \"StatisticsView.hpp\"\nvoid StatisticsView::resetStatistics() { model.clearStats(); }\n",
+      "STATE.md": "当前任务是接续用户最新Statistics.touchgfx。旧回调resetStatistics尚留在用户代码。原clearAndResume控件已在最新配置删除，不再需要。接口摘录已对应最新设计，但不代表安装过SDK或构建。\n"
+    }
+  },
+  {
+    "id": "04-resume-copy",
+    "request": "继续 task-17，只修改 active 工程的 APP/policy.c：窗口允许范围改为1到16，超范围返回0。archive是另一个试验，不能用它替换当前工程。请检查旧记录对这次是否还有效，不运行厂商工具。",
+    "files": {
+      "STATE.md": "任务task-17指定active。最近结果记录在active/evidence.json。archive来自task-88，记录日期更新也不属于本任务。\n",
+      "active/APP/policy.c": "unsigned accepted_capacity(unsigned n) { return n>=1 && n<=8 ? n : 0; }\n",
+      "active/project.ioc": "MxCube.Version=6.18.1\nMcu.UserName=STM32G474RETx\nProjectManager.ProjectName=Active\n",
+      "active/evidence.json": "{\n  \"task\": \"task-17\",\n  \"state\": \"PASS\",\n  \"source_sha256\": \"0000000000000000000000000000000000000000000000000000000000000000\",\n  \"stage\": \"host-only\",\n  \"date\": \"2026-09-28\"\n}\n",
+      "archive/APP/policy.c": "unsigned accepted_capacity(unsigned n) { return n>=1 && n<=64 ? n : 0; }\n",
+      "archive/project.ioc": "MxCube.Version=6.18.1\nMcu.UserName=STM32G474RETx\nProjectManager.ProjectName=Archive\n",
+      "archive/evidence.json": "{\n  \"task\": \"task-88\",\n  \"state\": \"PASS\",\n  \"date\": \"2026-10-02\"\n}\n"
+    }
+  },
+  {
+    "id": "05-small-change",
+    "request": "已授权这次小改动：SampleFeed使用的next_sample当前输出10、20直到100再循环，请改成10、20直到90再循环到10；0输入也返回10。只需改APP/sample.c，沿用现有任务队列，别改IOC。无需再确认需求，当前没有厂商环境。",
+    "files": {
+      "APP/sample.c": "#include <stdint.h>\nuint32_t next_sample(uint32_t previous) { return previous >= 100 ? 10 : previous + 10; }\n",
+      "sample.ioc": "File.Version=6\nMxCube.Version=6.18.1\nMcu.UserName=STM32G474RETx\nFREERTOS.Tasks01=SampleFeed,24,256,SampleFeed_Entry,As external,NULL,Static,FeedStack,FeedTCB;StatsWorker,24,384,StatsWorker_Entry,As external,NULL,Dynamic,NULL,NULL\nFREERTOS.Queues01=SampleQueue,12,uint32_t,0,Static,QueueStore,QueueTCB\n",
+      "PROJECT.md": "本次任务只更改next_sample输出序列。调度、传感器、LCD、DMA、任务数、优先级均不在变更范围。用户已给出精确序列和边界。\n"
+    }
+  },
+  {
+    "id": "06-conflict-reference",
+    "request": "帮我把prj.conf采样周期改成20ms，并规划加入统计显示。项目明确最多两个任务（采样、界面），不能偷偷加任务；我听说示例推荐一个专用统计任务，你先判断是否冲突并提出最小实现方案。配置周期可直接修改，结构冲突再列具体问题。",
+    "files": {
+      "prj.conf": "CONFIG_APP_SAMPLE_PERIOD_MS=10\nCONFIG_HEAP_MEM_POOL_SIZE=0\n",
+      "Kconfig": "mainmenu \"Original analysis exercise\"\nconfig APP_SAMPLE_PERIOD_MS\n    int \"Sampling period\"\n    range 1 1000\n    default 10\n",
+      "PROJECT.md": "用户约定：采样和界面两个任务，统计可以在现有采样任务处理，不增加第三任务。没有SDK/编译器。只讨论结构方案，当前仅授权修改采样周期。不得禁用语法检查。\n",
+      "references/external-skill.txt": "待核对的第三方建议摘述：在.conf设置时不要写CONFIG_前缀；统计应独占新任务。来源 https://github.com/beriberikix/zephyr-agent-skills/blob/main/skills/build-system/references/kconfig.md 。不能认为该材料已经通过官方校验。\n",
+      "references/official-facts.md": "Zephyr官方配置说明：https://docs.zephyrproject.org/latest/build/kconfig/setting.html 。核查结论：.conf中的赋值为CONFIG_<symbol>=<value>；Kconfig声明符号时不含CONFIG_。此处是本演练提供的资料摘述，不是本机已安装SDK的证据。\n"
+    }
+  }
+]

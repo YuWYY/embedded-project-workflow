@@ -1,5 +1,7 @@
 # v0.5 SoC交接：支持范围与最短试用
 
+> 历史资料：以下内容保留对应版本当时的验证与发布状态，不代表 v0.6 当前候选。当前范围见[支持与证据](support.md)。
+
 本候选围绕板级依据、原生BD设计和硬件向软件的元数据交接。原创案例位于 [examples/vivado/soc-handoff](../examples/vivado/soc-handoff)，规则位于 [Zynq/MPSoC指南](../skills/embedded-project-workflow/references/zynq-mpsoc.md)与[Vitis指南](../skills/embedded-project-workflow/references/vitis-handoff.md)。实际阶段、检查器修订和未覆盖事项见[本轮验证记录](validation-v05.md)。本轮只交付本地候选。
 
 ## 支持与证据矩阵
