@@ -1,0 +1,138 @@
+{
+  "version": "0.6.0-beta.1",
+  "status": "LOCAL_CANDIDATE_ACCEPTED_AFTER_TARGETED_REVISION",
+  "branch": "codex/first-use-v06",
+  "originals": {
+    "v05_source_files_unchanged": 268,
+    "native_input_files_unchanged": 2662
+  },
+  "python_regression": {
+    "tests": 125,
+    "normal": "PASS",
+    "optimized": "PASS"
+  },
+  "intake": {
+    "tests": 34,
+    "windows_normal": "PASS",
+    "windows_optimized": "PASS",
+    "wsl_ubuntu_normal": "PASS",
+    "wsl_ubuntu_optimized": "PASS",
+    "vendor_processes_started": 0
+  },
+  "cube_adapter": {
+    "tests": 37,
+    "normal": "PASS",
+    "optimized": "PASS",
+    "native_A": "PASS",
+    "native_B": "PASS",
+    "board": "NOT_RUN"
+  },
+  "host_business": {
+    "linux_stats": "PASS",
+    "wrong_mean_negative": "EXPECTED_FAILURE",
+    "linux_actual_model": "PASS",
+    "noop_reset_negative": "EXPECTED_FAILURE",
+    "windows_model_old_and_new_compiler_options": "PASS",
+    "gui": "NOT_RUN"
+  },
+  "behavior": {
+    "none": {
+      "runs": 12,
+      "endpoint_pass": 8,
+      "mechanical_pass": 12,
+      "elapsed_seconds_sum": 528.077,
+      "elapsed_seconds_median": 44.328,
+      "observable_tool_items": 104,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 778334,
+        "cached_input_tokens": 690176,
+        "output_tokens": 17162,
+        "reasoning_output_tokens": 2256
+      }
+    },
+    "v05": {
+      "runs": 12,
+      "endpoint_pass": 10,
+      "mechanical_pass": 12,
+      "elapsed_seconds_sum": 749.968,
+      "elapsed_seconds_median": 58.906,
+      "observable_tool_items": 155,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 1232750,
+        "cached_input_tokens": 1061888,
+        "output_tokens": 25961,
+        "reasoning_output_tokens": 4590
+      }
+    },
+    "v06": {
+      "runs": 12,
+      "endpoint_pass": 11,
+      "mechanical_pass": 12,
+      "elapsed_seconds_sum": 733.876,
+      "elapsed_seconds_median": 61.4845,
+      "observable_tool_items": 151,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 1279162,
+        "cached_input_tokens": 1115136,
+        "output_tokens": 26188,
+        "reasoning_output_tokens": 4502
+      }
+    },
+    "v06r1": {
+      "runs": 2,
+      "endpoint_pass": 2,
+      "mechanical_pass": 2,
+      "elapsed_seconds_sum": 144.297,
+      "elapsed_seconds_median": 72.1485,
+      "observable_tool_items": 29,
+      "protected_config_overwrite": 0,
+      "unrelated_change": 0,
+      "repeated_answered_question": 0,
+      "unsupported_validation_claim": 0,
+      "reported_usage": {
+        "input_tokens": 219961,
+        "cached_input_tokens": 186368,
+        "output_tokens": 5164,
+        "reasoning_output_tokens": 626
+      }
+    }
+  },
+  "packaging": {
+    "manifest": "PASS",
+    "controlled_negatives": "PASS",
+    "member_content_crc_hash": "PASS",
+    "unpacked_skill_intake": "PASS",
+    "unpacked_source_intake_and_manifest": "PASS"
+  },
+  "source_sha256": {
+    "skills/embedded-project-workflow/SKILL.md": "c737b1ad528887cdfa79c84bad91090e48f258f2a9224f63343efd967e98b577",
+    "skills/embedded-project-workflow/references/existing-projects.md": "b7230a556aafdd3b5d184cbccd880b5e9fdb88ed5e9fac32cf1cf17f3ccc3e23",
+    "skills/embedded-project-workflow/scripts/project_intake.py": "8dd55da452d92176e8075bf8a5bad18149fd42b4b3a8c3921fc0a9d3fec41ae8",
+    "skills/embedded-project-workflow/scripts/cubemx_rtos.py": "e8573d4a316209021e0e454421c39084e39c3e4302171e8bb4300b1ce1967d8e",
+    "examples/feature-handoff/touchgfx/tests/check_model.py": "6e47998562276bd896a558231d3a3ba446556b8dc1aa4d0b249ea423a22a3ed2",
+    ".github/workflows/validate.yml": "bf0434feb1aed04f49d6e9db2c6ee39a06cbd4d8e496daa5e718f728b8c0f1ab"
+  },
+  "not_run": [
+    "remote CI",
+    "new external human user trial",
+    "Vitis A53 platform/BSP/application build",
+    "ESP-IDF native build",
+    "board operation",
+    "installation",
+    "push",
+    "publication"
+  ],
+  "known_limit": "Public Vivado 2020.2 BD duplicate address_block unsupported; XPR facts retained, aggregate ERROR preserved."
+}

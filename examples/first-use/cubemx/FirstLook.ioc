@@ -1,0 +1,15 @@
+# Original read-only exercise. Not a complete CubeMX project.
+File.Version=6
+Mcu.CPN=STM32G474RET6
+Mcu.Family=STM32G4
+Mcu.Package=LQFP64
+Mcu.UserName=STM32G474RETx
+MxCube.Version=6.18.1
+MxDb.Version=DB.6.0.181
+ProjectManager.ProjectName=FirstLook
+ProjectManager.FirmwarePackage=STM32Cube FW_G4 V1.6.3
+ProjectManager.TargetToolchain=MDK-ARM V5
+ProjectManager.MainLocation=Core/Src
+ProjectManager.KeepUserCode=true
+FREERTOS.Tasks01=SampleFeed,24,256,SampleFeed_Entry,As external,NULL,Static,SampleFeedStack,SampleFeedTCB;StatsWorker,24,384,StatsWorker_Entry,As external,NULL,Dynamic,NULL,NULL
+FREERTOS.Queues01=SampleQueue,12,uint32_t,0,Static,SampleQueueStorage,SampleQueueTCB

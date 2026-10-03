@@ -1,0 +1,877 @@
+{
+  "schema_version": 1,
+  "model_requested": "gpt-5.5",
+  "reasoning_effort": "medium",
+  "environment": "Existing Windows CLI; fresh ephemeral contexts; process-only writable mode; user config/rules/apps/plugins/memories/hooks/web disabled. No OS-level VM isolation, no independent backend model attestation.",
+  "scope": "Original six v07 regressions plus A/B paired v06-v07; two routing retests and one functional retest are separate. No board or real display interaction claims.",
+  "preflight": {
+    "success": true,
+    "record_sha256": "c25016a788475c53a892cda45d28507510239d3e0f7ea83331181468abe40f9c"
+  },
+  "frozen_regression_inputs_sha256": {
+    "cases.json": "61a89438e5ed76460042083b029a2bb6766434ae50cf986d803debb1cdbdb877",
+    "reviewer-rubric.md": "12d2ba882dbc7f5e80550bab59a431e455ed6baa308d0d6b1f20adce3309b9fb"
+  },
+  "skill_snapshot_manifest_sha256": {
+    "v06": "869fe96570d5ae3d3b734cf9223b877c099fdaaccfc7123916e2462c66e377ba",
+    "v07": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+    "v07r1": "1dccccb01f53ce47fff71ab4afb3239b0ca2865a2935a1e9ff64f8c81cbf877b",
+    "v07r2": "41e229feac1ff7bd04e9795ea5cff738a52822beaa071b29ed7c1a97414a9605"
+  },
+  "independent_review_sha256": {
+    "original10": "1d71221b98c9c160209a7cc7aeeaa2bcc442700b44dcde2b49a32880f4331d70",
+    "targeted_revisions": "be6b00afa546e27580c74a52346163853f68c25b432582faf3353b8e095d3df9"
+  },
+  "summary_separate_phases": {
+    "original10": {
+      "runs": 10,
+      "strict_pass": 7,
+      "strict_fail": 3,
+      "elapsed_seconds_sum": 1153.14,
+      "observable_tool_items": 197
+    },
+    "routing_revision2": {
+      "runs": 2,
+      "strict_pass": 2,
+      "strict_fail": 0,
+      "elapsed_seconds_sum": 127.999,
+      "observable_tool_items": 23
+    },
+    "functional_revision1": {
+      "runs": 1,
+      "strict_pass": 1,
+      "strict_fail": 0,
+      "elapsed_seconds_sum": 170.688,
+      "observable_tool_items": 22
+    }
+  },
+  "runs": [
+    {
+      "id": "01-first-look-v07-1",
+      "case": "01-first-look",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 75.703,
+      "tool_calls": 14,
+      "observable_tool_output_utf8_bytes": 30135,
+      "observable_read_output_utf8_bytes": 25646,
+      "observable_skill_read_output_utf8_bytes": 23014,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 92080,
+          "cached_input_tokens": 69120,
+          "output_tokens": 2896,
+          "reasoning_output_tokens": 740
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PARTIAL",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "FAIL",
+        "strict_result": "FAIL",
+        "finding": "Correct device, two tasks, queue, current root and source/build boundary. However final answer calls stack values only fields 256/384; it never identifies words. This misses the explicit strict endpoint and is not credited as full completion.",
+        "evidence": [
+          "answer.txt: stack fields 256/384 lack words",
+          "events item_17: original IOC rows read",
+          "record modified/added empty"
+        ],
+        "execution_notes": "Read three relevant guides plus main entry. Repeated file listings/reads observed; no fixed call threshold used.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [],
+      "added_file_count": 0,
+      "input_manifest_sha256": "68c9c1dc3f12430288f599a7e077bf26a1b196fbf5348516cdece07d8cf954f0",
+      "raw_evidence_sha256": {
+        "record.json": "77bbbf44c5213dece95fa71a3369c3042127debd75fe91b551f0629d4acda691",
+        "events.jsonl": "1e757679bfa8ee67d511e563d30d611651abcf35c5dbafc14f8e8c9349706ab3",
+        "answer.txt": "9bad096f0735722d8c6b695c6190292d94d1bbd1a4f6f7a8ad3eea63f0e0bf3d"
+      },
+      "output": "outputs/01-first-look-v07-1.md"
+    },
+    {
+      "id": "01-first-look-v07r1-1",
+      "case": "01-first-look",
+      "arm": "v07r1",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 65.234,
+      "tool_calls": 12,
+      "observable_tool_output_utf8_bytes": 40505,
+      "observable_read_output_utf8_bytes": 36532,
+      "observable_skill_read_output_utf8_bytes": 26389,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 103517,
+          "cached_input_tokens": 76800,
+          "output_tokens": 2401,
+          "reasoning_output_tokens": 290
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "365073c2340d04a664d74e807e9ae57bc6b58d81525b8b96aaf7760bb0978f37",
+      "skill_snapshot_manifest_sha256": "1dccccb01f53ce47fff71ab4afb3239b0ca2865a2935a1e9ff64f8c81cbf877b",
+      "phase": "routing_revision2",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Invokes read-only intake, then reports 256/384 words and queue capacity 12 elements. Preserves current root, treats old ProjectPath as deprecated, identifies APP stub/missing entry and distinguishes declarations from generation/build/runtime.",
+        "evidence": [
+          "events item_10: actual intake JSON with stack_words/capacity_elements",
+          "answer.txt: explicit words and elements",
+          "no input changes"
+        ],
+        "execution_notes": "Unit omission resolved in this run. Still reads configuration-contracts and freertos after intake; observed read bytes rose even though calls and elapsed seconds fell. No general efficiency conclusion from one run.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [],
+      "added_file_count": 0,
+      "input_manifest_sha256": "68c9c1dc3f12430288f599a7e077bf26a1b196fbf5348516cdece07d8cf954f0",
+      "raw_evidence_sha256": {
+        "record.json": "7d0ef433618451f1f45f2a28509bc49a78295b93cf4200f6326dc7ec20adac20",
+        "events.jsonl": "e78ef42435151eb9138d336322f56ebfa6bee0e1d537e4990c91706e166d1f4d",
+        "answer.txt": "f13b3aaf4d192d5e6ac6599286d142998daad88ac51caab1c2fb834c242b7ac5"
+      },
+      "output": "outputs/01-first-look-v07r1-1.md"
+    },
+    {
+      "id": "02-unsupported-runner-v07-1",
+      "case": "02-unsupported-runner",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 80.719,
+      "tool_calls": 16,
+      "observable_tool_output_utf8_bytes": 17497,
+      "observable_read_output_utf8_bytes": 17497,
+      "observable_skill_read_output_utf8_bytes": 13108,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 109527,
+          "cached_input_tokens": 89600,
+          "output_tokens": 2815,
+          "reasoning_output_tokens": 479
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Preserves F103/CMake and existing app_tick loop. Proposes nonblocking HAL_GetTick >=100ms update inside the already-listed APP/display.c; correctly identifies stub rendering and narrow runner mismatch rather than build failure.",
+        "evidence": [
+          "answer.txt: four-step source integration plan",
+          "events: reads IOC, main.c, CMakeLists and APP/display.c",
+          "record modified/added empty"
+        ],
+        "execution_notes": "Read-only task satisfied. No source implementation or native build was requested or claimed.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [],
+      "added_file_count": 0,
+      "input_manifest_sha256": "9bd0c045c5d3437512098436d23a38933d9027fc6f0277294208ad1d8342c513",
+      "raw_evidence_sha256": {
+        "record.json": "7295c6dd23eced81e621f0a063e2831b4137cb28c91d22774efa4203c9911f74",
+        "events.jsonl": "3c44c6e759d6da7e6c9f7cb75fd4030ce7d15b87608f3bb0fe560640f4f75d55",
+        "answer.txt": "4b0cdf022cf1dd43027bf36a0a374629b64859cca7a8a70c1dd95283245b052c"
+      },
+      "output": "outputs/02-unsupported-runner-v07-1.md"
+    },
+    {
+      "id": "02-unsupported-runner-v07r1-1",
+      "case": "02-unsupported-runner",
+      "arm": "v07r1",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 62.765,
+      "tool_calls": 11,
+      "observable_tool_output_utf8_bytes": 21162,
+      "observable_read_output_utf8_bytes": 16063,
+      "observable_skill_read_output_utf8_bytes": 14946,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 80349,
+          "cached_input_tokens": 69632,
+          "output_tokens": 2264,
+          "reasoning_output_tokens": 666
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "365073c2340d04a664d74e807e9ae57bc6b58d81525b8b96aaf7760bb0978f37",
+      "skill_snapshot_manifest_sha256": "1dccccb01f53ce47fff71ab4afb3239b0ca2865a2935a1e9ff64f8c81cbf877b",
+      "phase": "routing_revision2",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Actual intake PARTIAL retained as source-level inventory; F103/CMake and current main-loop/app_tick topology preserved. Provides exact APP/display.c update path and HAL tick cadence, identifies rendering stub and no native verification.",
+        "evidence": [
+          "events item_13: intake text and no execution eligibility claim",
+          "answer.txt: scoped F103/CMake plan",
+          "no input changes"
+        ],
+        "execution_notes": "No Keil migration, environment installation or unrelated implementation.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [],
+      "added_file_count": 0,
+      "input_manifest_sha256": "9bd0c045c5d3437512098436d23a38933d9027fc6f0277294208ad1d8342c513",
+      "raw_evidence_sha256": {
+        "record.json": "416670b283e403985d84045919a279f18962c4996480964e9254c98dadf8efe8",
+        "events.jsonl": "4a9f24b4706ba70e1c060bb13bc1fe36c3198f41fbf0c187bcab75e87b6a2790",
+        "answer.txt": "6f707939dcccbd51b085668c0aaaf62331a41c24856c08f030eeafd46b487295"
+      },
+      "output": "outputs/02-unsupported-runner-v07r1-1.md"
+    },
+    {
+      "id": "03-human-rename-v07-1",
+      "case": "03-human-rename",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 64.328,
+      "tool_calls": 15,
+      "observable_tool_output_utf8_bytes": 27939,
+      "observable_read_output_utf8_bytes": 19023,
+      "observable_skill_read_output_utf8_bytes": 15026,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 119923,
+          "cached_input_tokens": 95744,
+          "output_tokens": 2300,
+          "reasoning_output_tokens": 266
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Only user View header/implementation now override clearWindow and call existing clearStats. Model still changes samples only; paused/count and latest Designer contract are unchanged.",
+        "evidence": [
+          "events item_14: two user files updated",
+          "events item_16/19/20: callback and actual source readback",
+          "workspace gui/Model.hpp and Statistics.touchgfx hashes unchanged"
+        ],
+        "execution_notes": "git diff/status failed because fixture is not a Git repository; final answer admits this. The phrase full-text search is wider than the actual code-scoped search (STATE/REQUEST retain historical names), a nonfunctional wording imprecision.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "gui/StatisticsView.cpp",
+        "gui/StatisticsView.hpp"
+      ],
+      "added_file_count": 0,
+      "input_manifest_sha256": "ebd86f1e4ff1595aaf4b5c17dc09fbed31b30d00f0481b9ec68cf2f99143abb6",
+      "raw_evidence_sha256": {
+        "record.json": "f9be2b345a59834e34f21d69eb8d0ec6b55ac6dcb78e40197aa35438e41510e3",
+        "events.jsonl": "702dbbe206e7b93f722810f4f2e5e330f9a20cf9a0724f5d17aa41e0698c55be",
+        "answer.txt": "25a5647055a835d821e22a5f07bf27dd6e1a491eb2c1afb2025ab3019359b01e"
+      },
+      "output": "outputs/03-human-rename-v07-1.md"
+    },
+    {
+      "id": "04-resume-copy-v07-1",
+      "case": "04-resume-copy",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 53.578,
+      "tool_calls": 12,
+      "observable_tool_output_utf8_bytes": 20183,
+      "observable_read_output_utf8_bytes": 11552,
+      "observable_skill_read_output_utf8_bytes": 10687,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 79911,
+          "cached_input_tokens": 68608,
+          "output_tokens": 1768,
+          "reasoning_output_tokens": 241
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Only active/APP/policy.c changes <=8 to <=16 with >=1 and outside=0 retained. Archive is untouched. Explicitly rejects all-zero old source hash and stale host-only PASS for current source.",
+        "evidence": [
+          "events item_13/15: scoped edit and readback",
+          "answer.txt: old evidence invalidation",
+          "archive hashes unchanged"
+        ],
+        "execution_notes": "Static verification honestly reported; failed git diff is not counted as functional failure.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "active/APP/policy.c"
+      ],
+      "added_file_count": 0,
+      "input_manifest_sha256": "2e3ba8a811e367e95d7f7cb27c08adc30690ca66becd7b00d5ecfdb27c29c6b5",
+      "raw_evidence_sha256": {
+        "record.json": "8664dfa8c996ed093c8453c3866dc915572e00ea43dcbed1ba47cca720e99367",
+        "events.jsonl": "ec87a10c225d6b75cd038d890e5fdf0214d951fe463acb138ca663c51f03fbe5",
+        "answer.txt": "2f44144cc85861c3a63a7d79c088cbef0664f487b39bbecb0b56f4a614a53f24"
+      },
+      "output": "outputs/04-resume-copy-v07-1.md"
+    },
+    {
+      "id": "05-small-change-v07-1",
+      "case": "05-small-change",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 55.672,
+      "tool_calls": 11,
+      "observable_tool_output_utf8_bytes": 18737,
+      "observable_read_output_utf8_bytes": 7677,
+      "observable_skill_read_output_utf8_bytes": 6827,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 91292,
+          "cached_input_tokens": 79360,
+          "output_tokens": 1642,
+          "reasoning_output_tokens": 260
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Only APP/sample.c threshold changes from 100 to 90. Actual function returns 10 for 0, advances 80 to 90, and returns 10 at 90. IOC, task/queue structure remain unchanged.",
+        "evidence": [
+          "events item_13/15: one-line edit/readback",
+          "answer.txt: concrete boundary behavior",
+          "sample.ioc hash unchanged"
+        ],
+        "execution_notes": "No added framework or confirmation. Static evidence only; git diff failed outside a repository and was disclosed.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "APP/sample.c"
+      ],
+      "added_file_count": 0,
+      "input_manifest_sha256": "6fce05bef5df8efe5b0ab03391ce4f9f66975623ccd76ba073c32847edb50b38",
+      "raw_evidence_sha256": {
+        "record.json": "7c7b06177dba0e1ab904d5c63f62d7623d2c4d154c717f41428676e75b7765ac",
+        "events.jsonl": "0e4491d6cb46dae852cb4ea36279c3ad5d99fe4aecdedb12954d451464f94f4f",
+        "answer.txt": "51bf3e2e21a5dd63e453d55617dc2aad9057e4a5141daf119e0d27f727110008"
+      },
+      "output": "outputs/05-small-change-v07-1.md"
+    },
+    {
+      "id": "06-conflict-reference-v07-1",
+      "case": "06-conflict-reference",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 62.594,
+      "tool_calls": 13,
+      "observable_tool_output_utf8_bytes": 16983,
+      "observable_read_output_utf8_bytes": 8516,
+      "observable_skill_read_output_utf8_bytes": 6827,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 104634,
+          "cached_input_tokens": 94208,
+          "output_tokens": 2065,
+          "reasoning_output_tokens": 355
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Actually changes CONFIG_APP_SAMPLE_PERIOD_MS=20; retains CONFIG_ syntax and other setting. Rejects incompatible third task, proposes statistics in existing sampling task and UI reading a snapshot, without claiming SDK validation.",
+        "evidence": [
+          "events item_16/18: prj.conf modification/readback",
+          "answer.txt: two-task alternative and source distinction",
+          "only prj.conf changed"
+        ],
+        "execution_notes": "One initial wrong relative guide lookup failed; agent recovered using supplied references. git diff also failed outside a repository. Both failures retained, not misreported as successful checks.",
+        "source_level": "source read/edits only; native generation/build/runtime NOT_RUN",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "prj.conf"
+      ],
+      "added_file_count": 0,
+      "input_manifest_sha256": "949efdc6e06ec40c4a7c1acae990b99d1b04484dfcbdb1614ad1dd152bbf26b0",
+      "raw_evidence_sha256": {
+        "record.json": "5880df1a288977a56b598bc5ce61123883044ac731fbc775c6e7deeb3eccb6db",
+        "events.jsonl": "d7be3da2aaf951a21aaec67ce2f4f00cb647299d8f63bccd9aacff3bee0126ed",
+        "answer.txt": "7f15428383a64f93d10da3451e7c3ee86178b1237614b303a4b361ba2f0f8891"
+      },
+      "output": "outputs/06-conflict-reference-v07-1.md"
+    },
+    {
+      "id": "07-existing-state-page-v06-1",
+      "case": "07-existing-state-page",
+      "arm": "v06",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 200.266,
+      "tool_calls": 27,
+      "observable_tool_output_utf8_bytes": 202668,
+      "observable_read_output_utf8_bytes": 193598,
+      "observable_skill_read_output_utf8_bytes": 19697,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 981734,
+          "cached_input_tokens": 905216,
+          "output_tokens": 7493,
+          "reasoning_output_tokens": 1401
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "869fe96570d5ae3d3b734cf9223b877c099fdaaccfc7123916e2462c66e377ba",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "FAIL",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PARTIAL",
+        "strict_result": "FAIL",
+        "finding": "Real UI/main-loop/CMake integration and Debug build succeeded. However uptime uses uint32(now-start)/1000, so cumulative seconds restart after one full millisecond tick period. Independent actual-source contract with 1000ms calls through 4294968000ms returns seconds=0 instead of 4294968; loops=4294968 is correct. Original tests cover a short crossing near UINT32_MAX, not lifetime accumulation.",
+        "evidence": [
+          "raw events item_30/item_32: Debug configure/build exit 0",
+          "target ELF disassembly: main calls init/poll and renderer calls snapshot getter",
+          "uptime-wrap/v06/run.log: independent lifetime contract failed with compile exit 0",
+          "uptime-wrap/results.json: actual source hashes and unchanged inputs"
+        ],
+        "stages": {
+          "native_cmake_configure": "PASS",
+          "target_debug_build": "PASS",
+          "original_host_tests": "PASS_AFTER_TEST_CORRECTION",
+          "independent_cumulative_wrap_contract": "FAIL",
+          "cube_generation": "NOT_RUN",
+          "ui_runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "execution_notes": "First host test failed at item_24; test expectation was revised to respect a 100ms publish interval, then passed at item_28. This correction is compatible with the request but does not cover the independent lifetime defect. Git diff failed outside a Git repository; v07 additionally recovered from one malformed PowerShell range-selection command. No evaluated source was modified by the reviewer.",
+        "source_level": "see feature evidence",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "CMakeLists.txt",
+        "Core/Src/main.c"
+      ],
+      "added_file_count": 105,
+      "input_manifest_sha256": "939a225fa4765a5c6ca91b74aa13c7dec798a47125a19784c4c95d22116bbd79",
+      "raw_evidence_sha256": {
+        "record.json": "bb231f65cc784e1bae030a0628f4d834699cdd292925c5d7863eac15c0530bf7",
+        "events.jsonl": "8b45046400ada095ae3bbd3154fbed08ba404cc31327b83e4eab5998f552e006",
+        "answer.txt": "0dc0e064df114e2959ec639b9eb2f6e0f5969f16f6122e9480e0097c902a66e9"
+      },
+      "output": "outputs/07-existing-state-page-v06-1.md"
+    },
+    {
+      "id": "07-existing-state-page-v07-1",
+      "case": "07-existing-state-page",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 249.671,
+      "tool_calls": 37,
+      "observable_tool_output_utf8_bytes": 187535,
+      "observable_read_output_utf8_bytes": 165284,
+      "observable_skill_read_output_utf8_bytes": 21249,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 1066729,
+          "cached_input_tokens": 994304,
+          "output_tokens": 9570,
+          "reasoning_output_tokens": 1350
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "FAIL",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PARTIAL",
+        "strict_result": "FAIL",
+        "finding": "Real UI/main-loop/CMake integration and Debug build succeeded. However uptime uses uint32(now-start)/1000, so cumulative seconds restart after one full millisecond tick period. Independent actual-source contract with 1000ms calls through 4294968000ms returns seconds=0 instead of 4294968; loops=4294968 is correct. Original tests cover a short crossing near UINT32_MAX, not lifetime accumulation.",
+        "evidence": [
+          "raw events item_46/item_48: Debug configure/build exit 0",
+          "target ELF disassembly: main calls init/poll and renderer calls snapshot getter",
+          "uptime-wrap/v07/run.log: independent lifetime contract failed with compile exit 0",
+          "uptime-wrap/results.json: actual source hashes and unchanged inputs"
+        ],
+        "stages": {
+          "native_cmake_configure": "PASS",
+          "target_debug_build": "PASS",
+          "original_host_tests": "PASS_AFTER_TEST_CORRECTION",
+          "independent_cumulative_wrap_contract": "FAIL",
+          "cube_generation": "NOT_RUN",
+          "ui_runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "execution_notes": "First host test failed at item_40; test expectation was revised to respect a 100ms publish interval, then passed at item_44. This correction is compatible with the request but does not cover the independent lifetime defect. Git diff failed outside a Git repository; v07 additionally recovered from one malformed PowerShell range-selection command. No evaluated source was modified by the reviewer.",
+        "source_level": "see feature evidence",
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "CMakeLists.txt",
+        "Core/Src/main.c"
+      ],
+      "added_file_count": 105,
+      "input_manifest_sha256": "939a225fa4765a5c6ca91b74aa13c7dec798a47125a19784c4c95d22116bbd79",
+      "raw_evidence_sha256": {
+        "record.json": "9e44e3ff44dfdb5b4dc79db2bcb9da4acac822eff03f221c37a0dcb0eccd7255",
+        "events.jsonl": "99a8637536457bbcf467554b90e1365aac962c1da59aee711f9793968e8cb224",
+        "answer.txt": "ac180081291b8bae320b4cfba08ba3a21b0ba7dfb152c7fe6019ea128011f37a"
+      },
+      "output": "outputs/07-existing-state-page-v07-1.md"
+    },
+    {
+      "id": "07-existing-state-page-v07r2-1",
+      "case": "07-existing-state-page",
+      "arm": "v07r2",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 170.688,
+      "tool_calls": 22,
+      "observable_tool_output_utf8_bytes": 274733,
+      "observable_read_output_utf8_bytes": 266074,
+      "observable_skill_read_output_utf8_bytes": 21887,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 660390,
+          "cached_input_tokens": 584192,
+          "output_tokens": 6138,
+          "reasoning_output_tokens": 1293
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "2e843fccccf97b13b53fb3dd4eeea98175873e5d4767bf2e089f92803bfb42ce",
+      "skill_snapshot_manifest_sha256": "41e229feac1ff7bd04e9795ea5cff738a52822beaa071b29ed7c1a97414a9605",
+      "phase": "functional_revision1",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Fresh original input now receives uint64 accumulation of successive uint32 tick deltas. Current main/renderer/CMake integration and target Debug build are real. Independent actual-source test with 1000ms polls through 4294968000ms produces seconds=4294968 and loops=4294968; prior modulo-lifetime defect is absent.",
+        "evidence": [
+          "events item_24: original host contract PASS",
+          "events item_26/27: native configure/build exit0",
+          "uptime-wrap-v07r2/result.json: independent full-cycle contract PASS and unchanged source hashes",
+          "uptime-wrap-v07r2/target-disassembly.log: actual init/poll/getter calls"
+        ],
+        "stages": {
+          "native_cmake_configure": "PASS",
+          "target_debug_build": "PASS",
+          "original_host_tests": "PASS_LIMITED_COVERAGE",
+          "independent_full_cycle_contract": "PASS",
+          "cube_generation": "NOT_RUN",
+          "ui_runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "execution_notes": "No evaluation workspace was changed by reviewer. Existing native configuration/navigation/keys/render cadence remain. Reading TouchGFX guidance for this custom bare-metal UI was unnecessary but caused no code scope expansion. One clean revision run is an observation, not a statistical success-rate claim.",
+        "source_level": "see feature evidence",
+        "original_test_gaps": [
+          "Executing agent still tests only a short wrap after initialization near UINT32_MAX; it did not add the requested full-cycle lifetime case to its own host contract. Reviewer full-cycle test supplies independent correctness evidence; do not claim the agent self-test covered this boundary."
+        ],
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "CMakeLists.txt",
+        "Core/Src/main.c"
+      ],
+      "added_file_count": 105,
+      "input_manifest_sha256": "939a225fa4765a5c6ca91b74aa13c7dec798a47125a19784c4c95d22116bbd79",
+      "raw_evidence_sha256": {
+        "record.json": "caa871be8b973909960f42b63b7bf49429c68551142a2e4f66c8333bcf0313f2",
+        "events.jsonl": "03a9dd9293e36ca167e0f3205939ba9d5d0c16f639dc634b530ec3acc12b904a",
+        "answer.txt": "22611456a99ce0512c7d06da61b9204732852368f0984c2769ef7517ecbbcc1c"
+      },
+      "output": "outputs/07-existing-state-page-v07r2-1.md"
+    },
+    {
+      "id": "08-human-config-handoff-v06-1",
+      "case": "08-human-config-handoff",
+      "arm": "v06",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 164.469,
+      "tool_calls": 21,
+      "observable_tool_output_utf8_bytes": 95945,
+      "observable_read_output_utf8_bytes": 73372,
+      "observable_skill_read_output_utf8_bytes": 15072,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 507934,
+          "cached_input_tokens": 462336,
+          "output_tokens": 5999,
+          "reasoning_output_tokens": 925
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "869fe96570d5ae3d3b734cf9223b877c099fdaaccfc7123916e2462c66e377ba",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Preserves the actual 250ms and Runtime info configuration, current business source and board setup. Actual host contracts and a fresh Debug configure/build complete. Target disassembly confirms main passes 250 to initialization and calls poll. Independent reviewer links the evaluated business source and verifies exact menu, 249/250ms boundary, late no-catchup and full tick-cycle cumulative seconds. Original 100ms products were not used as new evidence.",
+        "evidence": [
+          "workspace Core/AppStatus/status_config.h and native configuration hashes unchanged",
+          "events: actual host compilation/run and 78-step Debug build",
+          "handoff-current/v06/target-disassembly.log: movs r2,#250 before epw_status_init; poll call",
+          "handoff-current/v06/run.log and results.json: independent actual-source contracts PASS"
+        ],
+        "stages": {
+          "native_cmake_configure": "PASS",
+          "target_debug_build": "PASS",
+          "original_host_tests": "PASS_LIMITED_COVERAGE",
+          "independent_current_contract": "PASS",
+          "cube_generation": "NOT_RUN",
+          "ui_runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "execution_notes": "Only HANDOFF.md is updated; new host tests/logs/build products are appropriate. Initial mixed PowerShell table output was reprinted explicitly and git status failed outside a repository. Final no generated firmware wording is imprecise because ELF was built, but actual build and no-board boundary are otherwise explicit.",
+        "source_level": "see feature evidence",
+        "original_test_gaps": [
+          "Menu check only tests first character; full-cycle uptime not covered by agent test. Actual config/string is correct and independent reviewer checks the complete string and lifetime."
+        ],
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [
+        "HANDOFF.md"
+      ],
+      "added_file_count": 109,
+      "input_manifest_sha256": "d1390a247ae350368fc63b88e684fe195609bbcfb3f4622a0aff89bc94de86c7",
+      "raw_evidence_sha256": {
+        "record.json": "3d2a39bf7ab69f20c54ab87372727c82e80ecdb95546e576c63453aaf6a3740f",
+        "events.jsonl": "c4a9ef062d58a35f2b376cd016e29fdfb5b8e01d251dceef127eb6c90c4e7692",
+        "answer.txt": "169193ac1eb4d1ef967b61b238611eb55cb5122c83dba10037568a18641b6ed8"
+      },
+      "output": "outputs/08-human-config-handoff-v06-1.md"
+    },
+    {
+      "id": "08-human-config-handoff-v07-1",
+      "case": "08-human-config-handoff",
+      "arm": "v07",
+      "repeat": 1,
+      "state": "COMPLETED",
+      "exit_code": 0,
+      "elapsed_seconds": 146.14,
+      "tool_calls": 31,
+      "observable_tool_output_utf8_bytes": 166965,
+      "observable_read_output_utf8_bytes": 153874,
+      "observable_skill_read_output_utf8_bytes": 13108,
+      "byte_metric_scope": "UTF-8 length of observable command results classified as reads, including transformed intake output; not filesystem I/O, unique file bytes, hidden context or billing cost",
+      "usage": [
+        {
+          "input_tokens": 523582,
+          "cached_input_tokens": 457216,
+          "output_tokens": 4909,
+          "reasoning_output_tokens": 511
+        }
+      ],
+      "assigned_skill_unchanged": true,
+      "model_requested": "gpt-5.5",
+      "reasoning_effort": "medium",
+      "cli_version": "codex-cli 0.139.0",
+      "harness_sha256": "9fce96fc30ea06bba54e7fb21769daa095ee98303ee36edf0c79a7edb80422ea",
+      "skill_snapshot_manifest_sha256": "6d37c4ca9d9705cf2e74a44d809a3d871c09369625854f43426bd9f5c54d751c",
+      "phase": "original10",
+      "independent_review": {
+        "functional_endpoint": "PASS",
+        "configuration_protection": "PASS",
+        "evidence_honesty": "PASS",
+        "explanation_completeness": "PASS",
+        "strict_result": "PASS",
+        "finding": "Preserves the actual 250ms and Runtime info configuration, current business source and board setup. Actual host contracts and a fresh Debug configure/build complete. Target disassembly confirms main passes 250 to initialization and calls poll. Independent reviewer links the evaluated business source and verifies exact menu, 249/250ms boundary, late no-catchup and full tick-cycle cumulative seconds. Original 100ms products were not used as new evidence.",
+        "evidence": [
+          "workspace Core/AppStatus/status_config.h and native configuration hashes unchanged",
+          "events: actual host compilation/run and 78-step Debug build",
+          "handoff-current/v07/target-disassembly.log: movs r2,#250 before epw_status_init; poll call",
+          "handoff-current/v07/run.log and results.json: independent actual-source contracts PASS"
+        ],
+        "stages": {
+          "native_cmake_configure": "PASS",
+          "target_debug_build": "PASS",
+          "original_host_tests": "PASS_LIMITED_COVERAGE",
+          "independent_current_contract": "PASS",
+          "cube_generation": "NOT_RUN",
+          "ui_runtime": "NOT_RUN",
+          "board": "NOT_RUN"
+        },
+        "execution_notes": "No existing source is modified. An initial slash-sensitive compile_commands search failed, then a filename-based search succeeded; git status failed outside a repository. No unsupported runtime claim.",
+        "source_level": "see feature evidence",
+        "original_test_gaps": [
+          "Agent host test never expects a nonzero visible second; it cannot distinguish fixed-zero seconds. Full-cycle uptime not covered. Current source is correct and independent reviewer verifies nonzero lifetime accumulation."
+        ],
+        "repeated_questions": 0,
+        "unrelated_modifications": false,
+        "collected_hashes_match_current_files": true,
+        "skill_snapshot_unchanged_independently_checked": true
+      },
+      "changed_input_files": [],
+      "added_file_count": 103,
+      "input_manifest_sha256": "d1390a247ae350368fc63b88e684fe195609bbcfb3f4622a0aff89bc94de86c7",
+      "raw_evidence_sha256": {
+        "record.json": "3bc6897880e1288190e04f94ab0ec02ba142aa4768f718034bc070d543a59c4d",
+        "events.jsonl": "16930439f936710a0ef884536ce20d121d8ef3a1b2527be75c5c7541707aba92",
+        "answer.txt": "066056cb2253b30d84ccd9aebdab868da55651b986e8cf42b7941d33c5f4ca3a"
+      },
+      "output": "outputs/08-human-config-handoff-v07-1.md"
+    }
+  ],
+  "limits": [
+    "Case observations, not statistical evidence of efficiency or reliability.",
+    "Runtime seconds and observable byte/call counts can move in opposite directions; no overall cost reduction claim.",
+    "Usage is host-reported; cached token counts are not a bill or price estimate.",
+    "Underlying upstream source, full build trees, private paths and raw source-bearing tool outputs remain local.",
+    "Retests do not replace original failures. Reviewer was separate from case preparation and executing CLI but authored the intake adapter; this was not an external blinded trial."
+  ]
+}

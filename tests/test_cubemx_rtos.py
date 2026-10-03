@@ -91,6 +91,20 @@ class AdapterTests(unittest.TestCase):
         self.generated.write_text(generated(384, 16, dynamic), encoding="utf-8")
         self.map.write_text(fake_map(384, 16, dynamic), encoding="utf-8")
 
+    def simulated_native_success(self, plan, command, cwd, log, env, timeout=360, record=None, build_rc=0):
+        """Synthetic compiler products exercise checks; never native-build evidence."""
+        log.write_text("synthetic process output", encoding="utf-8")
+        if "-jar" in command:
+            self.materialize(plan)
+        else:
+            (log.parent / "keil.log").write_text("*** Using Compiler 'V5.06 update 7 (build 960)'\ncompiling user_app.c...\n0 Error(s), 2 Warning(s)\n", encoding="utf-8")
+            self.map.write_text(fake_map(384, 16), encoding="utf-8")
+            self.map.with_suffix(".axf").write_bytes(b"synthetic image")
+        result = record if record is not None else {}
+        result.update(status="EXITED", exit_code=0 if "-jar" in command else build_rc,
+                      timeout_seconds=timeout)
+        return result
+
     def test_only_requested_numeric_fields_change_and_crlf_preserved(self):
         data = ORIGINAL.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
         expected = data.replace(b"Producer,24,256,", b"Producer,24,384,").replace(b"Samples,8,uint32_t", b"Samples,16,uint32_t")
@@ -227,7 +241,7 @@ class AdapterTests(unittest.TestCase):
     def test_partial_apply_failure_keeps_backup_logs_and_failure_receipt(self):
         plan = self.plan()
         reports = self.root / "failed-apply"
-        def fake_run(command, cwd, log, env, timeout=600):
+        def fake_run(command, cwd, log, env, timeout=600, record=None):
             log.write_text("synthetic zero exit without generated updates", encoding="utf-8")
             return {"exit_code": 0}
         with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=fake_run):
@@ -323,7 +337,7 @@ class AdapterTests(unittest.TestCase):
     def test_source_changed_during_successful_rebuild_cannot_pass(self):
         plan = self.plan()
         reports = self.root / "during-build-drift"
-        def fake_run(command, cwd, log, env, timeout=360):
+        def fake_run(command, cwd, log, env, timeout=360, record=None):
             if "-jar" in command:
                 log.write_text("synthetic native generation", encoding="utf-8")
                 self.materialize(plan)
@@ -337,7 +351,181 @@ class AdapterTests(unittest.TestCase):
         with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=fake_run):
             with self.assertRaisesRegex(a.AdapterError, "inputs changed during rebuild"):
                 a.apply_plan(plan, self.root, reports)
-        self.assertEqual(json.loads((reports / "result.json").read_text(encoding="utf-8"))["status"], "FAILED")
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["status"], "FAILED")
+        self.assertEqual(result["build"]["status"], "FAILED")
+        self.assertEqual(result["build"]["exit_code"], 0)
+        self.assertEqual(result["verification"]["status"], "NOT_RUN")
+
+    def test_apply_start_failure_has_terminal_summary_and_unstarted_null_code(self):
+        plan = self.plan()
+        reports = self.root / "launch-failure"
+        native_run = a.run
+        def fail_start(command, cwd, log, env, timeout=360, record=None):
+            return native_run([str(self.root / "missing-tool.exe")], cwd, log, env, timeout, record)
+        with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=fail_start):
+            with self.assertRaises(OSError):
+                a.apply_plan(plan, self.root, reports, timeout=2.5)
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["generation"]["status"], "FAILED")
+        self.assertEqual(result["failure_type"], "process_start")
+        self.assertEqual(result["failure_stage"], "generate")
+        self.assertIsNone(result["actual_exit_code"])
+        self.assertIsNone(result["generation"]["exit_code"])
+        self.assertEqual(result["generation"]["timeout_seconds"], 2.5)
+        self.assertEqual(result["build"], {"status": "NOT_RUN", "exit_code": None})
+        self.assertEqual(result["verification"]["status"], "NOT_RUN")
+
+    def test_apply_timeout_propagates_real_process_cleanup_and_preserves_partial_log(self):
+        plan = self.plan()
+        reports = self.root / "apply-timeout"
+        native_run = a.run
+        def timeout_process(command, cwd, log, env, timeout=360, record=None):
+            return native_run([sys.executable, "-B", "-u", "-c", "import time; print('partial'); time.sleep(30)"],
+                              cwd, log, env, timeout, record)
+        with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=timeout_process):
+            with self.assertRaises(subprocess.TimeoutExpired):
+                a.apply_plan(plan, self.root, reports, timeout=0.5)
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["terminal_state"], "TIMEOUT")
+        self.assertEqual(result["generation"]["status"], "TIMEOUT")
+        self.assertEqual(result["failure_type"], "timeout")
+        self.assertIsInstance(result["actual_exit_code"], int)
+        self.assertEqual(result["actual_exit_code"], result["generation"]["exit_code"])
+        self.assertEqual(result["cleanup"]["status"], "COMPLETE")
+        self.assertIn("partial", (reports / "cubemx.log").read_text(encoding="utf-8"))
+        self.assertEqual(result["build"]["status"], "NOT_RUN")
+
+    def test_apply_interrupt_records_terminal_state_and_cli_returns_130(self):
+        plan = self.plan()
+        plan_path = self.root / "plan.json"
+        a.write_json(plan_path, plan)
+        reports = self.root / "interrupted-apply"
+        process = MagicMock()
+        process.pid = 789
+        process.wait.side_effect = KeyboardInterrupt()
+        process.poll.return_value = -9
+        with patch.object(a, "doctor", return_value=self.installation), \
+             patch.object(a.subprocess, "Popen", return_value=process), \
+             patch.object(a, "stop_owned_process", return_value={"status": "COMPLETE", "pid": 789}), \
+             contextlib.redirect_stderr(io.StringIO()):
+            code = a.main(["apply", "--plan", str(plan_path), "--work-root", str(self.root), "--reports", str(reports)])
+        self.assertEqual(code, 130)
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["terminal_state"], "INTERRUPTED")
+        self.assertEqual(result["generation"]["status"], "INTERRUPTED")
+        self.assertEqual(result["actual_exit_code"], -9)
+        self.assertEqual(result["build"]["status"], "NOT_RUN")
+
+    def test_apply_build_postcheck_failure_keeps_exit_code_and_completed_generation(self):
+        plan = self.plan()
+        reports = self.root / "build-postcheck"
+        def bad_build(command, cwd, log, env, timeout=360, record=None):
+            result = self.simulated_native_success(plan, command, cwd, log, env, timeout, record)
+            if "-jar" not in command:
+                self.map.unlink()
+            return result
+        with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=bad_build):
+            with self.assertRaisesRegex(a.AdapterError, "Missing build product"):
+                a.apply_plan(plan, self.root, reports)
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["generation"]["terminal_state"], "PASS")
+        self.assertEqual(result["build"]["status"], "FAILED")
+        self.assertEqual(result["build"]["process_status"], "EXITED")
+        self.assertEqual(result["actual_exit_code"], 0)
+        self.assertEqual(result["failure_type"], "validation")
+        self.assertEqual(result["verification"]["status"], "NOT_RUN")
+
+    def test_apply_zero_error_keil_exit_one_is_still_accepted(self):
+        plan = self.plan()
+        reports = self.root / "keil-warning-success"
+        def successful(command, cwd, log, env, timeout=360, record=None):
+            return self.simulated_native_success(plan, command, cwd, log, env, timeout, record, build_rc=1)
+        with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=successful):
+            result = a.apply_plan(plan, self.root, reports, timeout=7)
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(result["build"]["status"], "EXITED")
+        self.assertEqual(result["build"]["exit_code"], 1)
+        self.assertEqual(result["build"]["errors"], 0)
+        self.assertEqual(result["build"]["warnings"], 2)
+        self.assertEqual(result["build"]["terminal_state"], "PASS")
+        self.assertEqual(result["build"]["timeout_seconds"], 7)
+
+    def test_apply_wrong_process_exit_cannot_pass_a_zero_error_build_summary(self):
+        plan = self.plan()
+        reports = self.root / "wrong-exit"
+        def wrong_exit(command, cwd, log, env, timeout=360, record=None):
+            return self.simulated_native_success(plan, command, cwd, log, env, timeout, record, build_rc=2)
+        with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=wrong_exit):
+            with self.assertRaisesRegex(a.AdapterError, "Keil rebuild failed"):
+                a.apply_plan(plan, self.root, reports)
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["generation"]["terminal_state"], "PASS")
+        self.assertEqual(result["build"]["status"], "FAILED")
+        self.assertEqual(result["actual_exit_code"], 2)
+        self.assertEqual(result["verification"]["status"], "NOT_RUN")
+
+    def test_apply_wrong_map_owner_fails_verification_after_completed_build(self):
+        plan = self.plan()
+        reports = self.root / "wrong-owner"
+        def wrong_owner(command, cwd, log, env, timeout=360, record=None):
+            result = self.simulated_native_success(plan, command, cwd, log, env, timeout, record)
+            if "-jar" not in command:
+                self.map.write_text(fake_map(384, 16).replace("user_app.o(i.Producer_Entry)",
+                                    "app_freertos.o(i.Producer_Entry)"), encoding="utf-8")
+            return result
+        with patch.object(a, "doctor", return_value=self.installation), patch.object(a, "run", side_effect=wrong_owner):
+            with self.assertRaisesRegex(a.AdapterError, "expected user object"):
+                a.apply_plan(plan, self.root, reports)
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertEqual(result["build"]["terminal_state"], "PASS")
+        self.assertEqual(result["verification"]["status"], "FAILED")
+        self.assertEqual(result["failure_stage"], "verify")
+        self.assertIsNone(result["actual_exit_code"])
+        self.assertEqual(result["build"]["exit_code"], 0)
+
+    def test_apply_final_record_failure_returns_nonzero_without_persisting_success(self):
+        plan = self.plan()
+        plan_path = self.root / "plan.json"
+        a.write_json(plan_path, plan)
+        reports = self.root / "final-save-failed"
+        original_write = a.write_json
+        def blocked_final_save(path, value):
+            if Path(path).name == "result.json" and value.get("status") == "PASS":
+                raise OSError("final result storage unavailable")
+            original_write(path, value)
+        def successful(command, cwd, log, env, timeout=360, record=None):
+            return self.simulated_native_success(plan, command, cwd, log, env, timeout, record)
+        stderr = io.StringIO()
+        with patch.object(a, "doctor", return_value=self.installation), \
+             patch.object(a, "run", side_effect=successful), patch.object(a, "write_json", side_effect=blocked_final_save), \
+             contextlib.redirect_stderr(stderr):
+            code = a.main(["apply", "--plan", str(plan_path), "--work-root", str(self.root), "--reports", str(reports)])
+        self.assertEqual(code, 1)
+        self.assertIn("final result storage unavailable", stderr.getvalue())
+        result = json.loads((reports / "result.json").read_text(encoding="utf-8"))
+        self.assertNotEqual(result["status"], "PASS")
+        self.assertNotIn("verified_snapshot", result)
+
+    def test_invalid_timeout_rejected_before_plan_read_or_output_creation(self):
+        for value in ("0", "-1", "nan", "inf", "-inf", "bad"):
+            reports = self.root / ("invalid-" + value)
+            with self.subTest(value=value), patch.object(a, "load_plan") as load, contextlib.redirect_stderr(io.StringIO()):
+                with self.assertRaises(SystemExit) as caught:
+                    a.main(["apply", "--plan", "missing.json", "--work-root", str(self.root),
+                            "--reports", str(reports), "--timeout=" + value])
+                self.assertEqual(caught.exception.code, 2)
+                load.assert_not_called()
+                self.assertFalse(reports.exists())
+
+    def test_first_apply_record_failure_starts_no_process_and_preserves_ioc(self):
+        plan = self.plan()
+        with patch.object(a, "doctor", return_value=self.installation), \
+             patch.object(a, "write_json", side_effect=OSError("disk unavailable")), patch.object(a, "run") as run:
+            with self.assertRaisesRegex(OSError, "disk unavailable"):
+                a.apply_plan(plan, self.root, self.root / "record-failure")
+        run.assert_not_called()
+        self.assertEqual(self.ioc.read_bytes(), ORIGINAL)
 
     def test_verify_rejects_post_build_source_edit_even_when_products_unchanged(self):
         plan = self.plan()

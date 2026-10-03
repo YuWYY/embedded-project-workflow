@@ -11,6 +11,7 @@ import configparser
 import ctypes
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -99,6 +100,28 @@ def integer(text, label):
     value = int(text)
     require(value <= 0x3FFFFFFF, f"{label} overflows 32-bit byte count")
     return value
+
+
+def positive_timeout(value):
+    try:
+        seconds = float(value)
+    except (TypeError, ValueError) as exc:
+        raise argparse.ArgumentTypeError("timeout must be positive and finite") from exc
+    if not math.isfinite(seconds) or seconds <= 0:
+        raise argparse.ArgumentTypeError("timeout must be positive and finite")
+    return seconds
+
+
+def failure_type(exc, phase=None):
+    if isinstance(exc, KeyboardInterrupt):
+        return "interrupt"
+    if isinstance(exc, subprocess.TimeoutExpired):
+        return "timeout"
+    if phase == "start_process":
+        return "process_start"
+    if isinstance(exc, AdapterError):
+        return "validation"
+    return "io" if isinstance(exc, OSError) else "unexpected"
 
 
 def parse_ioc(data):
@@ -610,35 +633,47 @@ def stop_owned_process(process):
     return cleanup
 
 
-def run(command, cwd, log, env, timeout=360):
+def run(command, cwd, log, env, timeout=360, record=None):
+    timeout = positive_timeout(timeout)
     log = Path(log)
     kwargs = hidden_options()
     if os.name != "nt":
         kwargs["start_new_session"] = True
-    record = {"command": [str(x) for x in command], "status": "STARTED", "exit_code": None,
-              "timeout_seconds": timeout}
+    # The caller retains this very record even if launch, waiting, or saving fails.
+    # Do not recover it from a possibly stale or unwritable result file.
+    if record is None:
+        record = {}
+    record.update(command=[str(x) for x in command], status="STARTED", exit_code=None,
+                  timeout_seconds=timeout, terminal_state="RUNNING")
     write_json(log.with_suffix(".json"), record)
     start = time.monotonic()
     proc = None
+    phase = "open_log"
     try:
         with log.open("wb") as output:
+            phase = "start_process"
             proc = subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.DEVNULL,
                                     stdout=output, stderr=subprocess.STDOUT, **kwargs)
             record["pid"] = proc.pid
+            phase = "save_launched_record"
             write_json(log.with_suffix(".json"), record)
+            phase = "wait"
             try:
                 record["exit_code"] = proc.wait(timeout=timeout)
             except (subprocess.TimeoutExpired, KeyboardInterrupt):
                 record["cleanup"] = stop_owned_process(proc)
                 record["exit_code"] = proc.poll()
                 raise
-        record.update(status="EXITED")
+        record.update(status="EXITED", terminal_state="EXITED")
     except BaseException as exc:
         if proc is not None and proc.poll() is None and "cleanup" not in record:
             record["cleanup"] = stop_owned_process(proc)
             record["exit_code"] = proc.poll()
+        if proc is not None:
+            record["exit_code"] = proc.poll()
         status = "INTERRUPTED" if isinstance(exc, KeyboardInterrupt) else "TIMEOUT" if isinstance(exc, subprocess.TimeoutExpired) else "FAILED"
-        record.update(status=status, error=str(exc) or type(exc).__name__)
+        record.update(status=status, terminal_state=status, error=str(exc) or type(exc).__name__,
+                      error_type=type(exc).__name__, failure_type=failure_type(exc, phase), failure_phase=phase)
         raise
     finally:
         record["seconds"] = round(time.monotonic() - start, 3)
@@ -781,7 +816,8 @@ def disable_known_empty_hook(uvprojx, target_name):
     return empty
 
 
-def apply_plan(plan, work_root, reports):
+def apply_plan(plan, work_root, reports, timeout=360):
+    timeout = positive_timeout(timeout)
     for path in (plan["project"], work_root, reports):
         reject_links(path)
     project, reports, work_root = (Path(p).resolve() for p in (plan["project"], reports, work_root))
@@ -799,11 +835,14 @@ def apply_plan(plan, work_root, reports):
     after = edit_ioc(ioc.read_bytes(), plan["task_changes"], plan["queue_changes"])
     require(hashlib.sha256(after).hexdigest() == plan["requested_ioc_sha256"], "Requested IOC hash mismatch")
     reports.mkdir(parents=True)
-    outcome = {"status": "STARTED", "plan_id": plan["plan_id"], "runtime": "NOT_RUN", "board": "NOT_RUN",
-               "phase": "backup", "generation": {"status": "NOT_RUN"}, "build": {"status": "NOT_RUN"},
+    outcome = {"status": "STARTED", "terminal_state": "RUNNING", "timeout_seconds": timeout,
+               "plan_id": plan["plan_id"], "runtime": "NOT_RUN", "board": "NOT_RUN",
+               "phase": "backup", "generation": {"status": "NOT_RUN", "exit_code": None},
+               "build": {"status": "NOT_RUN", "exit_code": None}, "verification": {"status": "NOT_RUN"},
                "recovery": "IOC backup retained; native generation/build may partially modify multiple files; no atomic project rollback is promised."}
     write_json(reports / "result.json", outcome)
     temp = ioc.with_name(ioc.name + ".adapter-" + uuid.uuid4().hex + ".tmp")
+    active_stage = None
     try:
         write_json(reports / "plan.json", plan)
         shutil.copy2(ioc, reports / "source-before.ioc")
@@ -831,13 +870,17 @@ def apply_plan(plan, work_root, reports):
         generated = project / "Core/Src/app_freertos.c"
         old_hash = sha(generated)
         outcome["phase"] = "generate"
-        outcome["generation"] = {"status": "RUNNING", "record": str(reports / "cubemx.json")}
+        active_stage = "generation"
+        outcome["generation"] = {"status": "RUNNING", "exit_code": None,
+                                 "record": str(reports / "cubemx.json"), "timeout_seconds": timeout}
         write_json(reports / "result.json", outcome)
         start = time.time_ns()
         result = run([str(Path(paths["cubemx"]).parent / "jre/bin/java.exe"),
                       "--add-opens", "java.desktop/java.awt=ALL-UNNAMED", "--add-exports", "java.desktop/sun.awt=ALL-UNNAMED",
-                      "-Dfile.encoding=UTF-8", "-jar", paths["cubemx"], "-q", str(script)], project, reports / "cubemx.log", env)
+                      "-Dfile.encoding=UTF-8", "-jar", paths["cubemx"], "-q", str(script)],
+                     project, reports / "cubemx.log", env, timeout=timeout, record=outcome["generation"])
         outcome["generation"] = result
+        result["process_status"] = result.get("status", "EXITED")
         check_generation(result, reports / "cubemx.log", [generated, project / "Core/Src/main.c", Path(plan["uvprojx"])], start, old_hash)
         shutil.copy2(ioc, reports / "source-generated.ioc")
         outcome["phase"] = "validate_generated_project"
@@ -845,6 +888,8 @@ def apply_plan(plan, work_root, reports):
         outcome["disabled_known_empty_hooks"] = disable_known_empty_hook(plan["uvprojx"], plan["target"])
         state = inspect_project(project, ioc, plan["uvprojx"], plan["target"], plan["user_sources"], vendor_roots(paths))
         require(state["outputs"] == plan["outputs"] and state["output_name"] == plan["output_name"], "Output paths changed on regeneration")
+        outcome["generation"]["terminal_state"] = "PASS"
+        active_stage = None
         map_path = Path(state["outputs"]["ListingPath"]) / (state["output_name"] + ".map")
         image_path = Path(state["outputs"]["OutputDirectory"]) / (state["output_name"] + ".axf")
         # Move old products aside: a zero-exit no-op build cannot reuse them.
@@ -856,24 +901,44 @@ def apply_plan(plan, work_root, reports):
         start = time.time_ns()
         build_log = reports / "keil.log"
         outcome["phase"] = "rebuild"
-        outcome["build"] = {"status": "RUNNING", "record": str(reports / "keil-process.json")}
+        active_stage = "build"
+        outcome["build"] = {"status": "RUNNING", "exit_code": None,
+                            "record": str(reports / "keil-process.json"), "timeout_seconds": timeout}
         outcome["compilation_inputs"] = compilation_inputs(project, state["sources"] + state["extra_inputs"])
         write_json(reports / "result.json", outcome)
         result = run([paths["uv4"], "-r", plan["uvprojx"], "-t", plan["target"], "-o", str(build_log)],
-                     Path(plan["uvprojx"]).parent, reports / "keil-process.log", env)
+                     Path(plan["uvprojx"]).parent, reports / "keil-process.log", env,
+                     timeout=timeout, record=outcome["build"])
+        # Keep the actual process result before any generated/log/MAP checks.
+        outcome["build"] = result
+        result["process_status"] = result.get("status", "EXITED")
         check_compilation_inputs(project, outcome["compilation_inputs"])
         result.update(check_build(result, build_log, map_path, image_path, start))
         check_user_compilation(build_log, plan["user_sources"])
-        outcome["build"] = result
+        outcome["build"]["terminal_state"] = "PASS"
         outcome["phase"] = "verify"
+        active_stage = "verification"
+        outcome["verification"] = {"status": "RUNNING"}
         write_json(reports / "result.json", outcome)
         outcome["verification"] = verify_outputs(plan, map_path)
         outcome["products"] = {"map": {"path": str(map_path), "sha256": sha(map_path)},
                                "axf": {"path": str(image_path), "sha256": sha(image_path)}}
         outcome["verified_snapshot"] = snapshot(project)
         outcome["status"] = "PASS"
+        outcome["terminal_state"] = "PASS"
     except BaseException as exc:
-        outcome.update(status="FAILED", error=str(exc), error_type=type(exc).__name__)
+        terminal = "INTERRUPTED" if isinstance(exc, KeyboardInterrupt) else "TIMEOUT" if isinstance(exc, subprocess.TimeoutExpired) else "FAILED"
+        detail = outcome[active_stage] if active_stage else {}
+        kind = detail.get("failure_type", failure_type(exc))
+        if active_stage:
+            if "command" in detail:
+                detail.setdefault("process_status", detail.get("status"))
+            detail.update(status=terminal, terminal_state=terminal, error=str(exc) or type(exc).__name__,
+                          error_type=type(exc).__name__, failure_type=kind, failure_stage=outcome["phase"])
+        outcome.update(status="FAILED", terminal_state=terminal, error=str(exc) or type(exc).__name__,
+                       error_type=type(exc).__name__, failure_type=kind, failure_stage=outcome["phase"],
+                       actual_exit_code=detail.get("exit_code"),
+                       cleanup=detail.get("cleanup", {"status": "NOT_NEEDED"}))
         raise
     finally:
         if temp.exists():
@@ -911,6 +976,8 @@ def main(argv=None):
     apply.add_argument("--plan", type=Path, required=True)
     apply.add_argument("--work-root", type=Path, required=True)
     apply.add_argument("--reports", type=Path, required=True)
+    apply.add_argument("--timeout", type=positive_timeout, default=360,
+                       help="Positive finite per-child timeout in seconds (default: 360)")
     verify = commands.add_parser("verify")
     verify.add_argument("--plan", type=Path, required=True)
     verify.add_argument("--reports", type=Path, required=True)
@@ -932,7 +999,7 @@ def main(argv=None):
             write_json(args.output, result)
         elif args.command == "apply":
             plan = load_plan(args.plan)
-            result = apply_plan(plan, args.work_root, args.reports)
+            result = apply_plan(plan, args.work_root, args.reports, args.timeout)
         else:
             plan = load_plan(args.plan)
             receipt = json.loads((args.reports / "result.json").read_text(encoding="utf-8"))
