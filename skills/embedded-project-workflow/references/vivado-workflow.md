@@ -2,6 +2,8 @@
 
 用于Vivado IP/XPM/BD配置、生成、接入及相关回归。先按[IP选型](ip-selection.md)决定是否需要IP；简单自有RTL不必走IP生成流程。涉及板卡依据读[板级资料](board-evidence.md)，PS/PL与BD系统读[Zynq/MPSoC](zynq-mpsoc.md)，XSA下游或工具交界问题读[Vitis交接](vitis-handoff.md)。这些指南不声明完整Linux、多核、DDR或高速接口的已验证支持。
 
+完整架构规划需交图时按[成对规划图](planning-diagrams.md)表达端口依据、主要并行模块及各自执行条件、时钟/复位范围和真实CDC连接。
+
 ## 识别实际工程
 
 定位当前顶层、RTL/仿真源、XDC、XCI/BD、重建Tcl、工具/器件/IP版本及工作基线。使用工程属性和真实器件信息，不能由粗略型号前缀推断是否有PS。保留Project/Non-Project、RTL/BD等既有组织方式，不为采用本Skill强制迁移。

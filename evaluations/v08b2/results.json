@@ -1,0 +1,293 @@
+{
+  "schema": 1,
+  "version": "0.8.0-beta.2",
+  "date": "2026-10-08",
+  "mode": "LOCAL_CANDIDATE",
+  "frozen_skill_revision": "r1",
+  "frozen_skill_files": {
+    "agents/openai.yaml": "9ada78577e68f7d8932876763c0e6e573b2bb7607739229c0419f7e595be5d09",
+    "assets/planning-diagrams/01-chip-pin-layout.svg": "ab61c42b63902854e38c355f04e5b457c7bed12509b78d7a6217016ca4d0be27",
+    "assets/planning-diagrams/02-baremetal-execution.svg": "696e417fd22dd793a6da7724db8328553c1d91b4f567615682749a494d02ead1",
+    "assets/planning-diagrams/03-rtos-execution.svg": "17e1e6bb581094d67b484af97be545c8665595ca4d49d4f15e953ff5382db99b",
+    "assets/planning-diagrams/04-fpga-single-domain.svg": "daed5ef910a971e39abb822b20c033fd0b0f40f359d17b066d5ac9cfae6cd9b1",
+    "assets/planning-diagrams/05-fpga-dual-domain-fifo.svg": "c7bbd1ab9bdad2d4c963ac84d653412a543f09ed0f4af65aa69af105acae90b2",
+    "assets/planning-diagrams/generate_templates.py": "7a15ebde015fc086e6ff2f147c5cb4764ad5c36ac6082f6be116d42d71931c2d",
+    "references/board-evidence.md": "0ea45577479942e8570df1519ebba975b31aa8514e66362a362aab87efd9914d",
+    "references/configuration-contracts.md": "1e1b5b6b1e7ce691952534de2c39997189461ae4d3f2d1b50f8f676f9a0b7855",
+    "references/debug-retrospective.md": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
+    "references/esp-idf.md": "a9f89677067879d4a4ec252c7e7d225eca00c971625d9dbd45cfe0543a3e15f3",
+    "references/execution-entries.md": "21d7b02856aa4c537cf91acc01fe83d3b1f385d86677ee94b26b0054cc120e70",
+    "references/existing-projects.md": "894b189ab14bd56f8f022a87f412c7441d557708723645fda78f369cb610e9f3",
+    "references/freertos.md": "1bd2f526cd4388239f3b6dfd0b33e633dcc11adce5560b8b34ba742afda299cc",
+    "references/ip-selection.md": "45055c6fdc17baa65e2fecd1d6eb9fa91b8843632e74631e811ca82f4fc7cc16",
+    "references/long-project-workflow.md": "a8c17adb38065fccbf8840f65765c529241a840bf678f69deda1a74fb7fb8864",
+    "references/planning-diagrams.md": "caf3787ac95c3a62f4b17f71becca53d06cbcf6ac22ef15238b14fd8e970ef39",
+    "references/project-facts-template.md": "12abb8898c0cc98fd475ae42a1a6d8740eb6b8b70f742fd67c661fdf7be96a26",
+    "references/sources.md": "71412b18157de61aa7b23da39a562fbde10557e7e786dc233e683bd19e135eea",
+    "references/stm32-cubemx.md": "f5e66518eea3aaebb998a6aa7d1a42b3a980cafc384c5e8a3f45a4bcca42695d",
+    "references/touchgfx.md": "4bd969eeb3bfbbcb98e8e324f9d67ed46bdbe5dbc4a8adafc37ce0038af3d81e",
+    "references/vitis-handoff.md": "2f7093e956dc987d52bcbbd7e25d9f4f7b63675aafa89d41bf7e56e6eed044c2",
+    "references/vivado-workflow.md": "7d15261e5b540e0a17029d89a835e1f0dd45f7c7a8e4e7288a7a94997ea2f0d3",
+    "references/zynq-mpsoc.md": "14ef34294e9a2e3969db0f6aeb811f90cd147ef5a272b9c43bda8bd745b299f2",
+    "scripts/cubemx_rtos.py": "e8573d4a316209021e0e454421c39084e39c3e4302171e8bb4300b1ce1967d8e",
+    "scripts/planning_canvas.py": "5cd9836f2a01411c146184e3cfe3e1af7c661a53c268359f8cd9a3052f8f5230",
+    "scripts/project_intake.py": "30098700400eeb3965d4433912a016a87130a1b8aca4fb1b0dfac0207284a654",
+    "scripts/soc_handoff.py": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604",
+    "scripts/touchgfx_project.py": "4a320d8e1fb382f776452460efa0f989840130caf7dac3083ccd1e04e72bf62e",
+    "SKILL.md": "d0db51bdc3aa39917267b4ef8cd759d84e103a19646a0e0d85431a1f4aa869ab"
+  },
+  "independent_review": "All 11 first deliveries supported; nonblocking limitations retained in the validation report",
+  "method": "Fresh host contexts, fork_turns=none, isolated copies; final first delivery may include actor self-check and self-correction. No external feedback before delivery; no OS sandbox claim.",
+  "host": {
+    "exact_model": null,
+    "model_override": null,
+    "usage": null,
+    "tool_events": null,
+    "reason": "Host did not expose exact model/token totals or complete event streams. No statistical efficiency claim. Elapsed observations include dispatch and collection."
+  },
+  "summary": {
+    "total": 11,
+    "first_delivery_pass": 11,
+    "first_delivery_fail": 0,
+    "external_feedback_repairs": 0,
+    "pairs": 9,
+    "routing_cases": 2
+  },
+  "cases": [
+    {
+      "case": "01-baremetal-plan",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 719.680619,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "主循环1至5、DMA循环接收/位置通知、PWM硬件连续输出、中断TX与完成释放一致；GPIO方向正确；实际SVG/PNG与图面复核保留。"
+    },
+    {
+      "case": "02-rtos-plan",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 703.965354,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "当前r6、3任务优先级/栈/分配、DMA位置通知、静态队列和锁内快照与源码一致；40ms等待与32ms相对延时未冒充周期；两图原尺寸/缩小及最终SVG渲染均有实际查看证据。"
+    },
+    {
+      "case": "03-fpga-single-domain",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 785.442061,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "100MHz单域、samples并行扇出、5ms使能/200ms翻转与旧total契约一致；复位未知未补造；PACKAGE_PIN与XDC声明相符。"
+    },
+    {
+      "case": "04-fpga-dual-domain",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 619.08942,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "62.5/100MHz、FWFT头部数据、ready返回、单复位和两侧busy与RTL/契约一致；管脚和器件缺口明确。已看原图/缩小及最终SVG渲染。"
+    },
+    {
+      "case": "05-revision-conflict",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 719.687484,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "R1/R2A/当前IOC三者差异保留，ALERT引脚/电气/去抖未猜测；25/250ms和容量8明确，新增捕获/导出标为拟议；长标签清晰。"
+    },
+    {
+      "case": "06-small-change",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "NOT_APPLICABLE",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 140.201699,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "仅APP/report_gate.c将>改>=，无额外文档或图件；保留无符号差值，未虚报编译。"
+    },
+    {
+      "case": "07-first-look",
+      "kind": "synthetic_or_route",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "NOT_APPLICABLE",
+        "evidence_accuracy": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 321.243199,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "note": "只读提取当前IOC/单位/队列/CMake线索，未知6.19保留事实且PARTIAL；历史ProjectPath未切换；未出图/生成/重复询问。"
+    },
+    {
+      "case": "stm32-A",
+      "kind": "real_handoff",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS",
+        "actual_required_stages": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 642.788804,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "protected_source_count": 1024,
+      "artifact_identity": {
+        "project/planning/pin-functions.svg": "bdf678b1b570585393764750eea63ec0917b53c1e8cd194664390c2490e9d49e",
+        "project/planning/pin-functions.png": "dc444790956e760d2ba1fd89220ddbc5986a2557bc49110d4e6c5e45fb27544f",
+        "project/planning/execution-logic.svg": "eebd126d7c3a0d208be6a2a16475b6ced3ab26863c709cf4872ad632b0e7c4b4",
+        "project/planning/execution-logic.png": "f1f325f5a70c28d635538a936c254296851896b1a4d4acea39e3cea522d13d07"
+      },
+      "note": "当前100 ms/Run status；root实际看两图与源码/ELF结果，独立实际源码100ms契约通过。发布快照与UI绘制分开，无板测。"
+    },
+    {
+      "case": "stm32-B",
+      "kind": "real_handoff",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS",
+        "actual_required_stages": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 513.359024,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "protected_source_count": 1024,
+      "artifact_identity": {
+        "project/planning/pin-functions.svg": "169d2aa11aea87b8ae63b3486d7af25b3108993dae2e202c335cbe79c218d54d",
+        "project/planning/pin-functions.png": "e09f1916db71fc028c8a3feb687a2b93c43896b08351b31503e6d841b2139c4d",
+        "project/planning/execution-logic.svg": "ea6d662f60c5df99404376f67a02735bb8e2f05ebab6e1199f95be904bc604cd",
+        "project/planning/execution-logic.png": "4b7a28e184dfae54987edcdf1ef6c15c16075027981e1c4aed5b8335e4bfe2a2"
+      },
+      "note": "200ms/System status保留；当前源码199/200/201与完整tick周期及新Debug/ELF200实参/menu/MAP通过。两图同源更新，主循环/UI与快照周期分开。三次自检失败保留后执行者自修；root实际源码200契约和三个负例符合预期。"
+    },
+    {
+      "case": "fpga-A",
+      "kind": "real_handoff",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS",
+        "actual_required_stages": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 563.695968,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "protected_source_count": 64,
+      "artifact_identity": {
+        "project/planning/pin-functions.svg": "8863266bf1fd7f6520d509c296a29c9fa688217aa1db7505b07d486babc10fe0",
+        "project/planning/pin-functions.png": "fdc3ae1afe33fa76e42446151124e9262c1deae48e7cf3061716f9d18d47ca9e",
+        "project/planning/execution-logic.svg": "b0dfc5725d3b48c734b8521f62b49864073b34a40292ca77ee1b16406a3bb96c",
+        "project/planning/execution-logic.png": "710a19f827ab62d9d433f3db041e0e288300a4ed5d1deccabfdbbe6aa781eaf7"
+      },
+      "note": "原生125MHz/8ns，400cycles两轮reset与OOC/top synth；root实际看两图并核RTL/config。外层Tee日志错误保留，runner退出码缺口不冒称0，原生Vivado退出0。物理引脚待确认。"
+    },
+    {
+      "case": "fpga-B",
+      "kind": "real_handoff",
+      "first_delivery": "PASS",
+      "dimensions": {
+        "source_protection": "PASS",
+        "facts_relationships": "PASS",
+        "geometry": "PASS",
+        "evidence_accuracy": "PASS",
+        "actual_required_stages": "PASS"
+      },
+      "external_feedback_before_delivery": false,
+      "elapsed_observation_seconds": 645.34038,
+      "exact_model": null,
+      "usage": null,
+      "tool_events": null,
+      "protected_source_count": 64,
+      "artifact_identity": {
+        "project/planning/pin-functions.svg": "a22373cfb77546ad031a8ac19db6f21bdcdabb7a409dec2faa1182720508c172",
+        "project/planning/pin-functions.png": "21f1fb5498f2f4af32e672caf9578b2add7b2caa9db88ca6151e6822806f9335",
+        "project/planning/execution-logic.svg": "6c975db659f8a4890d59e25a078af10d5ed1fbe556895aabf0e1ae83bad0849c",
+        "project/planning/execution-logic.png": "39774639e33c50dba34e46d51e4a5ba7e405a2eadc18b9ca4b5f82cb60303a6e"
+      },
+      "note": "当前100MHz配置，两轮独立原生阶段均10ns/400周期两轮复位/OOC和top synth；五端口/RTL/TB/XDC保持。root实看新两图及stage-B缩图，125MHz缩图另属历史。再生成runner120但Vivado0，clean两层0；日志异常与原因不确定保留。"
+    }
+  ],
+  "raw_internal_failures_preserved": [
+    "Two CLI preflight failures before formal evaluation",
+    "Reserved-name fixture initially used NUL as a Windows parent directory",
+    "STM32 B old fixed-period contract and two preprocessing verifier errors before final self-corrected delivery",
+    "FPGA A outer Tee path error with unavailable runner exit code; native exit 0",
+    "FPGA B regenerate outer Tee I/O error; Python runner exit 120, native exit 0; independent clean native and runner exit 0",
+    "Optional browser-cache cleanup denied; retained without retry"
+  ],
+  "remaining_limits": [
+    "Common endpoint T junction can escape advisory geometry checks",
+    "Local STM32 contract supports the tested 100/200 ms cases; actor claim 1<period<1000 is too broad because late=3*p+57 followed by 4*p reverses time when p<57",
+    "Linux PNG not executed; three dependency tests skipped per Linux run",
+    "TB release observation window is not an exact three-edge standalone assertion",
+    "No board test, implementation, bitstream, Vitis A53 build or ESP-IDF native build",
+    "No new user field trial, remote CI, push, release or installation"
+  ]
+}

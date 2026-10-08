@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="28" font-size="36" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">② 模块执行逻辑｜RTOS 任务与交接</text>
+<text x="42" y="83" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">全部任务与数值仅为示例；本图示例调度约定：抢占式、优先级数值越大越高。</text>
+<polyline points="40,134 1560,134" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<text x="42" y="165" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">优先级解释必须从当前内核确认；任务并发不表示多个任务同时占用单核 CPU。</text>
+<rect x="40" y="219" width="640" height="620" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="任务：触发、CPU 执行预算、阻塞等待分别记录"/>
+<text x="56" y="231" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">任务：触发、CPU 执行预算、阻塞等待分别记录</text>
+<rect x="65" y="285" width="590" height="156" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="85" y="300" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">AcquisitionTask｜优先级 4（示例）</text>
+<text x="85" y="343" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">触发：DMA 完成通知；周期由硬件决定</text>
+<text x="85" y="380" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">CPU 预算：待测；阻塞：等待通知（上限待定）</text>
+<text x="85" y="410" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">截止期：待确认；发布后归还缓冲区所有权</text>
+<rect x="65" y="468" width="590" height="156" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="85" y="483" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">ControlTask｜优先级 3（示例）</text>
+<text x="85" y="526" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">触发：每 2 ms 释放一次（示例）</text>
+<text x="85" y="563" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">CPU 预算：待测；阻塞：等待下次周期释放</text>
+<text x="85" y="593" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">截止期：待确认；超期处理策略：待确认</text>
+<rect x="65" y="651" width="590" height="156" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="85" y="666" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">LoggerTask｜优先级 1（示例）</text>
+<text x="85" y="709" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">触发：队列有数据时运行</text>
+<text x="85" y="746" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">CPU 预算：待测；阻塞：等待队列（上限待定）</text>
+<text x="85" y="776" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">截止期：待确认；禁止阻塞高优先级控制链</text>
+<rect x="1010" y="219" width="550" height="620" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="事件 / 队列 / 外设：写清所有权及满空策略"/>
+<text x="1026" y="231" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">事件 / 队列 / 外设：写清所有权及满空策略</text>
+<rect x="1050" y="285" width="465" height="118" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1282.5" y="300" font-size="24" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">DMA 完成 ISR → 任务通知</text>
+<text x="1282.5" y="338" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">本例 ISR 使用内核许可的 FromISR 接口</text>
+<text x="1282.5" y="365" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">IRQ 优先级与内核调用限制：待确认</text>
+<polyline points="1050,335 655,335" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="655,335 667,340.4 667,329.6" fill="#2E835C"/>
+<text x="832" y="301" font-size="21" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">唤醒 / 缓冲区标识</text>
+<rect x="1050" y="455" width="465" height="146" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1282.5" y="470" font-size="24" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">SampleQueue（示例）</text>
+<text x="1282.5" y="508" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">AcquisitionTask 写 → ControlTask 读</text>
+<text x="1282.5" y="535" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">容量 4（示例）；满时策略：待确认</text>
+<text x="1282.5" y="562" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">读取等待上限：待确认</text>
+<polyline points="655,406 895,406 895,487 1050,487" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1050,487 1038,481.6 1038,492.4" fill="#2B68A3"/>
+<text x="830" y="372" font-size="21" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">发布样本</text>
+<polyline points="1050,556 655,556" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="655,556 667,561.4 667,550.6" fill="#2B68A3"/>
+<text x="832" y="521" font-size="21" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">读取最新 / 下一样本</text>
+<rect x="1050" y="653" width="465" height="146" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1282.5" y="668" font-size="24" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">LogQueue（示例）</text>
+<text x="1282.5" y="706" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">ControlTask 写 → LoggerTask 读</text>
+<text x="1282.5" y="733" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">容量：待确认；满时策略：待确认</text>
+<text x="1282.5" y="760" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">等待 / 丢弃 / 降采样需明确选择</text>
+<polyline points="655,597 905,597 905,687 1050,687" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1050,687 1038,681.6 1038,692.4" fill="#2B68A3"/>
+<text x="825" y="610" font-size="21" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">发送状态快照</text>
+<polyline points="1050,750 655,750" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="655,750 667,755.4 667,744.6" fill="#2B68A3"/>
+<text x="832" y="715" font-size="21" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">取出日志</text>
+<text x="42" y="859" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">CPU 执行时间 ≠ 周期 ≠ 阻塞等待时间；响应时间还受抢占、IRQ、资源竞争与优先级反转影响。</text>
+<polyline points="40,907 1560,907" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="45,938 103,938" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="103,938 91,932.6 91,943.4" fill="#2B68A3"/>
+<text x="120" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">数据</text>
+<polyline points="270,938 328,938" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="328,938 316,932.6 316,943.4" fill="#2E835C"/>
+<text x="345" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">控制</text>
+<polyline points="495,938 553,938" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="553,938 541,932.6 541,943.4" fill="#B77916"/>
+<text x="570" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">时钟</text>
+<polyline points="720,938 778,938" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="778,938 766,932.6 766,943.4" fill="#AD4C4C"/>
+<text x="795" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位</text>
+<text x="990" y="922" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">虚线仅表示已命名的分组 / 时钟域</text>
+<text x="42" y="964" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">示例不是调度分析结果；栈、任务总负载、最坏执行时间、阻塞上限和优先级继承需要工程证据。</text>
+</svg>

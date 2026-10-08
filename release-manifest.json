@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.7.0-beta.1",
+  "version": "0.8.0-beta.2",
   "files": {
     ".gitattributes": {
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
@@ -11,8 +11,8 @@
       "bytes": 1234
     },
     ".github/workflows/validate.yml": {
-      "sha256": "47c9c355cfbc9c66888b2ed0119d7c6c2f9285226866182ef98d398d947afd9f",
-      "bytes": 9194
+      "sha256": "daf26a129389e0a7c07d175117a601ff12b07e311ffa11e55acf74dc958ba222",
+      "bytes": 10285
     },
     ".gitignore": {
       "sha256": "3d06f774e264cb6c65343e2c1c64c79062138f30eeb36890d1f45ffeb0118fe5",
@@ -23,8 +23,8 @@
       "bytes": 1062
     },
     "README.md": {
-      "sha256": "2f26d1b0b69fa29ee6de11e6dad1086fb8cb95c8f1ec1f4adb9ab1a675add93e",
-      "bytes": 9176
+      "sha256": "816deb834a63c3f07664702b7eccf6c9b7c06af45eb6196c4d8cf8cce29ef43f",
+      "bytes": 11443
     },
     "docs/cubemx-adapter.md": {
       "sha256": "85638be8d0914fd7d3efea81a9c68cf32db376635af848a3bf8810ac62ad5289",
@@ -47,8 +47,8 @@
       "bytes": 4139
     },
     "docs/releasing.md": {
-      "sha256": "52d5297eff1085b87b89c4b6e2539fd1a72cb03507f23ea132b011779c7dd99f",
-      "bytes": 8095
+      "sha256": "6917acacb44afad6d968d84fa2ed82f970105303463f1cc89fe681e1085fad26",
+      "bytes": 11158
     },
     "docs/research-v06.md": {
       "sha256": "44f2d34c2c98d3bf1e0e0c52525cf19d727fe2c7aa786edfc0741edd3945fb61",
@@ -63,8 +63,8 @@
       "bytes": 3992
     },
     "docs/support.md": {
-      "sha256": "2415ca9f0bd0361b68c1b70fd3c18f04eccb46b46f4eba7d65cb33e1c924dd70",
-      "bytes": 5244
+      "sha256": "f6fa91860053cfada923bd39b544761d4140d4d3ea2c7973cfde9fe69500a0c1",
+      "bytes": 9780
     },
     "docs/validation-v03.json": {
       "sha256": "41ff9dd71512cd5cdc549260f070da74661c1ef2a506e1f1cf97607e38f2e18f",
@@ -105,6 +105,14 @@
     "docs/validation-v07.md": {
       "sha256": "155610cc2af8935da46b84e7eb280a60555c3648135d57b8e8fca0b06d60fa2f",
       "bytes": 6685
+    },
+    "docs/validation-v08.md": {
+      "sha256": "6213e20b72142f6c7e3d27df931b4c9255182ecf4bde3a9b8b2ad1f09e87ea23",
+      "bytes": 6581
+    },
+    "docs/validation-v08b2.md": {
+      "sha256": "74f36dc25b2bf47332e6e5ee4cefb22ed966c732a4fa8d9e25c53fd2c0a3e007",
+      "bytes": 13093
     },
     "docs/validation.md": {
       "sha256": "6b604cdeccda59caf9ddfb39350151524e5025e15fd2d5d900f391fd6a949625",
@@ -581,6 +589,38 @@
     "evaluations/v07/reviewer-rubric.md": {
       "sha256": "12d2ba882dbc7f5e80550bab59a431e455ed6baa308d0d6b1f20adce3309b9fb",
       "bytes": 3368
+    },
+    "evaluations/v08/README.md": {
+      "sha256": "070615b9bec07cc24debb0cf6d43cf189a5f19aa0a8aa22322c77a4930a0acf9",
+      "bytes": 1213
+    },
+    "evaluations/v08/cases.json": {
+      "sha256": "4b9272496aed38ead0f7de38a13f874da44fbaa44f95e6369a3a3aa9270377b5",
+      "bytes": 2901
+    },
+    "evaluations/v08/prepare.py": {
+      "sha256": "112d516e4d259362059704ffdebe48cbf6a8540e87e8790efa134c211f4c6742",
+      "bytes": 28694
+    },
+    "evaluations/v08/results.json": {
+      "sha256": "ccdfdac72c348a3859f1e322fe01494d451df26d77a104e70a261e37c821765d",
+      "bytes": 14734
+    },
+    "evaluations/v08b2/README.md": {
+      "sha256": "2b21b1f02871560d9590359288e83a2d8c878ce30b3954d314ef4ce5d8492196",
+      "bytes": 2264
+    },
+    "evaluations/v08b2/cases.json": {
+      "sha256": "bb8c7ab3fd4e7f7c521c36e4d02afb2acf755e6be8320da4dd0bd2d4ed8e76f8",
+      "bytes": 2890
+    },
+    "evaluations/v08b2/prepare.py": {
+      "sha256": "c4684961b8b0e3a0911d817b25397bec1dcf2abb0b10f10da1461f48eb084a61",
+      "bytes": 33949
+    },
+    "evaluations/v08b2/results.json": {
+      "sha256": "68486ea0edd4cb1172cdfbac5dde8a84e4f7359576351e784bfee0d78ae4da13",
+      "bytes": 15106
     },
     "examples/common/rolling-stats/README.md": {
       "sha256": "a117bafd97efec47b7e01a1239fb88ffa01ffef7685b82817f0c2b46aa64d5cb",
@@ -1315,24 +1355,48 @@
       "bytes": 2831
     },
     "scripts/release.py": {
-      "sha256": "50aa2d055486cac437030104c6e71d50d90ef5d2c68f4c3f323c9a9e98231329",
+      "sha256": "c69434162da7c5f39f7f0d094792f632a204a28bb6b18c00141ead6401ec15d8",
       "bytes": 16402
     },
     "skills/embedded-project-workflow/SKILL.md": {
-      "sha256": "a67fe9f6b8185444bdda6938e1a6fe050b0dcc9d1ed37ef55c8c29dbd6b59818",
-      "bytes": 6963
+      "sha256": "d0db51bdc3aa39917267b4ef8cd759d84e103a19646a0e0d85431a1f4aa869ab",
+      "bytes": 7434
     },
     "skills/embedded-project-workflow/agents/openai.yaml": {
       "sha256": "9ada78577e68f7d8932876763c0e6e573b2bb7607739229c0419f7e595be5d09",
       "bytes": 469
+    },
+    "skills/embedded-project-workflow/assets/planning-diagrams/01-chip-pin-layout.svg": {
+      "sha256": "ab61c42b63902854e38c355f04e5b457c7bed12509b78d7a6217016ca4d0be27",
+      "bytes": 11121
+    },
+    "skills/embedded-project-workflow/assets/planning-diagrams/02-baremetal-execution.svg": {
+      "sha256": "696e417fd22dd793a6da7724db8328553c1d91b4f567615682749a494d02ead1",
+      "bytes": 12092
+    },
+    "skills/embedded-project-workflow/assets/planning-diagrams/03-rtos-execution.svg": {
+      "sha256": "17e1e6bb581094d67b484af97be545c8665595ca4d49d4f15e953ff5382db99b",
+      "bytes": 11234
+    },
+    "skills/embedded-project-workflow/assets/planning-diagrams/04-fpga-single-domain.svg": {
+      "sha256": "daed5ef910a971e39abb822b20c033fd0b0f40f359d17b066d5ac9cfae6cd9b1",
+      "bytes": 9393
+    },
+    "skills/embedded-project-workflow/assets/planning-diagrams/05-fpga-dual-domain-fifo.svg": {
+      "sha256": "c7bbd1ab9bdad2d4c963ac84d653412a543f09ed0f4af65aa69af105acae90b2",
+      "bytes": 12474
+    },
+    "skills/embedded-project-workflow/assets/planning-diagrams/generate_templates.py": {
+      "sha256": "7a15ebde015fc086e6ff2f147c5cb4764ad5c36ac6082f6be116d42d71931c2d",
+      "bytes": 16774
     },
     "skills/embedded-project-workflow/references/board-evidence.md": {
       "sha256": "0ea45577479942e8570df1519ebba975b31aa8514e66362a362aab87efd9914d",
       "bytes": 3421
     },
     "skills/embedded-project-workflow/references/configuration-contracts.md": {
-      "sha256": "00c0c447a0b5505340a592b2e518594182aef715d645282a78bc2890307a6fc7",
-      "bytes": 4466
+      "sha256": "1e1b5b6b1e7ce691952534de2c39997189461ae4d3f2d1b50f8f676f9a0b7855",
+      "bytes": 4669
     },
     "skills/embedded-project-workflow/references/debug-retrospective.md": {
       "sha256": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
@@ -1351,8 +1415,8 @@
       "bytes": 7001
     },
     "skills/embedded-project-workflow/references/freertos.md": {
-      "sha256": "1365a7c9e997fd2d6ad084f8eae40c9b35655bba8955012f6c10c5e347bbf92b",
-      "bytes": 5551
+      "sha256": "1bd2f526cd4388239f3b6dfd0b33e633dcc11adce5560b8b34ba742afda299cc",
+      "bytes": 5739
     },
     "skills/embedded-project-workflow/references/ip-selection.md": {
       "sha256": "45055c6fdc17baa65e2fecd1d6eb9fa91b8843632e74631e811ca82f4fc7cc16",
@@ -1361,6 +1425,10 @@
     "skills/embedded-project-workflow/references/long-project-workflow.md": {
       "sha256": "a8c17adb38065fccbf8840f65765c529241a840bf678f69deda1a74fb7fb8864",
       "bytes": 3858
+    },
+    "skills/embedded-project-workflow/references/planning-diagrams.md": {
+      "sha256": "caf3787ac95c3a62f4b17f71becca53d06cbcf6ac22ef15238b14fd8e970ef39",
+      "bytes": 11365
     },
     "skills/embedded-project-workflow/references/project-facts-template.md": {
       "sha256": "12abb8898c0cc98fd475ae42a1a6d8740eb6b8b70f742fd67c661fdf7be96a26",
@@ -1383,8 +1451,8 @@
       "bytes": 7248
     },
     "skills/embedded-project-workflow/references/vivado-workflow.md": {
-      "sha256": "52ace4beff278f2e947b652df8a2d0fd27358ebe2e45fe7addd9cdc2ffd27550",
-      "bytes": 7294
+      "sha256": "7d15261e5b540e0a17029d89a835e1f0dd45f7c7a8e4e7288a7a94997ea2f0d3",
+      "bytes": 7471
     },
     "skills/embedded-project-workflow/references/zynq-mpsoc.md": {
       "sha256": "14ef34294e9a2e3969db0f6aeb811f90cd147ef5a272b9c43bda8bd745b299f2",
@@ -1393,6 +1461,10 @@
     "skills/embedded-project-workflow/scripts/cubemx_rtos.py": {
       "sha256": "e8573d4a316209021e0e454421c39084e39c3e4302171e8bb4300b1ce1967d8e",
       "bytes": 58263
+    },
+    "skills/embedded-project-workflow/scripts/planning_canvas.py": {
+      "sha256": "5cd9836f2a01411c146184e3cfe3e1af7c661a53c268359f8cd9a3052f8f5230",
+      "bytes": 25559
     },
     "skills/embedded-project-workflow/scripts/project_intake.py": {
       "sha256": "30098700400eeb3965d4433912a016a87130a1b8aca4fb1b0dfac0207284a654",
@@ -1407,12 +1479,16 @@
       "bytes": 21600
     },
     "source-files.txt": {
-      "sha256": "c58ce95857d57face53ed25f60b2b71477d2700acc4c223cbd2679e1eb51ebeb",
-      "bytes": 19447
+      "sha256": "22b8f517db2812c8478c8d678360d9a55dfd24e9ab07622481a03853bfdf4cd0",
+      "bytes": 20392
     },
     "tests/test_cubemx_rtos.py": {
       "sha256": "c23e87e4e21f1b069b3bb24e74dd6db6b2e8e476129ce74c392bfe8043ad9109",
       "bytes": 33725
+    },
+    "tests/test_planning_canvas.py": {
+      "sha256": "5c5ab74a7c552d1e32fd637108d7b32d2f7cc5269aba29521eb24c69f95555ef",
+      "bytes": 18167
     },
     "tests/test_project_intake.py": {
       "sha256": "dcdb50ec2cc310eac5438b33dd23768a0cf3b928d7629c0bab11539dc86e705c",

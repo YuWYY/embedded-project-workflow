@@ -1,0 +1,110 @@
+[
+  {
+    "id": "01-baremetal-plan",
+    "title": "串口命令与定时输出的裸机工程",
+    "kind": "baremetal-planning",
+    "native_generated": false,
+    "allowed_source_edits": [],
+    "source_files": [
+      "APP/profile.h",
+      "CONTRACTS.md",
+      "CommandSampler.ioc",
+      "Core/Src/main.c",
+      "Core/Src/uart_callbacks.c",
+      "MATERIAL_ORIGIN.md"
+    ]
+  },
+  {
+    "id": "02-rtos-plan",
+    "title": "当前 RTOS 流处理与历史副本",
+    "kind": "rtos-current-revision-planning",
+    "native_generated": false,
+    "allowed_source_edits": [],
+    "source_files": [
+      "MATERIAL_ORIGIN.md",
+      "SCOPE.md",
+      "archive/r3/FlowController.ioc",
+      "archive/r3/IDENTITY.json",
+      "archive/r3/profile.h",
+      "current/APP/profile.h",
+      "current/APP/tasks.c",
+      "current/Core/Inc/FreeRTOSConfig.h",
+      "current/FlowController.ioc",
+      "current/IDENTITY.json",
+      "current/INTERFACES.md"
+    ]
+  },
+  {
+    "id": "03-fpga-single-domain",
+    "title": "串行样本的并行统计与告警",
+    "kind": "single-clock-fpga-planning",
+    "native_generated": false,
+    "allowed_source_edits": [],
+    "source_files": [
+      "MATERIAL_ORIGIN.md",
+      "MODULES.md",
+      "constraints/sample_monitor.xdc",
+      "rtl/sample_monitor_top.sv"
+    ]
+  },
+  {
+    "id": "04-fpga-dual-domain",
+    "title": "FWFT 双域流桥与单一复位源",
+    "kind": "dual-clock-fwft-planning",
+    "native_generated": false,
+    "allowed_source_edits": [],
+    "source_files": [
+      "FIFO_CONTRACT.md",
+      "MATERIAL_ORIGIN.md",
+      "constraints/fwft_stream_bridge.xdc",
+      "rtl/fwft_stream_bridge.sv"
+    ]
+  },
+  {
+    "id": "05-revision-conflict",
+    "title": "控制板冲突资料与长名称模块",
+    "kind": "board-conflict-long-label-planning",
+    "native_generated": false,
+    "allowed_source_edits": [],
+    "source_files": [
+      "MATERIAL_ORIGIN.md",
+      "REQUIREMENTS.md",
+      "board/assembly-handoff.md",
+      "current/APP/loop.c",
+      "current/APP/schedule.h",
+      "current/ControlGateway.ioc"
+    ]
+  },
+  {
+    "id": "06-small-change",
+    "title": "明确范围的边界条件修正",
+    "kind": "small-change-routing",
+    "native_generated": false,
+    "allowed_source_edits": [
+      "APP/report_gate.c"
+    ],
+    "source_files": [
+      "APP/report_gate.c",
+      "APP/report_gate.h",
+      "BUILD_NOTE.md",
+      "ConfigExcerpt.ioc",
+      "MATERIAL_ORIGIN.md"
+    ]
+  },
+  {
+    "id": "07-first-look",
+    "title": "只有配置与代码线索的首次概览",
+    "kind": "read-only-intake-routing",
+    "native_generated": false,
+    "allowed_source_edits": [],
+    "source_files": [
+      "APP/sample_service.c",
+      "CMakeLists.txt",
+      "CMakePresets.json",
+      "HANDOFF.md",
+      "MATERIAL_ORIGIN.md",
+      "SensorConsole.ioc",
+      "cmake/gcc-arm-none-eabi.cmake"
+    ]
+  }
+]

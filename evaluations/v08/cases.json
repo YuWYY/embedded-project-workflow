@@ -1,0 +1,117 @@
+[
+  {
+    "id": "01-baremetal-plan",
+    "title": "裸机采集与显示项目",
+    "kind": "mcu-baremetal-planning",
+    "native_generated": false,
+    "reused_from": null,
+    "source_files": [
+      "APP/profile.h",
+      "Core/Src/interrupt_excerpt.c",
+      "Core/Src/main.c",
+      "MATERIAL_ORIGIN.md",
+      "PROJECT.md",
+      "PanelLogger.ioc"
+    ]
+  },
+  {
+    "id": "02-rtos-plan",
+    "title": "周期任务与事件任务",
+    "kind": "mcu-rtos-planning",
+    "native_generated": false,
+    "reused_from": null,
+    "source_files": [
+      "APP/tasks.c",
+      "AlertSampler.ioc",
+      "Core/Inc/FreeRTOSConfig.h",
+      "INTERFACES.md",
+      "MATERIAL_ORIGIN.md"
+    ]
+  },
+  {
+    "id": "03-fpga-single-domain",
+    "title": "单域 FPGA 计数遥测",
+    "kind": "fpga-single-domain-planning",
+    "native_generated": false,
+    "reused_from": null,
+    "source_files": [
+      "MATERIAL_ORIGIN.md",
+      "MODULE_CONTRACTS.md",
+      "constraints/telemetry_panel.xdc",
+      "rtl/telemetry_panel_top.sv"
+    ]
+  },
+  {
+    "id": "04-fpga-dual-domain",
+    "title": "双时钟域流接口",
+    "kind": "fpga-dual-domain-planning",
+    "native_generated": false,
+    "reused_from": null,
+    "source_files": [
+      "DOMAIN_CONTRACTS.md",
+      "MATERIAL_ORIGIN.md",
+      "constraints/stream_bridge.xdc",
+      "rtl/stream_bridge_interfaces.sv"
+    ]
+  },
+  {
+    "id": "05-revision-conflict",
+    "title": "板卡资料冲突与缺失接口",
+    "kind": "mcu-conflicting-board-planning",
+    "native_generated": false,
+    "reused_from": null,
+    "source_files": [
+      "APP/requirements.md",
+      "APP/schedule.h",
+      "BOARD_HANDOFF.md",
+      "MATERIAL_ORIGIN.md",
+      "board-notes/rev-A.csv",
+      "board-notes/rev-B.csv",
+      "current/PanelController.ioc"
+    ]
+  },
+  {
+    "id": "06-latest-design",
+    "title": "最新配置与历史副本",
+    "kind": "current-revision-planning",
+    "native_generated": false,
+    "reused_from": null,
+    "source_files": [
+      "MATERIAL_ORIGIN.md",
+      "SCOPE.md",
+      "archive/r2/APP/profile.h",
+      "archive/r2/IDENTITY.json",
+      "archive/r2/OperatorPanel.ioc",
+      "current/APP/profile.h",
+      "current/APP/tasks.c",
+      "current/IDENTITY.json",
+      "current/OperatorPanel.ioc"
+    ]
+  },
+  {
+    "id": "07-small-change",
+    "title": "小标量修改路由回归",
+    "kind": "routing-regression",
+    "native_generated": false,
+    "reused_from": "v07/05-small-change",
+    "source_files": [
+      "APP/sample.c",
+      "MATERIAL_ORIGIN.md",
+      "PROJECT.md",
+      "sample.ioc"
+    ]
+  },
+  {
+    "id": "08-first-look",
+    "title": "首次只读概览路由回归",
+    "kind": "routing-regression",
+    "native_generated": false,
+    "reused_from": "v07/01-first-look",
+    "source_files": [
+      "APP/feed.c",
+      "Demo.ioc",
+      "MATERIAL_ORIGIN.md",
+      "PROJECT.md"
+    ]
+  }
+]

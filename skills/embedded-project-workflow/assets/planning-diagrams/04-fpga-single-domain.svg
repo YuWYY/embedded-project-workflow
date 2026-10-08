@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="28" font-size="36" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">② 模块并行执行逻辑｜FPGA 单时钟域</text>
+<text x="42" y="83" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">示例：各模块持续并行；模块内写明每拍、使能或 valid / ready 条件，不绘 CPU 任务时间片。</text>
+<polyline points="40,134 1560,134" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<rect x="225" y="183" width="1335" height="690" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="时钟域 clk_sys：50 MHz / 20 ns（示例）；所有寄存器由该域时钟驱动"/>
+<text x="241" y="195" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">时钟域 clk_sys：50 MHz / 20 ns（示例）；所有寄存器由该域时钟驱动</text>
+<text x="250" y="238" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">域复位 rst_sys：高有效（示例）；来源 / 释放同步约定必须从实际 RTL 确认。</text>
+<rect x="40" y="441" width="145" height="118" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="112.5" y="456" font-size="23" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">外部输入</text>
+<text x="112.5" y="494" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">enable_raw</text>
+<text x="112.5" y="521" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">异步控制</text>
+<rect x="280" y="441" width="270" height="156" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="415" y="456" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">输入同步</text>
+<text x="415" y="494" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">input_sync</text>
+<text x="415" y="521" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每拍采样同步链</text>
+<text x="415" y="548" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">不直接同步多位数据</text>
+<rect x="780" y="441" width="290" height="156" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="925" y="456" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">计数 / 数据处理</text>
+<text x="925" y="494" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">counter_core</text>
+<text x="925" y="521" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每拍判断 enable_sync</text>
+<text x="925" y="548" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">为 1 更新；为 0 保持</text>
+<rect x="1275" y="345" width="245" height="149" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1397.5" y="360" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">状态输出</text>
+<text x="1397.5" y="398" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">status_reg</text>
+<text x="1397.5" y="425" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每拍采样计数位</text>
+<text x="1397.5" y="452" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">输出寄存状态</text>
+<rect x="1275" y="652" width="245" height="160" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1397.5" y="667" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">快照发送</text>
+<text x="1397.5" y="705" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">status_stream</text>
+<text x="1397.5" y="732" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每 20 ms 请求（示例）</text>
+<text x="1397.5" y="759" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">valid &amp;&amp; ready 时传输</text>
+<polyline points="185,500 280,500" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="280,500 268,494.6 268,505.4" fill="#2E835C"/>
+<polyline points="550,500 780,500" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="780,500 768,494.6 768,505.4" fill="#2E835C"/>
+<text x="665" y="462" font-size="21" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">enable_sync</text>
+<polyline points="1070,520 1175,520" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="1175,520 1175,423 1275,423" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1275,423 1263,417.6 1263,428.4" fill="#2B68A3"/>
+<polyline points="1175,520 1175,726 1275,726" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1275,726 1263,720.6 1263,731.4" fill="#2B68A3"/>
+<circle cx="1175" cy="520" r="5" fill="#2B68A3"/>
+<text x="1155" y="539" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="end" dominant-baseline="text-before-edge">counter</text>
+<text x="1155" y="568" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="end" dominant-baseline="text-before-edge">[31:0]</text>
+<text x="280" y="690" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">20 ms 仅为业务周期；各模块始终并行。</text>
+<text x="280" y="739" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">未就绪时保持 valid 与载荷；满 / 忙处理待定义。</text>
+<text x="250" y="832" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">黑点 = 真实连接；交叉无点 = 不连接。</text>
+<polyline points="40,907 1560,907" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="45,938 103,938" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="103,938 91,932.6 91,943.4" fill="#2B68A3"/>
+<text x="120" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">数据</text>
+<polyline points="270,938 328,938" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="328,938 316,932.6 316,943.4" fill="#2E835C"/>
+<text x="345" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">控制</text>
+<polyline points="495,938 553,938" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="553,938 541,932.6 541,943.4" fill="#B77916"/>
+<text x="570" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">时钟</text>
+<polyline points="720,938 778,938" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="778,938 766,932.6 766,943.4" fill="#AD4C4C"/>
+<text x="795" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位</text>
+<text x="990" y="922" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">虚线仅表示已命名的分组 / 时钟域</text>
+<text x="42" y="964" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">示例参数待替换；图示不等于 RTL 仿真、CDC、时序或板级验证。</text>
+</svg>
