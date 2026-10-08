@@ -16,7 +16,7 @@ import zipfile
 from pathlib import Path, PurePosixPath
 from urllib.parse import unquote, urlsplit
 
-VERSION = "0.7.0-beta.1"
+VERSION = "0.8.0-beta.2"
 SKILL = "skills/embedded-project-workflow"
 MANIFEST = "release-manifest.json"
 ALLOWLIST = "source-files.txt"

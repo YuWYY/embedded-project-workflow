@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="28" font-size="36" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">② 模块并行执行逻辑｜FPGA 双时钟域与异步 FIFO</text>
+<text x="42" y="83" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">所有参数与接口均为示例；使用实际 FIFO 的端口、满空含义及复位协议替换本图。</text>
+<polyline points="40,134 1560,134" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<rect x="40" y="180" width="420" height="690" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="写时钟域 clk_wr：80 MHz（示例）"/>
+<text x="56" y="192" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">写时钟域 clk_wr：80 MHz（示例）</text>
+<rect x="1140" y="180" width="420" height="690" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="读时钟域 clk_rd：50 MHz（示例）"/>
+<text x="1156" y="192" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">读时钟域 clk_rd：50 MHz（示例）</text>
+<text x="65" y="234" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">12.5 ns；rst_wr 高有效（示例）</text>
+<text x="1155" y="234" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">20 ns；rst_rd 高有效（示例）</text>
+<rect x="80" y="407" width="370" height="187" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="265" y="422" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">写侧生产模块</text>
+<text x="265" y="460" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">producer</text>
+<text x="265" y="487" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每拍检查 in_valid &amp;&amp; in_ready</text>
+<text x="265" y="514" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">条件成立才接收 / 写入数据</text>
+<text x="265" y="541" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">未就绪：保持载荷或按协议丢弃</text>
+<rect x="1150" y="407" width="370" height="187" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1335" y="422" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">读侧消费模块</text>
+<text x="1335" y="460" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">consumer</text>
+<text x="1335" y="487" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每拍检查 out_valid &amp;&amp; out_ready</text>
+<text x="1335" y="514" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">条件成立才读取 / 消费数据</text>
+<text x="1335" y="541" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">未就绪：停止取数，不越过空边界</text>
+<rect x="630" y="371" width="340" height="276" rx="4" fill="#FFFFFF" stroke="#26323D" stroke-width="2.5"/>
+<text x="800" y="390" font-size="30" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">异步 FIFO</text>
+<text x="800" y="436" font-size="24" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">跨域队列 / 边界</text>
+<text x="800" y="481" font-size="20" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">写时钟域：wr_clk / wr_reset</text>
+<text x="800" y="521" font-size="20" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">读时钟域：rd_clk / rd_reset</text>
+<text x="800" y="566" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">位宽 / 深度：待确认</text>
+<text x="800" y="606" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">不使用直接多位同步器替代</text>
+<polyline points="450,455 630,455" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="630,455 618,449.6 618,460.4" fill="#2B68A3"/>
+<text x="540" y="416" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">wr_data / wr_en</text>
+<polyline points="630,555 450,555" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="450,555 462,560.4 462,549.6" fill="#2E835C"/>
+<text x="540" y="571" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">full / in_ready</text>
+<polyline points="970,455 1150,455" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1150,455 1138,449.6 1138,460.4" fill="#2B68A3"/>
+<text x="1060" y="416" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">rd_data / valid</text>
+<polyline points="1150,555 970,555" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="970,555 982,560.4 982,549.6" fill="#2E835C"/>
+<text x="1060" y="571" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">rd_en / ready</text>
+<text x="65" y="302" font-size="22" fill="#B77916" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">clk_wr</text>
+<polyline points="180,318 710,318 710,371" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="710,371 715.4,359 704.6,359" fill="#B77916"/>
+<text x="740" y="323" font-size="18" fill="#B77916" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">wr_clk</text>
+<text x="1180" y="302" font-size="22" fill="#B77916" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">clk_rd</text>
+<polyline points="1170,318 890,318 890,371" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="890,371 895.4,359 884.6,359" fill="#B77916"/>
+<text x="918" y="323" font-size="18" fill="#B77916" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">rd_clk</text>
+<text x="65" y="687" font-size="22" fill="#AD4C4C" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">rst_wr</text>
+<polyline points="180,701 710,701 710,647" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="710,647 704.6,659 715.4,659" fill="#AD4C4C"/>
+<text x="735" y="663" font-size="18" fill="#AD4C4C" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">wr_reset</text>
+<text x="1180" y="687" font-size="22" fill="#AD4C4C" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">rst_rd</text>
+<polyline points="1170,701 890,701 890,647" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="890,647 884.6,659 895.4,659" fill="#AD4C4C"/>
+<text x="915" y="663" font-size="18" fill="#AD4C4C" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">rd_reset</text>
+<text x="65" y="758" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">写入边界（示例）：</text>
+<text x="65" y="785" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">in_ready = !full &amp;&amp; !wr_reset_busy</text>
+<text x="65" y="812" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位 / 忙时禁止写入</text>
+<text x="1155" y="758" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">读取边界（示例）：</text>
+<text x="1155" y="783.65" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">out_valid = !empty &amp;&amp; !rd_reset_busy</text>
+<text x="1155" y="809.3" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位 / 忙时禁止读取</text>
+<text x="800" y="751" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">示例采用 FWFT 风格；标准读模式</text>
+<text x="800" y="779.35" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">需按实际读延迟生成 valid。</text>
+<text x="800" y="807.7" font-size="21" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">双方复位完成后才恢复传输。</text>
+<polyline points="40,907 1560,907" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="45,938 103,938" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="103,938 91,932.6 91,943.4" fill="#2B68A3"/>
+<text x="120" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">数据</text>
+<polyline points="270,938 328,938" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="328,938 316,932.6 316,943.4" fill="#2E835C"/>
+<text x="345" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">控制</text>
+<polyline points="495,938 553,938" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="553,938 541,932.6 541,943.4" fill="#B77916"/>
+<text x="570" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">时钟</text>
+<polyline points="720,938 778,938" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="778,938 766,932.6 766,943.4" fill="#AD4C4C"/>
+<text x="795" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位</text>
+<text x="990" y="922" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">虚线仅表示已命名的分组 / 时钟域</text>
+<text x="42" y="964" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位端口数及协调、同步释放、busy 时序必须遵循实际 IP 契约；该规划图不是 CDC 或复位正确性证明。</text>
+</svg>

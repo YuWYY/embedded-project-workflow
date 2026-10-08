@@ -1,6 +1,8 @@
 # 维护、校验与发行
 
-本页说明 **v0.7.0-beta.1 公开预览版**的维护与发布流程。实际发布提交、附件和状态以[本版本 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)及[对应提交的 CI](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)为准；能力与证据范围见[支持表](support.md)。文档中的流程不表示远端步骤已经完成，下载与解压也不会安装或启用 Skill。下文 v0.5 发布记录保持历史身份。
+本页说明 **v0.8.0-beta.2 公开预览版**的维护与发布流程。发布目标固定为 `YuWYY/embedded-project-workflow` 的 `v0.8.0-beta.2`；实际发布提交、附件和状态以[本版 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.8.0-beta.2)及[对应提交的 CI](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)为准。发布准备时远端 CI 尚未运行，流程描述及本地通过都不表示远端步骤已经完成。能力与证据范围见[支持表](support.md)，下载与解压不会安装或启用 Skill。
+
+打包命令使用脚本中的当前版本 `0.8.0-beta.2`。五份可编辑 SVG 模板及绘图源码随 Skill 包交付；PNG 为本地生成预览，不进入文本源码白名单。SVG 生成使用标准库，PNG 依赖仅影响预览。beta.1、beta.2 本地验证报告及下文 v0.7/v0.5 记录保持各自历史身份，不倒改当时的“未发布、远端 CI 未执行”结论。
 
 所有命令从仓库根目录运行，需要 Python 3.12 标准库。仓库源码与发行物采用明确清单；不从任意目录整体归档，也不自动收集日志。
 
@@ -38,7 +40,19 @@ CubeMX/FreeRTOS、TouchGFX、ESP-IDF与共用业务模块的原创示例及合�
 
 CI 执行 validate、self-test、隔离runner证据/路径回归、合成案例准备、pack、verify-packages，并上传构建附件。runner故障回归模拟厂商子进程，不运行Vivado；Windows进程树测试会创建和清理自身Python父子孙进程，并核对独立同名进程存活。案例准备只复制原创输入与 Skill，不能代替模型执行和行为评分。CI 不自动创建 Release，不运行厂商工具，不安装 Skill，不操作硬件。
 
-## v0.7.0-beta.1 发布流程
+## v0.8.0-beta.2 发布流程
+
+1. 从远端当前 `main` 建立独立发布工作区与分支，只同步审阅白名单中的公开文件，统一版本为 `0.8.0-beta.2`。保留本地候选与原始工程，不把隔离实验、私有工程、厂商生成树或原始个人日志带入 Git 历史与附件。
+2. 完成本页的清单维护、审阅、本地校验、负例检查、三包构建与 `verify-packages`。核对五份 SVG 模板随 Skill 包交付，三包来自同一份源码，校验值逐字节对应。文档修改后重新生成清单和发行物，不能复用旧包或旧校验值。
+3. 提交发布 PR，检查实际提交的全部必要 CI 结果。发生修订后，以新提交重新核对；在远端结果返回前保持未执行或待完成状态，不引用旧版本 CI 代替。
+4. 合并后独立回读远端最终来源，重新校验清单、构建并核对三包。若 Git clone 不可用，保留限制，使用逐文件哈希核验的远端 API 导出，不称为全新克隆。
+5. 上述核对完成后，将 `v0.8.0-beta.2` 标签指向已核对的最终提交，创建 GitHub prerelease，上传三个 ZIP 与 `SHA256SUMS.txt`。回读实际 Release、标签、附件及 SHA-256，确认其来源与最终提交一致。
+
+固定下载入口：[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/embedded-project-workflow-source-v0.8.0-beta.2.zip)、[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/embedded-project-workflow-v0.8.0-beta.2.zip)、[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/vivado-examples-v0.8.0-beta.2.zip)及 [SHA256SUMS.txt](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/SHA256SUMS.txt)。这些链接使用本次固定 tag，实际可用状态以 Release 记录为准。
+
+发布说明分别陈述图稿、独立交付、原生工具及硬件证据：本轮 11 次首次交付复核通过，允许交付前自修；其中 9 对图及 2 次不扩展绘图的任务。STM32 100→200 ms 有当前源码契约、Debug/ELF/MAP 证据；FPGA 125→100 MHz 有生成、XSim、OOC 与顶层综合证据。保留[beta.2 原始记录](validation-v08b2.md)中的局部 T 形漏报、私有契约适用范围、外层 runner 异常及所有未覆盖项，不把原生阶段完成写成全部进程成功，不把这些结果写成板级验证或统计提效。未修改的历史厂商流程不机械重跑，也不改称本轮已执行。
+
+## v0.7.0-beta.1 发布流程（历史）
 
 1. 在独立发布仓库中，只同步审阅白名单内的公开文件；版本统一为 `0.7.0-beta.1`。原始工程、厂商内容、隔离实验目录和个人日志不上传。
 2. 更新并审阅清单，完成本地校验、负例检查、三包构建和 `verify-packages`。检查三包内容边界、同一来源及校验值；本地结果不替代远端 CI。
@@ -46,7 +60,7 @@ CI 执行 validate、self-test、隔离runner证据/路径回归、合成案例�
 4. 合并后独立回读远端最终来源，重新校验清单、构建并核对三个包。若 Git clone 不可用，明确记录限制，使用逐文件哈希核验的远端 API 导出；不把它称为全新克隆。
 5. 仅在上述核对完成后，将 `v0.7.0-beta.1` 标签指向已核对的最终提交，创建 GitHub prerelease，上传三个 ZIP 与 `SHA256SUMS.txt`，然后核对实际附件及校验值。
 
-本版本的直接入口为 [Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)、[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/embedded-project-workflow-source-v0.7.0-beta.1.zip)、[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/embedded-project-workflow-v0.7.0-beta.1.zip)、[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/vivado-examples-v0.7.0-beta.1.zip)和[校验值](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/SHA256SUMS.txt)。链接指向本次固定 tag，不以旧版本或 latest 附件代替。
+v0.7 的历史入口为 [Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)、[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/embedded-project-workflow-source-v0.7.0-beta.1.zip)、[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/embedded-project-workflow-v0.7.0-beta.1.zip)、[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/vivado-examples-v0.7.0-beta.1.zip)和[校验值](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/SHA256SUMS.txt)。这些入口保留 v0.7 身份；新版试用使用上方 beta.2 入口。
 
 发布说明应区分本地回归、代理行为与定向复验、真实厂商工具生成/构建、独立接入检查和真人试用。沿用记录中尚未执行的板测、Vitis A53 原生软件构建等边界；不把首次失败后的定向复验合并成首次全通过。历史 `validation` 文档保持原始结论，由实际 Release/PR/CI 记录补充公开发布阶段的事实。
 

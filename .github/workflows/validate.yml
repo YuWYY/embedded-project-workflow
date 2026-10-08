@@ -27,6 +27,12 @@ jobs:
         run: python -B -m unittest discover -s tests -p test_project_intake.py -v
       - name: Check optimized read-only intake
         run: python -B -O -m unittest discover -s tests -p test_project_intake.py -v
+      - name: Check planning SVG primitives without optional dependencies
+        run: python -B -S -m unittest discover -s tests -p test_planning_canvas.py -v
+      - name: Check optimized planning SVG primitives
+        run: python -B -S -O -m unittest discover -s tests -p test_planning_canvas.py -v
+      - name: Generate five editable SVG references
+        run: python -B -S skills/embedded-project-workflow/assets/planning-diagrams/generate_templates.py --output "${{ runner.temp }}/epw-v08-svg" --format svg
   host-business-contracts:
     runs-on: ubuntu-latest
     env:
@@ -89,7 +95,7 @@ jobs:
           subprocess.run([sys.executable, '-B', 'scripts/release.py', 'verify-packages'], check=True)
           target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'epw-source-host'
           target.mkdir()
-          with zipfile.ZipFile('dist/embedded-project-workflow-source-v0.7.0-beta.1.zip') as archive:
+          with zipfile.ZipFile('dist/embedded-project-workflow-source-v0.8.0-beta.2.zip') as archive:
               archive.extractall(target)
           source = target / 'embedded-project-workflow'
           subprocess.run([sys.executable, '-B', str(source / 'examples/real-project-handoff/tests/check.py'),
@@ -155,6 +161,10 @@ jobs:
         run: python -B evaluations/v04/prepare.py --output "${{ runner.temp }}/embedded-workflow-v04-cases"
       - name: Prepare v05 board and SoC evaluation inputs
         run: python -X utf8 -B evaluations/v05/prepare.py --output "${{ runner.temp }}/embedded-workflow-v05-cases"
+      - name: Prepare original planning diagram evaluation inputs
+        run: python -X utf8 -B evaluations/v08/prepare.py --output "${{ runner.temp }}/embedded-workflow-v08-cases"
+      - name: Prepare independent beta2 planning inputs
+        run: python -X utf8 -B evaluations/v08b2/prepare.py --output "${{ runner.temp }}/embedded-workflow-v08b2-cases"
       - name: Build release archives
         run: python -B scripts/release.py pack
       - name: Verify archive contents
@@ -165,14 +175,16 @@ jobs:
           import os, pathlib, subprocess, sys, zipfile
           target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'epw-release-unpacked'
           target.mkdir()
-          for kind, filename in [('source', 'embedded-project-workflow-source-v0.7.0-beta.1.zip'),
-                                 ('skill', 'embedded-project-workflow-v0.7.0-beta.1.zip')]:
+          for kind, filename in [('source', 'embedded-project-workflow-source-v0.8.0-beta.2.zip'),
+                                 ('skill', 'embedded-project-workflow-v0.8.0-beta.2.zip')]:
               with zipfile.ZipFile(pathlib.Path('dist') / filename) as archive:
                   archive.extractall(target / kind)
           source = target / 'source/embedded-project-workflow'
           skill = target / 'skill/embedded-project-workflow'
           subprocess.run([sys.executable, '-B', 'scripts/release.py', 'validate'], cwd=source, check=True)
           subprocess.run([sys.executable, '-B', str(skill / 'scripts/project_intake.py'), '--help'], check=True)
+          subprocess.run([sys.executable, '-B', '-S', str(skill / 'assets/planning-diagrams/generate_templates.py'),
+                          '--output', str(target / 'planning-svg'), '--format', 'svg'], check=True)
           for kind in ['cubemx', 'touchgfx', 'vivado']:
               subprocess.run([sys.executable, '-B', str(skill / 'scripts/project_intake.py'), 'inspect',
                               '--project', str(source / 'examples/first-use' / kind)], check=True)
@@ -180,8 +192,8 @@ jobs:
         with:
           name: beta-release-packages
           path: |
-            dist/embedded-project-workflow-source-v0.7.0-beta.1.zip
-            dist/embedded-project-workflow-v0.7.0-beta.1.zip
-            dist/vivado-examples-v0.7.0-beta.1.zip
+            dist/embedded-project-workflow-source-v0.8.0-beta.2.zip
+            dist/embedded-project-workflow-v0.8.0-beta.2.zip
+            dist/vivado-examples-v0.8.0-beta.2.zip
             dist/SHA256SUMS.txt
           if-no-files-found: error

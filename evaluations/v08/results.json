@@ -1,0 +1,315 @@
+{
+  "schema": 1,
+  "version": "0.8.0-beta.1",
+  "baseline_commit": "bbe108af8f07b0c561e0b51126fdc4d0ecc0f1e3",
+  "mode": "LOCAL_CANDIDATE",
+  "initial_execution_date": "2026-10-04",
+  "continuation_date": "2026-10-08",
+  "evaluation_method": "Eight fresh ephemeral CLI contexts received only assigned raw inputs and frozen r1 Skill. Six drawing cases and two routing cases. Corrections with explicit review feedback are separate, not new blind trials.",
+  "harness": {
+    "cli": "0.139.0",
+    "model": "CLI_DEFAULT",
+    "model_identity_exposed": false,
+    "model_limit": "Desktop model alias rejected in retained preflight; same CLI default arguments used for eight executions. No cross-model or statistical efficiency claim.",
+    "isolation": "Separate workspace copies and prompt boundaries; not an OS sandbox"
+  },
+  "initial_summary": {
+    "total": 8,
+    "passed": 2,
+    "failed": 6
+  },
+  "cases": [
+    {
+      "case": "01-baremetal-plan",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "FAIL",
+      "issues": [
+        "连线穿过模块，端点停在虚线边框",
+        "PNG与SVG分开绘制，内容不一致"
+      ],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 20,
+      "elapsed_seconds": 399.922,
+      "usage": [
+        {
+          "input_tokens": 578905,
+          "cached_input_tokens": 487936,
+          "output_tokens": 19268,
+          "reasoning_output_tokens": 2096
+        }
+      ],
+      "correction": {
+        "state": "PASS_WITH_REVIEW_FEEDBACK",
+        "independent_review": "PASS",
+        "input_unchanged": true,
+        "artifacts": {
+          "execution-logic-small.png": "1bbba4fb3bc6c6a767afde771f81702afb039d16bc15d7d393d560964ee2c3f5",
+          "execution-logic.png": "868b001772c1feaa10d8394078254a061ad21aa7af0396503da29501a5c431fe",
+          "execution-logic.svg": "c6e6966d0b0419950204cce89d734e8d677eb657ae8582eb9d6e1f285ced7388",
+          "pin-function-small.png": "975d3b4248bd7f850af0b7f46a78a40cf70783fe4ede161366936b77b07cb880",
+          "pin-function.png": "ad55db42e26e3515109e6f75036e301cca407b6437fd28874f4bbf29770f9274",
+          "pin-function.svg": "d9c30d2c72d539d9cf39b6320cc30b85f25616f0bf4d60c8229dd5658a4f4796"
+        },
+        "review_record_sha256": "886bf996665a868e2efffae03be8a5d0be698879131f0bb38def685435270a78"
+      }
+    },
+    {
+      "case": "02-rtos-plan",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "FAIL",
+      "issues": [
+        "长标签压框，说明被后画矩形遮住"
+      ],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 30,
+      "elapsed_seconds": 338.672,
+      "usage": [
+        {
+          "input_tokens": 607132,
+          "cached_input_tokens": 521472,
+          "output_tokens": 15473,
+          "reasoning_output_tokens": 1359
+        }
+      ],
+      "correction": {
+        "state": "PASS_WITH_REVIEW_FEEDBACK",
+        "independent_review": "PASS",
+        "input_unchanged": true,
+        "artifacts": {
+          "execution-logic-small.png": "2bc05f5e7d2dcab96aabe135e410c398c591f054a420a1d4b7f8a79ca50255ca",
+          "execution-logic.png": "c19989b50fbe1fe3dd3e77afb68ab48679796adb279d8dcefbd0c3da94d33a37",
+          "execution-logic.svg": "64357a2ce6b1f04cb8e857c7b60f28fd45c41e9498eace27486e3517efe3ef80",
+          "pin-function-small.png": "01a5645d4a8b2f731c86828c2bb45ad5059d0833fd6f268ff51c67d45aad86cd",
+          "pin-function.png": "f665365971338aad555e818995241e60cde2025404f42c4dd8303a94e1d05b6a",
+          "pin-function.svg": "c92bd2ec93a40a3a4380a743a86a040d62c6dca47c3770abc9edd3ec497aa869"
+        },
+        "review_record_sha256": "6c26f7b0ea683cdc2ec481800f5810941f22193a9e3b86c2c6b6f6267f9f99f7"
+      }
+    },
+    {
+      "case": "03-fpga-single-domain",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "FAIL",
+      "issues": [
+        "域框与外部模块交叠，连线穿标签",
+        "无实现依据却标复位高有效"
+      ],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 19,
+      "elapsed_seconds": 211.359,
+      "usage": [
+        {
+          "input_tokens": 611690,
+          "cached_input_tokens": 533760,
+          "output_tokens": 8938,
+          "reasoning_output_tokens": 1065
+        }
+      ],
+      "correction": {
+        "state": "PASS_WITH_REVIEW_FEEDBACK",
+        "independent_review": "PASS",
+        "input_unchanged": true,
+        "artifacts": {
+          "workspace/planning/diagrams/telemetry_panel_execution.png": "370fb50f42cf503bd63c7bd5a3b697c2238666a6a7ac4eaece0fe818998ea3bf",
+          "workspace/planning/diagrams/telemetry_panel_execution.svg": "335c7f43851bc8753a40b61d264e681adb3e124f903c7ec23156e1a460b16a6c",
+          "workspace/planning/diagrams/telemetry_panel_pins.png": "a913331a88ed7a7575270162d7eb7097d9bfef63d30819e9db56cf5a3f886883",
+          "workspace/planning/diagrams/telemetry_panel_pins.svg": "fdb116f6f497dc1d6f3b2ee230ca07ecbb81da38f7c27e146d7de26a96ba6c0a"
+        },
+        "review_record_sha256": "6e5e94d57cfcb30897b14d26120b66e6f9845a7f6735af47ac1abc1b660bdd69"
+      }
+    },
+    {
+      "case": "04-fpga-dual-domain",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "FAIL",
+      "issues": [
+        "SVG未转义导致XML无效",
+        "时钟方向、满空与复位连线不成立",
+        "单独PNG不能证明原SVG可显示，视觉检查声明证据不足"
+      ],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 22,
+      "elapsed_seconds": 378.875,
+      "usage": [
+        {
+          "input_tokens": 619084,
+          "cached_input_tokens": 541312,
+          "output_tokens": 18153,
+          "reasoning_output_tokens": 1419
+        }
+      ],
+      "correction": {
+        "state": "PASS_WITH_REVIEW_FEEDBACK",
+        "independent_review": "PASS",
+        "input_unchanged": true,
+        "artifacts": {
+          "execution_logic-preview.png": "8950ee5cc3c02429d2d75a0dbc365abe397365400402cbec5ecbf222c3908645",
+          "execution_logic.png": "a868b25c4fa4ea7d5c704db09f0ed77fc3ea8737334c9c66142190cee61d26aa",
+          "execution_logic.svg": "2b03b97a09a084e8c92098c4ecd6993c0f6a375094e6f8dec15910998af21888",
+          "pin_function-preview.png": "50d436a6618e12fd833ad649530f527531c5eeb5834a3b3da48e00709597bc2e",
+          "pin_function.png": "3d135f5f9ca551d88b38163640284a8b7e5978ebf9c17079b86022ff2350e85a",
+          "pin_function.svg": "8d46e911a0104b9291093fc33698dcc4f458224b4e8f2cdbcc7208b9e5b2cade"
+        },
+        "review_record_sha256": "fa55c340b413b2e703c7f55638422fc3deec33da43213ca25401e1dd85c45ad0"
+      }
+    },
+    {
+      "case": "05-revision-conflict",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "FAIL",
+      "issues": [
+        "按键误连温度功能，线路穿过无关模块"
+      ],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 19,
+      "elapsed_seconds": 276.453,
+      "usage": [
+        {
+          "input_tokens": 226266,
+          "cached_input_tokens": 193536,
+          "output_tokens": 12722,
+          "reasoning_output_tokens": 1411
+        }
+      ],
+      "correction": {
+        "state": "PASS_WITH_REVIEW_FEEDBACK",
+        "independent_review": "PASS",
+        "input_unchanged": true,
+        "artifacts": {
+          "execution_logic-preview.png": "aae7b5d1f642b6e6b31c75f57c352fbf81bd07bfc253728ba369733dae67130f",
+          "execution_logic.png": "54a559b5c75af01491242ec3c6df9d93cac86b5367e029b3f4638197aba661b5",
+          "execution_logic.svg": "eb58ba0902b60a019ec3cb97e81cf1cd2406af37b61b464a0888b741d4dceb0d",
+          "pin_function-preview.png": "e0ab9621c814ff2a4148b2f7a61ffdc5492545c883727a811b97ec6494032746",
+          "pin_function.png": "a9983fe1ade69630a4db6e5a61b178c028ce59b5018d04b1c7c3746ced39f262",
+          "pin_function.svg": "b82e6bbb5b52af437f32edfd9e0c97f14c134040a372315dd0370e61709e5bc4"
+        },
+        "review_record_sha256": "18992fedf7b0b3000d4e94a01d16f69aae4ae8a24df04c018a4c8fdd1de7cde2"
+      }
+    },
+    {
+      "case": "06-latest-design",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "FAIL",
+      "issues": [
+        "GPIO输出箭头反向，未知故障来源画成OLED",
+        "返回线压住时间说明"
+      ],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 23,
+      "elapsed_seconds": 204.297,
+      "usage": [
+        {
+          "input_tokens": 314807,
+          "cached_input_tokens": 278016,
+          "output_tokens": 7948,
+          "reasoning_output_tokens": 837
+        }
+      ],
+      "correction": {
+        "state": "PASS_WITH_REVIEW_FEEDBACK",
+        "independent_review": "PASS",
+        "input_unchanged": true,
+        "artifacts": {
+          "workspace/planning_output/operator-panel-execution-logic.png": "bb736017ede7c394f101becc9bb2776d0c8d9507a6ad0dfdbff82a19c42433e1",
+          "workspace/planning_output/operator-panel-execution-logic.svg": "f3dd962dacef95597b4c488d424ff9db901a0bb1549349807023fb88ee46c66a",
+          "workspace/planning_output/operator-panel-pin-functions.png": "a27a7d36f7fce50f252ed55901e8f5c51fcc1f93817e36acfa0165d7f4a297ec",
+          "workspace/planning_output/operator-panel-pin-functions.svg": "d4037aaf54a70b1f0bca4e84a773a0a63d4eee15ba26011cae85dd7daa8a9085"
+        },
+        "review_record_sha256": "1510c2ebccdc8f464f785e24cba115e47fc3f36086ab1dfc76d54330303bf2e0"
+      }
+    },
+    {
+      "case": "07-small-change",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "PASS",
+      "issues": [],
+      "source_changes": [
+        "APP/sample.c"
+      ],
+      "assigned_skill_unchanged": true,
+      "tool_events": 8,
+      "elapsed_seconds": 46.235,
+      "usage": [
+        {
+          "input_tokens": 78617,
+          "cached_input_tokens": 60928,
+          "output_tokens": 1454,
+          "reasoning_output_tokens": 326
+        }
+      ],
+      "correction": "NOT_REQUIRED"
+    },
+    {
+      "case": "08-first-look",
+      "process_state": "COMPLETED",
+      "process_exit_code": 0,
+      "initial_verdict": "PASS",
+      "issues": [],
+      "source_changes": [],
+      "assigned_skill_unchanged": true,
+      "tool_events": 14,
+      "elapsed_seconds": 70.515,
+      "usage": [
+        {
+          "input_tokens": 93247,
+          "cached_input_tokens": 76800,
+          "output_tokens": 2613,
+          "reasoning_output_tokens": 291
+        }
+      ],
+      "correction": "NOT_REQUIRED"
+    }
+  ],
+  "final_skill_files": {
+    "agents/openai.yaml": "9ada78577e68f7d8932876763c0e6e573b2bb7607739229c0419f7e595be5d09",
+    "assets/planning-diagrams/01-chip-pin-layout.svg": "ab61c42b63902854e38c355f04e5b457c7bed12509b78d7a6217016ca4d0be27",
+    "assets/planning-diagrams/02-baremetal-execution.svg": "e9f35defdab36024b40afe7ffbf9f01ffe1873864f07e24d18a2a59a781bc7c0",
+    "assets/planning-diagrams/03-rtos-execution.svg": "7925784983efa2962153211677f65eec600113c92e62412c046bb315076daa95",
+    "assets/planning-diagrams/04-fpga-single-domain.svg": "daed5ef910a971e39abb822b20c033fd0b0f40f359d17b066d5ac9cfae6cd9b1",
+    "assets/planning-diagrams/05-fpga-dual-domain-fifo.svg": "c7bbd1ab9bdad2d4c963ac84d653412a543f09ed0f4af65aa69af105acae90b2",
+    "assets/planning-diagrams/generate_templates.py": "bfc8334d2fd10bbdedd18099d4e472d0c16c7416deb6f4e6d48f204b2a66ad37",
+    "references/board-evidence.md": "0ea45577479942e8570df1519ebba975b31aa8514e66362a362aab87efd9914d",
+    "references/configuration-contracts.md": "1e1b5b6b1e7ce691952534de2c39997189461ae4d3f2d1b50f8f676f9a0b7855",
+    "references/debug-retrospective.md": "9c99f13b918c3756059e8da426517fbc2b8a1be974299713ab6985320f6d1abf",
+    "references/esp-idf.md": "a9f89677067879d4a4ec252c7e7d225eca00c971625d9dbd45cfe0543a3e15f3",
+    "references/execution-entries.md": "21d7b02856aa4c537cf91acc01fe83d3b1f385d86677ee94b26b0054cc120e70",
+    "references/existing-projects.md": "894b189ab14bd56f8f022a87f412c7441d557708723645fda78f369cb610e9f3",
+    "references/freertos.md": "1bd2f526cd4388239f3b6dfd0b33e633dcc11adce5560b8b34ba742afda299cc",
+    "references/ip-selection.md": "45055c6fdc17baa65e2fecd1d6eb9fa91b8843632e74631e811ca82f4fc7cc16",
+    "references/long-project-workflow.md": "a8c17adb38065fccbf8840f65765c529241a840bf678f69deda1a74fb7fb8864",
+    "references/planning-diagrams.md": "40d03e79130258f6254a7b36178f880df054227ba3ff53a88be801c96db09e01",
+    "references/project-facts-template.md": "12abb8898c0cc98fd475ae42a1a6d8740eb6b8b70f742fd67c661fdf7be96a26",
+    "references/sources.md": "71412b18157de61aa7b23da39a562fbde10557e7e786dc233e683bd19e135eea",
+    "references/stm32-cubemx.md": "f5e66518eea3aaebb998a6aa7d1a42b3a980cafc384c5e8a3f45a4bcca42695d",
+    "references/touchgfx.md": "4bd969eeb3bfbbcb98e8e324f9d67ed46bdbe5dbc4a8adafc37ce0038af3d81e",
+    "references/vitis-handoff.md": "2f7093e956dc987d52bcbbd7e25d9f4f7b63675aafa89d41bf7e56e6eed044c2",
+    "references/vivado-workflow.md": "7d15261e5b540e0a17029d89a835e1f0dd45f7c7a8e4e7288a7a94997ea2f0d3",
+    "references/zynq-mpsoc.md": "14ef34294e9a2e3969db0f6aeb811f90cd147ef5a272b9c43bda8bd745b299f2",
+    "scripts/cubemx_rtos.py": "e8573d4a316209021e0e454421c39084e39c3e4302171e8bb4300b1ce1967d8e",
+    "scripts/planning_canvas.py": "b8326d3cd0b78a3a04738d7df1b05124ea9822eb8bbe14eca105d6e6a2ddd821",
+    "scripts/project_intake.py": "30098700400eeb3965d4433912a016a87130a1b8aca4fb1b0dfac0207284a654",
+    "scripts/soc_handoff.py": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604",
+    "scripts/touchgfx_project.py": "4a320d8e1fb382f776452460efa0f989840130caf7dac3083ccd1e04e72bf62e",
+    "SKILL.md": "d0db51bdc3aa39917267b4ef8cd759d84e103a19646a0e0d85431a1f4aa869ab"
+  },
+  "current_scope": "Synthetic materials and drawing artifacts; vendor tools, hardware and remote CI NOT_RUN",
+  "correction_summary": {
+    "total": 6,
+    "review_passed": 6,
+    "blind_trials": 0,
+    "method": "Review feedback supplied; repaired diagrams independently checked against raw inputs and native/reduced rendered views. Not a claim of first-attempt reliability."
+  }
+}

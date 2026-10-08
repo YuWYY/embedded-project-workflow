@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="28" font-size="36" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">② 模块执行逻辑｜裸机循环、IRQ 与硬件回调</text>
+<text x="42" y="83" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">示例结构：主循环顺序执行；硬件独立推进；IRQ 可抢占主循环，回调上下文必须注明。</text>
+<polyline points="40,134 1560,134" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<rect x="40" y="165" width="1520" height="185" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="主循环 main：顺序运行；循环一次的 CPU 时间待测"/>
+<text x="56" y="177" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">主循环 main：顺序运行；循环一次的 CPU 时间待测</text>
+<rect x="90" y="226" width="325" height="92" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="252.5" y="241" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">读取事件 / 最新样本</text>
+<text x="252.5" y="279" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">每轮执行；有新数据才处理</text>
+<rect x="590" y="226" width="355" height="92" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="767.5" y="241" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">应用状态机</text>
+<text x="767.5" y="279" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">条件成立时更新状态</text>
+<rect x="1140" y="226" width="350" height="92" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1315" y="241" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">后台工作</text>
+<text x="1315" y="279" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">非阻塞步骤；完成后回到循环</text>
+<polyline points="415,268 590,268" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="590,268 578,262.6 578,273.4" fill="#2E835C"/>
+<text x="502" y="234" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">事件标志</text>
+<polyline points="945,268 1140,268" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1140,268 1128,262.6 1128,273.4" fill="#2E835C"/>
+<text x="1042" y="234" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">下一步骤</text>
+<polyline points="1315,318 1315,334 252,334 252,318" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="252,318 247.32,328.4 256.68,328.4" fill="#2E835C"/>
+<rect x="40" y="389" width="1520" height="232" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="IRQ / 回调上下文：在中断中执行；仅做有界工作，禁止无界等待"/>
+<text x="56" y="401" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">IRQ / 回调上下文：在中断中执行；仅做有界工作，禁止无界等待</text>
+<rect x="90" y="451" width="325" height="120" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="252.5" y="466" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">DMA / 外设 IRQ</text>
+<text x="252.5" y="504" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">触发：完成标志或错误标志</text>
+<rect x="590" y="451" width="355" height="120" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="767.5" y="466" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">驱动完成回调</text>
+<text x="767.5" y="504" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">本例由 IRQ 调用</text>
+<text x="767.5" y="531" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">确认实际回调上下文</text>
+<rect x="1140" y="451" width="350" height="120" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1315" y="466" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">发布缓冲区 / 事件</text>
+<text x="1315" y="504" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">交接后立即返回</text>
+<text x="1315" y="531" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">共享状态需要一致性约定</text>
+<polyline points="415,503 590,503" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="590,503 578,497.6 578,508.4" fill="#2E835C"/>
+<text x="502" y="467" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">驱动分派</text>
+<polyline points="945,503 1140,503" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1140,503 1128,497.6 1128,508.4" fill="#2B68A3"/>
+<text x="1042" y="467" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">样本就绪</text>
+<polyline points="1315,451 1315,378 300,378 300,318" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="300,318 294.6,330 305.4,330" fill="#2B68A3"/>
+<text x="820" y="353" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">交接数据 / 事件；不是直接调用主循环</text>
+<text x="78" y="587" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">优先级与最大 IRQ 持续时间：待确认。共享缓冲的所有权、覆盖规则及临界区：待确认。</text>
+<rect x="40" y="661" width="1520" height="216" rx="0" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-dasharray="9 7" data-scope="硬件：定时器、采样与 DMA 可独立于 CPU 推进"/>
+<text x="56" y="673" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">硬件：定时器、采样与 DMA 可独立于 CPU 推进</text>
+<rect x="90" y="723" width="325" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="252.5" y="738" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">定时器触发</text>
+<text x="252.5" y="776" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">触发周期：待确认</text>
+<rect x="590" y="723" width="355" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="767.5" y="738" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">ADC / 外设采样</text>
+<text x="767.5" y="776" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">触发边沿到来时启动</text>
+<rect x="1140" y="723" width="350" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1315" y="738" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">DMA 写缓冲区</text>
+<text x="1315" y="776" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">传输完成时置位 IRQ</text>
+<polyline points="415,775 590,775" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="590,775 578,769.6 578,780.4" fill="#2E835C"/>
+<text x="502" y="741" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">触发</text>
+<polyline points="945,775 1140,775" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1140,775 1128,769.6 1128,780.4" fill="#2B68A3"/>
+<text x="1042" y="741" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">采样值</text>
+<polyline points="1315,833 1315,860 25,860 25,584 252,584 252,571" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="252,571 248.197,579.45 255.803,579.45" fill="#2E835C"/>
+<text x="800" y="882" font-size="18" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">完成 IRQ：硬件触发软件入口</text>
+<polyline points="40,907 1560,907" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="45,938 103,938" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="103,938 91,932.6 91,943.4" fill="#2B68A3"/>
+<text x="120" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">数据</text>
+<polyline points="270,938 328,938" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="328,938 316,932.6 316,943.4" fill="#2E835C"/>
+<text x="345" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">控制</text>
+<polyline points="495,938 553,938" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="553,938 541,932.6 541,943.4" fill="#B77916"/>
+<text x="570" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">时钟</text>
+<polyline points="720,938 778,938" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="778,938 766,932.6 766,943.4" fill="#AD4C4C"/>
+<text x="795" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位</text>
+<text x="990" y="922" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">虚线仅表示已命名的分组 / 时钟域</text>
+<text x="42" y="964" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">规划图不等于中断时延或实时性证据；用当前工程的 IRQ 优先级、回调调用链及实测预算替换占位。</text>
+</svg>

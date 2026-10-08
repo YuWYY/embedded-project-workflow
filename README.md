@@ -2,7 +2,9 @@
 
 `embedded-project-workflow` 帮助 AI 读取你的工程和目标，选择原生配置、已有组件或用户代码，在约定范围内完成实现，让你继续用熟悉的工具维护工程。
 
-**v0.7.0-beta.1 公开预览版**聚焦从自己的工程读出概览、选定下一步并接续一项改动。下载与发布状态见[本版本 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)，当前提交检查见[CI](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)，实际验证范围见[支持与证据](docs/support.md)。预览版保留已知限制，历史通过结果不自动证明新版本通过。
+**推荐从 v0.8.0-beta.2 公开预览版开始。** 本版完善两张工程规划图的独立交付与维护接续：完整规划后看清引脚功能分配和任务/外设执行逻辑，交付可编辑 SVG；保存新配置后，相关图稿随当前设计更新。现有工程接手、配置保护及小改动流程继续按需使用。
+
+发布状态、提交及附件以[本版 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.8.0-beta.2)为准，远端检查以[对应提交的 CI](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)为准，不把本地通过写成远端已通过。[支持与证据](docs/support.md)汇总适用范围；[beta.2 本地验证记录](docs/validation-v08b2.md)保留当时“未发布、远端 CI 未执行”的身份，[v0.7 公开版](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)继续作为历史基线。
 
 | 从这里开始 | 你会得到什么 |
 |---|---|
@@ -48,15 +50,32 @@
 
 不必填满参数表。可选一个已有功能链，例如沿RTOS采样队列加统计、接通Designer新增按钮，或调整允许范围内的IP参数。脚本只覆盖各自声明的检查或生成构建，实际业务仍需接入；[包内最小调用](skills/embedded-project-workflow/references/execution-entries.md)说明参数从哪里读取和何时可用。
 
+## 完整规划后，看两张图
+
+**引脚功能图**把抽象芯片连接到外部设备，标明有依据的GPIO、顶层端口和功能；**执行逻辑图**说明主循环/中断、RTOS任务，或FPGA各模块的执行条件和数据关系。FPGA用虚线划分时钟域，把“每拍、使能时、每段周期”写进模块；RTOS区分优先级、周期、CPU预算及待测耗时。
+
+你可以先给用途，也可以先配置原生工程。AI依据当前材料绘图，未知引脚保留待确认；小函数修改和首次只读概览不自动增加出图流程。用户保存新配置后，相关图面随实际设计更新。图稿不是配置源，也不证明已构建或板测。
+
+```text
+请显式读取 <SKILL.md绝对路径>。
+依据 <当前工作副本> 和 <相关硬件资料>，规划 <目标功能>。
+完整计划后提供同一项目的引脚功能图和执行逻辑图，交付可编辑SVG及可用的PNG预览。
+保留已有结构，区分当前事实、设计提案和待确认项。
+```
+
+[绘图指南与包内模板](skills/embedded-project-workflow/references/planning-diagrams.md)包括裸机、RTOS、单时钟域和跨时钟域布局。SVG只需Python标准库；PNG可选，需要已有Pillow和字体，不自动安装。
+
+本轮 11 次独立首次交付通过复核，包含 9 对图及 2 次按范围不出图的任务；“首次交付”允许执行者交付前自检修正。真实接续覆盖 STM32 100→200 ms 的当前源码契约与 Debug 构建，以及 FPGA 125→100 MHz 的 IP 生成、XSim 和综合。小样本、私有检查脚本适用范围、局部 T 形诊断漏报及外层 runner 异常均见[原始验证记录](docs/validation-v08b2.md)，这些结果不代表任意工程兼容或硬件验证。
+
 ## 下载哪一份
 
 | 获取方式 | 包含什么 | 适合谁 |
 |---|---|---|
-| **[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/embedded-project-workflow-source-v0.7.0-beta.1.zip)** | Skill、指南、检查脚本、原创示例、入门材料和评估输入 | 第一次试用、查看案例和参与改进；本页的入门命令以此为准 |
-| **[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/embedded-project-workflow-v0.7.0-beta.1.zip)** | `embedded-project-workflow/` 内的主入口、参考指南、脚本及许可 | 已有自己的工程，只需要把 Skill 交给 AI；不包含仓库的 `docs/`、`examples/`、`tests/` |
-| **[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/vivado-examples-v0.7.0-beta.1.zip)** | 独立的原创 Vivado 案例源码及许可 | 按案例说明使用本机已有工具；它不是 Skill 包，也不含厂商依赖 |
+| **[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/embedded-project-workflow-source-v0.8.0-beta.2.zip)** | Skill、指南、检查脚本、原创示例、入门材料和评估输入 | 第一次试用、查看案例和参与改进；本页的入门命令以此为准 |
+| **[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/embedded-project-workflow-v0.8.0-beta.2.zip)** | `embedded-project-workflow/` 内的主入口、参考指南、脚本、五份SVG模板及许可 | 已有自己的工程；绘图资源包内自足，不包含仓库的 `docs/`、`examples/`、`tests/` |
+| **[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/vivado-examples-v0.8.0-beta.2.zip)** | 独立的原创 Vivado 案例源码及许可 | 保留历史验证身份；本轮125→100 MHz验证单独记录，不含厂商依赖 |
 
-下载或解压不会安装 Skill。未安装时使用真实 `SKILL.md` 路径，不假定 `$embedded-project-workflow` 已能解析。仅有 Skill ZIP 时，入口是 `<解压目录>/embedded-project-workflow/SKILL.md`；只读检查脚本也在该目录的 `scripts/` 下。三个包使用同一版本；校验值见 [SHA256SUMS.txt](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.7.0-beta.1/SHA256SUMS.txt)。实际附件以[本版本 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)为准，发布流程见[发行说明](docs/releasing.md)，不用旧版附件代表新版。
+三个 ZIP 固定指向 `v0.8.0-beta.2`，请用同一 Release 的 [SHA256SUMS.txt](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/SHA256SUMS.txt)核对下载文件；完整源码包是审阅白名单发行物。下载或解压不会安装 Skill。未安装时使用真实 `SKILL.md` 路径，不假定 `$embedded-project-workflow` 已能解析。仅有 Skill ZIP 时，入口是 `<解压目录>/embedded-project-workflow/SKILL.md`；脚本与绘图素材均在包内。打包、发布核验及历史记录见[发行说明](docs/releasing.md)。
 
 ## 怎样协作
 

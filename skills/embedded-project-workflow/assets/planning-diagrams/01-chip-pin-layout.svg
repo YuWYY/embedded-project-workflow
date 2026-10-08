@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+<rect width="100%" height="100%" fill="#FFFFFF"/>
+<text x="40" y="28" font-size="36" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="start" dominant-baseline="text-before-edge">① 引脚功能分配｜芯片边缘布局参考</text>
+<text x="42" y="83" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">全部信号名称和 PIN 标签均为示例占位；实际图必须从当前原生配置与原理图核对。</text>
+<polyline points="40,134 1560,134" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<rect x="605" y="205" width="390" height="660" rx="4" fill="#FFFFFF" stroke="#26323D" stroke-width="2.5"/>
+<polyline points="650,190 650,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="650,865 650,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="695,190 695,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="695,865 695,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="740,190 740,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="740,865 740,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="785,190 785,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="785,865 785,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="830,190 830,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="830,865 830,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="875,190 875,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="875,865 875,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="920,190 920,205" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="920,865 920,880" fill="none" stroke="#9BA7B0" stroke-width="2" stroke-linejoin="round"/>
+<text x="800" y="408" font-size="38" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">MCU / FPGA</text>
+<text x="800" y="472" font-size="26" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">型号 / 封装：待确认</text>
+<text x="800" y="528" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">原生配置负责实际分配</text>
+<text x="800" y="575" font-size="23" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">图中位置不代表物理脚序</text>
+<rect x="40" y="255" width="300" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="190" y="270" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">传感器输入</text>
+<text x="190" y="308" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">采样功能：待确认</text>
+<polyline points="340,310 605,310" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="605,310 593,304.6 593,315.4" fill="#2B68A3"/>
+<text x="472" y="251" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">PIN_A（占位）</text>
+<text x="472" y="276.65" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">adc_in（示例）</text>
+<rect x="40" y="480" width="300" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="190" y="495" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">外部时钟源</text>
+<text x="190" y="533" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">频率 / 电压：待确认</text>
+<polyline points="340,535 605,535" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="605,535 593,529.6 593,540.4" fill="#B77916"/>
+<text x="472" y="476" font-size="19" fill="#B77916" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">PIN_B（占位）</text>
+<text x="472" y="501.65" font-size="19" fill="#B77916" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">clk_in（示例）</text>
+<rect x="40" y="705" width="300" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="190" y="720" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">复位来源</text>
+<text x="190" y="758" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">极性 / 电平：待确认</text>
+<polyline points="340,760 605,760" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="605,760 593,754.6 593,765.4" fill="#AD4C4C"/>
+<text x="472" y="701" font-size="19" fill="#AD4C4C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">PIN_C（占位）</text>
+<text x="472" y="726.65" font-size="19" fill="#AD4C4C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">reset_n（示例）</text>
+<rect x="1260" y="255" width="300" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1410" y="270" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">执行器接口</text>
+<text x="1410" y="308" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">极性 / 安全态：待确认</text>
+<polyline points="995,310 1260,310" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1260,310 1248,304.6 1248,315.4" fill="#2E835C"/>
+<text x="1127" y="251" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">PIN_D（占位）</text>
+<text x="1127" y="276.65" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">pwm_out（示例）</text>
+<rect x="1260" y="480" width="300" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1410" y="495" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">通信收发器</text>
+<text x="1410" y="533" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">方向 / 速率：待确认</text>
+<polyline points="995,535 1260,535" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1260,535 1248,529.6 1248,540.4" fill="#2B68A3"/>
+<text x="1127" y="476" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">PIN_E（占位）</text>
+<text x="1127" y="501.65" font-size="19" fill="#2B68A3" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">uart_tx（示例）</text>
+<rect x="1260" y="705" width="300" height="110" rx="4" fill="#FFFFFF" stroke="#9BA7B0" stroke-width="2"/>
+<text x="1410" y="720" font-size="25" fill="#26323D" font-family="sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="text-before-edge">状态指示</text>
+<text x="1410" y="758" font-size="20" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">有效电平：待确认</text>
+<polyline points="995,760 1260,760" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1260,760 1248,754.6 1248,765.4" fill="#2E835C"/>
+<text x="1127" y="701" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">PIN_F（占位）</text>
+<text x="1127" y="726.65" font-size="19" fill="#2E835C" font-family="sans-serif" font-weight="400" text-anchor="middle" dominant-baseline="text-before-edge">status（示例）</text>
+<polyline points="40,907 1560,907" fill="none" stroke="#9BA7B0" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="45,938 103,938" fill="none" stroke="#2B68A3" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="103,938 91,932.6 91,943.4" fill="#2B68A3"/>
+<text x="120" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">数据</text>
+<polyline points="270,938 328,938" fill="none" stroke="#2E835C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="328,938 316,932.6 316,943.4" fill="#2E835C"/>
+<text x="345" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">控制</text>
+<polyline points="495,938 553,938" fill="none" stroke="#B77916" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="553,938 541,932.6 541,943.4" fill="#B77916"/>
+<text x="570" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">时钟</text>
+<polyline points="720,938 778,938" fill="none" stroke="#AD4C4C" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="778,938 766,932.6 766,943.4" fill="#AD4C4C"/>
+<text x="795" y="922" font-size="22" fill="#26323D" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">复位</text>
+<text x="990" y="922" font-size="22" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">虚线仅表示已命名的分组 / 时钟域</text>
+<text x="42" y="964" font-size="19" fill="#65727E" font-family="sans-serif" font-weight="400" text-anchor="start" dominant-baseline="text-before-edge">填写实际端口、封装脚号、方向、电平和复用；当前模板没有已确认的引脚事实，也不证明硬件连通。</text>
+</svg>
