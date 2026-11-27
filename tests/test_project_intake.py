@@ -113,6 +113,91 @@ class IntakeTests(unittest.TestCase):
         self.assertIn('device STM32G474RETx', intake.format_text(report))
         self.assertIsNone(report['sources'][0]['facts']['device'])
 
+    def test_ioc_firmware_default_and_older_unspecified_locations(self):
+        base = 'MxCube.Version=6.18.1\nProjectManager.FirmwarePackage=STM32Cube FW_F4 V1.28.3\n'
+        for mode, declarations in [('default', 'ProjectManager.DefaultFWLocation=true\nProjectManager.CustomerFirmwarePackage=\n'),
+                                   ('unspecified', '')]:
+            with self.subTest(mode=mode):
+                report = intake.inspect_project(self.write('app.ioc', base + declarations))
+                loc = report['sources'][0]['facts']['firmware_location']
+                self.assertEqual(report['status'], 'READ_ONLY')
+                self.assertEqual(loc['mode'], mode)
+                self.assertEqual(loc['declared_path'], '' if mode == 'default' else None)
+                self.assertIsNone(loc['resolved_path'])
+                self.assertEqual(loc['directory_status'], 'NOT_CHECKED')
+                self.assertIn('STM32Cube FW_F4 V1.28.3 | location: ' + mode, intake.format_text(report))
+
+    def test_ioc_custom_firmware_directory_relative_to_each_ioc(self):
+        raw = r'..\\custom\ packs\\patched'
+        contents = ('MxCube.Version=6.18.1\nProjectManager.DefaultFWLocation=false\n'
+                    'ProjectManager.CustomerFirmwarePackage=' + raw + '\n')
+        installed = self.root/'custom packs'/'patched'
+        installed.mkdir(parents=True)
+        original = self.write('project/app.ioc', contents)
+        moved = self.write('moved/deeper/app.ioc', contents)
+        before = tree_hashes(self.root)
+        for source, target, state in [(original, installed, 'DIRECTORY_PRESENT'),
+                                     (moved, self.root/'moved'/'custom packs'/'patched', 'MISSING')]:
+            with self.subTest(state=state):
+                report = intake.inspect_project(source)
+                loc = report['sources'][0]['facts']['firmware_location']
+                self.assertEqual((loc['mode'], loc['declared_path']), ('custom', raw))
+                self.assertEqual((loc['resolved_path'], loc['directory_status']), (str(target), state))
+                self.assertIn(raw, intake.format_text(report))
+                self.assertIn(str(target), intake.format_text(report))
+                self.assertEqual('FIRMWARE_PATH_MISSING' in codes(report), state == 'MISSING')
+        self.assertEqual(before, tree_hashes(self.root))
+
+    def test_ioc_custom_absolute_path_and_inactive_stale_declaration(self):
+        folder = self.root/'private pack'
+        folder.mkdir()
+        raw = str(folder).replace('\\', '\\\\').replace(':', '\\:')
+        source = 'MxCube.Version=6.18.1\nProjectManager.CustomerFirmwarePackage=' + raw + '\n'
+        for flag, mode, state in [('true', 'default', 'NOT_CHECKED'), ('false', 'custom', 'DIRECTORY_PRESENT')]:
+            report = intake.inspect_project(self.write('app.ioc', source + 'ProjectManager.DefaultFWLocation=' + flag))
+            loc = report['sources'][0]['facts']['firmware_location']
+            self.assertEqual((loc['mode'], loc['declared_path'], loc['directory_status']), (mode, raw, state))
+            self.assertEqual(report['status'], 'READ_ONLY')
+
+    def test_ioc_network_path_is_only_reported_as_data(self):
+        raw = r'\\\\example.invalid\\share\\pack'
+        report = intake.inspect_project(self.write('app.ioc', 'MxCube.Version=6.18.1\nProjectManager.DefaultFWLocation=false\n'
+                                                   'ProjectManager.CustomerFirmwarePackage=' + raw))
+        loc = report['sources'][0]['facts']['firmware_location']
+        self.assertEqual(loc['declared_path'], raw)
+        self.assertIsNone(loc['resolved_path'])
+        self.assertIn('FIRMWARE_PATH_NOT_CHECKED', codes(report))
+
+    def test_ioc_missing_component_before_parent_traversal(self):
+        (self.root/'pack').mkdir()
+        raw = 'absent/../pack'
+        source = self.write('app.ioc', 'MxCube.Version=6.18.1\nProjectManager.DefaultFWLocation=false\n'
+                            'ProjectManager.CustomerFirmwarePackage=' + raw)
+        loc = intake.inspect_project(source)['sources'][0]['facts']['firmware_location']
+        target = self.root/raw
+        self.assertEqual(loc['directory_status'], 'DIRECTORY_PRESENT' if target.is_dir() else 'MISSING')
+        self.assertEqual(loc['resolved_path'], str(self.root/'pack' if os.name == 'nt' else target))
+
+    def test_ioc_stops_at_link_before_inspecting_descendants(self):
+        link = self.root/'alias'
+        origin = self.root/'vendor'/'original'
+        origin.mkdir(parents=True)
+        (self.root/'pack').mkdir()
+        if os.name == 'nt':
+            # A real directory junction requires no symlink privilege.
+            import _winapi
+            _winapi.CreateJunction(str(origin), str(link))
+        else:
+            link.symlink_to(origin, target_is_directory=True)
+        for raw, expected in [('alias/child', 'LINK_NOT_READ'),
+                              ('alias/../pack', 'DIRECTORY_PRESENT' if os.name == 'nt' else 'LINK_NOT_READ')]:
+            with self.subTest(raw=raw):
+                source = self.write('app.ioc', 'MxCube.Version=6.18.1\nProjectManager.DefaultFWLocation=false\n'
+                                    'ProjectManager.CustomerFirmwarePackage=' + raw)
+                loc = intake.inspect_project(source)['sources'][0]['facts']['firmware_location']
+                self.assertEqual(loc['directory_status'], expected)
+                self.assertEqual(loc['resolved_path'], str(self.root/'pack' if expected == 'DIRECTORY_PRESENT' else self.root/raw))
+
     def test_first_use_original_fragments_can_be_inventoried(self):
         result = intake.inspect_project(REPO/'examples/first-use')
         self.assertEqual(len(result['sources']), 4)

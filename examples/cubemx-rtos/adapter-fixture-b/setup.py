@@ -43,7 +43,7 @@ def establish(args):
     project.mkdir()
     ioc = project / (name + ".ioc")
     shutil.copy2(source / (name + ".ioc"), ioc)
-    adapter.parse_ioc(ioc.read_bytes())
+    model = adapter.parse_ioc(ioc.read_bytes())
     env = os.environ.copy()
     for key in adapter.FORBIDDEN_ENV:
         env.pop(key, None)
@@ -51,8 +51,7 @@ def establish(args):
     temp.mkdir()
     env.update(TEMP=str(temp), TMP=str(temp), PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1")
     script = reports / "initial.mxscript"
-    script.write_text('\n'.join([f'config load "{ioc.as_posix()}"', 'project toolchain "MDK-ARM V5.27"',
-        f'project setCustomFWPath "{Path(paths["firmware"]).as_posix()}"', 'project generate', 'exit', '']), encoding="utf-8")
+    script.write_text(adapter.generation_script(ioc, model["values"], paths["firmware"]), encoding="utf-8")
     outcome = {"fixture": args.fixture, "project": str(project), "status": "STARTED", "runtime": "NOT_RUN"}
     adapter.write_json(reports / "result.json", outcome)
     try:
@@ -63,6 +62,7 @@ def establish(args):
             "--add-opens", "java.desktop/java.awt=ALL-UNNAMED", "--add-exports", "java.desktop/sun.awt=ALL-UNNAMED",
             "-Dfile.encoding=UTF-8", "-jar", paths["cubemx"], "-q", str(script)], project, reports / "cubemx.log", env)
         adapter.check_generation(generation, reports / "cubemx.log", [generated, project / "Core/Src/main.c", uvprojx], start, None)
+        adapter.check_firmware_location(ioc, adapter.parse_ioc(ioc.read_bytes())["values"], paths["firmware"], model["values"])
         shutil.copytree(source / folder, project / folder)
         body = generated.read_text(encoding="utf-8")
         for region, insert in (("Includes", f'\n#include "{header}"'), ("RTOS_THREADS", f"\n  {hook}();")):

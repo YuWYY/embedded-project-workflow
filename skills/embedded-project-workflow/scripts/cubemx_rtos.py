@@ -548,12 +548,55 @@ def vendor_roots(paths):
     return [Path(paths["firmware"]), Path(paths["pack"]), Path(paths["armcc"]).parent.parent]
 
 
+def check_firmware_location(ioc, values, firmware, original=None):
+    """Match the standalone CubeMX 6.18.1 selection to the audited --firmware."""
+    mode_key = "ProjectManager.DefaultFWLocation"
+    mode = values.get(mode_key, "true")
+    raw = values.get("ProjectManager.CustomerFirmwarePackage", "")
+    require(mode in ("true", "false") and (mode_key in values or not raw),
+            "Ambiguous IOC firmware location; check DefaultFWLocation and CustomerFirmwarePackage")
+    if original is not None:
+        require(mode == original.get(mode_key, "true"), "CubeMX changed the firmware location mode")
+        pin = "ProjectManager.LastFirmware"
+        require(pin not in original or values.get(pin) == original[pin], "CubeMX changed the firmware version policy")
+    if mode == "false":
+        require(raw, "Custom firmware location is empty")
+        # CubeMX escapes Windows separators, drive colons and spaces in IOC properties.
+        decoded = re.sub(r'\\([\\: =#!])', r'\1', raw)
+        selected = ioc.parent / decoded.replace("\\", "/")
+    else:
+        user_dir = Path.home()
+        updater = user_dir / ".stm32cubemx/plugins/updater/updater.ini"
+        repository = user_dir / "STM32Cube/Repository"
+        if updater.exists():
+            config = configparser.ConfigParser(interpolation=None)
+            try:
+                config.read_string(updater.read_text(encoding="utf-8-sig"))
+            except (UnicodeError, configparser.Error) as exc:
+                raise AdapterError(f"Cannot read CubeMX repository setting from {updater}: {exc}") from exc
+            configured = config.get("Path", "RepositoryPath", fallback="").strip()
+            if configured:
+                repository = Path(configured)
+                require(repository.is_absolute(), f"CubeMX repository path must be absolute: {repository}")
+        selected = repository / PROFILE["firmware"].replace(" ", "_")
+    require(selected.is_dir(), f"Missing {PROFILE['firmware']} for {ioc}: {selected.resolve()}")
+    require(selected.samefile(firmware),
+            f"IOC selects {selected.resolve()} but --firmware selects {firmware}; check the project and CubeMX settings")
+
+
+def generation_script(ioc, values, firmware):
+    check_firmware_location(ioc, values, firmware)
+    return "\n".join([f'config load "{ioc.as_posix()}"', 'project toolchain "MDK-ARM V5.27"',
+                      "project generate", "exit", ""])
+
+
 def make_plan(project, ioc, uvprojx, target, users, task_items, queue_items, tools):
     for path in (project, ioc, uvprojx):
         reject_links(path)
     project, ioc, uvprojx = (Path(p).resolve() for p in (project, ioc, uvprojx))
     installation = doctor(tools)
     state = inspect_project(project, ioc, uvprojx, target, users, vendor_roots(installation["paths"]))
+    check_firmware_location(ioc, state["model"]["values"], installation["paths"]["firmware"])
     tasks = assignments(task_items, state["model"]["tasks"], "stack_words")
     queues = assignments(queue_items, state["model"]["queues"], "capacity_elements")
     require(tasks or queues, "At least one actual object change is required")
@@ -832,6 +875,7 @@ def apply_plan(plan, work_root, reports, timeout=360):
     state = inspect_project(project, plan["ioc"], plan["uvprojx"], plan["target"], plan["user_sources"],
                             vendor_roots(current_tools["paths"]))
     ioc = Path(plan["ioc"])
+    commands = generation_script(ioc, state["model"]["values"], current_tools["paths"]["firmware"])
     after = edit_ioc(ioc.read_bytes(), plan["task_changes"], plan["queue_changes"])
     require(hashlib.sha256(after).hexdigest() == plan["requested_ioc_sha256"], "Requested IOC hash mismatch")
     reports.mkdir(parents=True)
@@ -864,9 +908,7 @@ def apply_plan(plan, work_root, reports, timeout=360):
         env.update(TEMP=str(temporary), TMP=str(temporary), PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1")
         paths = current_tools["paths"]
         script = reports / "generate.mxscript"
-        script.write_text('\n'.join([f'config load "{ioc.as_posix()}"',
-            'project toolchain "MDK-ARM V5.27"', f'project setCustomFWPath "{Path(paths["firmware"]).as_posix()}"',
-            'project generate', 'exit', '']), encoding="utf-8")
+        script.write_text(commands, encoding="utf-8")
         generated = project / "Core/Src/app_freertos.c"
         old_hash = sha(generated)
         outcome["phase"] = "generate"
@@ -887,6 +929,7 @@ def apply_plan(plan, work_root, reports, timeout=360):
         write_json(reports / "result.json", outcome)
         outcome["disabled_known_empty_hooks"] = disable_known_empty_hook(plan["uvprojx"], plan["target"])
         state = inspect_project(project, ioc, plan["uvprojx"], plan["target"], plan["user_sources"], vendor_roots(paths))
+        check_firmware_location(ioc, state["model"]["values"], paths["firmware"], plan["before"]["values"])
         require(state["outputs"] == plan["outputs"] and state["output_name"] == plan["output_name"], "Output paths changed on regeneration")
         outcome["generation"]["terminal_state"] = "PASS"
         active_stage = None

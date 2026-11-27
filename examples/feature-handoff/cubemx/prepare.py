@@ -90,8 +90,7 @@ def establish(args):
     temporary.mkdir()
     env.update(TEMP=str(temporary), TMP=str(temporary), PYTHONUTF8="1", PYTHONDONTWRITEBYTECODE="1")
     commands = reports / "generation.mxscript"
-    commands.write_text("\n".join([f'config load "{ioc.as_posix()}"', 'project toolchain "MDK-ARM V5.27"',
-        f'project setCustomFWPath "{Path(paths["firmware"]).as_posix()}"', "project generate", "exit", ""]), encoding="utf-8")
+    commands.write_text(adapter.generation_script(ioc, original_model["values"], paths["firmware"]), encoding="utf-8")
     outcome = {"status": "STARTED", "stage": "native-generation", "project": str(project),
                "adapter_sha256": adapter_before, "source_inputs": inputs_before,
                "runtime": "NOT_RUN", "board": "NOT_RUN", "feature": "NOT_IMPLEMENTED"}
@@ -114,6 +113,7 @@ def establish(args):
             project, reports / "cubemx.log", env)
         outcome["generation"] = generation
         adapter.check_generation(generation, reports / "cubemx.log", [generated, project / "Core/Src/main.c", uvprojx], started, None)
+        adapter.check_firmware_location(ioc, adapter.parse_ioc(ioc.read_bytes())["values"], paths["firmware"], original_model["values"])
         adapter.write_json(reports / "native-generated-sha256.json", adapter.compilation_inputs(project))
         shutil.copy2(generated, reports / "native-generated-app_freertos.c")
         record("user-integration", generation_exit_code=generation["exit_code"])

@@ -239,8 +239,8 @@ def establish(args):
         shutil.copy2(uvprojx, reports / "before-regeneration.uvprojx")
         adapter.write_json(reports / "pre-generation-inputs.json", inputs(project, linked_before["extra_inputs"]))
         commands = reports / "generation.mxscript"
-        commands.write_text("\n".join([f'config load "{ioc.as_posix()}"', 'project toolchain "MDK-ARM V5.27"',
-            f'project setCustomFWPath "{Path(paths["firmware"]).as_posix()}"', "project generate", "exit", ""]), encoding="utf-8")
+        firmware_values = adapter.parse_ioc(ioc.read_bytes())["values"]
+        commands.write_text(adapter.generation_script(ioc, firmware_values, paths["firmware"]), encoding="utf-8")
         env = os.environ.copy()
         for key in adapter.FORBIDDEN_ENV:
             env.pop(key, None)
@@ -265,6 +265,7 @@ def establish(args):
             adapter.require(outside_user_regions((project / name).read_text(encoding="utf-8-sig")) == body,
                             f"Regeneration changed generator-owned code: {name}")
         model = adapter.parse_ioc(ioc.read_bytes())
+        adapter.check_firmware_location(ioc, model["values"], paths["firmware"], firmware_values)
         adapter.require(model["tasks"] == baseline_state["model"]["tasks"] and
                         model["queues"] == baseline_state["model"]["queues"], "Native object contract changed")
         linked_after = inspect_build(project, uvprojx, expected_model=baseline_state["model"])

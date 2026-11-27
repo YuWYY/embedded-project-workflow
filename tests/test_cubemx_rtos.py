@@ -77,6 +77,10 @@ class AdapterTests(unittest.TestCase):
         self.map = self.project / "MDK-ARM/out/unit.map"
         self.map.write_text(fake_map(), encoding="utf-8")
         self.tools = {key: str(self.root / key) for key in ("cubemx", "firmware", "uv4", "armcc", "pack")}
+        self.enterContext(patch.object(Path, "home", return_value=self.root))
+        self.firmware = self.root / "STM32Cube/Repository/STM32Cube_FW_G4_V1.6.3"
+        self.firmware.mkdir(parents=True)
+        self.tools["firmware"] = str(self.firmware)
         self.installation = {"paths": self.tools, "profile": a.PROFILE}
 
     def plan(self, dynamic=False):
@@ -109,6 +113,40 @@ class AdapterTests(unittest.TestCase):
         data = ORIGINAL.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
         expected = data.replace(b"Producer,24,256,", b"Producer,24,384,").replace(b"Samples,8,uint32_t", b"Samples,16,uint32_t")
         self.assertEqual(a.edit_ioc(data, {"Producer": 384}, {"Samples": 16}), expected)
+
+    def test_default_policy_uses_cubemx_settings_for_both_legacy_and_explicit_ioc(self):
+        repo = self.root / "shared SDK"
+        package = repo / self.firmware.name
+        package.mkdir(parents=True)
+        prefs = self.root / ".stm32cubemx/plugins/updater/updater.ini"
+        prefs.parent.mkdir(parents=True)
+        prefs.write_text("[Path]\nRepositoryPath=" + str(repo) + "\n", encoding="utf-8")
+        for values in ({}, {"ProjectManager.DefaultFWLocation": "true"}):
+            with self.subTest(values=values):
+                commands = a.generation_script(self.ioc, values, package)
+                self.assertNotIn("setCustomFWPath", commands)
+                with self.assertRaisesRegex(a.AdapterError, "but --firmware selects"):
+                    a.generation_script(self.ioc, values, self.firmware)
+
+    def test_custom_path_with_escaped_separators_and_space_uses_ioc_directory(self):
+        package = self.root / "custom pack" / self.firmware.name
+        package.mkdir(parents=True)
+        fields = {"ProjectManager.DefaultFWLocation": "false",
+                  "ProjectManager.CustomerFirmwarePackage": r"..\\custom\ pack\\" + package.name}
+        a.generation_script(self.ioc, fields, package)
+        with self.assertRaisesRegex(a.AdapterError, "but --firmware selects"):
+            a.generation_script(self.ioc, fields, self.firmware)
+        relocated = self.root / "new" / "depth" / self.ioc.name
+        relocated.parent.mkdir(parents=True)
+        with self.assertRaisesRegex(a.AdapterError, "Missing STM32Cube FW_G4 V1.6.3"):
+            a.generation_script(relocated, fields, package)
+
+    def test_generation_rejects_changed_location_mode_or_version_policy(self):
+        original = {"ProjectManager.DefaultFWLocation": "true", "ProjectManager.LastFirmware": "false"}
+        for changes, message in (({"ProjectManager.DefaultFWLocation": "false"}, "location mode"),
+                                 ({"ProjectManager.LastFirmware": "true"}, "version policy")):
+            with self.subTest(changes=changes), self.assertRaisesRegex(a.AdapterError, message):
+                a.check_firmware_location(self.ioc, {**original, **changes}, self.firmware, original)
 
     def test_named_edits_do_not_depend_on_task_order(self):
         data = (ROOT / "examples/cubemx-rtos/adapter-fixture-b/telemetry_fixture.ioc").read_bytes()
