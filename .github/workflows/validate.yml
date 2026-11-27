@@ -95,7 +95,7 @@ jobs:
           subprocess.run([sys.executable, '-B', 'scripts/release.py', 'verify-packages'], check=True)
           target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'epw-source-host'
           target.mkdir()
-          with zipfile.ZipFile('dist/embedded-project-workflow-source-v0.8.0-beta.2.zip') as archive:
+          with zipfile.ZipFile('dist/embedded-project-workflow-source-v0.8.0.zip') as archive:
               archive.extractall(target)
           source = target / 'embedded-project-workflow'
           subprocess.run([sys.executable, '-B', str(source / 'examples/real-project-handoff/tests/check.py'),
@@ -175,8 +175,8 @@ jobs:
           import os, pathlib, subprocess, sys, zipfile
           target = pathlib.Path(os.environ['RUNNER_TEMP']) / 'epw-release-unpacked'
           target.mkdir()
-          for kind, filename in [('source', 'embedded-project-workflow-source-v0.8.0-beta.2.zip'),
-                                 ('skill', 'embedded-project-workflow-v0.8.0-beta.2.zip')]:
+          for kind, filename in [('source', 'embedded-project-workflow-source-v0.8.0.zip'),
+                                 ('skill', 'embedded-project-workflow-v0.8.0.zip')]:
               with zipfile.ZipFile(pathlib.Path('dist') / filename) as archive:
                   archive.extractall(target / kind)
           source = target / 'source/embedded-project-workflow'
@@ -190,10 +190,10 @@ jobs:
                               '--project', str(source / 'examples/first-use' / kind)], check=True)
       - uses: actions/upload-artifact@v4
         with:
-          name: beta-release-packages
+          name: release-packages
           path: |
-            dist/embedded-project-workflow-source-v0.8.0-beta.2.zip
-            dist/embedded-project-workflow-v0.8.0-beta.2.zip
-            dist/vivado-examples-v0.8.0-beta.2.zip
+            dist/embedded-project-workflow-source-v0.8.0.zip
+            dist/embedded-project-workflow-v0.8.0.zip
+            dist/vivado-examples-v0.8.0.zip
             dist/SHA256SUMS.txt
           if-no-files-found: error

@@ -2,9 +2,9 @@
 
 `embedded-project-workflow` 帮助 AI 读取你的工程和目标，选择原生配置、已有组件或用户代码，在约定范围内完成实现，让你继续用熟悉的工具维护工程。
 
-**推荐从 v0.8.0-beta.2 公开预览版开始。** 本版完善两张工程规划图的独立交付与维护接续：完整规划后看清引脚功能分配和任务/外设执行逻辑，交付可编辑 SVG；保存新配置后，相关图稿随当前设计更新。现有工程接手、配置保护及小改动流程继续按需使用。
+**当前正式版为 v0.8.0。** 在临时目录生成 CubeMX 工程后，技能会从最终交付位置核对固件包。使用默认固件库的工程可继续按声明版本加载，使用自定义包的工程保留其路径选择。
 
-发布状态、提交及附件以[本版 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.8.0-beta.2)为准，远端检查以[对应提交的 CI](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)为准，不把本地通过写成远端已通过。[支持与证据](docs/support.md)汇总适用范围；[beta.2 本地验证记录](docs/validation-v08b2.md)保留当时“未发布、远端 CI 未执行”的身份，[v0.7 公开版](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.7.0-beta.1)继续作为历史基线。
+发行包与校验值见[正式版 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.8.0)，自动检查见[GitHub Actions](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)。[支持范围](docs/support.md)列出本版和此前版本各自验证的能力。
 
 | 从这里开始 | 你会得到什么 |
 |---|---|
@@ -65,17 +65,17 @@
 
 [绘图指南与包内模板](skills/embedded-project-workflow/references/planning-diagrams.md)包括裸机、RTOS、单时钟域和跨时钟域布局。SVG只需Python标准库；PNG可选，需要已有Pillow和字体，不自动安装。
 
-本轮 11 次独立首次交付通过复核，包含 9 对图及 2 次按范围不出图的任务；“首次交付”允许执行者交付前自检修正。真实接续覆盖 STM32 100→200 ms 的当前源码契约与 Debug 构建，以及 FPGA 125→100 MHz 的 IP 生成、XSim 和综合。小样本、私有检查脚本适用范围、局部 T 形诊断漏报及外层 runner 异常均见[原始验证记录](docs/validation-v08b2.md)，这些结果不代表任意工程兼容或硬件验证。
+beta.2 的 11 次独立首次交付通过复核，包含 9 对图及 2 次按范围不出图的任务；“首次交付”允许执行者交付前自检修正。真实接续覆盖 STM32 100→200 ms 的当前源码契约与 Debug 构建，以及 FPGA 125→100 MHz 的 IP 生成、XSim 和综合。小样本、私有检查脚本适用范围、局部 T 形诊断漏报及外层 runner 异常均见[原始验证记录](docs/validation-v08b2.md)，这些结果不代表任意工程兼容或硬件验证。
 
 ## 下载哪一份
 
 | 获取方式 | 包含什么 | 适合谁 |
 |---|---|---|
-| **[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/embedded-project-workflow-source-v0.8.0-beta.2.zip)** | Skill、指南、检查脚本、原创示例、入门材料和评估输入 | 第一次试用、查看案例和参与改进；本页的入门命令以此为准 |
-| **[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/embedded-project-workflow-v0.8.0-beta.2.zip)** | `embedded-project-workflow/` 内的主入口、参考指南、脚本、五份SVG模板及许可 | 已有自己的工程；绘图资源包内自足，不包含仓库的 `docs/`、`examples/`、`tests/` |
-| **[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/vivado-examples-v0.8.0-beta.2.zip)** | 独立的原创 Vivado 案例源码及许可 | 保留历史验证身份；本轮125→100 MHz验证单独记录，不含厂商依赖 |
+| **[完整源码 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0/embedded-project-workflow-source-v0.8.0.zip)** | Skill、指南、检查脚本、原创示例、入门材料和评估输入 | 第一次试用、查看案例和参与改进；本页的入门命令以此为准 |
+| **[Skill ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0/embedded-project-workflow-v0.8.0.zip)** | `embedded-project-workflow/` 内的主入口、参考指南、脚本、五份SVG模板及许可 | 已有自己的工程；绘图资源包内自足，不包含仓库的 `docs/`、`examples/`、`tests/` |
+| **[Vivado 示例 ZIP](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0/vivado-examples-v0.8.0.zip)** | 独立的原创 Vivado 案例源码及许可 | 保留历史验证身份；beta.2 的 125→100 MHz 验证单独记录，不含厂商依赖 |
 
-三个 ZIP 固定指向 `v0.8.0-beta.2`，请用同一 Release 的 [SHA256SUMS.txt](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0-beta.2/SHA256SUMS.txt)核对下载文件；完整源码包是审阅白名单发行物。下载或解压不会安装 Skill。未安装时使用真实 `SKILL.md` 路径，不假定 `$embedded-project-workflow` 已能解析。仅有 Skill ZIP 时，入口是 `<解压目录>/embedded-project-workflow/SKILL.md`；脚本与绘图素材均在包内。打包、发布核验及历史记录见[发行说明](docs/releasing.md)。
+三个 ZIP 固定指向 `v0.8.0`，请用同一 Release 的 [SHA256SUMS.txt](https://github.com/YuWYY/embedded-project-workflow/releases/download/v0.8.0/SHA256SUMS.txt)核对下载文件；完整源码包是审阅白名单发行物。下载或解压不会安装 Skill。未安装时使用真实 `SKILL.md` 路径，不假定 `$embedded-project-workflow` 已能解析。仅有 Skill ZIP 时，入口是 `<解压目录>/embedded-project-workflow/SKILL.md`；脚本与绘图素材均在包内。打包、发布核验及历史记录见[发行说明](docs/releasing.md)。
 
 ## 怎样协作
 

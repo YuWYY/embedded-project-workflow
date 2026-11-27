@@ -15,6 +15,7 @@ import json
 import os
 from pathlib import Path, PureWindowsPath
 import re
+import stat
 import sys
 import xml.etree.ElementTree as ET
 
@@ -171,7 +172,61 @@ def profile_hint(executor, matches):
             'note': 'Only source declarations were compared. Tool availability, full profile, build and runtime are not checked.'}
 
 
-def parse_ioc(text, record):
+def ioc_firmware_location(values, project, record):
+    flag = values.get('ProjectManager.DefaultFWLocation')
+    raw = values.get('ProjectManager.CustomerFirmwarePackage')
+    mode = {None: 'unspecified', 'true': 'default', 'false': 'custom'}.get(flag, 'unrecognized')
+    location = {'mode': mode, 'default_fw_location': flag, 'declared_path': raw,
+                'resolved_path': None, 'directory_status': 'NOT_CHECKED'}
+    if mode == 'unrecognized':
+        issue(record, 'FIRMWARE_LOCATION_UNRECOGNIZED', 'Unrecognized ProjectManager.DefaultFWLocation: ' + str(flag))
+    if mode != 'custom':
+        return location
+    if not raw:
+        issue(record, 'FIRMWARE_PATH_UNDECLARED', 'Custom firmware location selected without a package path')
+        return location
+
+    # CubeMX property values escape Windows separators, the drive colon and
+    # sometimes spaces. Preserve the on-disk spelling separately above.
+    decoded = re.sub(r'\\([\\: =#!])', r'\1', raw)
+    path = decoded.replace('\\', '/')
+    windows = PureWindowsPath(path)
+    if (path.startswith('//') or raw.startswith('\\\\') or
+            (windows.drive and (os.name != 'nt' or not windows.is_absolute())) or
+            (os.name == 'nt' and path.startswith('/'))):
+        issue(record, 'FIRMWARE_PATH_NOT_CHECKED', 'Network or non-local path syntax: ' + raw)
+        return location
+
+    target = project.parent / path
+    # Win32 collapses ".." before lookup. POSIX traverses each component,
+    # including any missing directory or link immediately before "..".
+    if os.name == 'nt':
+        target = Path(os.path.abspath(target))
+    state = 'DIRECTORY_PRESENT'
+    try:
+        for component in (*reversed(target.parents), target):
+            info = component.lstat()
+            is_junction = os.name == 'nt' and info.st_reparse_tag == stat.IO_REPARSE_TAG_MOUNT_POINT
+            if stat.S_ISLNK(info.st_mode) or is_junction:
+                state = 'LINK_NOT_READ'
+                break
+            if not stat.S_ISDIR(info.st_mode):
+                state = 'NOT_A_DIRECTORY'
+                break
+    except (FileNotFoundError, NotADirectoryError):
+        state = 'MISSING'
+    except OSError:
+        state = 'UNREADABLE'
+    # Simplify only the inspected prefix. Preserve ".." beyond a component
+    # that stopped traversal so the report does not point to a different pack.
+    location['resolved_path'] = str(Path(os.path.abspath(component)) / target.relative_to(component))
+    location['directory_status'] = state
+    if state != 'DIRECTORY_PRESENT':
+        issue(record, 'FIRMWARE_PATH_' + state, f'Custom firmware directory {state} at {component}')
+    return location
+
+
+def parse_ioc(text, record, project):
     values = {}
     for line_no, line in enumerate(text.splitlines(), 1):
         if not line.strip() or line.lstrip().startswith('#'):
@@ -191,6 +246,7 @@ def parse_ioc(text, record):
               'main_location': 'ProjectManager.MainLocation', 'keep_user_code': 'ProjectManager.KeepUserCode'}
     facts = {label: values.get(key) for label, key in fields.items()}
     record['facts'] = facts
+    facts['firmware_location'] = ioc_firmware_location(values, project, record)
     version_note(record, facts['tool_version'])
     facts['peripherals'] = [values[k] for k in sorted(values, key=lambda k: (len(k), k))
                             if re.fullmatch(r'Mcu\.IP\d+', k)]
@@ -433,7 +489,7 @@ class Inventory:
             if '\x00' in text:
                 raise IntakeError('INVALID_ENCODING', 'NUL bytes are not supported in native sources')
             if record['kind'] == 'cubemx':
-                parse_ioc(text, record)
+                parse_ioc(text, record, actual)
                 if record['facts'].get('toolchain') == 'CMake':
                     self.cmake_companions(actual, record)
             elif record['kind'] == 'vivado_project':
@@ -707,7 +763,8 @@ def inspect_project(project, entry=None):
             'verification': {'tools': 'NOT_RUN', 'generation': 'NOT_RUN', 'build': 'NOT_RUN', 'runtime': 'NOT_RUN'},
             'limits': ['Configuration facts only; declared commands are data and are never executed.',
                        'No SDK, executable profile or hardware correctness has been validated.',
-                       'External and linked references are not followed; multiple sources are not resolved into a primary project.',
+                       'Custom CubeMX firmware paths are checked for directory existence only. External contents and linked references are not read.',
+                       'Multiple sources are not resolved into a primary project.',
                        'Inventory parses selected native structures; user code linkage and complete vendor schemas are not verified.']}
 
 
@@ -721,6 +778,13 @@ def format_text(report):
         if source['kind'] == 'cubemx':
             device = facts.get('device') or facts.get('device_name') or '(not declared in the recognized fields)'
             lines.append(f"  CubeMX {facts.get('tool_version')} | device {device} | toolchain {facts.get('toolchain')}")
+            if 'firmware_location' in facts:
+                loc = facts['firmware_location']
+                lines.append(f"  Firmware: {facts['firmware'] or '(not declared)'} | location: {loc['mode']}")
+                if loc['declared_path']:
+                    lines.append('    Declared custom path: ' + loc['declared_path'])
+                if loc['resolved_path']:
+                    lines.append(f"    Local directory: {loc['resolved_path']} [{loc['directory_status']}]")
             for task in facts.get('rtos', {}).get('tasks', []):
                 lines.append(f"  Task {task['name']}: {task['stack_words']} words, {task['allocation']}, entry={task['entry']}")
             for queue in facts.get('rtos', {}).get('queues', []):

@@ -1,4 +1,12 @@
-# v0.8.0-beta.2 公开预览版支持范围
+# v0.8.0 正式版支持范围
+
+CubeMX 工程扫描可读取固件版本和位置设置。对自定义路径，扫描以所选 `.ioc` 的目录为基准报告路径状态。G4 执行适配器沿用工程的固件库选择。工程迁移及复验步骤见 [CubeMX 指南](../skills/embedded-project-workflow/references/stm32-cubemx.md#固件库与工程迁移)。
+
+本机使用 CubeMX 6.18.1，以 F4 V1.28.3 的隔离副本复验。临时目录生成的自定义相对路径在移动后失效，加载在 60 秒内未完成。同一位置切回默认库后，加载与生成均完成，生成了新的 `main.c` 和 Keil 工程。生成的 HAL 源文件与已安装的 V1.28.3 同哈希，可与同时安装的 V1.28.0 和 V1.28.2 区分。
+
+G4 适配器使用 STM32G474 工程、G4 V1.6.3 与 Keil 复验。CubeMX 生成后的工程保留默认库、空自定义路径和原有版本策略，Keil 构建通过。
+
+# v0.8.0-beta.2 公开预览版支持范围（历史）
 
 本版聚焦独立规划图交付与 STM32/FPGA 配置变化后的维护接续，不增加原生执行器支持资格。发布状态、附件及提交以[本版 Release](https://github.com/YuWYY/embedded-project-workflow/releases/tag/v0.8.0-beta.2)为准，远端结果以[对应提交的 CI](https://github.com/YuWYY/embedded-project-workflow/actions/workflows/validate.yml)为准。发布准备时远端 CI 尚未运行，本地结果不替代远端检查。
 

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "0.8.0-beta.2",
+  "version": "0.8.0",
   "files": {
     ".gitattributes": {
       "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
@@ -11,8 +11,8 @@
       "bytes": 1234
     },
     ".github/workflows/validate.yml": {
-      "sha256": "daf26a129389e0a7c07d175117a601ff12b07e311ffa11e55acf74dc958ba222",
-      "bytes": 10285
+      "sha256": "28036f05553ed88bbbe49459b613f93af051220c3dd11570b2531e25537677b5",
+      "bytes": 10238
     },
     ".gitignore": {
       "sha256": "3d06f774e264cb6c65343e2c1c64c79062138f30eeb36890d1f45ffeb0118fe5",
@@ -23,12 +23,12 @@
       "bytes": 1062
     },
     "README.md": {
-      "sha256": "816deb834a63c3f07664702b7eccf6c9b7c06af45eb6196c4d8cf8cce29ef43f",
-      "bytes": 11443
+      "sha256": "769e788e59826cfa487f8e2be4b71fe40197d1d55a403ffb97cd901f30e0bca4",
+      "bytes": 11013
     },
     "docs/cubemx-adapter.md": {
-      "sha256": "85638be8d0914fd7d3efea81a9c68cf32db376635af848a3bf8810ac62ad5289",
-      "bytes": 5882
+      "sha256": "50e6efacbbd7e398b236ff5ca5e9b2044689537d21765df74a5716098884ab55",
+      "bytes": 6169
     },
     "docs/failures-v06.md": {
       "sha256": "8d888ef8067813e17ab4febff70eb9afc049045e127109e503f037462c9c607f",
@@ -47,8 +47,8 @@
       "bytes": 4139
     },
     "docs/releasing.md": {
-      "sha256": "6917acacb44afad6d968d84fa2ed82f970105303463f1cc89fe681e1085fad26",
-      "bytes": 11158
+      "sha256": "e539223e2520d9c1cb3849999e3f107089cb5eabc0336f1f5223714f35c47f61",
+      "bytes": 10962
     },
     "docs/research-v06.md": {
       "sha256": "44f2d34c2c98d3bf1e0e0c52525cf19d727fe2c7aa786edfc0741edd3945fb61",
@@ -63,8 +63,8 @@
       "bytes": 3992
     },
     "docs/support.md": {
-      "sha256": "f6fa91860053cfada923bd39b544761d4140d4d3ea2c7973cfde9fe69500a0c1",
-      "bytes": 9780
+      "sha256": "bdaa525a0325031b405e76a267bddb659b20c6f8253f7694cb7d7269eda2f6fb",
+      "bytes": 10706
     },
     "docs/validation-v03.json": {
       "sha256": "41ff9dd71512cd5cdc549260f070da74661c1ef2a506e1f1cf97607e38f2e18f",
@@ -667,8 +667,8 @@
       "bytes": 226
     },
     "examples/cubemx-rtos/adapter-fixture-b/setup.py": {
-      "sha256": "315e1c7b0b8cb250a2d8496dcb60878fcad839d53b52f6944058e044e5699644",
-      "bytes": 7142
+      "sha256": "b8372ace868f0e214b800f801963b41c29b6fd959afc5b989c0eb0368140c462",
+      "bytes": 7154
     },
     "examples/cubemx-rtos/adapter-fixture-b/telemetry_fixture.ioc": {
       "sha256": "664ae77a457f77fef1675d4c408d4b6e9bc9417cfcf1182c278e5a6f63cff6db",
@@ -779,16 +779,16 @@
       "bytes": 536
     },
     "examples/feature-handoff/cubemx/implementation/apply.py": {
-      "sha256": "e421af9df83e7d0c15558442c0e906ef1d2fddd69699d627440b9b0489eaa3d2",
-      "bytes": 21000
+      "sha256": "223835b42391c67d7df921f39f9de525f241586797964aed9fb9a08ffad6bbed",
+      "bytes": 21042
     },
     "examples/feature-handoff/cubemx/implementation/tests/check_resume_boundary.py": {
       "sha256": "1f548a154f8f414df4615ccbdeedbcf7d6385b1b1b51b5351f6774ae63b1617c",
       "bytes": 9050
     },
     "examples/feature-handoff/cubemx/prepare.py": {
-      "sha256": "7a9efc408b89c5165a032a71cf151ad76563e3df484b03ef2bbe0a59159e718e",
-      "bytes": 12772
+      "sha256": "6303f14ca5afed7311c40ea85a027b34327df02b6f4844e5680335ea54333722",
+      "bytes": 12794
     },
     "examples/feature-handoff/cubemx/sample_statistics.ioc": {
       "sha256": "fabf1fe9b386e747fa5a42aab2d6e52d802c1a5615061eeb218083ca6b5d45c9",
@@ -1355,8 +1355,8 @@
       "bytes": 2831
     },
     "scripts/release.py": {
-      "sha256": "c69434162da7c5f39f7f0d094792f632a204a28bb6b18c00141ead6401ec15d8",
-      "bytes": 16402
+      "sha256": "29cf2414107111ad8bf1ebec493176cf69c1bb00a922c11d8edb41d10f618636",
+      "bytes": 16395
     },
     "skills/embedded-project-workflow/SKILL.md": {
       "sha256": "d0db51bdc3aa39917267b4ef8cd759d84e103a19646a0e0d85431a1f4aa869ab",
@@ -1439,8 +1439,8 @@
       "bytes": 20183
     },
     "skills/embedded-project-workflow/references/stm32-cubemx.md": {
-      "sha256": "f5e66518eea3aaebb998a6aa7d1a42b3a980cafc384c5e8a3f45a4bcca42695d",
-      "bytes": 8426
+      "sha256": "03aec7ae330903054bfcafbbf1f0eb8fc4304b339990e0ad06094905dc4f6cf6",
+      "bytes": 9980
     },
     "skills/embedded-project-workflow/references/touchgfx.md": {
       "sha256": "4bd969eeb3bfbbcb98e8e324f9d67ed46bdbe5dbc4a8adafc37ce0038af3d81e",
@@ -1459,16 +1459,16 @@
       "bytes": 4525
     },
     "skills/embedded-project-workflow/scripts/cubemx_rtos.py": {
-      "sha256": "e8573d4a316209021e0e454421c39084e39c3e4302171e8bb4300b1ce1967d8e",
-      "bytes": 58263
+      "sha256": "ef8a061b378e80294d2c3a4daf50ad532433f6fccd85100a72ed67ccaaad0073",
+      "bytes": 60796
     },
     "skills/embedded-project-workflow/scripts/planning_canvas.py": {
       "sha256": "5cd9836f2a01411c146184e3cfe3e1af7c661a53c268359f8cd9a3052f8f5230",
       "bytes": 25559
     },
     "skills/embedded-project-workflow/scripts/project_intake.py": {
-      "sha256": "30098700400eeb3965d4433912a016a87130a1b8aca4fb1b0dfac0207284a654",
-      "bytes": 44741
+      "sha256": "dc5e6c875f39542be1cc4c3c3f84582c8ff498204f527dc5df35602a5229c76a",
+      "bytes": 48107
     },
     "skills/embedded-project-workflow/scripts/soc_handoff.py": {
       "sha256": "1641ddb0676b10f0d149a1401ae99e4cfd5ab738f89332e3aeac1c4a08315604",
@@ -1483,16 +1483,16 @@
       "bytes": 20392
     },
     "tests/test_cubemx_rtos.py": {
-      "sha256": "c23e87e4e21f1b069b3bb24e74dd6db6b2e8e476129ce74c392bfe8043ad9109",
-      "bytes": 33725
+      "sha256": "bd1a54f8c753097ca98af344a66faba891e144a5e32dba65b507ec77d7fecd59",
+      "bytes": 36186
     },
     "tests/test_planning_canvas.py": {
       "sha256": "5c5ab74a7c552d1e32fd637108d7b32d2f7cc5269aba29521eb24c69f95555ef",
       "bytes": 18167
     },
     "tests/test_project_intake.py": {
-      "sha256": "dcdb50ec2cc310eac5438b33dd23768a0cf3b928d7629c0bab11539dc86e705c",
-      "bytes": 35915
+      "sha256": "e056e691cfa166c9a8398e23af3eac392896d796b4c49dcc6b1caaa962d053bc",
+      "bytes": 41469
     },
     "tests/test_soc_handoff.py": {
       "sha256": "78dac0b2cc6ec0e5eb4a66bee6528b647775959fabdc375c681952ef78025e9a",
